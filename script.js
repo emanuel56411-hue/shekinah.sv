@@ -143,7 +143,7 @@ const translations = {
       description:
         'Usa el codigo <strong>QJRR+HH2, San Juan Opico</strong> para abrir la ruta desde Google Maps o Waze y llegar sin perderte.',
       mapsBtn: "Abrir Google Maps",
-      wazeBtn: "Abrir Waze",
+      wazeBtn: "Como llegar en Waze",
       whatsappBtn: "Preguntar por WhatsApp",
     },
     eventos: {
@@ -330,7 +330,7 @@ const translations = {
       description:
         'Use the code <strong>QJRR+HH2, San Juan Opico</strong> to open directions from Google Maps or Waze and get here without getting lost.',
       mapsBtn: "Open Google Maps",
-      wazeBtn: "Open Waze",
+      wazeBtn: "Get directions in Waze",
       whatsappBtn: "Ask via WhatsApp",
     },
     eventos: {
@@ -616,12 +616,14 @@ themeToggle.addEventListener("click", () => {
 menuButton.addEventListener("click", () => {
   const isOpen = mainMenu.classList.toggle("is-open");
   menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute("aria-label", isOpen ? "Cerrar menu" : "Abrir menu");
 });
 
 mainMenu.addEventListener("click", (event) => {
   if (event.target.tagName === "A") {
     mainMenu.classList.remove("is-open");
     menuButton.setAttribute("aria-expanded", "false");
+    menuButton.setAttribute("aria-label", "Abrir menu");
   }
 });
 

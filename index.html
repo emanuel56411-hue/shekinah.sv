@@ -26,11 +26,12 @@
         </span>
       </a>
 
-      <button class="menu-button" type="button" aria-expanded="false" aria-controls="main-menu">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        Menu
+      <button class="menu-button" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="main-menu">
+        <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M19.4 13.5c.1-.5.1-1 .1-1.5s0-1-.1-1.5l2-1.5-2-3.5-2.4 1a8 8 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.5A8 8 0 0 0 7 6.5l-2.4-1-2 3.5 2 1.5A8.6 8.6 0 0 0 4.5 12c0 .5 0 1 .1 1.5l-2 1.5 2 3.5 2.4-1a8 8 0 0 0 2.6 1.5l.4 2.5h4l.4-2.5a8 8 0 0 0 2.6-1.5l2.4 1 2-3.5-2-1.5Z" />
+          <circle cx="12" cy="12" r="3.1" />
+        </svg>
+        <span class="menu-label">Menu</span>
       </button>
 
       <nav id="main-menu" class="main-nav" aria-label="Navegacion principal" data-i18n-aria-label="header.navAria">
@@ -197,8 +198,8 @@
               <a class="button primary" href="https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico" target="_blank" rel="noopener noreferrer" data-i18n="ubicacion.mapsBtn">
                 Abrir Google Maps
               </a>
-              <a class="button waze" href="https://waze.com/ul?q=QJRR%2BHH2%2C%20San%20Juan%20Opico&navigate=yes" target="_blank" rel="noopener noreferrer" data-i18n="ubicacion.wazeBtn">
-                Abrir Waze
+              <a class="button waze" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer" data-i18n="ubicacion.wazeBtn">
+                Como llegar en Waze
               </a>
               <a class="button ghost" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="ubicacion.whatsappBtn">
                 Preguntar por WhatsApp
