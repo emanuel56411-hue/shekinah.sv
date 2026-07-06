@@ -8,12 +8,15 @@
   --line: rgba(113, 45, 29, 0.18);
   --brand: #b32636;
   --brand-strong: #6f1320;
-  --gold: #f0a92f;
+  --gold: #cf9a34;
+  --gold-ink: #8a5a12;
   --sage: #4f7b48;
   --blue: #255273;
   --shadow: 0 18px 40px rgba(92, 35, 22, 0.16);
   --soft-shadow: 0 12px 28px rgba(92, 35, 22, 0.1);
   --radius: 8px;
+  --heading-font: "Fraunces", Georgia, "Times New Roman", serif;
+  --body-font: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
 }
 
 body.dark-mode {
@@ -26,7 +29,8 @@ body.dark-mode {
   --line: rgba(255, 232, 199, 0.18);
   --brand: #ff6f7d;
   --brand-strong: #c83d4d;
-  --gold: #ffc15a;
+  --gold: #f2b955;
+  --gold-ink: #f2b955;
   --sage: #b9d389;
   --blue: #74c0fc;
   --shadow: 0 20px 48px rgba(0, 0, 0, 0.48);
@@ -48,9 +52,9 @@ body {
     radial-gradient(circle at top left, rgba(240, 169, 47, 0.22), transparent 28rem),
     radial-gradient(circle at 85% 10%, rgba(179, 38, 54, 0.09), transparent 24rem),
     linear-gradient(180deg, var(--bg), color-mix(in srgb, var(--bg) 70%, var(--surface)));
-  font-family: "Segoe UI", Inter, system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  font-family: var(--body-font);
   font-size: 1.08rem;
-  line-height: 1.62;
+  line-height: 1.65;
 }
 
 body.dark-mode {
@@ -98,11 +102,18 @@ body.dark-mode .site-header {
   align-items: center;
   gap: 10px;
   min-width: 212px;
+  transition: transform 180ms ease;
+}
+
+.brand:hover,
+.brand:focus-visible {
+  transform: translateY(-1px);
 }
 
 .brand-logo {
   width: 46px;
   height: 46px;
+  aspect-ratio: 1;
   object-fit: contain;
   background: #ffffff;
   border: 1px solid var(--line);
@@ -130,7 +141,8 @@ body.dark-mode .site-header {
 }
 
 .main-nav a,
-.theme-toggle {
+.theme-toggle,
+.lang-toggle {
   min-height: 36px;
   padding: 7px 10px;
   color: var(--muted);
@@ -139,19 +151,37 @@ body.dark-mode .site-header {
   border-radius: var(--radius);
   font-weight: 750;
   cursor: pointer;
+  transition:
+    color 170ms ease,
+    background 170ms ease,
+    box-shadow 170ms ease,
+    transform 170ms ease;
 }
 
 .main-nav a:hover,
 .main-nav a:focus-visible,
 .theme-toggle:hover,
-.theme-toggle:focus-visible {
+.theme-toggle:focus-visible,
+.lang-toggle:hover,
+.lang-toggle:focus-visible {
   color: var(--ink);
   background: color-mix(in srgb, var(--gold) 14%, transparent);
+  box-shadow: 0 8px 18px rgba(92, 35, 22, 0.08);
+  transform: translateY(-1px);
   outline: none;
 }
 
-.theme-toggle {
+.main-nav a:active,
+.theme-toggle:active,
+.lang-toggle:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.theme-toggle,
+.lang-toggle {
   border: 1px solid var(--line);
+  font-weight: 800;
 }
 
 .menu-button {
@@ -176,6 +206,7 @@ body.dark-mode .site-header {
 
 .hero {
   color: #ffffff;
+  /* Rendimiento: convertir iglesia-shekinah-interior.png a .webp ayudaria a reducir el peso de carga. */
   background:
     linear-gradient(90deg, rgba(23, 11, 8, 0.9), rgba(111, 19, 32, 0.72), rgba(23, 11, 8, 0.22)),
     url("assets/iglesia-shekinah-interior.png") center / cover;
@@ -203,12 +234,16 @@ body.dark-mode .hero {
 }
 
 .eyebrow {
-  margin: 0 0 7px;
-  color: var(--gold);
-  font-size: 0.76rem;
-  font-weight: 850;
-  letter-spacing: 0.04em;
+  margin: 0 0 9px;
+  color: var(--gold-ink);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
   text-transform: uppercase;
+}
+
+.hero .eyebrow {
+  color: var(--gold);
 }
 
 .hero h1,
@@ -220,9 +255,11 @@ h3 {
 
 .hero h1 {
   max-width: 780px;
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--heading-font);
+  font-weight: 800;
   font-size: clamp(2.8rem, 6.8vw, 6rem);
   line-height: 0.97;
+  letter-spacing: -0.025em;
 }
 
 .hero p:not(.eyebrow) {
@@ -294,11 +331,23 @@ h3 {
   border-radius: var(--radius);
   font-weight: 850;
   cursor: pointer;
-  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  transition:
+    transform 170ms ease,
+    background 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    color 170ms ease;
 }
 
-.button:hover {
-  transform: translateY(-1px);
+.button:hover,
+.button:focus-visible {
+  box-shadow: 0 12px 24px rgba(92, 35, 22, 0.16);
+  transform: translateY(-2px);
+}
+
+.button:active {
+  box-shadow: 0 4px 10px rgba(92, 35, 22, 0.18);
+  transform: translateY(0);
 }
 
 .button.primary {
@@ -328,7 +377,8 @@ body.dark-mode .button.primary {
 }
 
 body.dark-mode .button.ghost,
-body.dark-mode .theme-toggle {
+body.dark-mode .theme-toggle,
+body.dark-mode .lang-toggle {
   background: rgba(255, 255, 255, 0.04);
 }
 
@@ -377,6 +427,14 @@ body.dark-mode .help-form {
   min-height: 72px;
   padding: 15px 18px;
   border-right: 1px solid var(--line);
+  transition: background 170ms ease, transform 170ms ease;
+}
+
+.quick-strip a:hover,
+.quick-strip a:focus-visible {
+  background: color-mix(in srgb, var(--gold) 10%, transparent);
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .quick-strip a:last-child {
@@ -395,15 +453,15 @@ body.dark-mode .help-form {
 }
 
 .section {
-  padding: clamp(34px, 5vw, 58px) clamp(16px, 4vw, 42px);
+  padding: clamp(42px, 6vw, 76px) clamp(16px, 4vw, 42px);
 }
 
 .section-tight {
-  padding-block: clamp(30px, 4.2vw, 50px);
+  padding-block: clamp(38px, 5.2vw, 66px);
 }
 
 .section.compact {
-  padding-block: 30px;
+  padding-block: clamp(34px, 4.5vw, 52px);
 }
 
 .section-inner {
@@ -425,8 +483,8 @@ body.dark-mode .tinted {
 }
 
 .identity-section {
-  padding-top: clamp(36px, 5vw, 58px);
-  padding-bottom: clamp(30px, 4vw, 48px);
+  padding-top: clamp(42px, 5.5vw, 70px);
+  padding-bottom: clamp(38px, 5vw, 64px);
 }
 
 .identity-layout {
@@ -439,7 +497,7 @@ body.dark-mode .tinted {
 .identity-grid,
 .updates-grid {
   display: grid;
-  gap: 10px;
+  gap: 14px;
 }
 
 .identity-grid {
@@ -453,6 +511,14 @@ body.dark-mode .tinted {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--soft-shadow);
+  transition: border-color 170ms ease, box-shadow 170ms ease, transform 170ms ease;
+}
+
+.identity-grid article:hover,
+.updates-grid article:hover {
+  border-color: color-mix(in srgb, var(--gold) 44%, var(--line));
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
 }
 
 .identity-grid span,
@@ -484,8 +550,8 @@ body.dark-mode .identity-section {
 }
 
 .scripture-section {
-  padding-top: clamp(34px, 4vw, 50px);
-  padding-bottom: clamp(30px, 4vw, 46px);
+  padding-top: clamp(38px, 4.8vw, 60px);
+  padding-bottom: clamp(36px, 4.8vw, 58px);
 }
 
 .scripture-layout {
@@ -508,7 +574,7 @@ body.dark-mode .identity-section {
 
 .scripture-grid {
   display: grid;
-  gap: 10px;
+  gap: 14px;
 }
 
 .scripture-grid article {
@@ -544,6 +610,11 @@ body.dark-mode .scripture-grid article {
   border-color: rgba(255, 193, 90, 0.18);
 }
 
+body.dark-mode .contact-item {
+  background: rgba(255, 255, 255, 0.035);
+  border-color: rgba(255, 193, 90, 0.18);
+}
+
 .two-column,
 .social-layout,
 .contact-layout {
@@ -558,14 +629,19 @@ body.dark-mode .scripture-grid article {
 }
 
 h2 {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(2.15rem, 3.7vw, 3.35rem);
-  line-height: 1.08;
+  font-family: var(--heading-font);
+  font-weight: 800;
+  font-size: clamp(2.1rem, 4vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
 }
 
 h3 {
-  font-size: 1.22rem;
-  line-height: 1.2;
+  font-family: var(--heading-font);
+  font-weight: 700;
+  font-size: 1.32rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .section-copy p,
@@ -583,7 +659,7 @@ h3 {
 
 .schedule-list {
   display: grid;
-  gap: 8px;
+  gap: 12px;
 }
 
 .schedule-item {
@@ -639,7 +715,8 @@ h3 {
 }
 
 .location-card strong {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--heading-font);
+  font-weight: 800;
   font-size: clamp(2.2rem, 5vw, 3.8rem);
   line-height: 0.95;
 }
@@ -676,13 +753,13 @@ h3 {
 
 .section-heading {
   max-width: 620px;
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 
 .ministry-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
 }
 
 .ministry-grid article,
@@ -694,6 +771,16 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--soft-shadow);
+  transition: border-color 170ms ease, box-shadow 170ms ease, transform 170ms ease;
+}
+
+.ministry-grid article:hover,
+.help-card:hover,
+.contact-form:focus-within,
+.help-form:focus-within {
+  border-color: color-mix(in srgb, var(--gold) 44%, var(--line));
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
 }
 
 .ministry-grid article span,
@@ -742,7 +829,13 @@ body.dark-mode .callout {
 
 .help-board {
   display: grid;
-  gap: 10px;
+  gap: 14px;
+}
+
+.help-card {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 58%),
+    var(--card);
 }
 
 .help-card .button {
@@ -752,7 +845,7 @@ body.dark-mode .callout {
 .social-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  gap: 14px;
 }
 
 .social-card {
@@ -763,6 +856,15 @@ body.dark-mode .callout {
   color: #ffffff;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+  transition: box-shadow 170ms ease, transform 170ms ease, filter 170ms ease;
+}
+
+.social-card:hover,
+.social-card:focus-visible {
+  filter: saturate(1.06);
+  box-shadow: 0 22px 42px rgba(92, 35, 22, 0.2);
+  transform: translateY(-2px);
+  outline: none;
 }
 
 .social-card span,
@@ -795,10 +897,46 @@ body.dark-mode .callout {
   background: var(--surface);
 }
 
+.contact-details {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 10px 12px;
+  background: color-mix(in srgb, var(--card) 70%, transparent);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.contact-icon {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  color: var(--brand);
+  fill: currentColor;
+}
+
 .contact-form,
 .help-form {
   display: grid;
   gap: 10px;
+}
+
+.help-form {
+  border-color: color-mix(in srgb, var(--brand) 24%, var(--line));
+}
+
+.form-note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.45;
 }
 
 label {
@@ -830,6 +968,19 @@ textarea:focus,
 .button:focus-visible {
   outline: 3px solid color-mix(in srgb, var(--gold) 42%, transparent);
   outline-offset: 2px;
+}
+
+input,
+select,
+textarea {
+  transition: border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: color-mix(in srgb, var(--gold) 60%, var(--line));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--gold) 14%, transparent);
 }
 
 .site-footer {
@@ -894,7 +1045,8 @@ body.dark-mode .site-footer {
   }
 
   .main-nav a,
-  .theme-toggle {
+  .theme-toggle,
+  .lang-toggle {
     width: 100%;
     text-align: left;
   }
@@ -946,6 +1098,12 @@ body.dark-mode .site-footer {
   }
 }
 
+@media (max-width: 860px) {
+  .ministry-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 680px) {
   .identity-grid,
   .updates-grid {
@@ -959,6 +1117,20 @@ body.dark-mode .site-footer {
   .hero-inner {
     min-height: 500px;
     padding-bottom: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 
