@@ -970,6 +970,27 @@ body.dark-mode .callout {
   text-transform: uppercase;
 }
 
+.social-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.social-card.facebook .social-icon {
+  fill: currentColor;
+  stroke: none;
+}
+
 .social-card strong {
   overflow-wrap: anywhere;
   font-size: 1.15rem;
