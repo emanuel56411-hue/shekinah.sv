@@ -294,6 +294,14 @@
               <input type="text" name="nombre-ayuda" placeholder="Tu nombre" data-i18n-placeholder="form.namePlaceholder" required />
             </label>
             <label>
+              <span data-i18n="ayuda.phoneLabel">Telefono</span>
+              <input type="tel" name="telefono-ayuda" autocomplete="tel" placeholder="Tu telefono (opcional)" data-i18n-placeholder="ayuda.phonePlaceholder" />
+            </label>
+            <label>
+              <span data-i18n="ayuda.emailLabel">Correo</span>
+              <input type="email" name="correo-ayuda" autocomplete="email" placeholder="Tu correo (opcional)" data-i18n-placeholder="ayuda.emailPlaceholder" />
+            </label>
+            <label>
               <span data-i18n="ayuda.typeLabel">Tipo de ayuda</span>
               <select name="tipo-ayuda">
                 <option value="General" data-i18n="ayuda.typeDefault">Seleccionar tipo (opcional)</option>
@@ -307,7 +315,8 @@
               <span data-i18n="form.message">Mensaje</span>
               <textarea name="mensaje-ayuda" rows="3" placeholder="Escribe la necesidad o forma de ayudar" data-i18n-placeholder="ayuda.messagePlaceholder" required></textarea>
             </label>
-            <p class="form-note" data-i18n="ayuda.formNote">La solicitud se envia por WhatsApp; la tarjeta que aparece aqui es solo una vista local temporal.</p>
+            <p class="form-note" data-i18n="ayuda.formNote">La solicitud se guarda para revision y tambien se abre WhatsApp para coordinar con respeto y orden.</p>
+            <p class="form-status" role="status" aria-live="polite"></p>
             <button class="button dark" type="submit" data-i18n="ayuda.submitBtn">Enviar solicitud por WhatsApp</button>
           </form>
         </div>
@@ -387,6 +396,7 @@
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
   </body>
 </html>

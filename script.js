@@ -5,9 +5,23 @@ const langToggle = document.querySelector(".lang-toggle");
 const contactForm = document.querySelector(".contact-form");
 const helpForm = document.querySelector(".help-form");
 const helpBoard = document.querySelector(".help-board");
+const helpStatus = document.querySelector(".form-status");
 const coordinatorPhone = document.body.dataset.phone || "";
 const phoneDisplayNodes = document.querySelectorAll("[data-phone-display]");
 const whatsappLinks = document.querySelectorAll("[data-whatsapp-link]");
+const defaultHelpCards = Array.from(helpBoard.children).map((card) => card.cloneNode(true));
+const SUPABASE_URL = "https://yjhnqxubicaglqfroiqk.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
+const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
+const LAST_HELP_SUBMIT_KEY = "shekinah-last-help-submit";
+const isSupabaseConfigured =
+  SUPABASE_URL.startsWith("https://") &&
+  !SUPABASE_URL.includes("YOUR_PROJECT_ID") &&
+  SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
+const supabaseClient =
+  isSupabaseConfigured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+let latestPublicHelpRequests = [];
+let currentHelpStatus = null;
 
 function formatPhone(phone) {
   if (phone.length === 11 && phone.startsWith("503")) {
@@ -172,9 +186,23 @@ const translations = {
       formAria: "Formulario de ayuda",
       typeLabel: "Tipo de ayuda",
       typeDefault: "Seleccionar tipo (opcional)",
+      phoneLabel: "Telefono",
+      phonePlaceholder: "Tu telefono (opcional)",
+      emailLabel: "Correo",
+      emailPlaceholder: "Tu correo (opcional)",
       messagePlaceholder: "Escribe la necesidad o forma de ayudar",
-      formNote: "La solicitud se envia por WhatsApp; la tarjeta que aparece aqui es solo una vista local temporal.",
+      formNote: "La solicitud se guarda para revision y tambien se abre WhatsApp para coordinar con respeto y orden.",
       submitBtn: "Enviar solicitud por WhatsApp",
+      saving: "Guardando solicitud...",
+      submitted: "Solicitud guardada. Quedara pendiente de revision antes de publicarse.",
+      saveError: "No se pudo guardar la solicitud. Intentalo de nuevo o escribenos por WhatsApp.",
+      configError: "Falta configurar Supabase para guardar solicitudes.",
+      rateLimit: "Espera un momento antes de enviar otra solicitud.",
+      loadingRequests: "Cargando solicitudes aprobadas...",
+      loadError: "No se pudieron cargar las solicitudes aprobadas.",
+      coordinateBtn: "Coordinar ayuda",
+      anonymousName: "Solicitud de ayuda",
+      noContact: "Sin contacto adicional",
     },
     helpTypes: {
       oracion: "Oracion",
@@ -345,9 +373,23 @@ const translations = {
       formAria: "Help form",
       typeLabel: "Type of help",
       typeDefault: "Select a type (optional)",
+      phoneLabel: "Phone",
+      phonePlaceholder: "Your phone (optional)",
+      emailLabel: "Email",
+      emailPlaceholder: "Your email (optional)",
       messagePlaceholder: "Describe the need or how you can help",
-      formNote: "The request is sent via WhatsApp; the card shown here is only a temporary local preview.",
+      formNote: "The request is saved for review and WhatsApp also opens so help can be coordinated respectfully.",
       submitBtn: "Send request via WhatsApp",
+      saving: "Saving request...",
+      submitted: "Request saved. It will stay pending review before being published.",
+      saveError: "The request could not be saved. Please try again or message us on WhatsApp.",
+      configError: "Supabase must be configured before requests can be saved.",
+      rateLimit: "Please wait a moment before sending another request.",
+      loadingRequests: "Loading approved requests...",
+      loadError: "Approved requests could not be loaded.",
+      coordinateBtn: "Coordinate help",
+      anonymousName: "Help request",
+      noContact: "No additional contact",
     },
     helpTypes: {
       oracion: "Prayer",
@@ -383,6 +425,111 @@ const translations = {
 
 function getTranslation(key, lang) {
   return key.split(".").reduce((value, part) => (value ? value[part] : undefined), translations[lang]);
+}
+
+function getHelpTypeLabel(type) {
+  const typeMap = {
+    Oracion: "helpTypes.oracion",
+    Viveres: "helpTypes.viveres",
+    Visita: "helpTypes.visita",
+    "Otra ayuda": "helpTypes.otra",
+  };
+
+  return getTranslation(typeMap[type], currentLang) || type || getTranslation("ayuda.typeDefault", currentLang);
+}
+
+function setHelpStatus(key, type = "info") {
+  if (!helpStatus) {
+    return;
+  }
+
+  currentHelpStatus = key ? { key, type } : null;
+  helpStatus.textContent = key ? getTranslation(key, currentLang) : "";
+  helpStatus.dataset.status = type;
+}
+
+function refreshHelpStatusTranslation() {
+  if (currentHelpStatus) {
+    setHelpStatus(currentHelpStatus.key, currentHelpStatus.type);
+  }
+}
+
+function createHelpBoardMessage(key) {
+  const card = document.createElement("article");
+  card.className = "help-card";
+
+  const tag = document.createElement("span");
+  tag.textContent = getTranslation("ayuda.eyebrow", currentLang);
+
+  const title = document.createElement("h3");
+  title.textContent = getTranslation(key, currentLang);
+
+  card.append(tag, title);
+  return card;
+}
+
+function restoreDefaultHelpCards() {
+  helpBoard.replaceChildren(...defaultHelpCards.map((card) => card.cloneNode(true)));
+  applyTranslations(currentLang);
+}
+
+function createPublicHelpCard(request) {
+  const card = document.createElement("article");
+  card.className = "help-card";
+
+  const tag = document.createElement("span");
+  tag.textContent = getHelpTypeLabel(request.help_type);
+
+  const title = document.createElement("h3");
+  title.textContent = request.display_name || getTranslation("ayuda.anonymousName", currentLang);
+
+  const text = document.createElement("p");
+  text.textContent = request.public_message || "";
+
+  const link = document.createElement("a");
+  link.className = "button dark";
+  link.href = buildWhatsappUrl(
+    `Hola, quiero ayudar o consultar sobre esta solicitud: ${request.help_type} - ${request.public_message}`
+  );
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  link.textContent = getTranslation("ayuda.coordinateBtn", currentLang);
+
+  card.append(tag, title, text, link);
+  return card;
+}
+
+function renderPublicHelpRequests(requests) {
+  latestPublicHelpRequests = requests;
+
+  if (!requests.length) {
+    restoreDefaultHelpCards();
+    return;
+  }
+
+  helpBoard.replaceChildren(...requests.map(createPublicHelpCard));
+}
+
+async function loadPublicHelpRequests() {
+  if (!supabaseClient) {
+    restoreDefaultHelpCards();
+    return;
+  }
+
+  helpBoard.replaceChildren(createHelpBoardMessage("ayuda.loadingRequests"));
+
+  const { data, error } = await supabaseClient
+    .from("public_help_requests")
+    .select("id, display_name, help_type, public_message, status, published_at")
+    .order("published_at", { ascending: false });
+
+  if (error) {
+    console.error("No se pudieron cargar las solicitudes de ayuda:", error);
+    helpBoard.replaceChildren(createHelpBoardMessage("ayuda.loadError"));
+    return;
+  }
+
+  renderPublicHelpRequests(data || []);
 }
 
 function syncThemeButton(lang) {
@@ -445,6 +592,10 @@ langToggle.addEventListener("click", () => {
   currentLang = currentLang === "es" ? "en" : "es";
   localStorage.setItem("shekinah-lang", currentLang);
   applyTranslations(currentLang);
+  refreshHelpStatusTranslation();
+  if (latestPublicHelpRequests.length) {
+    renderPublicHelpRequests(latestPublicHelpRequests);
+  }
 });
 
 /* --- Modo oscuro / claro --- */
@@ -489,34 +640,61 @@ contactForm.addEventListener("submit", (event) => {
   );
 });
 
-helpForm.addEventListener("submit", (event) => {
+helpForm.addEventListener("submit", async (event) => {
   event.preventDefault();
+
+  if (!supabaseClient) {
+    setHelpStatus("ayuda.configError", "error");
+    return;
+  }
+
+  const lastSubmit = Number(localStorage.getItem(LAST_HELP_SUBMIT_KEY) || 0);
+  if (Date.now() - lastSubmit < HELP_SUBMIT_COOLDOWN_MS) {
+    setHelpStatus("ayuda.rateLimit", "error");
+    return;
+  }
+
   const formData = new FormData(helpForm);
-  const name = formData.get("nombre-ayuda");
-  const type = formData.get("tipo-ayuda");
-  const message = formData.get("mensaje-ayuda");
-  const whatsappMessage = `Hola, soy ${name}. Solicito ayuda de tipo ${type}: ${message}`;
-  const card = document.createElement("article");
-  card.className = "help-card";
+  const name = String(formData.get("nombre-ayuda") || "").trim();
+  const phone = String(formData.get("telefono-ayuda") || "").trim();
+  const email = String(formData.get("correo-ayuda") || "").trim();
+  const type = String(formData.get("tipo-ayuda") || "General").trim();
+  const message = String(formData.get("mensaje-ayuda") || "").trim();
+  const contact = [phone, email].filter(Boolean).join(" / ") || getTranslation("ayuda.noContact", currentLang);
+  const whatsappMessage = `Hola, soy ${name}. Mi contacto es ${contact}. Solicito ayuda de tipo ${type}: ${message}`;
+  const submitButton = helpForm.querySelector('button[type="submit"]');
 
-  const tag = document.createElement("span");
-  tag.textContent = type;
+  submitButton.disabled = true;
+  submitButton.textContent = getTranslation("ayuda.saving", currentLang);
+  setHelpStatus(null);
 
-  const title = document.createElement("h3");
-  title.textContent = name;
+  try {
+    const { error } = await supabaseClient.from("help_requests").insert([
+      {
+        name,
+        phone: phone || null,
+        email: email || null,
+        help_type: type || "General",
+        message_private: message,
+      },
+    ]);
 
-  const text = document.createElement("p");
-  text.textContent = message;
+    if (error) {
+      throw error;
+    }
+  } catch (error) {
+    console.error("No se pudo guardar la solicitud de ayuda:", error);
+    setHelpStatus("ayuda.saveError", "error");
+    return;
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = getTranslation("ayuda.submitBtn", currentLang);
+  }
 
-  const link = document.createElement("a");
-  link.className = "button dark";
-  link.href = buildWhatsappUrl(`Hola, quiero ayudar o consultar sobre esta solicitud: ${type} - ${message}`);
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  link.textContent = "Coordinar ayuda";
-
-  card.append(tag, title, text, link);
-  helpBoard.prepend(card);
+  localStorage.setItem(LAST_HELP_SUBMIT_KEY, String(Date.now()));
+  setHelpStatus("ayuda.submitted", "success");
   window.open(buildWhatsappUrl(whatsappMessage), "_blank", "noopener,noreferrer");
   helpForm.reset();
 });
+
+loadPublicHelpRequests();
