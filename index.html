@@ -318,9 +318,10 @@
             </label>
             <label>
               <span data-i18n="form.message">Mensaje</span>
-              <textarea name="mensaje-ayuda" rows="3" placeholder="Escribe la necesidad o forma de ayudar" data-i18n-placeholder="ayuda.messagePlaceholder" required></textarea>
+              <textarea name="mensaje-ayuda" rows="3" minlength="10" maxlength="500" placeholder="Escribe la necesidad o forma de ayudar" data-i18n-placeholder="ayuda.messagePlaceholder" required></textarea>
             </label>
             <p class="form-note" data-i18n="ayuda.formNote">La solicitud se guarda para revision y tambien se abre WhatsApp para coordinar con respeto y orden.</p>
+            <p class="privacy-note" data-i18n="ayuda.privacyNote">Tu información será usada únicamente para coordinar ayuda, oración o contacto pastoral. No publicamos tu teléfono ni correo sin autorización.</p>
             <p class="form-status" role="status" aria-live="polite"></p>
             <button class="button dark" type="submit" data-i18n="ayuda.submitBtn">Enviar solicitud por WhatsApp</button>
           </form>

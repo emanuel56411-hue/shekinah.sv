@@ -14,6 +14,9 @@ const SUPABASE_URL = "https://yjhnqxubicaglqfroiqk.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
 const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
 const LAST_HELP_SUBMIT_KEY = "shekinah-last-help-submit";
+const HELP_MESSAGE_MIN_LENGTH = 10;
+const HELP_MESSAGE_MAX_LENGTH = 500;
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const isSupabaseConfigured =
   SUPABASE_URL.startsWith("https://") &&
   !SUPABASE_URL.includes("YOUR_PROJECT_ID") &&
@@ -196,6 +199,8 @@ const translations = {
       emailPlaceholder: "Tu correo (opcional)",
       messagePlaceholder: "Escribe la necesidad o forma de ayudar",
       formNote: "La solicitud se guarda para revision y tambien se abre WhatsApp para coordinar con respeto y orden.",
+      privacyNote:
+        "Tu información será usada únicamente para coordinar ayuda, oración o contacto pastoral. No publicamos tu teléfono ni correo sin autorización.",
       submitBtn: "Enviar solicitud por WhatsApp",
       saving: "Guardando solicitud...",
       submitted: "Solicitud guardada. Quedara pendiente de revision antes de publicarse.",
@@ -203,6 +208,8 @@ const translations = {
       offlineError: "Necesitas conexion a internet para enviar tu solicitud. Intentalo de nuevo cuando tengas senal.",
       configError: "Falta configurar Supabase para guardar solicitudes.",
       rateLimit: "Espera un momento antes de enviar otra solicitud.",
+      invalidEmail: "Revisa el correo electronico o deja el campo vacio.",
+      messageLengthError: "El mensaje debe tener entre 10 y 500 caracteres.",
       loadingRequests: "Cargando solicitudes aprobadas...",
       loadError: "No se pudieron cargar las solicitudes aprobadas.",
       coordinateBtn: "Coordinar ayuda",
@@ -384,6 +391,8 @@ const translations = {
       emailPlaceholder: "Your email (optional)",
       messagePlaceholder: "Describe the need or how you can help",
       formNote: "The request is saved for review and WhatsApp also opens so help can be coordinated respectfully.",
+      privacyNote:
+        "Your information will only be used to coordinate help, prayer, or pastoral contact. We do not publish your phone or email without authorization.",
       submitBtn: "Send request via WhatsApp",
       saving: "Saving request...",
       submitted: "Request saved. It will stay pending review before being published.",
@@ -391,6 +400,8 @@ const translations = {
       offlineError: "You need an internet connection to send your request. Please try again once you are back online.",
       configError: "Supabase must be configured before requests can be saved.",
       rateLimit: "Please wait a moment before sending another request.",
+      invalidEmail: "Please check the email address or leave the field empty.",
+      messageLengthError: "The message must be between 10 and 500 characters.",
       loadingRequests: "Loading approved requests...",
       loadError: "Approved requests could not be loaded.",
       coordinateBtn: "Coordinate help",
@@ -676,6 +687,16 @@ helpForm.addEventListener("submit", async (event) => {
   const contact = [phone, email].filter(Boolean).join(" / ") || getTranslation("ayuda.noContact", currentLang);
   const whatsappMessage = `Hola, soy ${name}. Mi contacto es ${contact}. Solicito ayuda de tipo ${type}: ${message}`;
   const submitButton = helpForm.querySelector('button[type="submit"]');
+
+  if (email && !EMAIL_PATTERN.test(email)) {
+    setHelpStatus("ayuda.invalidEmail", "error");
+    return;
+  }
+
+  if (message.length < HELP_MESSAGE_MIN_LENGTH || message.length > HELP_MESSAGE_MAX_LENGTH) {
+    setHelpStatus("ayuda.messageLengthError", "error");
+    return;
+  }
 
   submitButton.disabled = true;
   submitButton.textContent = getTranslation("ayuda.saving", currentLang);
