@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sin conexion - Iglesia Bautista Shekinah</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        padding: 24px;
+        color: #fff7ec;
+        background: linear-gradient(160deg, #6f1320, #3a0c14 70%);
+        font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+        text-align: center;
+      }
+
+      .offline-card {
+        display: grid;
+        gap: 14px;
+        max-width: 420px;
+        padding: 32px 28px;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 232, 199, 0.22);
+        border-radius: 14px;
+        box-shadow: 0 24px 56px rgba(0, 0, 0, 0.35);
+      }
+
+      .offline-icon {
+        width: 52px;
+        height: 52px;
+        margin: 0 auto 4px;
+        color: #cf9a34;
+        fill: none;
+        stroke: currentColor;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.6;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        line-height: 1.25;
+      }
+
+      p {
+        margin: 0;
+        color: rgba(255, 247, 236, 0.86);
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
+      p.secondary {
+        font-size: 0.88rem;
+        color: rgba(255, 247, 236, 0.66);
+      }
+
+      button {
+        justify-self: center;
+        min-height: 42px;
+        margin-top: 8px;
+        padding: 10px 22px;
+        color: #21140e;
+        background: #cf9a34;
+        border: 0;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 750;
+        cursor: pointer;
+        transition: transform 170ms ease, box-shadow 170ms ease;
+      }
+
+      button:hover,
+      button:focus-visible {
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.32);
+        transform: translateY(-2px);
+        outline: none;
+      }
+
+      button:active {
+        transform: translateY(0) scale(0.97);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="offline-card">
+      <svg class="offline-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M2 8.5c5.5-4.7 14.5-4.7 20 0" />
+        <path d="M5.5 12.5c3.6-3 9.4-3 13 0" />
+        <path d="M9 16.3c1.7-1.4 4.3-1.4 6 0" />
+        <circle cx="12" cy="19.4" r="1" fill="currentColor" stroke="none" />
+        <path d="M2.5 2.5 21.5 21.5" />
+      </svg>
+      <h1>Estas sin conexion</h1>
+      <p>
+        No pudimos cargar esta pagina porque no hay internet en este momento. Cuando
+        recuperes la senal, vuelve a intentarlo para ver el sitio completo de
+        Iglesia Bautista Shekinah.
+      </p>
+      <p class="secondary">You are offline. Reconnect to load the full site.</p>
+      <button type="button" onclick="window.location.reload()">Reintentar</button>
+    </main>
+  </body>
+</html>

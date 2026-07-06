@@ -36,6 +36,10 @@ function buildWhatsappUrl(message = "") {
   return message ? `${baseUrl}?text=${encodeURIComponent(message)}` : baseUrl;
 }
 
+function isOffline() {
+  return typeof navigator !== "undefined" && "onLine" in navigator && !navigator.onLine;
+}
+
 phoneDisplayNodes.forEach((node) => {
   node.textContent = formatPhone(coordinatorPhone);
 });
@@ -196,6 +200,7 @@ const translations = {
       saving: "Guardando solicitud...",
       submitted: "Solicitud guardada. Quedara pendiente de revision antes de publicarse.",
       saveError: "No se pudo guardar la solicitud. Intentalo de nuevo o escribenos por WhatsApp.",
+      offlineError: "Necesitas conexion a internet para enviar tu solicitud. Intentalo de nuevo cuando tengas senal.",
       configError: "Falta configurar Supabase para guardar solicitudes.",
       rateLimit: "Espera un momento antes de enviar otra solicitud.",
       loadingRequests: "Cargando solicitudes aprobadas...",
@@ -383,6 +388,7 @@ const translations = {
       saving: "Saving request...",
       submitted: "Request saved. It will stay pending review before being published.",
       saveError: "The request could not be saved. Please try again or message us on WhatsApp.",
+      offlineError: "You need an internet connection to send your request. Please try again once you are back online.",
       configError: "Supabase must be configured before requests can be saved.",
       rateLimit: "Please wait a moment before sending another request.",
       loadingRequests: "Loading approved requests...",
@@ -511,7 +517,7 @@ function renderPublicHelpRequests(requests) {
 }
 
 async function loadPublicHelpRequests() {
-  if (!supabaseClient) {
+  if (!supabaseClient || isOffline()) {
     restoreDefaultHelpCards();
     return;
   }
@@ -645,6 +651,11 @@ contactForm.addEventListener("submit", (event) => {
 helpForm.addEventListener("submit", async (event) => {
   event.preventDefault();
 
+  if (isOffline()) {
+    setHelpStatus("ayuda.offlineError", "error");
+    return;
+  }
+
   if (!supabaseClient) {
     setHelpStatus("ayuda.configError", "error");
     return;
@@ -686,7 +697,7 @@ helpForm.addEventListener("submit", async (event) => {
     }
   } catch (error) {
     console.error("No se pudo guardar la solicitud de ayuda:", error);
-    setHelpStatus("ayuda.saveError", "error");
+    setHelpStatus(isOffline() ? "ayuda.offlineError" : "ayuda.saveError", "error");
     return;
   } finally {
     submitButton.disabled = false;
@@ -700,3 +711,13 @@ helpForm.addEventListener("submit", async (event) => {
 });
 
 loadPublicHelpRequests();
+
+/* --- PWA: registro del service worker --- */
+
+if ("serviceWorker" in navigator && window.isSecureContext) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch((error) => {
+      console.error("No se pudo registrar el service worker:", error);
+    });
+  });
+}
