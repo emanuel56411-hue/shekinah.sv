@@ -15,7 +15,7 @@
   --shadow: 0 18px 40px rgba(92, 35, 22, 0.16);
   --soft-shadow: 0 12px 28px rgba(92, 35, 22, 0.1);
   --radius: 8px;
-  --heading-font: "Fraunces", Georgia, "Times New Roman", serif;
+  --heading-font: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
   --body-font: "Inter", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
 }
 
@@ -368,9 +368,11 @@ h3 {
 }
 
 .hero-panel strong {
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--heading-font);
+  font-weight: 800;
   font-size: 2rem;
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .hero-panel p {
@@ -616,11 +618,6 @@ body.dark-mode .tinted {
   color: var(--muted);
 }
 
-body.dark-mode .identity-section {
-  background:
-    linear-gradient(135deg, rgba(255, 193, 90, 0.06), transparent 50%),
-    transparent;
-}
 
 .scripture-section {
   padding-top: clamp(38px, 4.8vw, 60px);
@@ -633,9 +630,7 @@ body.dark-mode .identity-section {
   gap: clamp(18px, 4vw, 40px);
   align-items: center;
   padding: clamp(18px, 3vw, 26px);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--gold) 10%, transparent), transparent 52%),
-    var(--card);
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
   box-shadow: var(--soft-shadow);
@@ -672,9 +667,7 @@ body.dark-mode .identity-section {
 }
 
 body.dark-mode .scripture-layout {
-  background:
-    linear-gradient(135deg, rgba(255, 193, 90, 0.13), rgba(255, 111, 125, 0.08)),
-    var(--card);
+  background: var(--card);
   border-color: rgba(255, 193, 90, 0.22);
 }
 
@@ -1017,7 +1010,7 @@ body.dark-mode .location-card span {
 }
 
 body.dark-mode .callout {
-  background: linear-gradient(135deg, rgba(255, 111, 125, 0.18), rgba(255, 193, 90, 0.12));
+  background: color-mix(in srgb, var(--brand) 14%, var(--card));
   border-color: rgba(255, 193, 90, 0.24);
 }
 
@@ -1074,9 +1067,7 @@ body.dark-mode .callout {
 }
 
 .help-card {
-  background:
-    linear-gradient(180deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 58%),
-    var(--card);
+  background: var(--card);
 }
 
 .help-form {
@@ -1895,15 +1886,11 @@ body.dark-mode {
 }
 
 body {
-  background:
-    radial-gradient(circle at top left, rgba(212, 165, 63, 0.11), transparent 30rem),
-    linear-gradient(180deg, var(--bg), var(--surface));
+  background: var(--bg);
 }
 
 body.dark-mode {
-  background:
-    radial-gradient(circle at 85% 0%, rgba(255, 120, 134, 0.1), transparent 24rem),
-    linear-gradient(180deg, var(--bg), #0f141c 58%, #0b0f15);
+  background: var(--bg);
 }
 
 main > section:not(.hero) {
@@ -2156,11 +2143,16 @@ body.dark-mode .contact-section {
   align-content: center;
   padding: clamp(24px, 4vw, 38px);
   color: var(--ink);
-  background:
-    linear-gradient(145deg, color-mix(in srgb, var(--gold) 12%, var(--card)), var(--card));
+  background: var(--card);
   border: 1px solid var(--line);
   border-radius: 28px;
   box-shadow: none;
+}
+
+body.dark-mode .location-card {
+  color: var(--ink);
+  background: var(--card);
+  border-color: var(--line);
 }
 
 .location-card span {
@@ -2325,9 +2317,21 @@ body.dark-mode .contact-section {
   max-width: 520px;
 }
 
+.hero h1 {
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
 h2 {
   max-width: 700px;
+  font-weight: 850;
   font-size: clamp(2.05rem, 4.2vw, 3.65rem);
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  font-weight: 800;
+  letter-spacing: -0.015em;
 }
 
 .section-copy p,
