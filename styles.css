@@ -2314,3 +2314,64 @@ body.dark-mode .contact-section {
     min-height: 66px;
   }
 }
+
+/* --- Contenido mas breve: iglesia moderna con acciones claras --- */
+
+.section {
+  padding-block: clamp(42px, 5.8vw, 74px);
+}
+
+.section-copy {
+  max-width: 520px;
+}
+
+h2 {
+  max-width: 700px;
+  font-size: clamp(2.05rem, 4.2vw, 3.65rem);
+}
+
+.section-copy p,
+.updates-grid p,
+.ministry-grid p,
+.help-card p,
+.contact-section p {
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.scripture-layout {
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+  padding: clamp(20px, 4vw, 34px);
+}
+
+.scripture-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.scripture-grid p {
+  font-size: 0.98rem;
+}
+
+.ministry-grid {
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+}
+
+.help-layout {
+  grid-template-columns: minmax(0, 0.78fr) minmax(250px, 0.86fr) minmax(300px, 1fr);
+}
+
+.updates-grid article,
+.identity-grid article,
+.ministry-grid article,
+.help-card {
+  padding: 18px;
+}
+
+@media (max-width: 1040px) {
+  .scripture-grid,
+  .ministry-grid,
+  .help-layout {
+    grid-template-columns: 1fr;
+  }
+}
