@@ -1028,14 +1028,19 @@ body.dark-mode .callout {
 
 .help-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.82fr) minmax(250px, 0.9fr) minmax(290px, 1fr);
-  gap: 14px;
+  grid-template-columns: minmax(0, 0.88fr) minmax(300px, 0.9fr) minmax(320px, 1fr);
+  gap: clamp(14px, 2vw, 22px);
   align-items: start;
+}
+
+.help-actions-panel {
+  display: grid;
+  gap: 12px;
 }
 
 .help-board {
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
 .help-shortcuts {
@@ -1072,6 +1077,10 @@ body.dark-mode .callout {
   background:
     linear-gradient(180deg, color-mix(in srgb, var(--gold) 8%, transparent), transparent 58%),
     var(--card);
+}
+
+.help-form {
+  align-self: start;
 }
 
 .help-card .button {
@@ -1340,6 +1349,11 @@ body.dark-mode .site-footer {
   .help-layout .section-copy {
     grid-column: 1 / -1;
     max-width: 720px;
+  }
+
+  .help-actions-panel,
+  .help-form {
+    min-width: 0;
   }
 }
 
