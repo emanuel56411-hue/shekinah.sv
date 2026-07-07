@@ -1,5 +1,6 @@
 const menuButton = document.querySelector(".menu-button");
 const mainMenu = document.querySelector("#main-menu");
+const menuClose = document.querySelector(".menu-close");
 const themeToggle = document.querySelector(".theme-toggle");
 const langToggle = document.querySelector(".lang-toggle");
 const contactForm = document.querySelector(".contact-form");
@@ -9,7 +10,16 @@ const helpStatus = document.querySelector(".form-status");
 const coordinatorPhone = document.body.dataset.phone || "";
 const phoneDisplayNodes = document.querySelectorAll("[data-phone-display]");
 const whatsappLinks = document.querySelectorAll("[data-whatsapp-link]");
+const progressiveSections = document.querySelectorAll("main > section:not(.hero)");
 const defaultHelpCards = Array.from(helpBoard.children).map((card) => card.cloneNode(true));
+const nextServiceLabel = document.querySelector("[data-next-service-label]");
+const nextServiceDay = document.querySelector("[data-next-service-day]");
+const nextServiceTime = document.querySelector("[data-next-service-time]");
+const nextServiceRowOneDay = document.querySelector("[data-next-service-row-one-day]");
+const nextServiceRowOneTitle = document.querySelector("[data-next-service-row-one-title]");
+const nextServiceRowTwoDay = document.querySelector("[data-next-service-row-two-day]");
+const nextServiceRowTwoTitle = document.querySelector("[data-next-service-row-two-title]");
+const helpShortcutButtons = document.querySelectorAll("[data-help-shortcut]");
 const SUPABASE_URL = "https://yjhnqxubicaglqfroiqk.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
 const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
@@ -70,6 +80,26 @@ const translations = {
       ministerios: "Ministerios",
       ayuda: "Ayuda",
       redes: "Redes",
+      eventos: "Eventos",
+    },
+    menu: {
+      title: "Conectate",
+      connect: "Conectate",
+      discover: "Descubre",
+      contact: "Contacto",
+      openAria: "Abrir menu",
+      closeAria: "Cerrar menu",
+      scheduleDesc: "Encuentra el dia y hora para congregarte.",
+      eventsDesc: "Conoce proximas actividades y anuncios.",
+      ministriesDesc: "Descubre areas donde puedes servir.",
+      helpDesc: "Pide oracion, apoyo o coordina donaciones.",
+      aboutDesc: "Conoce quienes somos y como vivimos la fe.",
+      locationDesc: "Abre la ruta para llegar a San Juan Opico.",
+      socialDesc: "Sigue anuncios, fotos y momentos de la iglesia.",
+      messages: "Mensajes",
+      messagesDesc: "Predicaciones y recursos por anunciar.",
+      contactDesc: "Escribenos para visitas o mas informacion.",
+      whatsappDesc: "Abre un chat directo con coordinacion.",
     },
     theme: {
       toDark: "Oscuro",
@@ -85,6 +115,13 @@ const translations = {
     },
     quickStrip: {
       aria: "Accesos rapidos",
+      visitTitle: "Visitanos",
+      visitDesc: "Domingo 8:30 a.m. y 10:00 a.m.",
+      locationTitle: "Como llegar",
+      prayerTitle: "Pedir oracion",
+      prayerDesc: "Comparte tu necesidad con respeto.",
+      serveTitle: "Quiero servir",
+      serveDesc: "Conoce las areas de servicio.",
     },
     common: {
       sunday: "Domingo",
@@ -102,8 +139,9 @@ const translations = {
       eyebrow: "Biblia, adoracion y servicio",
       description:
         "Una comunidad cristiana en San Juan Opico donde puedes acercarte a Dios, aprender su Palabra y caminar acompanado por una familia de fe.",
-      ctaPrimary: "Ver horarios",
+      ctaPrimary: "Visitanos este domingo",
       ctaSecondary: "Como llegar",
+      ctaPrayer: "Pedir oracion",
     },
     schedule: {
       tuesdayActivity: "Estudio exegetico",
@@ -148,10 +186,13 @@ const translations = {
       eyebrow: "Como llegar",
       title: "Estamos en San Juan Opico",
       description:
-        'Usa el codigo <strong>QJRR+HH2, San Juan Opico</strong> para abrir la ruta desde Google Maps o Waze y llegar sin perderte.',
+        'Usa <strong>QJRR+HH2, San Juan Opico</strong> para abrir la ruta en tu telefono. Puedes elegir Google Maps, Waze o escribirnos por WhatsApp.',
       mapsBtn: "Abrir Google Maps",
       wazeBtn: "Como llegar en Waze",
       whatsappBtn: "Preguntar por WhatsApp",
+      mapsHint: "Ver ruta y referencia",
+      wazeHint: "Iniciar navegacion",
+      whatsappHint: "Pedir referencia",
     },
     eventos: {
       eyebrow: "Eventos",
@@ -215,6 +256,10 @@ const translations = {
       coordinateBtn: "Coordinar ayuda",
       anonymousName: "Solicitud de ayuda",
       noContact: "Sin contacto adicional",
+      quickPrayer: "Pedir oracion",
+      quickFood: "Solicitar viveres",
+      quickVisit: "Pedir visita",
+      quickDonate: "Quiero donar",
     },
     helpTypes: {
       oracion: "Oracion",
@@ -262,6 +307,26 @@ const translations = {
       ministerios: "Ministries",
       ayuda: "Help",
       redes: "Social",
+      eventos: "Events",
+    },
+    menu: {
+      title: "Connect",
+      connect: "Connect",
+      discover: "Discover",
+      contact: "Contact",
+      openAria: "Open menu",
+      closeAria: "Close menu",
+      scheduleDesc: "Find the day and time to gather.",
+      eventsDesc: "See upcoming activities and announcements.",
+      ministriesDesc: "Discover areas where you can serve.",
+      helpDesc: "Ask for prayer, support, or coordinate donations.",
+      aboutDesc: "Learn who we are and how we live our faith.",
+      locationDesc: "Open directions to San Juan Opico.",
+      socialDesc: "Follow announcements, photos, and church moments.",
+      messages: "Messages",
+      messagesDesc: "Sermons and resources to be announced.",
+      contactDesc: "Write to us for visits or more information.",
+      whatsappDesc: "Open a direct chat with coordination.",
     },
     theme: {
       toDark: "Dark",
@@ -277,6 +342,13 @@ const translations = {
     },
     quickStrip: {
       aria: "Quick links",
+      visitTitle: "Visit Us",
+      visitDesc: "Sunday 8:30 a.m. and 10:00 a.m.",
+      locationTitle: "Get directions",
+      prayerTitle: "Request prayer",
+      prayerDesc: "Share your need respectfully.",
+      serveTitle: "I want to serve",
+      serveDesc: "See the areas of service.",
     },
     common: {
       sunday: "Sunday",
@@ -294,8 +366,9 @@ const translations = {
       eyebrow: "Bible, worship and service",
       description:
         "A Christian community in San Juan Opico where you can draw near to God, learn His Word and walk alongside a family of faith.",
-      ctaPrimary: "View schedule",
+      ctaPrimary: "Visit us this Sunday",
       ctaSecondary: "Get directions",
+      ctaPrayer: "Request prayer",
     },
     schedule: {
       tuesdayActivity: "Exegetical study",
@@ -340,10 +413,13 @@ const translations = {
       eyebrow: "How to get there",
       title: "We are in San Juan Opico",
       description:
-        'Use the code <strong>QJRR+HH2, San Juan Opico</strong> to open directions from Google Maps or Waze and get here without getting lost.',
+        'Use <strong>QJRR+HH2, San Juan Opico</strong> to open directions on your phone. You can choose Google Maps, Waze or message us on WhatsApp.',
       mapsBtn: "Open Google Maps",
       wazeBtn: "Get directions in Waze",
       whatsappBtn: "Ask via WhatsApp",
+      mapsHint: "View route and reference",
+      wazeHint: "Start navigation",
+      whatsappHint: "Ask for a reference",
     },
     eventos: {
       eyebrow: "Events",
@@ -407,6 +483,10 @@ const translations = {
       coordinateBtn: "Coordinate help",
       anonymousName: "Help request",
       noContact: "No additional contact",
+      quickPrayer: "Ask for prayer",
+      quickFood: "Request groceries",
+      quickVisit: "Request a visit",
+      quickDonate: "I want to donate",
     },
     helpTypes: {
       oracion: "Prayer",
@@ -442,6 +522,130 @@ const translations = {
 
 function getTranslation(key, lang) {
   return key.split(".").reduce((value, part) => (value ? value[part] : undefined), translations[lang]);
+}
+
+const meetingSchedule = [
+  {
+    day: 0,
+    start: 8 * 60 + 30,
+    end: 9 * 60 + 40,
+    dayKey: "common.sunday",
+    titleKey: "schedule.sunday1Activity",
+    time: "8:30 a.m. - 9:40 a.m.",
+  },
+  {
+    day: 0,
+    start: 10 * 60,
+    end: 11 * 60 + 30,
+    dayKey: "common.sunday",
+    titleKey: "schedule.sunday2Activity",
+    time: "10:00 a.m. - 11:30 a.m.",
+  },
+  {
+    day: 2,
+    start: 19 * 60,
+    end: 20 * 60 + 30,
+    dayKey: "common.tuesday",
+    titleKey: "schedule.tuesdayActivity",
+    time: "7:00 p.m. - 8:30 p.m.",
+  },
+  {
+    day: 4,
+    start: 19 * 60,
+    end: 20 * 60 + 30,
+    dayKey: "common.thursday",
+    titleKey: "schedule.thursdayActivity",
+    time: "7:00 p.m. - 8:30 p.m.",
+  },
+  {
+    day: 6,
+    start: 16 * 60 + 30,
+    end: 18 * 60,
+    dayKey: "common.saturday",
+    titleKey: "schedule.saturdayActivity",
+    time: "4:30 p.m. - 6:00 p.m.",
+  },
+];
+
+function getElSalvadorTimeParts(date = new Date()) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/El_Salvador",
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+
+  const weekday = parts.find((part) => part.type === "weekday")?.value || "Sun";
+  const hour = Number(parts.find((part) => part.type === "hour")?.value || 0);
+  const minute = Number(parts.find((part) => part.type === "minute")?.value || 0);
+  const dayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+
+  return {
+    day: dayMap[weekday] ?? 0,
+    minutes: hour * 60 + minute,
+  };
+}
+
+function getUpcomingMeetings(limit = 3) {
+  const now = getElSalvadorTimeParts();
+
+  return meetingSchedule
+    .map((meeting) => {
+      const dayDistance = (meeting.day - now.day + 7) % 7;
+      const isToday = dayDistance === 0;
+      const hasNotEndedToday = isToday && meeting.end > now.minutes;
+      const daysUntil = isToday && !hasNotEndedToday ? 7 : dayDistance;
+      const isHappeningNow = isToday && now.minutes >= meeting.start && now.minutes < meeting.end;
+
+      return {
+        ...meeting,
+        daysUntil,
+        isToday,
+        isHappeningNow,
+        sortValue: daysUntil * 24 * 60 + meeting.start,
+      };
+    })
+    .sort((a, b) => a.sortValue - b.sortValue)
+    .slice(0, limit);
+}
+
+function getNextServiceLabel(meeting) {
+  if (meeting.isHappeningNow) {
+    return currentLang === "en" ? "Happening now" : "En este momento";
+  }
+
+  if (meeting.isToday) {
+    return currentLang === "en" ? "Today we gather" : "Hoy nos reunimos";
+  }
+
+  return currentLang === "en" ? "Next gathering" : "Proxima reunion";
+}
+
+function updateNextServicePanel() {
+  if (!nextServiceLabel || !nextServiceDay || !nextServiceTime) {
+    return;
+  }
+
+  const [nextMeeting, secondMeeting, thirdMeeting] = getUpcomingMeetings(3);
+
+  if (!nextMeeting) {
+    return;
+  }
+
+  nextServiceLabel.textContent = getNextServiceLabel(nextMeeting);
+  nextServiceDay.textContent = getTranslation(nextMeeting.dayKey, currentLang);
+  nextServiceTime.textContent = `${nextMeeting.time} | ${getTranslation(nextMeeting.titleKey, currentLang)}`;
+
+  if (secondMeeting && nextServiceRowOneDay && nextServiceRowOneTitle) {
+    nextServiceRowOneDay.textContent = getTranslation(secondMeeting.dayKey, currentLang);
+    nextServiceRowOneTitle.textContent = getTranslation(secondMeeting.titleKey, currentLang);
+  }
+
+  if (thirdMeeting && nextServiceRowTwoDay && nextServiceRowTwoTitle) {
+    nextServiceRowTwoDay.textContent = getTranslation(thirdMeeting.dayKey, currentLang);
+    nextServiceRowTwoTitle.textContent = getTranslation(thirdMeeting.titleKey, currentLang);
+  }
 }
 
 function getHelpTypeLabel(type) {
@@ -561,6 +765,12 @@ function syncLangButton(lang) {
   langToggle.setAttribute("aria-label", getTranslation(isSpanish ? "lang.ariaToEnglish" : "lang.ariaToSpanish", lang));
 }
 
+function syncMenuButton(lang) {
+  const isOpen = mainMenu.classList.contains("is-open");
+  menuButton.setAttribute("aria-expanded", String(isOpen));
+  menuButton.setAttribute("aria-label", getTranslation(isOpen ? "menu.closeAria" : "menu.openAria", lang));
+}
+
 function applyTranslations(lang) {
   document.documentElement.lang = lang;
 
@@ -600,10 +810,13 @@ function applyTranslations(lang) {
 
   syncThemeButton(lang);
   syncLangButton(lang);
+  syncMenuButton(lang);
+  updateNextServicePanel();
 }
 
 let currentLang = localStorage.getItem("shekinah-lang") === "en" ? "en" : "es";
 applyTranslations(currentLang);
+setInterval(updateNextServicePanel, 60 * 1000);
 
 langToggle.addEventListener("click", () => {
   currentLang = currentLang === "es" ? "en" : "es";
@@ -630,19 +843,129 @@ themeToggle.addEventListener("click", () => {
   syncThemeButton(currentLang);
 });
 
+function setMenuOpen(isOpen, returnFocus = false) {
+  mainMenu.classList.toggle("is-open", isOpen);
+  document.body.classList.toggle("menu-open", isOpen);
+  syncMenuButton(currentLang);
+
+  if (isOpen) {
+    (menuClose || mainMenu.querySelector("summary, a, button"))?.focus();
+    return;
+  }
+
+  if (returnFocus) {
+    menuButton.focus();
+  }
+}
+
+function showProgressiveSection(hash) {
+  const target = document.querySelector(hash);
+
+  if (!target) {
+    return document.querySelector("#inicio");
+  }
+
+  if (!target.matches("main > section, .quick-strip")) {
+    return null;
+  }
+
+  return target;
+}
+
+function navigateToProgressiveSection(hash) {
+  const target = showProgressiveSection(hash);
+
+  if (!target) {
+    return;
+  }
+
+  if (history.pushState) {
+    history.pushState(null, "", hash);
+  }
+
+  requestAnimationFrame(() => {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+}
+
+function getMenuFocusableElements() {
+  return Array.from(
+    mainMenu.querySelectorAll('a[href], button:not([disabled]), summary, [tabindex]:not([tabindex="-1"])')
+  ).filter((element) => element.offsetParent !== null);
+}
+
 menuButton.addEventListener("click", () => {
-  const isOpen = mainMenu.classList.toggle("is-open");
-  menuButton.setAttribute("aria-expanded", String(isOpen));
-  menuButton.setAttribute("aria-label", isOpen ? "Cerrar menu" : "Abrir menu");
+  setMenuOpen(!mainMenu.classList.contains("is-open"));
+});
+
+menuClose.addEventListener("click", () => {
+  setMenuOpen(false, true);
 });
 
 mainMenu.addEventListener("click", (event) => {
-  if (event.target.tagName === "A") {
-    mainMenu.classList.remove("is-open");
-    menuButton.setAttribute("aria-expanded", "false");
-    menuButton.setAttribute("aria-label", "Abrir menu");
+  const link = event.target.closest("a");
+
+  if (!link) {
+    return;
+  }
+
+  const hash = link.getAttribute("href");
+
+  if (hash && hash.startsWith("#") && hash.length > 1) {
+    event.preventDefault();
+    setMenuOpen(false);
+    navigateToProgressiveSection(hash);
+    return;
+  }
+
+  setMenuOpen(false);
+});
+
+document.addEventListener("keydown", (event) => {
+  if (!mainMenu.classList.contains("is-open")) {
+    return;
+  }
+
+  if (event.key === "Escape") {
+    setMenuOpen(false, true);
+    return;
+  }
+
+  if (event.key === "Tab") {
+    const focusableElements = getMenuFocusableElements();
+    const firstElement = focusableElements[0];
+    const lastElement = focusableElements[focusableElements.length - 1];
+
+    if (!firstElement || !lastElement) {
+      return;
+    }
+
+    if (event.shiftKey && document.activeElement === firstElement) {
+      event.preventDefault();
+      lastElement.focus();
+    } else if (!event.shiftKey && document.activeElement === lastElement) {
+      event.preventDefault();
+      firstElement.focus();
+    }
   }
 });
+
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const hash = link.getAttribute("href");
+
+    if (!hash || hash === "#" || link.closest("#main-menu")) {
+      return;
+    }
+
+    event.preventDefault();
+    navigateToProgressiveSection(hash);
+  });
+});
+
+if (window.location.hash) {
+  showProgressiveSection(window.location.hash);
+}
 
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -657,6 +980,27 @@ contactForm.addEventListener("submit", (event) => {
     "_blank",
     "noopener,noreferrer"
   );
+});
+
+helpShortcutButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const type = button.dataset.helpType || "General";
+    const message = button.dataset.helpMessage || "";
+    const typeField = helpForm.querySelector('[name="tipo-ayuda"]');
+    const messageField = helpForm.querySelector('[name="mensaje-ayuda"]');
+
+    if (typeField) {
+      typeField.value = type;
+    }
+
+    if (messageField && !messageField.value.trim()) {
+      messageField.value = message;
+    }
+
+    helpShortcutButtons.forEach((item) => item.classList.toggle("is-selected", item === button));
+    helpForm.scrollIntoView({ behavior: "smooth", block: "center" });
+    messageField?.focus({ preventScroll: true });
+  });
 });
 
 helpForm.addEventListener("submit", async (event) => {

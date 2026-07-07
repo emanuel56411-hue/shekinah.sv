@@ -547,16 +547,12 @@ body.dark-mode .help-form {
 }
 
 .tinted {
-  background:
-    linear-gradient(135deg, rgba(240, 169, 47, 0.13), rgba(179, 38, 54, 0.05)),
-    var(--surface);
+  background: color-mix(in srgb, var(--surface) 86%, #ffffff);
   border-block: 1px solid var(--line);
 }
 
 body.dark-mode .tinted {
-  background:
-    linear-gradient(135deg, rgba(255, 193, 90, 0.08), rgba(255, 111, 125, 0.06)),
-    var(--surface);
+  background: color-mix(in srgb, var(--surface) 88%, #0e1117);
 }
 
 .identity-section {
@@ -775,24 +771,33 @@ h3 {
 }
 
 .location-grid {
-  align-items: center;
+  align-items: stretch;
+  gap: clamp(18px, 4vw, 42px);
 }
 
 .location-card {
   display: grid;
-  gap: 7px;
-  min-height: 176px;
-  padding: 20px;
-  color: #ffffff;
+  align-content: end;
+  gap: 8px;
+  min-height: 238px;
+  padding: clamp(18px, 3vw, 26px);
+  overflow: hidden;
+  color: var(--ink);
   background:
-    linear-gradient(135deg, rgba(111, 19, 32, 0.94), rgba(37, 82, 115, 0.88)),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(255, 248, 236, 0.92)),
     url("assets/iglesia-shekinah-interior.png") center / cover;
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: var(--soft-shadow);
 }
 
 .location-card span {
-  color: var(--gold);
+  width: fit-content;
+  padding: 4px 8px;
+  color: var(--brand);
+  background: color-mix(in srgb, var(--card) 86%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
   font-size: 0.78rem;
   font-weight: 850;
   text-transform: uppercase;
@@ -807,7 +812,117 @@ h3 {
 
 .location-card p {
   margin: 0;
-  color: rgba(255, 255, 255, 0.83);
+  color: var(--muted);
+  font-weight: 750;
+}
+
+.location-card small {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.address-pill {
+  display: grid;
+  gap: 3px;
+  width: min(100%, 520px);
+  margin-top: 18px;
+  padding: 13px 15px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+}
+
+.address-pill span {
+  color: var(--brand);
+  font-size: 0.78rem;
+  font-weight: 850;
+  text-transform: uppercase;
+}
+
+.address-pill strong {
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+.route-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.action-link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 4px 10px;
+  align-items: center;
+  min-height: 74px;
+  padding: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+  transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease, background 170ms ease;
+}
+
+.action-link:hover,
+.action-link:focus-visible {
+  border-color: color-mix(in srgb, var(--brand) 52%, var(--line));
+  box-shadow: var(--shadow);
+  transform: translateY(-4px);
+  outline: none;
+}
+
+.action-link svg {
+  grid-row: span 2;
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  color: var(--brand);
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  background: color-mix(in srgb, var(--brand) 9%, transparent);
+  border-radius: 999px;
+}
+
+.action-link span {
+  color: var(--ink);
+  font-size: 0.98rem;
+  font-weight: 850;
+  line-height: 1.1;
+}
+
+.action-link small {
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.action-link.waze svg {
+  color: #0987a0;
+  background: rgba(49, 196, 236, 0.15);
+}
+
+.action-link.whatsapp svg {
+  color: #1f8f52;
+  background: rgba(31, 143, 82, 0.13);
+}
+
+body.dark-mode .location-card {
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(14, 17, 23, 0.12), rgba(32, 38, 50, 0.96)),
+    url("assets/iglesia-shekinah-interior.png") center / cover;
+  border-color: rgba(255, 232, 199, 0.2);
+}
+
+body.dark-mode .location-card span {
+  background: rgba(14, 17, 23, 0.72);
 }
 
 .event-row {
@@ -921,6 +1036,36 @@ body.dark-mode .callout {
 .help-board {
   display: grid;
   gap: 14px;
+}
+
+.help-shortcuts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.help-shortcuts button {
+  min-height: 52px;
+  padding: 10px 12px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+  font-weight: 850;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease, background 170ms ease;
+}
+
+.help-shortcuts button:hover,
+.help-shortcuts button:focus-visible,
+.help-shortcuts button.is-selected {
+  background: color-mix(in srgb, var(--gold) 14%, var(--card));
+  border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+  outline: none;
 }
 
 .help-card {
@@ -1346,5 +1491,812 @@ body.dark-mode .site-footer {
 
   .quick-strip {
     width: calc(100% - 24px);
+  }
+}
+
+/* --- Navegacion progresiva: hero primero, contenido bajo demanda --- */
+
+main > section:not(.hero) {
+  display: none;
+}
+
+main > section.is-visible {
+  display: block;
+  animation: sectionReveal 260ms ease both;
+}
+
+.hero {
+  background-position:
+    center,
+    58% center;
+  background-size:
+    auto,
+    cover;
+}
+
+body.dark-mode .hero {
+  background-position:
+    center,
+    58% center;
+  background-size:
+    auto,
+    cover;
+}
+
+.location-card {
+  background-position:
+    center,
+    58% center;
+  background-size:
+    auto,
+    cover;
+}
+
+.hero-inner {
+  min-height: max(520px, calc(100svh - 64px));
+}
+
+.main-nav {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 100%;
+  height: 100dvh;
+  padding: clamp(20px, 5vw, 46px);
+  color: #fff7ec;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(207, 154, 52, 0.15), transparent 22rem),
+    linear-gradient(145deg, rgba(5, 7, 10, 0.98), rgba(15, 17, 24, 0.98) 58%, rgba(6, 8, 12, 0.98));
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-18px) scale(0.985);
+  visibility: hidden;
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease,
+    visibility 0ms linear 260ms;
+}
+
+.main-nav.is-open {
+  display: grid;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+  animation: none;
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease,
+    visibility 0ms;
+}
+
+.menu-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: min(980px, 100%);
+  margin: 0 auto;
+}
+
+.menu-panel-title {
+  font-family: var(--heading-font);
+  font-size: clamp(2rem, 6vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.menu-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  color: #111318;
+  background: rgba(255, 255, 255, 0.9);
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    background 170ms ease,
+    box-shadow 170ms ease,
+    transform 170ms ease;
+}
+
+.menu-close span {
+  font-size: 2.4rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.menu-close:hover,
+.menu-close:focus-visible {
+  background: #ffffff;
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.36);
+  outline: none;
+  transform: translateY(-2px) rotate(6deg);
+}
+
+.menu-groups {
+  display: grid;
+  align-content: start;
+  gap: 14px;
+  width: min(980px, 100%);
+  margin: clamp(26px, 6vh, 58px) auto 0;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.menu-group {
+  border-bottom: 1px solid rgba(255, 247, 236, 0.12);
+}
+
+.menu-group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  min-height: 62px;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: var(--body-font);
+  font-size: clamp(2rem, 7vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  list-style: none;
+  text-transform: uppercase;
+}
+
+.menu-group summary::-webkit-details-marker {
+  display: none;
+}
+
+.menu-plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 247, 236, 0.7);
+  font-size: 0.8em;
+  font-weight: 300;
+  transition:
+    color 170ms ease,
+    transform 220ms ease;
+}
+
+.menu-group[open] .menu-plus {
+  color: var(--gold);
+  transform: rotate(45deg);
+}
+
+.mega-links {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    grid-template-rows 260ms ease,
+    opacity 220ms ease;
+}
+
+.menu-group[open] .mega-links {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mega-links-inner {
+  display: grid;
+  gap: 10px;
+  min-height: 0;
+  padding: 8px 0 18px;
+}
+
+.main-nav .mega-link {
+  display: grid;
+  grid-template-columns: 34px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  min-height: 76px;
+  padding: 10px 12px;
+  color: #fff7ec;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: calc(var(--radius) + 6px);
+  box-shadow: none;
+  text-align: left;
+  transition:
+    background 170ms ease,
+    border-color 170ms ease,
+    transform 170ms ease;
+}
+
+.main-nav .mega-link:hover,
+.main-nav .mega-link:focus-visible {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.055);
+  border-color: rgba(207, 154, 52, 0.24);
+  box-shadow: none;
+  outline: none;
+  transform: translateX(5px);
+}
+
+.mega-link svg {
+  width: 26px;
+  height: 26px;
+  color: rgba(255, 247, 236, 0.76);
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.7;
+}
+
+.mega-link span,
+.mega-link strong,
+.mega-link small {
+  display: block;
+}
+
+.mega-link strong {
+  color: #ffffff;
+  font-size: clamp(1.08rem, 2vw, 1.28rem);
+  line-height: 1.2;
+}
+
+.mega-link small {
+  margin-top: 3px;
+  color: rgba(255, 247, 236, 0.58);
+  font-size: clamp(0.9rem, 1.7vw, 1rem);
+  line-height: 1.35;
+}
+
+.menu-panel-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: min(980px, 100%);
+  margin: 20px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 247, 236, 0.12);
+}
+
+.main-nav .theme-toggle,
+.main-nav .lang-toggle {
+  width: auto;
+  min-height: 44px;
+  padding: 10px 16px;
+  color: #fff7ec;
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 247, 236, 0.16);
+  text-align: center;
+}
+
+.main-nav .theme-toggle:hover,
+.main-nav .theme-toggle:focus-visible,
+.main-nav .lang-toggle:hover,
+.main-nav .lang-toggle:focus-visible {
+  color: #10131a;
+  background: var(--gold);
+  box-shadow: none;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+@keyframes sectionReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 600px) and (orientation: portrait) {
+  .hero,
+  body.dark-mode .hero,
+  .location-card {
+    background-position:
+      center,
+      72% center;
+  }
+
+  .hero-inner {
+    min-height: max(560px, calc(100svh - 64px));
+  }
+}
+
+@media (max-width: 420px) and (orientation: portrait) {
+  .hero,
+  body.dark-mode .hero,
+  .location-card {
+    background-position:
+      center,
+      76% center;
+  }
+}
+
+@media (min-width: 900px) {
+  .mega-links-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .main-nav {
+    padding: 22px 18px;
+  }
+
+  .menu-close {
+    width: 54px;
+    height: 54px;
+  }
+
+  .menu-group summary {
+    min-height: 56px;
+  }
+}
+
+/* --- Refinamiento visual: moderno, limpio y predecible --- */
+
+:root {
+  --bg: #fbf6ee;
+  --surface: #fffaf2;
+  --card: #ffffff;
+  --ink: #1d1712;
+  --muted: #65554a;
+  --line: rgba(78, 54, 39, 0.13);
+  --brand: #9f1726;
+  --brand-strong: #65101a;
+  --gold: #d4a53f;
+  --gold-ink: #8a6116;
+  --shadow: 0 18px 36px rgba(74, 45, 24, 0.1);
+  --soft-shadow: 0 8px 22px rgba(74, 45, 24, 0.07);
+  --radius: 18px;
+}
+
+body.dark-mode {
+  --bg: #0c1016;
+  --surface: #121821;
+  --card: #171f2b;
+  --ink: #fff8ee;
+  --muted: #cfc1b1;
+  --line: rgba(255, 236, 210, 0.13);
+  --brand: #ff7886;
+  --brand-strong: #d64a59;
+  --gold: #e7b75c;
+  --gold-ink: #f0c777;
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.32);
+  --soft-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+}
+
+body {
+  background:
+    radial-gradient(circle at top left, rgba(212, 165, 63, 0.11), transparent 30rem),
+    linear-gradient(180deg, var(--bg), var(--surface));
+}
+
+body.dark-mode {
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 120, 134, 0.1), transparent 24rem),
+    linear-gradient(180deg, var(--bg), #0f141c 58%, #0b0f15);
+}
+
+main > section:not(.hero) {
+  display: block;
+}
+
+.site-header {
+  min-height: 70px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  box-shadow: none;
+}
+
+body.dark-mode .site-header {
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  box-shadow: none;
+}
+
+.brand-logo {
+  border-radius: 12px;
+}
+
+.brand strong {
+  color: var(--ink);
+  font-weight: 850;
+}
+
+.menu-button {
+  width: 44px;
+  height: 44px;
+  color: var(--ink);
+  background: var(--card);
+  border-color: var(--line);
+  border-radius: 14px;
+  box-shadow: var(--soft-shadow);
+}
+
+.menu-button:hover,
+.menu-button:focus-visible,
+.menu-button[aria-expanded="true"] {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--gold) 20%, var(--card));
+  border-color: color-mix(in srgb, var(--gold) 38%, var(--line));
+  box-shadow: var(--soft-shadow);
+}
+
+.menu-button:hover .menu-icon,
+.menu-button:focus-visible .menu-icon,
+.menu-button[aria-expanded="true"] .menu-icon {
+  transform: none;
+}
+
+.hero {
+  position: relative;
+  min-height: calc(100svh - 70px);
+  background:
+    linear-gradient(90deg, rgba(21, 14, 10, 0.86) 0%, rgba(95, 26, 31, 0.66) 48%, rgba(21, 14, 10, 0.18) 100%),
+    url("assets/iglesia-shekinah-interior.png") 58% center / cover;
+}
+
+body.dark-mode .hero {
+  background:
+    linear-gradient(90deg, rgba(6, 8, 12, 0.9) 0%, rgba(92, 25, 34, 0.62) 52%, rgba(6, 8, 12, 0.24) 100%),
+    url("assets/iglesia-shekinah-interior.png") 58% center / cover;
+}
+
+.hero-inner {
+  min-height: calc(100svh - 70px);
+  align-items: center;
+  padding-top: clamp(64px, 8vw, 104px);
+  padding-bottom: clamp(42px, 6vw, 72px);
+}
+
+.hero-content {
+  width: min(680px, 100%);
+}
+
+.hero h1 {
+  font-size: clamp(3rem, 7vw, 6.5rem);
+  text-wrap: balance;
+}
+
+.hero p:not(.eyebrow) {
+  max-width: 620px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.button {
+  min-height: 48px;
+  padding: 11px 18px;
+  border-radius: 999px;
+  box-shadow: none;
+}
+
+.button:hover,
+.button:focus-visible {
+  box-shadow: var(--soft-shadow);
+  transform: translateY(-2px);
+}
+
+.button.primary {
+  color: #23170d;
+  background: var(--gold);
+  border-color: color-mix(in srgb, var(--gold) 78%, #ffffff);
+}
+
+.button.secondary {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.button.secondary.quiet {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.button.dark {
+  background: var(--brand-strong);
+}
+
+body.dark-mode .button.dark,
+body.dark-mode .button.primary {
+  color: #17100b;
+  background: var(--gold);
+  box-shadow: none;
+}
+
+.hero-panel {
+  align-self: end;
+  padding: 20px;
+  background: rgba(26, 18, 15, 0.42);
+  border-color: rgba(255, 255, 255, 0.18);
+  border-radius: 22px;
+  box-shadow: none;
+}
+
+.quick-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: min(1120px, calc(100% - 32px));
+  margin-top: -34px;
+  border-radius: 22px;
+  box-shadow: var(--soft-shadow);
+}
+
+.quick-strip a {
+  min-height: 92px;
+  padding: 18px;
+}
+
+.quick-strip a:hover,
+.quick-strip a:focus-visible {
+  background: color-mix(in srgb, var(--gold) 10%, var(--card));
+  box-shadow: inset 0 -2px 0 var(--gold);
+  transform: none;
+}
+
+.quick-strip span {
+  color: var(--brand);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.quick-strip strong {
+  font-size: 1rem;
+}
+
+.section {
+  padding-block: clamp(52px, 7vw, 92px);
+}
+
+.section-inner {
+  width: min(1120px, 100%);
+}
+
+.section-copy {
+  max-width: 560px;
+}
+
+h2 {
+  max-width: 760px;
+  font-size: clamp(2.2rem, 4.6vw, 4.2rem);
+  text-wrap: balance;
+}
+
+.identity-grid article,
+.updates-grid article,
+.ministry-grid article,
+.help-card,
+.contact-form,
+.help-form,
+.schedule-item,
+.scripture-layout,
+.scripture-grid article,
+.address-pill,
+.contact-item {
+  box-shadow: none;
+}
+
+.identity-grid article,
+.updates-grid article,
+.ministry-grid article,
+.help-card,
+.contact-form,
+.help-form,
+.schedule-item,
+.scripture-layout,
+.scripture-grid article,
+.contact-item {
+  border-color: var(--line);
+  border-radius: 20px;
+}
+
+.identity-grid article:hover,
+.updates-grid article:hover,
+.ministry-grid article:hover,
+.help-card:hover,
+.schedule-item:hover,
+.contact-item:hover {
+  box-shadow: var(--soft-shadow);
+  transform: translateY(-2px);
+}
+
+.schedule-list {
+  gap: 10px;
+}
+
+.schedule-item {
+  min-height: 64px;
+  padding: 14px 16px;
+}
+
+.tinted,
+.contact-section {
+  background: color-mix(in srgb, var(--surface) 88%, var(--card));
+}
+
+body.dark-mode .tinted,
+body.dark-mode .contact-section {
+  background: color-mix(in srgb, var(--surface) 92%, #090d13);
+}
+
+.location-grid {
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  align-items: center;
+}
+
+.location-card {
+  min-height: 300px;
+  align-content: center;
+  padding: clamp(24px, 4vw, 38px);
+  color: var(--ink);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--gold) 12%, var(--card)), var(--card));
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  box-shadow: none;
+}
+
+.location-card span {
+  background: color-mix(in srgb, var(--gold) 14%, var(--card));
+  border: 0;
+}
+
+.location-card strong {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(2.35rem, 4vw, 3.4rem);
+}
+
+.location-card p,
+.location-card small {
+  max-width: 420px;
+  color: var(--muted);
+}
+
+.address-pill {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: color-mix(in srgb, var(--gold) 8%, var(--card));
+  border-radius: 18px;
+}
+
+.inline-actions {
+  gap: 10px;
+}
+
+.button.waze {
+  color: #06242d;
+  background: #8be7fb;
+  border-color: #8be7fb;
+}
+
+.social-card {
+  border-radius: 24px;
+  box-shadow: none;
+}
+
+.social-card:hover,
+.social-card:focus-visible {
+  box-shadow: var(--soft-shadow);
+  transform: translateY(-2px);
+}
+
+.main-nav {
+  padding: clamp(20px, 5vw, 44px);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(212, 165, 63, 0.12), transparent 24rem),
+    rgba(8, 10, 14, 0.98);
+}
+
+.menu-panel-header,
+.menu-groups,
+.menu-panel-actions {
+  width: min(860px, 100%);
+}
+
+.menu-panel-title {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+}
+
+.menu-group summary {
+  min-height: 58px;
+  font-size: clamp(1.9rem, 5.6vw, 3.4rem);
+  letter-spacing: -0.035em;
+}
+
+.main-nav .mega-link {
+  min-height: 68px;
+  border-radius: 18px;
+}
+
+.menu-close {
+  width: 52px;
+  height: 52px;
+}
+
+@media (max-width: 1040px) {
+  .quick-strip,
+  .location-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-strip a {
+    border-right: 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    min-height: auto;
+    background:
+      linear-gradient(90deg, rgba(21, 14, 10, 0.9) 0%, rgba(95, 26, 31, 0.68) 58%, rgba(21, 14, 10, 0.12) 100%),
+      url("assets/iglesia-shekinah-interior.png") 76% center / cover;
+  }
+
+  body.dark-mode .hero {
+    background:
+      linear-gradient(90deg, rgba(6, 8, 12, 0.92) 0%, rgba(92, 25, 34, 0.68) 58%, rgba(6, 8, 12, 0.18) 100%),
+      url("assets/iglesia-shekinah-interior.png") 76% center / cover;
+  }
+
+  .hero-inner {
+    min-height: calc(100svh - 70px);
+    padding-inline: 14px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.65rem, 13vw, 4.2rem);
+  }
+
+  .hero-panel {
+    width: 100%;
+  }
+
+  .quick-strip {
+    width: calc(100% - 24px);
+    margin-top: 12px;
+  }
+
+  .quick-strip a {
+    min-height: 78px;
+  }
+
+  .section {
+    padding-block: 48px;
+  }
+
+  .schedule-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .schedule-item time {
+    grid-column: auto;
+  }
+
+  .location-card {
+    min-height: 220px;
+  }
+
+  .route-actions,
+  .help-shortcuts {
+    grid-template-columns: 1fr;
+  }
+
+  .action-link {
+    min-height: 66px;
   }
 }
