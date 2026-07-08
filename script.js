@@ -119,9 +119,15 @@ const translations = {
       visitDesc: "Domingo 8:30 a.m. y 10:00 a.m.",
       locationTitle: "Como llegar",
       prayerTitle: "Pedir oracion",
-      prayerDesc: "Comparte tu necesidad con respeto.",
-      socialTitle: "Redes sociales",
-      socialDesc: "Instagram y Facebook de la iglesia.",
+      prayerDesc: "Oracion y apoyo",
+      socialTitle: "Redes",
+      socialDesc: "Instagram y Facebook",
+    },
+    mobileCta: {
+      aria: "Acciones principales",
+      schedule: "Horarios",
+      directions: "Llegar",
+      whatsapp: "WhatsApp",
     },
     common: {
       sunday: "Domingo",
@@ -137,11 +143,10 @@ const translations = {
     },
     hero: {
       eyebrow: "Biblia, adoracion y servicio",
-      description:
-        "Un lugar para conocer a Cristo, crecer en fe y caminar en familia.",
+      description: "Conoce a Cristo, crece en fe y camina en familia.",
       ctaPrimary: "Ver horarios",
       ctaSecondary: "Como llegar",
-      ctaPrayer: "Pedir oracion",
+      ctaWhatsapp: "Escribir por WhatsApp",
     },
     schedule: {
       tuesdayActivity: "Estudio exegetico",
@@ -153,21 +158,18 @@ const translations = {
     somos: {
       eyebrow: "Somos Shekinah",
       title: "Una iglesia para conocer a Cristo",
-      description: "Familia de fe que adora, aprende y sirve con amor.",
+      description: "Adoramos, aprendemos y servimos en familia.",
       item1Title: "Palabra",
-      item1Desc: "La Biblia como guia de vida.",
+      item1Desc: "La Biblia nos guia.",
       item2Title: "Adoracion",
-      item2Desc: "Exaltamos a Dios con gratitud.",
+      item2Desc: "Exaltamos a Dios.",
       item3Title: "Comunidad",
-      item3Desc: "Nadie camina solo aqui.",
+      item3Desc: "Caminamos juntos.",
       item4Title: "Servicio",
-      item4Desc: "Servimos con orden y amor.",
+      item4Desc: "Servimos con amor.",
     },
     scripture: {
-      eyebrow: "Palabra para tu vida",
-      title: "Hay un lugar para ti",
-      description: "Ven como estas. Caminamos contigo hacia Cristo.",
-      cta: "Quiero visitar",
+      aria: "Versiculo biblico",
       verseRef: "Isaias 60:1",
       verseText:
         '"Levantate, resplandece; porque ha venido tu luz, y la gloria de Jehova ha nacido sobre ti".',
@@ -175,18 +177,17 @@ const translations = {
     reuniones: {
       eyebrow: "Reuniones",
       title: "Horarios de reunion",
-      description: "Te esperamos entre semana y domingos.",
+      description: "Domingos y entre semana.",
     },
     ubicacion: {
       eyebrow: "Como llegar",
       title: "Encuentranos en San Juan Opico",
-      description:
-        'Usa <strong>QJRR+HH2, San Juan Opico</strong> para abrir la ruta en tu telefono.',
-      mapsBtn: "Abrir Google Maps",
-      wazeBtn: "Como llegar en Waze",
-      whatsappBtn: "Preguntar por WhatsApp",
-      mapsHint: "Ver ruta y referencia",
-      wazeHint: "Iniciar navegacion",
+      addressLabel: "Direccion",
+      mapsBtn: "Google Maps",
+      wazeBtn: "Waze",
+      whatsappBtn: "WhatsApp",
+      mapsHint: "Abrir ruta",
+      wazeHint: "Navegar",
       whatsappHint: "Pedir referencia",
     },
     eventos: {
@@ -220,8 +221,7 @@ const translations = {
     ayuda: {
       eyebrow: "Ayuda y donaciones",
       title: "Pide oracion o apoyo",
-      description:
-        "Escribenos para oracion, visita, viveres o acompanamiento.",
+      description: "Oracion, visita, viveres o donacion.",
       example1Title: "Ejemplo de solicitud",
       example1Desc: "Una familia pidio oracion esta semana.",
       example2Title: "Ayuda alimentaria",
@@ -264,7 +264,7 @@ const translations = {
     },
     redes: {
       title: "Siguenos",
-      description: "Anuncios, fotos y momentos de la iglesia.",
+      description: "Fotos y anuncios de la iglesia.",
     },
     contacto: {
       eyebrow: "Contacto",
@@ -341,9 +341,15 @@ const translations = {
       visitDesc: "Sunday 8:30 a.m. and 10:00 a.m.",
       locationTitle: "Get directions",
       prayerTitle: "Request prayer",
-      prayerDesc: "Share your need respectfully.",
-      socialTitle: "Social media",
-      socialDesc: "Instagram and Facebook of the church.",
+      prayerDesc: "Prayer and support",
+      socialTitle: "Social",
+      socialDesc: "Instagram and Facebook",
+    },
+    mobileCta: {
+      aria: "Main actions",
+      schedule: "Schedule",
+      directions: "Directions",
+      whatsapp: "WhatsApp",
     },
     common: {
       sunday: "Sunday",
@@ -359,11 +365,10 @@ const translations = {
     },
     hero: {
       eyebrow: "Bible, worship and service",
-      description:
-        "A place to know Christ, grow in faith and walk as family.",
+      description: "Know Christ, grow in faith and walk as family.",
       ctaPrimary: "See times",
       ctaSecondary: "Get directions",
-      ctaPrayer: "Request prayer",
+      ctaWhatsapp: "Message on WhatsApp",
     },
     schedule: {
       tuesdayActivity: "Exegetical study",
@@ -375,21 +380,18 @@ const translations = {
     somos: {
       eyebrow: "About Shekinah",
       title: "A church to know Christ",
-      description: "A family of faith that worships, learns and serves with love.",
+      description: "We worship, learn and serve as family.",
       item1Title: "Word",
-      item1Desc: "The Bible as our guide.",
+      item1Desc: "The Bible guides us.",
       item2Title: "Worship",
-      item2Desc: "We exalt God with gratitude.",
+      item2Desc: "We exalt God.",
       item3Title: "Community",
-      item3Desc: "No one walks alone here.",
+      item3Desc: "We walk together.",
       item4Title: "Service",
-      item4Desc: "We serve with order and love.",
+      item4Desc: "We serve with love.",
     },
     scripture: {
-      eyebrow: "A word for your life",
-      title: "There is a place for you",
-      description: "Come as you are. We walk with you toward Christ.",
-      cta: "I want to visit",
+      aria: "Bible verse",
       verseRef: "Isaiah 60:1",
       verseText:
         '"Arise, shine; for your light has come, and the glory of the Lord has risen upon you."',
@@ -397,19 +399,18 @@ const translations = {
     reuniones: {
       eyebrow: "Services",
       title: "Service times",
-      description: "Join us during the week and on Sundays.",
+      description: "Sundays and weekdays.",
     },
     ubicacion: {
       eyebrow: "How to get there",
       title: "Find us in San Juan Opico",
-      description:
-        'Use <strong>QJRR+HH2, San Juan Opico</strong> to open directions on your phone.',
-      mapsBtn: "Open Google Maps",
-      wazeBtn: "Get directions in Waze",
-      whatsappBtn: "Ask via WhatsApp",
-      mapsHint: "View route and reference",
-      wazeHint: "Start navigation",
-      whatsappHint: "Ask for a reference",
+      addressLabel: "Address",
+      mapsBtn: "Google Maps",
+      wazeBtn: "Waze",
+      whatsappBtn: "WhatsApp",
+      mapsHint: "Open route",
+      wazeHint: "Navigate",
+      whatsappHint: "Ask for reference",
     },
     eventos: {
       eyebrow: "Events",
@@ -442,8 +443,7 @@ const translations = {
     ayuda: {
       eyebrow: "Help & donations",
       title: "Request prayer or support",
-      description:
-        "Write to us for prayer, a visit, groceries or support.",
+      description: "Prayer, visit, groceries or donation.",
       example1Title: "Example request",
       example1Desc: "A family asked for prayer this week.",
       example2Title: "Food assistance",
@@ -486,7 +486,7 @@ const translations = {
     },
     redes: {
       title: "Follow us",
-      description: "Announcements, photos and church moments.",
+      description: "Photos and church updates.",
     },
     contacto: {
       eyebrow: "Contact",

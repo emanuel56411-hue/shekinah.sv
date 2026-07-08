@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=9" />
+    <link rel="stylesheet" href="styles.css?v=10" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -138,13 +138,11 @@
           <div class="hero-content">
             <p class="eyebrow" data-i18n="hero.eyebrow">Biblia, adoracion y servicio</p>
             <h1>Iglesia Bautista Shekinah</h1>
-            <p data-i18n="hero.description">
-              Un lugar para conocer a Cristo, crecer en fe y caminar en familia.
-            </p>
+            <p data-i18n="hero.description">Conoce a Cristo, crece en fe y camina en familia.</p>
             <div class="hero-actions">
               <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
+              <a class="button whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
               <a class="button secondary" href="#ubicacion" data-i18n="hero.ctaSecondary">Como llegar</a>
-              <a class="button secondary quiet" href="#ayuda" data-i18n="hero.ctaPrayer">Pedir oracion</a>
             </div>
           </div>
 
@@ -175,64 +173,33 @@
         </a>
         <a href="#ayuda">
           <span data-i18n="quickStrip.prayerTitle">Pedir oracion</span>
-          <strong data-i18n="quickStrip.prayerDesc">Comparte tu necesidad con respeto.</strong>
+          <strong data-i18n="quickStrip.prayerDesc">Oracion y apoyo</strong>
         </a>
         <a href="#redes">
-          <span data-i18n="quickStrip.socialTitle">Redes sociales</span>
-          <strong data-i18n="quickStrip.socialDesc">Instagram y Facebook de la iglesia.</strong>
+          <span data-i18n="quickStrip.socialTitle">Redes</span>
+          <strong data-i18n="quickStrip.socialDesc">Instagram y Facebook</strong>
         </a>
       </section>
 
-      <section id="somos" class="section identity-section" aria-labelledby="somos-title">
-        <div class="section-inner identity-layout">
-          <div class="section-copy">
-            <p class="eyebrow" data-i18n="somos.eyebrow">Somos Shekinah</p>
-            <h2 id="somos-title" data-i18n="somos.title">Una iglesia para conocer a Cristo</h2>
-            <p data-i18n="somos.description">
-              Familia de fe que adora, aprende y sirve con amor.
-            </p>
-          </div>
-
-          <div class="identity-grid">
-            <article><span>01</span><strong data-i18n="somos.item1Title">Palabra</strong><p data-i18n="somos.item1Desc">La Biblia como guia de vida.</p></article>
-            <article><span>02</span><strong data-i18n="somos.item2Title">Adoracion</strong><p data-i18n="somos.item2Desc">Exaltamos a Dios con gratitud.</p></article>
-            <article><span>03</span><strong data-i18n="somos.item3Title">Comunidad</strong><p data-i18n="somos.item3Desc">Nadie camina solo aqui.</p></article>
-            <article><span>04</span><strong data-i18n="somos.item4Title">Servicio</strong><p data-i18n="somos.item4Desc">Servimos con orden y amor.</p></article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section scripture-section" aria-labelledby="palabra-title">
-        <div class="section-inner scripture-layout">
-          <div class="section-copy">
-            <p class="eyebrow" data-i18n="scripture.eyebrow">Palabra para tu vida</p>
-            <h2 id="palabra-title" data-i18n="scripture.title">Hay un lugar para ti</h2>
-            <p data-i18n="scripture.description">
-              Ven como estas. Caminamos contigo hacia Cristo.
-            </p>
-            <a class="button dark" href="#reuniones" data-i18n="scripture.cta">Quiero visitar</a>
-          </div>
-
-          <div class="scripture-grid scripture-grid-single">
-            <article class="scripture-quote-card">
-              <span data-i18n="scripture.verseRef">Isaias 60:1</span>
-              <p data-i18n="scripture.verseText">"Levantate, resplandece; porque ha venido tu luz, y la gloria de Jehova ha nacido sobre ti".</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="reuniones" class="section section-tight">
+      <section id="reuniones" class="section section-tight section-featured">
         <div class="section-inner two-column">
           <div class="section-copy">
             <p class="eyebrow" data-i18n="reuniones.eyebrow">Reuniones</p>
             <h2 data-i18n="reuniones.title">Horarios de reunion</h2>
-            <p data-i18n="reuniones.description">
-              Te esperamos entre semana y domingos.
-            </p>
+            <p data-i18n="reuniones.description">Domingos y entre semana.</p>
           </div>
 
           <div class="schedule-list">
+            <article class="schedule-item schedule-item-highlight">
+              <span data-i18n="common.sunday">Domingo</span>
+              <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
+              <time>8:30 a.m. - 9:40 a.m.</time>
+            </article>
+            <article class="schedule-item schedule-item-highlight">
+              <span data-i18n="common.sunday">Domingo</span>
+              <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
+              <time>10:00 a.m. - 11:30 a.m.</time>
+            </article>
             <article class="schedule-item">
               <span data-i18n="common.tuesday">Martes</span>
               <strong data-i18n="schedule.tuesdayActivity">Estudio exegetico</strong>
@@ -248,16 +215,6 @@
               <strong data-i18n="schedule.saturdayActivity">Culto de jovenes</strong>
               <time>4:30 p.m. - 6:00 p.m.</time>
             </article>
-            <article class="schedule-item">
-              <span data-i18n="common.sunday">Domingo</span>
-              <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
-              <time>8:30 a.m. - 9:40 a.m.</time>
-            </article>
-            <article class="schedule-item">
-              <span data-i18n="common.sunday">Domingo</span>
-              <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
-              <time>10:00 a.m. - 11:30 a.m.</time>
-            </article>
           </div>
         </div>
       </section>
@@ -267,11 +224,8 @@
           <div class="section-copy">
             <p class="eyebrow" data-i18n="ubicacion.eyebrow">Como llegar</p>
             <h2 data-i18n="ubicacion.title">Encuentranos en San Juan Opico</h2>
-            <p data-i18n-html="ubicacion.description">
-              Usa <strong>QJRR+HH2, San Juan Opico</strong> para abrir la ruta en tu telefono.
-            </p>
             <div class="address-pill" aria-label="Direccion de la iglesia">
-              <span>Direccion</span>
+              <span data-i18n="ubicacion.addressLabel">Direccion</span>
               <strong>QJRR+HH2, San Juan Opico, La Libertad</strong>
             </div>
             <div class="route-actions" aria-label="Opciones para llegar a la iglesia">
@@ -281,84 +235,38 @@
                   <circle fill="#fff" cx="12" cy="9" r="2.6" />
                   <circle fill="#4285F4" cx="12" cy="9" r="1.2" />
                 </svg>
-                <span data-i18n="ubicacion.mapsBtn">Abrir Google Maps</span>
-                <small data-i18n="ubicacion.mapsHint">Ver ruta y referencia</small>
+                <span data-i18n="ubicacion.mapsBtn">Google Maps</span>
+                <small data-i18n="ubicacion.mapsHint">Abrir ruta</small>
               </a>
               <a class="action-link waze" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer" aria-label="Como llegar en Waze">
                 <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <rect x="2" y="2" width="20" height="20" rx="6" fill="#33CCFF" />
-                  <path fill="#fff" d="M5.1 7h2.25l1.45 7.15L10.9 7h2.2l2.1 7.15L16.65 7h2.25l-2.55 10h-2.3L12 10.28 9.95 17h-2.3L5.1 7Z" />
+                  <rect x="2" y="2" width="20" height="20" rx="5.5" fill="#33CCFF" />
+                  <circle cx="9.25" cy="10.5" r="1.5" fill="#fff" />
+                  <circle cx="14.75" cy="10.5" r="1.5" fill="#fff" />
+                  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.4" d="M8.8 13.4c1.1.8 2.4.8 3.5 0 1.1.8 2.4.8 3.5 0" />
                 </svg>
-                <span data-i18n="ubicacion.wazeBtn">Como llegar en Waze</span>
-                <small data-i18n="ubicacion.wazeHint">Iniciar navegacion</small>
+                <span data-i18n="ubicacion.wazeBtn">Waze</span>
+                <small data-i18n="ubicacion.wazeHint">Navegar</small>
               </a>
               <a class="action-link whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="Preguntar por WhatsApp">
                 <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <path fill="#25D366" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
                   <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
                 </svg>
-                <span data-i18n="ubicacion.whatsappBtn">Preguntar por WhatsApp</span>
+                <span data-i18n="ubicacion.whatsappBtn">WhatsApp</span>
                 <small data-i18n="ubicacion.whatsappHint">Pedir referencia</small>
               </a>
             </div>
           </div>
 
-          <article class="location-card">
-            <span data-i18n="nav.ubicacion">Ubicacion</span>
-            <strong>QJRR+HH2</strong>
-            <p>San Juan Opico, La Libertad, El Salvador</p>
-            <small>Referencia lista para abrir en el telefono.</small>
+          <article class="location-card location-card-photo">
+            <img src="assets/iglesia-shekinah-interior.png" alt="Interior de la iglesia Shekinah" loading="lazy" width="640" height="480" />
+            <div class="location-card-overlay">
+              <span data-i18n="nav.ubicacion">Ubicacion</span>
+              <strong>QJRR+HH2</strong>
+              <p>San Juan Opico, La Libertad</p>
+            </div>
           </article>
-        </div>
-      </section>
-
-      <section id="eventos" class="section compact">
-        <div class="section-inner updates-layout">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="eventos.eyebrow">Eventos</p>
-            <h2 data-i18n="eventos.title">Proximas actividades</h2>
-          </div>
-          <div class="updates-grid">
-            <article>
-              <span data-i18n="eventos.item1Tag">Proximamente</span>
-              <h3 data-i18n="eventos.item1Title">Eventos por anunciar</h3>
-              <p data-i18n="eventos.item1Desc">Vigilias, cultos especiales y actividades familiares.</p>
-            </article>
-            <article>
-              <span data-i18n="eventos.item2Tag">Accion social</span>
-              <h3 data-i18n="eventos.item2Title">Ayuda y donaciones</h3>
-              <p data-i18n="eventos.item2Desc">Apoyo en oracion, viveres y visitas.</p>
-            </article>
-            <article>
-              <span data-i18n="nav.redes">Redes</span>
-              <h3 data-i18n="eventos.item3Title">Anuncios recientes</h3>
-              <p data-i18n="eventos.item3Desc">Avisos, fotos y momentos en Facebook e Instagram.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="ministerios" class="section section-tight">
-        <div class="section-inner">
-          <div class="section-heading">
-            <p class="eyebrow" data-i18n="ministerios.eyebrow">Servicio</p>
-            <h2 data-i18n="ministerios.title">Sirve con nosotros</h2>
-          </div>
-
-          <div class="ministry-grid">
-            <article><span>01</span><h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3><p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p></article>
-            <article><span>02</span><h3 data-i18n="ministerios.item2Title">Alabanza</h3><p data-i18n="ministerios.item2Desc">Musica y sonido en cada culto.</p></article>
-            <article><span>03</span><h3 data-i18n="ministerios.item3Title">Acomodacion</h3><p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p></article>
-            <article><span>04</span><h3 data-i18n="ministerios.item4Title">Escuela biblica</h3><p data-i18n="ministerios.item4Desc">Ensenanza para crecer en la Palabra.</p></article>
-            <article><span>05</span><h3 data-i18n="ministerios.item5Title">Aseo</h3><p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p></article>
-          </div>
-
-          <div class="callout">
-            <p data-i18n="ministerios.calloutText">Quieres servir?</p>
-            <a class="button primary" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="ministerios.calloutBtn">
-              Escribir al encargado
-            </a>
-          </div>
         </div>
       </section>
 
@@ -367,9 +275,7 @@
           <div class="section-copy">
             <p class="eyebrow" data-i18n="ayuda.eyebrow">Ayuda y donaciones</p>
             <h2 data-i18n="ayuda.title">Pide oracion o apoyo</h2>
-            <p data-i18n="ayuda.description">
-              Escribenos para oracion, visita, viveres o acompanamiento.
-            </p>
+            <p data-i18n="ayuda.description">Oracion, visita, viveres o donacion.</p>
           </div>
 
           <div class="help-actions-panel">
@@ -434,6 +340,86 @@
             <p class="form-status" role="status" aria-live="polite"></p>
             <button class="button dark" type="submit" data-i18n="ayuda.submitBtn">Enviar solicitud por WhatsApp</button>
           </form>
+        </div>
+      </section>
+
+      <section id="somos" class="section identity-section" aria-labelledby="somos-title">
+        <div class="section-inner identity-layout">
+          <div class="identity-visual">
+            <img src="assets/iglesia-shekinah-interior.png" alt="Interior de la iglesia Shekinah" loading="lazy" width="640" height="480" />
+          </div>
+          <div class="identity-content">
+            <div class="section-copy">
+              <p class="eyebrow" data-i18n="somos.eyebrow">Somos Shekinah</p>
+              <h2 id="somos-title" data-i18n="somos.title">Una iglesia para conocer a Cristo</h2>
+              <p data-i18n="somos.description">Adoramos, aprendemos y servimos en familia.</p>
+            </div>
+            <div class="identity-grid">
+              <article><span>01</span><strong data-i18n="somos.item1Title">Palabra</strong><p data-i18n="somos.item1Desc">La Biblia nos guia.</p></article>
+              <article><span>02</span><strong data-i18n="somos.item2Title">Adoracion</strong><p data-i18n="somos.item2Desc">Exaltamos a Dios.</p></article>
+              <article><span>03</span><strong data-i18n="somos.item3Title">Comunidad</strong><p data-i18n="somos.item3Desc">Caminamos juntos.</p></article>
+              <article><span>04</span><strong data-i18n="somos.item4Title">Servicio</strong><p data-i18n="somos.item4Desc">Servimos con amor.</p></article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section scripture-section" aria-label="Versiculo biblico" data-i18n-aria-label="scripture.aria">
+        <div class="section-inner">
+          <article class="scripture-quote-card scripture-quote-standalone">
+            <span data-i18n="scripture.verseRef">Isaias 60:1</span>
+            <p data-i18n="scripture.verseText">"Levantate, resplandece; porque ha venido tu luz, y la gloria de Jehova ha nacido sobre ti".</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="eventos" class="section compact">
+        <div class="section-inner updates-layout">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="eventos.eyebrow">Eventos</p>
+            <h2 data-i18n="eventos.title">Proximas actividades</h2>
+          </div>
+          <div class="updates-grid">
+            <article>
+              <span data-i18n="eventos.item1Tag">Proximamente</span>
+              <h3 data-i18n="eventos.item1Title">Eventos por anunciar</h3>
+              <p data-i18n="eventos.item1Desc">Vigilias, cultos especiales y actividades familiares.</p>
+            </article>
+            <article>
+              <span data-i18n="eventos.item2Tag">Accion social</span>
+              <h3 data-i18n="eventos.item2Title">Ayuda y donaciones</h3>
+              <p data-i18n="eventos.item2Desc">Apoyo en oracion, viveres y visitas.</p>
+            </article>
+            <article>
+              <span data-i18n="nav.redes">Redes</span>
+              <h3 data-i18n="eventos.item3Title">Anuncios recientes</h3>
+              <p data-i18n="eventos.item3Desc">Avisos, fotos y momentos en Facebook e Instagram.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="ministerios" class="section section-tight">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="ministerios.eyebrow">Servicio</p>
+            <h2 data-i18n="ministerios.title">Sirve con nosotros</h2>
+          </div>
+
+          <div class="ministry-grid">
+            <article><span>01</span><h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3><p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p></article>
+            <article><span>02</span><h3 data-i18n="ministerios.item2Title">Alabanza</h3><p data-i18n="ministerios.item2Desc">Musica y sonido en cada culto.</p></article>
+            <article><span>03</span><h3 data-i18n="ministerios.item3Title">Acomodacion</h3><p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p></article>
+            <article><span>04</span><h3 data-i18n="ministerios.item4Title">Escuela biblica</h3><p data-i18n="ministerios.item4Desc">Ensenanza para crecer en la Palabra.</p></article>
+            <article><span>05</span><h3 data-i18n="ministerios.item5Title">Aseo</h3><p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p></article>
+          </div>
+
+          <div class="callout">
+            <p data-i18n="ministerios.calloutText">Quieres servir?</p>
+            <a class="button primary" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="ministerios.calloutBtn">
+              Escribir al encargado
+            </a>
+          </div>
         </div>
       </section>
 
@@ -516,6 +502,12 @@
       </section>
     </main>
 
+    <nav class="mobile-cta" aria-label="Acciones principales" data-i18n-aria-label="mobileCta.aria">
+      <a href="#reuniones" data-i18n="mobileCta.schedule">Horarios</a>
+      <a href="#ubicacion" data-i18n="mobileCta.directions">Llegar</a>
+      <a class="mobile-cta-whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="mobileCta.whatsapp">WhatsApp</a>
+    </nav>
+
     <footer class="site-footer">
       <p>&copy; 2026 Iglesia Bautista Shekinah</p>
       <div>
@@ -525,6 +517,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=9"></script>
+    <script src="script.js?v=10"></script>
   </body>
 </html>
