@@ -1183,11 +1183,21 @@ body.dark-mode .scripture-grid article {
 }
 
 .gallery-nav {
-  width: 54px;
-  height: 54px;
-  border-radius: 999px;
-  font-size: 2rem;
-  line-height: 1;
+  width: 48px;
+  height: 48px;
+  background: rgba(12, 14, 18, 0.72);
+  border-color: rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+}
+
+.gallery-nav svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* 9. Horarios / Ubicacion -------------------------------------------------- */

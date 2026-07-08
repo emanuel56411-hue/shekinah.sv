@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="utf-8" />
@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=13" />
+    <link rel="stylesheet" href="styles.css?v=14" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -190,16 +190,6 @@
           </div>
 
           <div class="schedule-list">
-            <article class="schedule-item schedule-item-highlight">
-              <span data-i18n="common.sunday">Domingo</span>
-              <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
-              <time>8:30 a.m. - 9:40 a.m.</time>
-            </article>
-            <article class="schedule-item schedule-item-highlight">
-              <span data-i18n="common.sunday">Domingo</span>
-              <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
-              <time>10:00 a.m. - 11:30 a.m.</time>
-            </article>
             <article class="schedule-item">
               <span data-i18n="common.tuesday">Martes</span>
               <strong data-i18n="schedule.tuesdayActivity">Estudio exegetico</strong>
@@ -214,6 +204,16 @@
               <span data-i18n="common.saturday">Sabado</span>
               <strong data-i18n="schedule.saturdayActivity">Culto de jovenes</strong>
               <time>4:30 p.m. - 6:00 p.m.</time>
+            </article>
+            <article class="schedule-item schedule-item-highlight">
+              <span data-i18n="common.sunday">Domingo</span>
+              <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
+              <time>8:30 a.m. - 9:40 a.m.</time>
+            </article>
+            <article class="schedule-item schedule-item-highlight">
+              <span data-i18n="common.sunday">Domingo</span>
+              <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
+              <time>10:00 a.m. - 11:30 a.m.</time>
             </article>
           </div>
         </div>
@@ -336,7 +336,7 @@
               <textarea name="mensaje-ayuda" rows="3" minlength="10" maxlength="500" placeholder="Escribe la necesidad o forma de ayudar" data-i18n-placeholder="ayuda.messagePlaceholder" required></textarea>
             </label>
             <p class="form-note" data-i18n="ayuda.formNote">Se guarda para revision y se abre WhatsApp para coordinar.</p>
-            <p class="privacy-note" data-i18n="ayuda.privacyNote">Tu informaciÃ³n serÃ¡ usada Ãºnicamente para coordinar ayuda, oraciÃ³n o contacto pastoral. No publicamos tu telÃ©fono ni correo sin autorizaciÃ³n.</p>
+            <p class="privacy-note" data-i18n="ayuda.privacyNote">Tu informacion sera usada unicamente para coordinar ayuda, oracion o contacto pastoral. No publicamos tu telefono ni correo sin autorizacion.</p>
             <p class="form-status" role="status" aria-live="polite"></p>
             <button class="button dark" type="submit" data-i18n="ayuda.submitBtn">Enviar solicitud por WhatsApp</button>
           </form>
@@ -568,12 +568,20 @@
 
     <div class="gallery-lightbox" data-gallery-lightbox aria-hidden="true">
       <button class="gallery-close" type="button" data-gallery-close aria-label="Cerrar foto">Cerrar</button>
-      <button class="gallery-nav gallery-prev" type="button" data-gallery-prev aria-label="Foto anterior">â€¹</button>
+      <button class="gallery-nav gallery-prev" type="button" data-gallery-prev aria-label="Foto anterior">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M15 6 9 12l6 6" />
+        </svg>
+      </button>
       <figure class="gallery-stage">
         <img src="" alt="" data-gallery-image />
         <figcaption data-gallery-caption></figcaption>
       </figure>
-      <button class="gallery-nav gallery-next" type="button" data-gallery-next aria-label="Foto siguiente">â€º</button>
+      <button class="gallery-nav gallery-next" type="button" data-gallery-next aria-label="Foto siguiente">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="m9 6 6 6-6 6" />
+        </svg>
+      </button>
     </div>
 
     <footer class="site-footer">
@@ -585,7 +593,8 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=13"></script>
+    <script src="script.js?v=14"></script>
   </body>
 </html>
+
 
