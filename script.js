@@ -168,12 +168,9 @@ const translations = {
       title: "Hay un lugar para ti",
       description: "Ven como estas. Caminamos contigo hacia Cristo.",
       cta: "Quiero visitar",
-      verse1Ref: "Mateo 18:20",
-      verse1Text: "Cristo esta presente donde su pueblo se reune.",
-      verse2Ref: "2 Timoteo 3:16-17",
-      verse2Text: "La Escritura nos forma para vivir y servir con firmeza.",
-      verse3Ref: "Salmos 150:6",
-      verse3Text: "Todo lo que respira alaba al Senor.",
+      verseRef: "Isaias 60:1",
+      verseText:
+        '"Levantate, resplandece; porque ha venido tu luz, y la gloria de Jehova ha nacido sobre ti".',
     },
     reuniones: {
       eyebrow: "Reuniones",
@@ -393,12 +390,9 @@ const translations = {
       title: "There is a place for you",
       description: "Come as you are. We walk with you toward Christ.",
       cta: "I want to visit",
-      verse1Ref: "Matthew 18:20",
-      verse1Text: "Christ is present where His people gather.",
-      verse2Ref: "2 Timothy 3:16-17",
-      verse2Text: "Scripture shapes us to live and serve with a firm faith.",
-      verse3Ref: "Psalm 150:6",
-      verse3Text: "Everything that has breath praises the Lord.",
+      verseRef: "Isaiah 60:1",
+      verseText:
+        '"Arise, shine; for your light has come, and the glory of the Lord has risen upon you."',
     },
     reuniones: {
       eyebrow: "Services",

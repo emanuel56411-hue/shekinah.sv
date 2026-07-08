@@ -620,16 +620,16 @@ body.dark-mode .tinted {
 
 
 .scripture-section {
-  padding-top: clamp(38px, 4.8vw, 60px);
-  padding-bottom: clamp(36px, 4.8vw, 58px);
+  padding-top: clamp(28px, 4vw, 46px);
+  padding-bottom: clamp(28px, 4vw, 46px);
 }
 
 .scripture-layout {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(320px, 1.14fr);
-  gap: clamp(18px, 4vw, 40px);
+  grid-template-columns: minmax(240px, 0.72fr) minmax(320px, 1.28fr);
+  gap: clamp(16px, 3vw, 28px);
   align-items: center;
-  padding: clamp(18px, 3vw, 26px);
+  padding: clamp(16px, 2.6vw, 24px);
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -637,7 +637,7 @@ body.dark-mode .tinted {
 }
 
 .scripture-layout .button {
-  margin-top: 18px;
+  margin-top: 14px;
 }
 
 .scripture-grid {
@@ -652,6 +652,28 @@ body.dark-mode .tinted {
   border-radius: var(--radius);
 }
 
+.scripture-grid.scripture-grid-single article {
+  padding: clamp(22px, 4vw, 36px);
+}
+
+.scripture-quote-card {
+  position: relative;
+  overflow: hidden;
+  min-height: clamp(180px, 22vw, 250px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.scripture-quote-card::before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px solid color-mix(in srgb, var(--brand) 22%, transparent);
+  border-radius: calc(var(--radius) - 8px);
+  pointer-events: none;
+}
+
 .scripture-grid span {
   display: inline-flex;
   margin-bottom: 7px;
@@ -664,6 +686,16 @@ body.dark-mode .tinted {
   margin: 0;
   color: var(--muted);
   font-size: 1.08rem;
+}
+
+.scripture-grid-single p {
+  color: var(--text);
+  max-width: 760px;
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 700;
+  line-height: 1.38;
+  position: relative;
+  z-index: 1;
 }
 
 body.dark-mode .scripture-layout {
@@ -2344,17 +2376,17 @@ h3 {
 }
 
 .scripture-layout {
-  grid-template-columns: minmax(0, 1fr);
-  align-items: start;
-  padding: clamp(20px, 4vw, 34px);
+  grid-template-columns: minmax(230px, 0.72fr) minmax(320px, 1.28fr);
+  align-items: center;
+  padding: clamp(16px, 2.6vw, 24px);
 }
 
 .scripture-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
 }
 
-.scripture-grid p {
-  font-size: 0.98rem;
+.scripture-grid-single p {
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
 }
 
 .ministry-grid {
@@ -2376,6 +2408,10 @@ h3 {
   .scripture-grid,
   .ministry-grid,
   .help-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .scripture-layout {
     grid-template-columns: 1fr;
   }
 }
