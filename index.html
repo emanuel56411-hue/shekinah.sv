@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=6" />
+    <link rel="stylesheet" href="styles.css?v=9" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -113,8 +113,11 @@
                   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="14" rx="2" /><path d="m4 7 8 6 8-6" /></svg>
                   <span><strong data-i18n="contacto.eyebrow">Contacto</strong><small data-i18n="menu.contactDesc">Escribenos para visitas o mas informacion.</small></span>
                 </a>
-                <a class="mega-link" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer">
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.9l-1 3.6 3.8-1A8.5 8.5 0 1 0 12 3.5Z" /><path d="M8.7 9.2c.2 3 2.4 5.3 5.6 6.1l1.4-1.5-2.2-1-1 1c-1.2-.5-2.1-1.4-2.6-2.6l1-1-1-2.2-1.2 1.2Z" /></svg>
+                <a class="mega-link" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+                  <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path fill="#25D366" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
+                    <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+                  </svg>
                   <span><strong>WhatsApp</strong><small data-i18n="menu.whatsappDesc">Abre un chat directo con coordinacion.</small></span>
                 </a>
               </div>
@@ -136,10 +139,10 @@
             <p class="eyebrow" data-i18n="hero.eyebrow">Biblia, adoracion y servicio</p>
             <h1>Iglesia Bautista Shekinah</h1>
             <p data-i18n="hero.description">
-              Una iglesia en San Juan Opico para adorar a Dios, estudiar la Biblia y caminar en familia.
+              Un lugar para conocer a Cristo, crecer en fe y caminar en familia.
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Planifica tu visita</a>
+              <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
               <a class="button secondary" href="#ubicacion" data-i18n="hero.ctaSecondary">Como llegar</a>
               <a class="button secondary quiet" href="#ayuda" data-i18n="hero.ctaPrayer">Pedir oracion</a>
             </div>
@@ -174,9 +177,9 @@
           <span data-i18n="quickStrip.prayerTitle">Pedir oracion</span>
           <strong data-i18n="quickStrip.prayerDesc">Comparte tu necesidad con respeto.</strong>
         </a>
-        <a href="#ministerios">
-          <span data-i18n="quickStrip.serveTitle">Quiero servir</span>
-          <strong data-i18n="quickStrip.serveDesc">Conoce las areas de servicio.</strong>
+        <a href="#redes">
+          <span data-i18n="quickStrip.socialTitle">Redes sociales</span>
+          <strong data-i18n="quickStrip.socialDesc">Instagram y Facebook de la iglesia.</strong>
         </a>
       </section>
 
@@ -272,28 +275,27 @@
               <strong>QJRR+HH2, San Juan Opico, La Libertad</strong>
             </div>
             <div class="route-actions" aria-label="Opciones para llegar a la iglesia">
-              <a class="action-link maps" href="https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 21s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12Z" />
-                  <circle cx="12" cy="9" r="2.4" />
+              <a class="action-link maps" href="https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico" target="_blank" rel="noopener noreferrer" aria-label="Abrir Google Maps">
+                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="#EA4335" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z" />
+                  <circle fill="#fff" cx="12" cy="9" r="2.6" />
+                  <circle fill="#4285F4" cx="12" cy="9" r="1.2" />
                 </svg>
                 <span data-i18n="ubicacion.mapsBtn">Abrir Google Maps</span>
                 <small data-i18n="ubicacion.mapsHint">Ver ruta y referencia</small>
               </a>
-              <a class="action-link waze" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M5 14.2c-1.2-.2-2-.9-2-2 0-1 .8-1.7 1.8-1.9.8-3.4 3.9-5.8 7.6-5.8 4.3 0 7.8 3.1 7.8 7 0 3.8-3.5 7-7.8 7-.7 0-1.4-.1-2-.3l-3.3 1.7.5-3.3A7.3 7.3 0 0 1 5 14.2Z" />
-                  <circle cx="10" cy="11" r="1" />
-                  <circle cx="15" cy="11" r="1" />
-                  <path d="M10 14c1.2.9 2.8.9 4 0" />
+              <a class="action-link waze" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer" aria-label="Como llegar en Waze">
+                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="2" y="2" width="20" height="20" rx="6" fill="#33CCFF" />
+                  <path fill="#fff" d="M5.1 7h2.25l1.45 7.15L10.9 7h2.2l2.1 7.15L16.65 7h2.25l-2.55 10h-2.3L12 10.28 9.95 17h-2.3L5.1 7Z" />
                 </svg>
                 <span data-i18n="ubicacion.wazeBtn">Como llegar en Waze</span>
                 <small data-i18n="ubicacion.wazeHint">Iniciar navegacion</small>
               </a>
-              <a class="action-link whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 3.5c-4.7 0-8.5 3.2-8.5 7.2 0 2.3 1.3 4.4 3.4 5.7l-.7 3.1 3.3-1.7c.8.2 1.6.3 2.5.3 4.7 0 8.5-3.2 8.5-7.2S16.7 3.5 12 3.5Z" />
-                  <path d="M8.5 9.6c.5 1.9 2.1 3.4 4 4.1l1.1-1c.2-.2.5-.2.8-.1.8.3 1.4.4 2.2.4" />
+              <a class="action-link whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="Preguntar por WhatsApp">
+                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="#25D366" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
+                  <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
                 </svg>
                 <span data-i18n="ubicacion.whatsappBtn">Preguntar por WhatsApp</span>
                 <small data-i18n="ubicacion.whatsappHint">Pedir referencia</small>
@@ -443,21 +445,22 @@
             <p data-i18n="redes.description">Anuncios, fotos y momentos de la iglesia.</p>
           </div>
           <div class="social-cards">
-            <a class="social-card instagram" href="https://www.instagram.com/shekinahelsalvador" target="_blank" rel="noopener noreferrer">
+            <a class="social-card instagram" href="https://www.instagram.com/shekinahelsalvador" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Shekinah">
               <span class="social-label">
-                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <rect x="4" y="4" width="16" height="16" rx="5" />
-                  <circle cx="12" cy="12" r="3.4" />
-                  <circle cx="16.7" cy="7.3" r="1" />
+                <svg class="social-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="#d62976" stroke-width="1.8" />
+                  <circle cx="12" cy="12" r="3.6" fill="none" stroke="#d62976" stroke-width="1.8" />
+                  <circle cx="17" cy="7" r="1.1" fill="#d62976" />
                 </svg>
                 Instagram
               </span>
               <strong>@shekinahelsalvador</strong>
             </a>
-            <a class="social-card facebook" href="https://www.facebook.com/share/1L6qRECBoy/" target="_blank" rel="noopener noreferrer">
+            <a class="social-card facebook" href="https://www.facebook.com/share/1L6qRECBoy/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Shekinah Versalles">
               <span class="social-label">
-                <svg class="social-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M14.2 8.1h2.1V4.6c-.4-.1-1.7-.2-3.2-.2-3.2 0-5.3 1.9-5.3 5.4v3H4.6v3.9h3.2v7h4v-7h3.2l.5-3.9h-3.7v-2.6c0-1.1.3-2.1 2.4-2.1Z" />
+                <svg class="social-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="#1877f2" stroke-width="1.8" />
+                  <path fill="#1877f2" d="M13.4 8h1.8V6.4c-.3-.1-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v1.9H7.2v2.4h1.3v6.1h2.9v-6.1h2.4l.4-2.4h-2.8v-1.8c0-.8.2-1.3 1.4-1.3Z" />
                 </svg>
                 Facebook
               </span>
@@ -522,6 +525,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=6"></script>
+    <script src="script.js?v=9"></script>
   </body>
 </html>

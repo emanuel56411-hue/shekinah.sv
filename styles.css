@@ -483,32 +483,36 @@ body.menu-open {
   overflow: hidden;
 }
 
+main {
+  background: var(--bg);
+}
+
 /* 4. Hero ----------------------------------------------------------- */
 
 .hero {
   position: relative;
-  min-height: calc(100svh - 70px);
+  min-height: clamp(480px, 72svh, 680px);
   background:
-    linear-gradient(90deg, rgba(21, 14, 10, 0.86) 0%, rgba(95, 26, 31, 0.66) 48%, rgba(21, 14, 10, 0.18) 100%),
+    linear-gradient(90deg, rgba(15, 11, 9, 0.88) 0%, rgba(93, 23, 32, 0.62) 52%, rgba(12, 10, 9, 0.18) 100%),
     url("assets/iglesia-shekinah-interior.png") 58% center / cover;
   color: #ffffff;
 }
 
 body.dark-mode .hero {
   background:
-    linear-gradient(90deg, rgba(6, 8, 12, 0.9) 0%, rgba(92, 25, 34, 0.62) 52%, rgba(6, 8, 12, 0.24) 100%),
+    linear-gradient(90deg, rgba(5, 6, 9, 0.92) 0%, rgba(92, 25, 34, 0.58) 52%, rgba(6, 8, 12, 0.2) 100%),
     url("assets/iglesia-shekinah-interior.png") 58% center / cover;
 }
 
 .hero-inner {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
-  gap: clamp(20px, 5vw, 52px);
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+  gap: clamp(20px, 4vw, 40px);
   align-items: center;
-  width: min(1160px, 100%);
-  min-height: calc(100svh - 70px);
+  width: min(1120px, 100%);
+  min-height: clamp(480px, 72svh, 680px);
   margin: 0 auto;
-  padding: clamp(64px, 8vw, 104px) clamp(18px, 5vw, 42px) clamp(42px, 6vw, 72px);
+  padding: clamp(88px, 9vw, 112px) clamp(18px, 4vw, 36px) clamp(48px, 6vw, 72px);
 }
 
 .hero-content {
@@ -522,38 +526,39 @@ body.dark-mode .hero {
 
 .hero h1 {
   margin: 0;
-  max-width: 780px;
+  max-width: 640px;
   font-family: var(--heading-font);
   font-weight: 900;
-  font-size: clamp(3rem, 7vw, 6.5rem);
-  line-height: 0.97;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.35rem, 5.8vw, 4.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
 .hero p:not(.eyebrow) {
-  max-width: 620px;
-  margin: 15px 0 0;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: clamp(1.16rem, 1.8vw, 1.34rem);
+  max-width: 520px;
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
 }
 
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 9px;
-  margin-top: 22px;
+  gap: 10px;
+  margin-top: 26px;
 }
 
 .hero-panel {
   display: grid;
   gap: 8px;
   align-self: end;
-  padding: 20px;
-  background: rgba(26, 18, 15, 0.42);
+  padding: 18px 20px;
+  background: rgba(18, 14, 14, 0.48);
   border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 22px;
-  backdrop-filter: blur(14px);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+  backdrop-filter: blur(12px);
 }
 
 .hero-panel span,
@@ -657,29 +662,28 @@ body.dark-mode .button.primary {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   width: min(1120px, calc(100% - 32px));
-  margin: -34px auto 0;
+  margin: -22px auto 0;
   position: relative;
   z-index: 3;
   background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 22px;
-  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
   overflow: hidden;
 }
 
 .quick-strip a {
   display: grid;
-  gap: 3px;
-  min-height: 92px;
-  padding: 18px;
+  gap: 2px;
+  min-height: 68px;
+  padding: 14px 16px;
   border-right: 1px solid var(--line);
-  transition: background 170ms ease, box-shadow 170ms ease;
+  transition: background 170ms ease;
 }
 
 .quick-strip a:hover,
 .quick-strip a:focus-visible {
-  background: color-mix(in srgb, var(--gold) 10%, var(--card));
-  box-shadow: inset 0 -2px 0 var(--gold);
+  background: color-mix(in srgb, var(--gold) 8%, var(--card));
   outline: none;
 }
 
@@ -809,9 +813,9 @@ body.dark-mode .location-card {
 .help-form:focus-within,
 .schedule-item:hover,
 .contact-item:hover {
-  border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
+  border-color: color-mix(in srgb, var(--brand) 38%, var(--line));
   box-shadow: var(--shadow);
-  transform: translateY(-3px);
+  transform: none;
 }
 
 /* Chip/etiqueta compartida para categorias (numeros, tags) */
@@ -878,21 +882,21 @@ body.dark-mode .location-card {
 /* 8. Somos / Palabra ------------------------------------------------------ */
 
 .scripture-section {
-  padding-block: clamp(36px, 4.6vw, 58px);
+  padding-block: clamp(30px, 4.2vw, 50px);
 }
 
 .scripture-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: clamp(18px, 4vw, 40px);
-  align-items: start;
-  padding: clamp(20px, 4vw, 34px);
+  grid-template-columns: minmax(240px, 0.74fr) minmax(320px, 1.26fr);
+  gap: clamp(18px, 3.4vw, 34px);
+  align-items: center;
+  padding: clamp(18px, 3vw, 28px);
   background: var(--card);
   border-radius: var(--radius);
 }
 
 .scripture-layout .button {
-  margin-top: 18px;
+  margin-top: 16px;
 }
 
 .scripture-grid {
@@ -903,8 +907,6 @@ body.dark-mode .location-card {
 
 .scripture-grid.scripture-grid-single {
   grid-template-columns: minmax(0, 1fr);
-  max-width: 640px;
-  margin-inline: auto;
 }
 
 .scripture-grid article {
@@ -913,10 +915,26 @@ body.dark-mode .location-card {
   border-radius: var(--radius);
 }
 
+.scripture-grid.scripture-grid-single article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: auto;
+  padding: clamp(20px, 3vw, 28px);
+}
+
 .scripture-grid p {
   margin: 0;
   color: var(--muted);
   font-size: 0.98rem;
+}
+
+.scripture-grid.scripture-grid-single p {
+  max-width: 680px;
+  color: var(--ink);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 650;
+  line-height: 1.45;
 }
 
 body.dark-mode .scripture-grid article {
@@ -1025,67 +1043,65 @@ body.dark-mode .scripture-grid article {
 .route-actions {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 10px;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 16px;
 }
 
 .action-link {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 4px 10px;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 2px 10px;
   align-items: center;
-  min-height: 74px;
-  padding: 12px;
+  min-height: 52px;
+  padding: 10px 12px;
   background: var(--card);
-  border-radius: var(--radius);
-  transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease, background 170ms ease;
+  border-radius: calc(var(--radius) - 4px);
+  transition: border-color 170ms ease, background 170ms ease;
 }
 
 .action-link:hover,
 .action-link:focus-visible {
-  border-color: color-mix(in srgb, var(--brand) 52%, var(--line));
-  box-shadow: var(--shadow);
+  border-color: color-mix(in srgb, var(--brand) 38%, var(--line));
+  background: color-mix(in srgb, var(--surface) 55%, var(--card));
+  box-shadow: none;
   outline: none;
-  transform: translateY(-3px);
+  transform: none;
 }
 
 .action-link svg {
   grid-row: span 2;
-  width: 30px;
-  height: 30px;
-  padding: 6px;
-  color: var(--brand);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.action-link svg.brand-icon {
   fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  background: color-mix(in srgb, var(--brand) 9%, transparent);
-  border-radius: 999px;
+  stroke: none;
 }
 
 .action-link span {
   color: var(--ink);
-  font-size: 0.98rem;
-  font-weight: 850;
-  line-height: 1.1;
+  font-size: 0.92rem;
+  font-weight: 750;
+  line-height: 1.15;
 }
 
 .action-link small {
   color: var(--muted);
-  font-size: 0.82rem;
-  font-weight: 700;
+  font-size: 0.76rem;
+  font-weight: 600;
   line-height: 1.2;
 }
 
-.action-link.waze svg {
-  color: #0987a0;
-  background: rgba(49, 196, 236, 0.15);
-}
-
-.action-link.whatsapp svg {
-  color: #1f8f52;
-  background: rgba(31, 143, 82, 0.13);
+.mega-link svg.brand-icon {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+  background: transparent;
 }
 
 /* 10. Eventos / Ministerios -------------------------------------------------- */
@@ -1281,19 +1297,21 @@ textarea:focus {
 .social-card {
   display: grid;
   align-content: end;
-  min-height: 126px;
-  padding: 18px;
-  color: #ffffff;
-  border-radius: 24px;
-  transition: box-shadow 170ms ease, transform 170ms ease, filter 170ms ease;
+  min-height: 108px;
+  padding: 16px 18px;
+  color: var(--ink);
+  background: var(--card);
+  border-radius: var(--radius);
+  transition: border-color 170ms ease, box-shadow 170ms ease;
 }
 
 .social-card:hover,
 .social-card:focus-visible {
-  filter: saturate(1.14);
+  border-color: color-mix(in srgb, var(--brand) 40%, var(--line));
   box-shadow: var(--shadow);
   outline: none;
-  transform: translateY(-3px);
+  transform: none;
+  filter: none;
 }
 
 .social-card span,
@@ -1312,32 +1330,29 @@ textarea:focus {
 }
 
 .social-icon {
-  width: 20px;
-  height: 20px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.8;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
 }
 
-.social-card.facebook .social-icon {
-  fill: currentColor;
+.social-icon.brand-icon {
+  fill: none;
   stroke: none;
 }
 
 .social-card strong {
   overflow-wrap: anywhere;
-  font-size: 1.15rem;
-  line-height: 1.18;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  color: var(--ink);
 }
 
 .social-card.instagram {
-  background: linear-gradient(135deg, #6f2dbd, #d62976 46%, #f59f00);
+  border-left: 3px solid #d62976;
 }
 
 .social-card.facebook {
-  background: linear-gradient(135deg, #145da0, #1c7ed6);
+  border-left: 3px solid #1877f2;
 }
 
 .contact-section {
@@ -1424,6 +1439,7 @@ body.dark-mode .site-footer {
   .quick-strip,
   .identity-layout,
   .identity-grid,
+  .scripture-layout,
   .scripture-grid,
   .two-column,
   .updates-grid,
@@ -1472,23 +1488,24 @@ body.dark-mode .site-footer {
   .hero {
     min-height: auto;
     background:
-      linear-gradient(90deg, rgba(21, 14, 10, 0.9) 0%, rgba(95, 26, 31, 0.68) 58%, rgba(21, 14, 10, 0.12) 100%),
+      linear-gradient(90deg, rgba(21, 14, 10, 0.9) 0%, rgba(95, 26, 31, 0.62) 58%, rgba(21, 14, 10, 0.12) 100%),
       url("assets/iglesia-shekinah-interior.png") 76% center / cover;
   }
 
   body.dark-mode .hero {
     background:
-      linear-gradient(90deg, rgba(6, 8, 12, 0.92) 0%, rgba(92, 25, 34, 0.68) 58%, rgba(6, 8, 12, 0.18) 100%),
+      linear-gradient(90deg, rgba(6, 8, 12, 0.92) 0%, rgba(92, 25, 34, 0.58) 58%, rgba(6, 8, 12, 0.18) 100%),
       url("assets/iglesia-shekinah-interior.png") 76% center / cover;
   }
 
   .hero-inner {
-    min-height: clamp(480px, 82svh, 640px);
+    min-height: auto;
     padding-inline: 14px;
+    padding-bottom: 40px;
   }
 
   .hero h1 {
-    font-size: clamp(2.65rem, 13vw, 4.2rem);
+    font-size: clamp(2rem, 9vw, 2.8rem);
   }
 
   .hero-actions {
@@ -1497,6 +1514,8 @@ body.dark-mode .site-footer {
 
   .hero-actions .button {
     width: 100%;
+    min-height: 44px;
+    font-size: 0.95rem;
   }
 
   .hero-panel {
@@ -1505,11 +1524,23 @@ body.dark-mode .site-footer {
 
   .quick-strip {
     width: calc(100% - 24px);
-    margin-top: 14px;
+    margin-top: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .quick-strip a {
-    min-height: 78px;
+    min-height: 60px;
+    padding: 12px 14px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .quick-strip a:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .quick-strip a:nth-last-child(-n + 2) {
+    border-bottom: 0;
   }
 
   .ministry-grid {
@@ -1531,7 +1562,7 @@ body.dark-mode .site-footer {
   }
 
   .location-card {
-    min-height: 220px;
+    min-height: auto;
   }
 
   .route-actions,
@@ -1540,7 +1571,7 @@ body.dark-mode .site-footer {
   }
 
   .action-link {
-    min-height: 66px;
+    min-height: 48px;
   }
 }
 

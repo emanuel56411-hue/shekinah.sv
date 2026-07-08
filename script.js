@@ -120,8 +120,8 @@ const translations = {
       locationTitle: "Como llegar",
       prayerTitle: "Pedir oracion",
       prayerDesc: "Comparte tu necesidad con respeto.",
-      serveTitle: "Quiero servir",
-      serveDesc: "Conoce las areas de servicio.",
+      socialTitle: "Redes sociales",
+      socialDesc: "Instagram y Facebook de la iglesia.",
     },
     common: {
       sunday: "Domingo",
@@ -138,8 +138,8 @@ const translations = {
     hero: {
       eyebrow: "Biblia, adoracion y servicio",
       description:
-        "Una iglesia en San Juan Opico para adorar a Dios, estudiar la Biblia y caminar en familia.",
-      ctaPrimary: "Planifica tu visita",
+        "Un lugar para conocer a Cristo, crecer en fe y caminar en familia.",
+      ctaPrimary: "Ver horarios",
       ctaSecondary: "Como llegar",
       ctaPrayer: "Pedir oracion",
     },
@@ -342,8 +342,8 @@ const translations = {
       locationTitle: "Get directions",
       prayerTitle: "Request prayer",
       prayerDesc: "Share your need respectfully.",
-      serveTitle: "I want to serve",
-      serveDesc: "See the areas of service.",
+      socialTitle: "Social media",
+      socialDesc: "Instagram and Facebook of the church.",
     },
     common: {
       sunday: "Sunday",
@@ -360,8 +360,8 @@ const translations = {
     hero: {
       eyebrow: "Bible, worship and service",
       description:
-        "A church in San Juan Opico to worship God, study the Bible and walk as family.",
-      ctaPrimary: "Plan your visit",
+        "A place to know Christ, grow in faith and walk as family.",
+      ctaPrimary: "See times",
       ctaSecondary: "Get directions",
       ctaPrayer: "Request prayer",
     },
