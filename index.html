@@ -18,7 +18,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=10" />
+    <link rel="stylesheet" href="styles.css?v=12" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -260,7 +260,7 @@
           </div>
 
           <article class="location-card location-card-photo">
-            <img src="assets/iglesia-shekinah-interior.png" alt="Interior de la iglesia Shekinah" loading="lazy" width="640" height="480" />
+            <img src="assets/fotos/congregacion-culto.webp" alt="Congregacion reunida en Iglesia Bautista Shekinah" loading="lazy" width="1080" height="732" />
             <div class="location-card-overlay">
               <span data-i18n="nav.ubicacion">Ubicacion</span>
               <strong>QJRR+HH2</strong>
@@ -346,7 +346,7 @@
       <section id="somos" class="section identity-section" aria-labelledby="somos-title">
         <div class="section-inner identity-layout">
           <div class="identity-visual">
-            <img src="assets/iglesia-shekinah-interior.png" alt="Interior de la iglesia Shekinah" loading="lazy" width="640" height="480" />
+            <img src="assets/fotos/equipo-alabanza.webp" alt="Equipo de alabanza de Iglesia Bautista Shekinah" loading="lazy" width="1008" height="756" />
           </div>
           <div class="identity-content">
             <div class="section-copy">
@@ -370,6 +370,64 @@
             <span data-i18n="scripture.verseRef">Isaias 60:1</span>
             <p data-i18n="scripture.verseText">"Levantate, resplandece; porque ha venido tu luz, y la gloria de Jehova ha nacido sobre ti".</p>
           </article>
+        </div>
+      </section>
+
+      <section id="galeria" class="section gallery-section">
+        <div class="section-inner">
+          <div class="section-heading gallery-heading">
+            <p class="eyebrow" data-i18n="galeria.eyebrow">Vida de iglesia</p>
+            <h2 data-i18n="galeria.title">Momentos que compartimos</h2>
+            <p data-i18n="galeria.description">Cultos, servicio, familia y gratitud a Dios.</p>
+          </div>
+
+          <div class="photo-grid">
+            <article class="photo-card photo-card-large">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de congregacion reunida">
+                <img src="assets/fotos/congregacion-culto.webp" alt="Congregacion reunida durante un culto" loading="lazy" width="1080" height="732" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item1Tag">Congregacion</span>
+                  <strong data-i18n="galeria.item1Title">Nos reunimos como familia</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de ministerio de ninos">
+                <img src="assets/fotos/ministerio-ninos.webp" alt="Ninos participando en actividad de la iglesia" loading="lazy" width="1280" height="576" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item2Tag">Ninos</span>
+                  <strong data-i18n="galeria.item2Title">Formando nuevas generaciones</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de aniversario Shekinah">
+                <img src="assets/fotos/aniversario-shekinah.webp" alt="Celebracion de aniversario de Iglesia Bautista Shekinah" loading="lazy" width="1200" height="1600" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item3Tag">Gratitud</span>
+                  <strong data-i18n="galeria.item3Title">Celebramos lo que Dios ha hecho</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de liderazgo pastoral">
+                <img src="assets/fotos/liderazgo-pastoral.webp" alt="Liderazgo pastoral de Iglesia Bautista Shekinah" loading="lazy" width="1600" height="1353" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item4Tag">Comunion</span>
+                  <strong data-i18n="galeria.item4Title">Sirviendo con unidad</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de predicacion">
+                <img src="assets/fotos/predicacion-shekinah.webp" alt="Predicacion en Iglesia Bautista Shekinah" loading="lazy" width="883" height="1600" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item5Tag">Palabra</span>
+                  <strong data-i18n="galeria.item5Title">La Biblia al centro</strong>
+                </span>
+              </button>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -508,6 +566,16 @@
       <a class="mobile-cta-whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="mobileCta.whatsapp">WhatsApp</a>
     </nav>
 
+    <div class="gallery-lightbox" data-gallery-lightbox aria-hidden="true">
+      <button class="gallery-close" type="button" data-gallery-close aria-label="Cerrar foto">Cerrar</button>
+      <button class="gallery-nav gallery-prev" type="button" data-gallery-prev aria-label="Foto anterior">‹</button>
+      <figure class="gallery-stage">
+        <img src="" alt="" data-gallery-image />
+        <figcaption data-gallery-caption></figcaption>
+      </figure>
+      <button class="gallery-nav gallery-next" type="button" data-gallery-next aria-label="Foto siguiente">›</button>
+    </div>
+
     <footer class="site-footer">
       <p>&copy; 2026 Iglesia Bautista Shekinah</p>
       <div>
@@ -517,6 +585,6 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=10"></script>
+    <script src="script.js?v=12"></script>
   </body>
 </html>

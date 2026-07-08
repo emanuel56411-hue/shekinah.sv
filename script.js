@@ -20,6 +20,13 @@ const nextServiceRowOneTitle = document.querySelector("[data-next-service-row-on
 const nextServiceRowTwoDay = document.querySelector("[data-next-service-row-two-day]");
 const nextServiceRowTwoTitle = document.querySelector("[data-next-service-row-two-title]");
 const helpShortcutButtons = document.querySelectorAll("[data-help-shortcut]");
+const galleryTriggers = Array.from(document.querySelectorAll("[data-gallery-trigger]"));
+const galleryLightbox = document.querySelector("[data-gallery-lightbox]");
+const galleryImage = document.querySelector("[data-gallery-image]");
+const galleryCaption = document.querySelector("[data-gallery-caption]");
+const galleryClose = document.querySelector("[data-gallery-close]");
+const galleryPrev = document.querySelector("[data-gallery-prev]");
+const galleryNext = document.querySelector("[data-gallery-next]");
 const SUPABASE_URL = "https://yjhnqxubicaglqfroiqk.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
 const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
@@ -35,6 +42,8 @@ const supabaseClient =
   isSupabaseConfigured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 let latestPublicHelpRequests = [];
 let currentHelpStatus = null;
+let currentGalleryIndex = 0;
+let lastGalleryFocus = null;
 
 function formatPhone(phone) {
   if (phone.length === 11 && phone.startsWith("503")) {
@@ -173,6 +182,21 @@ const translations = {
       verseRef: "Isaias 60:1",
       verseText:
         '"Levantate, resplandece; porque ha venido tu luz, y la gloria de Jehova ha nacido sobre ti".',
+    },
+    galeria: {
+      eyebrow: "Vida de iglesia",
+      title: "Momentos que compartimos",
+      description: "Cultos, servicio, familia y gratitud a Dios.",
+      item1Tag: "Congregacion",
+      item1Title: "Nos reunimos como familia",
+      item2Tag: "Ninos",
+      item2Title: "Formando nuevas generaciones",
+      item3Tag: "Gratitud",
+      item3Title: "Celebramos lo que Dios ha hecho",
+      item4Tag: "Comunion",
+      item4Title: "Sirviendo con unidad",
+      item5Tag: "Palabra",
+      item5Title: "La Biblia al centro",
     },
     reuniones: {
       eyebrow: "Reuniones",
@@ -395,6 +419,21 @@ const translations = {
       verseRef: "Isaiah 60:1",
       verseText:
         '"Arise, shine; for your light has come, and the glory of the Lord has risen upon you."',
+    },
+    galeria: {
+      eyebrow: "Church life",
+      title: "Moments we share",
+      description: "Services, service, family and gratitude to God.",
+      item1Tag: "Congregation",
+      item1Title: "We gather as family",
+      item2Tag: "Children",
+      item2Title: "Raising new generations",
+      item3Tag: "Gratitude",
+      item3Title: "Celebrating what God has done",
+      item4Tag: "Fellowship",
+      item4Title: "Serving in unity",
+      item5Tag: "Word",
+      item5Title: "The Bible at the center",
     },
     reuniones: {
       eyebrow: "Services",
@@ -912,6 +951,25 @@ mainMenu.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
+  if (galleryLightbox?.classList.contains("is-open")) {
+    if (event.key === "Escape") {
+      closeGallery();
+      return;
+    }
+
+    if (event.key === "ArrowLeft") {
+      event.preventDefault();
+      showGalleryImage(currentGalleryIndex - 1);
+      return;
+    }
+
+    if (event.key === "ArrowRight") {
+      event.preventDefault();
+      showGalleryImage(currentGalleryIndex + 1);
+      return;
+    }
+  }
+
   if (!mainMenu.classList.contains("is-open")) {
     return;
   }
@@ -956,6 +1014,85 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
 if (window.location.hash) {
   showProgressiveSection(window.location.hash);
 }
+
+function getGalleryItems() {
+  return galleryTriggers
+    .map((trigger) => {
+      const image = trigger.querySelector("img");
+      const title = trigger.querySelector(".photo-card-caption strong")?.textContent?.trim();
+
+      if (!image) {
+        return null;
+      }
+
+      return {
+        src: image.currentSrc || image.getAttribute("src"),
+        alt: image.getAttribute("alt") || title || "Foto de Iglesia Bautista Shekinah",
+        caption: title || image.getAttribute("alt") || "",
+      };
+    })
+    .filter(Boolean);
+}
+
+function showGalleryImage(index) {
+  const items = getGalleryItems();
+
+  if (!items.length || !galleryImage || !galleryCaption) {
+    return;
+  }
+
+  currentGalleryIndex = (index + items.length) % items.length;
+  const item = items[currentGalleryIndex];
+
+  galleryImage.src = item.src;
+  galleryImage.alt = item.alt;
+  galleryCaption.textContent = item.caption;
+}
+
+function openGallery(index) {
+  if (!galleryLightbox) {
+    return;
+  }
+
+  lastGalleryFocus = document.activeElement;
+  showGalleryImage(index);
+  galleryLightbox.classList.add("is-open");
+  galleryLightbox.setAttribute("aria-hidden", "false");
+  document.body.classList.add("lightbox-open");
+  galleryClose?.focus();
+}
+
+function closeGallery() {
+  if (!galleryLightbox) {
+    return;
+  }
+
+  galleryLightbox.classList.remove("is-open");
+  galleryLightbox.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("lightbox-open");
+
+  if (galleryImage) {
+    galleryImage.src = "";
+  }
+
+  if (lastGalleryFocus && typeof lastGalleryFocus.focus === "function") {
+    lastGalleryFocus.focus();
+  }
+}
+
+galleryTriggers.forEach((trigger, index) => {
+  trigger.addEventListener("click", () => openGallery(index));
+});
+
+galleryClose?.addEventListener("click", closeGallery);
+galleryPrev?.addEventListener("click", () => showGalleryImage(currentGalleryIndex - 1));
+galleryNext?.addEventListener("click", () => showGalleryImage(currentGalleryIndex + 1));
+
+galleryLightbox?.addEventListener("click", (event) => {
+  if (event.target === galleryLightbox) {
+    closeGallery();
+  }
+});
 
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();

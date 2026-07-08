@@ -1,14 +1,20 @@
-const CACHE_VERSION = "shekinah-pwa-v10";
+const CACHE_VERSION = "shekinah-pwa-v12";
 
 const PRECACHE_URLS = [
   "./",
   "index.html",
-  "styles.css?v=10",
-  "script.js?v=10",
+  "styles.css?v=12",
+  "script.js?v=12",
   "manifest.json",
   "offline.html",
   "assets/logo-shekinah.png",
   "assets/iglesia-shekinah-interior.png",
+  "assets/fotos/equipo-alabanza.webp",
+  "assets/fotos/ministerio-ninos.webp",
+  "assets/fotos/aniversario-shekinah.webp",
+  "assets/fotos/liderazgo-pastoral.webp",
+  "assets/fotos/congregacion-culto.webp",
+  "assets/fotos/predicacion-shekinah.webp",
 ];
 
 self.addEventListener("install", (event) => {
