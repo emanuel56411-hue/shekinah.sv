@@ -1,10 +1,10 @@
-const CACHE_VERSION = "shekinah-pwa-v12";
+﻿const CACHE_VERSION = "shekinah-pwa-v13";
 
 const PRECACHE_URLS = [
   "./",
   "index.html",
-  "styles.css?v=12",
-  "script.js?v=12",
+  "styles.css?v=13",
+  "script.js?v=13",
   "manifest.json",
   "offline.html",
   "assets/logo-shekinah.png",
@@ -87,3 +87,4 @@ self.addEventListener("fetch", (event) => {
 
   event.respondWith(cacheFirst(request));
 });
+
