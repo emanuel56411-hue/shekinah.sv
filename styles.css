@@ -1836,6 +1836,11 @@ textarea:focus {
   border-left: 3px solid #1877f2;
 }
 
+.social-card.youtube {
+  border: 1px solid var(--line);
+  border-left: 3px solid #ff0000;
+}
+
 .contact-section {
   background: color-mix(in srgb, var(--surface) 88%, var(--card));
 }
