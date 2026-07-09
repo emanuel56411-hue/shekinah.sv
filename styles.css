@@ -987,9 +987,9 @@ body.dark-mode .location-card {
   padding: clamp(20px, 3vw, 28px);
   text-align: center;
   background: var(--card);
-  border: 1px solid var(--line);
+  border: 2px solid var(--gold);
   border-radius: var(--radius);
-  box-shadow: var(--soft-shadow);
+  box-shadow: none;
 }
 
 .scripture-quote-standalone span {
