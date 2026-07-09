@@ -288,9 +288,7 @@ const translations = {
       coordinateBtn: "Coordinar ayuda",
       anonymousName: "Solicitud de ayuda",
       noContact: "Sin contacto adicional",
-      quickPrayer: "Pedir oración",
-      quickFood: "Solicitar víveres",
-      quickVisit: "Pedir visita",
+      quickSupport: "Pedir apoyo",
       quickDonate: "Quiero donar",
     },
     helpTypes: {
@@ -541,9 +539,7 @@ const translations = {
       coordinateBtn: "Coordinate help",
       anonymousName: "Help request",
       noContact: "No additional contact",
-      quickPrayer: "Ask for prayer",
-      quickFood: "Request groceries",
-      quickVisit: "Request a visit",
+      quickSupport: "Request support",
       quickDonate: "I want to donate",
     },
     helpTypes: {
