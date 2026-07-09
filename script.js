@@ -158,6 +158,11 @@ const translations = {
       ctaSecondary: "Como llegar",
       ctaWhatsapp: "Escribir por WhatsApp",
     },
+    anniversary: {
+      aria: "Aniversario de la iglesia",
+      years: "anos",
+      text: "Llevamos 19 anos sirviendo a Cristo en familia.",
+    },
     schedule: {
       tuesdayActivity: "Estudio exegetico",
       thursdayActivity: "Estudio biblico",
@@ -201,6 +206,10 @@ const translations = {
       item4Title: "Sirviendo con unidad",
       item5Tag: "Palabra",
       item5Title: "La Biblia al centro",
+      item6Tag: "Ensenanza",
+      item6Title: "Aprendemos juntos la Palabra",
+      item7Tag: "Familia",
+      item7Title: "Los ninos tambien participan",
     },
     reuniones: {
       eyebrow: "Reuniones",
@@ -418,6 +427,11 @@ const translations = {
       ctaSecondary: "Get directions",
       ctaWhatsapp: "Message on WhatsApp",
     },
+    anniversary: {
+      aria: "Church anniversary",
+      years: "years",
+      text: "19 years serving Christ together as family.",
+    },
     schedule: {
       tuesdayActivity: "Exegetical study",
       thursdayActivity: "Bible study",
@@ -461,6 +475,10 @@ const translations = {
       item4Title: "Serving in unity",
       item5Tag: "Word",
       item5Title: "The Bible at the center",
+      item6Tag: "Teaching",
+      item6Title: "We learn the Word together",
+      item7Tag: "Family",
+      item7Title: "Children participate too",
     },
     reuniones: {
       eyebrow: "Services",

@@ -32,6 +32,8 @@
   --gold: #d4a53f;
   --gold-ink: #8a6116;
   --sage: #3f7a45;
+  --action: var(--brand-strong);
+  --action-hover: #4f0c14;
   --shadow: 0 20px 44px rgba(74, 45, 24, 0.14);
   --soft-shadow: 0 10px 26px rgba(74, 45, 24, 0.11);
   --radius: 20px;
@@ -52,6 +54,8 @@ body.dark-mode {
   --gold: #e7b75c;
   --gold-ink: #f0c777;
   --sage: #8fd699;
+  --action: #c44d5c;
+  --action-hover: #d65a69;
   --shadow: 0 24px 50px rgba(0, 0, 0, 0.42);
   --soft-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
 }
@@ -638,14 +642,14 @@ body.dark-mode .hero {
 
 .button.whatsapp {
   color: #ffffff;
-  background: #1fa855;
-  border-color: #1fa855;
+  background: var(--action);
+  border-color: var(--action);
 }
 
 .button.whatsapp:hover,
 .button.whatsapp:focus-visible {
-  background: #1b964c;
-  border-color: #1b964c;
+  background: var(--action-hover);
+  border-color: var(--action-hover);
 }
 
 .button.secondary {
@@ -669,13 +673,65 @@ body.dark-mode .button.primary {
   background: var(--gold);
 }
 
+/* 5b. Aniversario ------------------------------------------------------- */
+
+.anniversary-note {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  width: min(1120px, calc(100% - 32px));
+  margin: -12px auto 0;
+  padding: 11px 22px;
+  position: relative;
+  z-index: 3;
+  background: color-mix(in srgb, var(--card) 94%, var(--gold));
+  border: 1px solid color-mix(in srgb, var(--gold) 24%, var(--line));
+  border-radius: 999px;
+  box-shadow: var(--soft-shadow);
+}
+
+.anniversary-badge {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--heading-font);
+  font-weight: 800;
+  font-size: 0.95rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.anniversary-number {
+  font-size: 1.65rem;
+  font-weight: 900;
+  color: var(--gold-ink);
+}
+
+.anniversary-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+
+body.dark-mode .anniversary-note {
+  background: color-mix(in srgb, var(--card) 90%, var(--gold));
+  border-color: color-mix(in srgb, var(--gold) 30%, var(--line));
+}
+
 /* 6. Quick strip -------------------------------------------------------- */
 
 .quick-strip {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   width: min(1120px, calc(100% - 32px));
-  margin: -22px auto 0;
+  margin: 12px auto 0;
   position: relative;
   z-index: 3;
   background: var(--card);
@@ -1301,7 +1357,7 @@ body.dark-mode .scripture-grid article {
   width: 54px;
   height: 54px;
   color: #ffffff;
-  background: #1fa855;
+  background: var(--action);
   text-decoration: none;
 }
 
@@ -1310,9 +1366,13 @@ body.dark-mode .scripture-grid article {
   height: 28px;
 }
 
+.fab-whatsapp svg path {
+  fill: #ffffff;
+}
+
 .fab-whatsapp:hover,
 .fab-whatsapp:focus-visible {
-  background: #1b964c;
+  background: var(--action-hover);
   outline: none;
   transform: translateY(-2px);
 }
@@ -1936,8 +1996,8 @@ textarea:focus {
 
   .mobile-cta-whatsapp {
     color: #ffffff !important;
-    background: #1fa855 !important;
-    border-color: #1fa855 !important;
+    background: var(--action) !important;
+    border-color: var(--action) !important;
   }
 
   .hero-actions {
@@ -2108,6 +2168,21 @@ body.dark-mode .site-footer {
 
   .hero-panel {
     width: 100%;
+  }
+
+  .anniversary-note {
+    width: calc(100% - 24px);
+    margin-top: -8px;
+    padding: 10px 16px;
+    gap: 4px 12px;
+  }
+
+  .anniversary-number {
+    font-size: 1.45rem;
+  }
+
+  .anniversary-text {
+    font-size: 0.84rem;
   }
 
   .quick-strip {

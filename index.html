@@ -35,7 +35,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=15" />
+    <link rel="stylesheet" href="styles.css?v=17" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -178,6 +178,14 @@
           </aside>
         </div>
       </section>
+
+      <div class="anniversary-note" aria-label="Aniversario de la iglesia" data-i18n-aria-label="anniversary.aria">
+        <p class="anniversary-badge">
+          <span class="anniversary-number" aria-hidden="true">19</span>
+          <span data-i18n="anniversary.years">anos</span>
+        </p>
+        <p class="anniversary-text" data-i18n="anniversary.text">Llevamos 19 anos sirviendo a Cristo en familia.</p>
+      </div>
 
       <section class="quick-strip" aria-label="Accesos rapidos" data-i18n-aria-label="quickStrip.aria">
         <a href="#reuniones">
@@ -444,6 +452,24 @@
                 </span>
               </button>
             </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de enseñanza biblica">
+                <img src="assets/fotos/predicacion-horarios.webp" alt="Ensenanza biblica en Iglesia Bautista Shekinah" loading="lazy" width="1300" height="1950" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item6Tag">Ensenanza</span>
+                  <strong data-i18n="galeria.item6Title">Aprendemos juntos la Palabra</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de presentacion de ninos">
+                <img src="assets/fotos/presentacion-ninos.webp" alt="Ninos participando en una presentacion biblica" loading="lazy" width="640" height="480" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item7Tag">Familia</span>
+                  <strong data-i18n="galeria.item7Title">Los ninos tambien participan</strong>
+                </span>
+              </button>
+            </article>
           </div>
         </div>
       </section>
@@ -672,8 +698,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=15"></script>
+    <script src="script.js?v=16"></script>
   </body>
 </html>
-
 
