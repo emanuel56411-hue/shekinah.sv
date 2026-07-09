@@ -306,8 +306,6 @@ const translations = {
     faq: {
       eyebrow: "Preguntas",
       title: "Preguntas frecuentes",
-      q1: "¿Cómo llego a la iglesia?",
-      a1: "Usa QJRR+HH2, San Juan Opico. Abre Google Maps o Waze desde la sección de ubicación.",
       q2: "¿Debo vestir de alguna forma en particular?",
       a2: "No hay un código estricto. Ven cómodo y respetuoso; lo importante es tu corazón.",
       q3: "¿Hay actividades para niños?",
@@ -575,8 +573,6 @@ const translations = {
     faq: {
       eyebrow: "Questions",
       title: "Frequently asked questions",
-      q1: "How do I get to the church?",
-      a1: "Use QJRR+HH2, San Juan Opico. Open Google Maps or Waze from the location section.",
       q2: "Is there a dress code?",
       a2: "There is no strict dress code. Come comfortable and respectful; what matters is your heart.",
       q3: "Are there activities for children?",

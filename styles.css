@@ -1357,7 +1357,7 @@ body.dark-mode .scripture-grid article {
   width: 54px;
   height: 54px;
   color: #ffffff;
-  background: var(--action);
+  background: #25d366;
   text-decoration: none;
 }
 
@@ -1372,7 +1372,7 @@ body.dark-mode .scripture-grid article {
 
 .fab-whatsapp:hover,
 .fab-whatsapp:focus-visible {
-  background: var(--action-hover);
+  background: #1ebe5d;
   outline: none;
   transform: translateY(-2px);
 }
