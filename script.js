@@ -131,7 +131,7 @@ const translations = {
       prayerTitle: "Pedir oración",
       prayerDesc: "Oración y apoyo",
       socialTitle: "Redes",
-      socialDesc: "Instagram y Facebook",
+      socialDesc: "Instagram, Facebook y YouTube",
     },
     mobileCta: {
       aria: "Acciones principales",
@@ -309,7 +309,7 @@ const translations = {
       eyebrow: "Contacto",
       title: "Hablemos",
       detailsAria: "Datos de contacto",
-      socialText: "Instagram y Facebook como Shekinah Versalles",
+      socialText: "Instagram, Facebook y YouTube como Shekinah Versalles",
       contactLabel: "Teléfono o correo",
       contactPlaceholder: "Cómo contactarte",
       messagePlaceholder: "¿Cómo podemos ayudarte?",
