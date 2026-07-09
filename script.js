@@ -27,6 +27,7 @@ const galleryCaption = document.querySelector("[data-gallery-caption]");
 const galleryClose = document.querySelector("[data-gallery-close]");
 const galleryPrev = document.querySelector("[data-gallery-prev]");
 const galleryNext = document.querySelector("[data-gallery-next]");
+const scrollTopButton = document.querySelector(".scroll-top");
 const SUPABASE_URL = "https://yjhnqxubicaglqfroiqk.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
 const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
@@ -187,6 +188,9 @@ const translations = {
       eyebrow: "Vida de iglesia",
       title: "Momentos que compartimos",
       description: "Cultos, servicio, familia y gratitud a Dios.",
+      viewerAria: "Visor de fotos",
+      closeAria: "Cerrar foto",
+      closeBtn: "Cerrar",
       item1Tag: "Congregacion",
       item1Title: "Nos reunimos como familia",
       item2Tag: "Ninos",
@@ -289,6 +293,26 @@ const translations = {
     redes: {
       title: "Siguenos",
       description: "Fotos y anuncios de la iglesia.",
+    },
+    faq: {
+      eyebrow: "Preguntas",
+      title: "Preguntas frecuentes",
+      q1: "Como llego a la iglesia?",
+      a1: "Usa QJRR+HH2, San Juan Opico. Abre Google Maps o Waze desde la seccion de ubicacion.",
+      q2: "Debo vestir de alguna forma en particular?",
+      a2: "No hay un codigo estricto. Ven comodo y respetuoso; lo importante es tu corazon.",
+      q3: "Hay actividades para ninos?",
+      a3: "Si. Tenemos ministerio para ninos y espacios donde pueden aprender de la Biblia.",
+      q4: "Puedo asistir aunque nunca haya ido a una iglesia?",
+      a4: "Claro que si. Te recibimos con amor y puedes venir como estas.",
+      q5: "Como puedo pedir oracion?",
+      a5: "En la seccion de ayuda puedes enviar tu solicitud o escribirnos por WhatsApp.",
+      q6: "Como puedo unirme a un ministerio?",
+      a6: "Visita la seccion de ministerios y escribenos por WhatsApp para coordinar.",
+    },
+    fab: {
+      whatsappAria: "Escribir por WhatsApp",
+      scrollTopAria: "Volver arriba",
     },
     contacto: {
       eyebrow: "Contacto",
@@ -424,6 +448,9 @@ const translations = {
       eyebrow: "Church life",
       title: "Moments we share",
       description: "Services, service, family and gratitude to God.",
+      viewerAria: "Photo viewer",
+      closeAria: "Close photo",
+      closeBtn: "Close",
       item1Tag: "Congregation",
       item1Title: "We gather as family",
       item2Tag: "Children",
@@ -526,6 +553,26 @@ const translations = {
     redes: {
       title: "Follow us",
       description: "Photos and church updates.",
+    },
+    faq: {
+      eyebrow: "Questions",
+      title: "Frequently asked questions",
+      q1: "How do I get to the church?",
+      a1: "Use QJRR+HH2, San Juan Opico. Open Google Maps or Waze from the location section.",
+      q2: "Is there a dress code?",
+      a2: "There is no strict dress code. Come comfortable and respectful; what matters is your heart.",
+      q3: "Are there activities for children?",
+      a3: "Yes. We have a children's ministry and spaces where they can learn from the Bible.",
+      q4: "Can I attend even if I have never been to a church?",
+      a4: "Absolutely. We welcome you with love and you can come as you are.",
+      q5: "How can I request prayer?",
+      a5: "In the help section you can send your request or message us on WhatsApp.",
+      q6: "How can I join a ministry?",
+      a6: "Visit the ministries section and message us on WhatsApp to coordinate.",
+    },
+    fab: {
+      whatsappAria: "Message on WhatsApp",
+      scrollTopAria: "Back to top",
     },
     contacto: {
       eyebrow: "Contact",
@@ -1093,6 +1140,23 @@ galleryLightbox?.addEventListener("click", (event) => {
     closeGallery();
   }
 });
+
+function updateScrollTopButton() {
+  if (!scrollTopButton) {
+    return;
+  }
+
+  const shouldShow = window.scrollY > 420;
+  scrollTopButton.hidden = !shouldShow;
+  scrollTopButton.classList.toggle("is-visible", shouldShow);
+}
+
+scrollTopButton?.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
+
+window.addEventListener("scroll", updateScrollTopButton, { passive: true });
+updateScrollTopButton();
 
 contactForm.addEventListener("submit", (event) => {
   event.preventDefault();

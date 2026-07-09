@@ -64,6 +64,7 @@ body.dark-mode {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
@@ -73,6 +74,7 @@ body {
   font-family: var(--body-font);
   font-size: 1rem;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 body.dark-mode {
@@ -1175,11 +1177,31 @@ body.dark-mode .scripture-grid article {
   position: absolute;
   top: 18px;
   right: 18px;
+  z-index: 2;
+  gap: 0;
+  min-width: 44px;
   min-height: 44px;
-  padding: 9px 14px;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  font-weight: 800;
+  padding: 0;
+  border-radius: 12px;
+}
+
+.gallery-close-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.gallery-close svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
 }
 
 .gallery-nav {
@@ -1198,6 +1220,143 @@ body.dark-mode .scripture-grid article {
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+
+/* 8c. FAQ ---------------------------------------------------------- */
+
+.faq-section {
+  background: color-mix(in srgb, var(--surface) 72%, var(--card));
+}
+
+.faq-list {
+  display: grid;
+  gap: 10px;
+  max-width: 760px;
+}
+
+.faq-item {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+}
+
+.faq-item summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 18px;
+  color: var(--ink);
+  font-weight: 750;
+  line-height: 1.35;
+  cursor: pointer;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  flex-shrink: 0;
+  color: var(--brand);
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 18px 16px;
+  color: var(--muted);
+  font-size: 0.96rem;
+  line-height: 1.55;
+}
+
+/* 8d. Botones flotantes -------------------------------------------- */
+
+.fab-whatsapp,
+.scroll-top {
+  position: fixed;
+  z-index: 17;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform 170ms ease, box-shadow 170ms ease, opacity 170ms ease;
+}
+
+.fab-whatsapp {
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  width: 54px;
+  height: 54px;
+  color: #ffffff;
+  background: #1fa855;
+  text-decoration: none;
+}
+
+.fab-whatsapp svg {
+  width: 28px;
+  height: 28px;
+}
+
+.fab-whatsapp:hover,
+.fab-whatsapp:focus-visible {
+  background: #1b964c;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.scroll-top {
+  right: 18px;
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  width: 42px;
+  height: 42px;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.scroll-top svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.scroll-top:hover,
+.scroll-top:focus-visible {
+  border-color: color-mix(in srgb, var(--brand) 40%, var(--line));
+  outline: none;
+  transform: translateY(-2px);
+}
+
+body.lightbox-open .fab-whatsapp,
+body.lightbox-open .scroll-top,
+body.menu-open .fab-whatsapp,
+body.menu-open .scroll-top {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* 9. Horarios / Ubicacion -------------------------------------------------- */
@@ -1719,6 +1878,25 @@ textarea:focus {
     padding-bottom: 72px;
   }
 
+  .fab-whatsapp {
+    right: 14px;
+    bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+    width: 50px;
+    height: 50px;
+  }
+
+  .fab-whatsapp svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .scroll-top {
+    right: 14px;
+    bottom: calc(142px + env(safe-area-inset-bottom, 0px));
+    width: 40px;
+    height: 40px;
+  }
+
   .mobile-cta {
     position: fixed;
     right: 0;
@@ -2014,9 +2192,9 @@ body.dark-mode .site-footer {
   .gallery-nav {
     position: fixed;
     bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    z-index: 3;
     width: 48px;
     height: 48px;
-    font-size: 1.7rem;
   }
 
   .gallery-prev {

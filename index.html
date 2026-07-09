@@ -8,6 +8,23 @@
       content="Sitio web de Iglesia Bautista Shekinah: horarios, ubicacion, ministerios, ayuda, donaciones y redes sociales."
     />
     <title>Iglesia Bautista Shekinah</title>
+    <!-- CONFIGURAR: crear assets/og-image.jpg de 1200x630 para mejor vista al compartir -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://emanuel56411-hue.github.io/shekinah.sv/" />
+    <meta property="og:title" content="Iglesia Bautista Shekinah" />
+    <meta
+      property="og:description"
+      content="Horarios, ubicacion, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador."
+    />
+    <meta property="og:image" content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp" />
+    <meta property="og:locale" content="es_SV" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Iglesia Bautista Shekinah" />
+    <meta
+      name="twitter:description"
+      content="Horarios, ubicacion, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador."
+    />
+    <meta name="twitter:image" content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp" />
     <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#65101a" />
     <link rel="apple-touch-icon" href="assets/logo-shekinah.png" />
@@ -18,7 +35,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=14" />
+    <link rel="stylesheet" href="styles.css?v=15" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -205,12 +222,12 @@
               <strong data-i18n="schedule.saturdayActivity">Culto de jovenes</strong>
               <time>4:30 p.m. - 6:00 p.m.</time>
             </article>
-            <article class="schedule-item schedule-item-highlight">
+            <article class="schedule-item">
               <span data-i18n="common.sunday">Domingo</span>
               <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
               <time>8:30 a.m. - 9:40 a.m.</time>
             </article>
-            <article class="schedule-item schedule-item-highlight">
+            <article class="schedule-item">
               <span data-i18n="common.sunday">Domingo</span>
               <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
               <time>10:00 a.m. - 11:30 a.m.</time>
@@ -514,6 +531,42 @@
         </div>
       </section>
 
+      <section id="faq" class="section section-tight faq-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <p class="eyebrow" data-i18n="faq.eyebrow">Preguntas</p>
+            <h2 data-i18n="faq.title">Preguntas frecuentes</h2>
+          </div>
+
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary data-i18n="faq.q1">Como llego a la iglesia?</summary>
+              <p data-i18n="faq.a1">Usa QJRR+HH2, San Juan Opico. Abre Google Maps o Waze desde la seccion de ubicacion.</p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq.q2">Debo vestir de alguna forma en particular?</summary>
+              <p data-i18n="faq.a2">No hay un codigo estricto. Ven comodo y respetuoso; lo importante es tu corazon.</p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq.q3">Hay actividades para ninos?</summary>
+              <p data-i18n="faq.a3">Si. Tenemos ministerio para ninos y espacios donde pueden aprender de la Biblia.</p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq.q4">Puedo asistir aunque nunca haya ido a una iglesia?</summary>
+              <p data-i18n="faq.a4">Claro que si. Te recibimos con amor y puedes venir como estas.</p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq.q5">Como puedo pedir oracion?</summary>
+              <p data-i18n="faq.a5">En la seccion de ayuda puedes enviar tu solicitud o escribirnos por WhatsApp.</p>
+            </details>
+            <details class="faq-item">
+              <summary data-i18n="faq.q6">Como puedo unirme a un ministerio?</summary>
+              <p data-i18n="faq.a6">Visita la seccion de ministerios y escribenos por WhatsApp para coordinar.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
       <section id="contacto" class="section contact-section">
         <div class="section-inner contact-layout">
           <div class="section-copy">
@@ -566,8 +619,34 @@
       <a class="mobile-cta-whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="mobileCta.whatsapp">WhatsApp</a>
     </nav>
 
-    <div class="gallery-lightbox" data-gallery-lightbox aria-hidden="true">
-      <button class="gallery-close" type="button" data-gallery-close aria-label="Cerrar foto">Cerrar</button>
+    <a
+      class="fab-whatsapp"
+      href="https://wa.me/50364465489?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Escribir por WhatsApp"
+      data-i18n-aria-label="fab.whatsappAria"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
+        <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+      </svg>
+    </a>
+
+    <button class="scroll-top" type="button" aria-label="Volver arriba" data-i18n-aria-label="fab.scrollTopAria" hidden>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M12 19V5" />
+        <path d="m7 10 5-5 5 5" />
+      </svg>
+    </button>
+
+    <div class="gallery-lightbox" data-gallery-lightbox aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visor de fotos" data-i18n-aria-label="galeria.viewerAria">
+      <button class="gallery-close" type="button" data-gallery-close aria-label="Cerrar foto" data-i18n-aria-label="galeria.closeAria">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M6 6l12 12M18 6 6 18" />
+        </svg>
+        <span class="gallery-close-label" data-i18n="galeria.closeBtn">Cerrar</span>
+      </button>
       <button class="gallery-nav gallery-prev" type="button" data-gallery-prev aria-label="Foto anterior">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M15 6 9 12l6 6" />
@@ -593,7 +672,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=14"></script>
+    <script src="script.js?v=15"></script>
   </body>
 </html>
 
