@@ -1,10 +1,10 @@
-const CACHE_VERSION = "shekinah-pwa-v22";
+const CACHE_VERSION = "shekinah-pwa-v23";
 
 const PRECACHE_URLS = [
   "./",
   "index.html",
-  "styles.css?v=22",
-  "script.js?v=22",
+  "styles.css?v=23",
+  "script.js?v=23",
   "manifest.json",
   "offline.html",
   "assets/logo-shekinah.png",

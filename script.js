@@ -34,7 +34,6 @@ const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
 const LAST_HELP_SUBMIT_KEY = "shekinah-last-help-submit";
 const HELP_MESSAGE_MIN_LENGTH = 10;
 const HELP_MESSAGE_MAX_LENGTH = 500;
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const isSupabaseConfigured =
   SUPABASE_URL.startsWith("https://") &&
   !SUPABASE_URL.includes("YOUR_PROJECT_ID") &&
@@ -126,8 +125,9 @@ const translations = {
     quickStrip: {
       aria: "Accesos rápidos",
       visitTitle: "Visítanos",
-      visitDesc: "Domingo 8:30 a.m. y 10:00 a.m.",
+      visitDesc: "Horarios de cultos",
       locationTitle: "Cómo llegar",
+      locationDesc: "Ver en Waze",
       prayerTitle: "Pedir oración",
       prayerDesc: "Oración y apoyo",
       socialTitle: "Redes",
@@ -173,15 +173,12 @@ const translations = {
     somos: {
       eyebrow: "Somos Shekinah",
       title: "Una iglesia para conocer a Cristo",
-      description: "Adoramos, aprendemos y servimos en familia.",
       item1Title: "Palabra",
       item1Desc: "La Biblia nos guía.",
       item2Title: "Adoración",
       item2Desc: "Exaltamos a Dios.",
-      item3Title: "Comunidad",
-      item3Desc: "Caminamos juntos.",
-      item4Title: "Servicio",
-      item4Desc: "Servimos con amor.",
+      item3Title: "Servicio",
+      item3Desc: "Servimos con amor.",
     },
     scripture: {
       aria: "Versículo bíblico",
@@ -208,8 +205,8 @@ const translations = {
       item5Title: "La Biblia al centro",
       item6Tag: "Enseñanza",
       item6Title: "Aprendemos juntos la Palabra",
-      item7Tag: "Familia",
-      item7Title: "Los niños también participan",
+      item7Tag: "Familia, momentos",
+      item7Title: "Recordando momentos de la iglesia",
     },
     reuniones: {
       eyebrow: "Reuniones",
@@ -377,12 +374,13 @@ const translations = {
     quickStrip: {
       aria: "Quick links",
       visitTitle: "Visit Us",
-      visitDesc: "Sunday 8:30 a.m. and 10:00 a.m.",
+      visitDesc: "Service times",
       locationTitle: "Get directions",
+      locationDesc: "Open in Waze",
       prayerTitle: "Request prayer",
       prayerDesc: "Prayer and support",
       socialTitle: "Social",
-      socialDesc: "Instagram and Facebook",
+      socialDesc: "Instagram, Facebook and YouTube",
     },
     mobileCta: {
       aria: "Main actions",
@@ -424,15 +422,12 @@ const translations = {
     somos: {
       eyebrow: "About Shekinah",
       title: "A church to know Christ",
-      description: "We worship, learn and serve as family.",
       item1Title: "Word",
       item1Desc: "The Bible guides us.",
       item2Title: "Worship",
       item2Desc: "We exalt God.",
-      item3Title: "Community",
-      item3Desc: "We walk together.",
-      item4Title: "Service",
-      item4Desc: "We serve with love.",
+      item3Title: "Service",
+      item3Desc: "We serve with love.",
     },
     scripture: {
       aria: "Bible verse",
@@ -459,8 +454,8 @@ const translations = {
       item5Title: "The Bible at the center",
       item6Tag: "Teaching",
       item6Title: "We learn the Word together",
-      item7Tag: "Family",
-      item7Title: "Children participate too",
+      item7Tag: "Family, moments",
+      item7Title: "Remembering church moments",
     },
     reuniones: {
       eyebrow: "Services",
@@ -1198,17 +1193,11 @@ helpForm.addEventListener("submit", async (event) => {
   const formData = new FormData(helpForm);
   const name = String(formData.get("nombre-ayuda") || "").trim();
   const phone = String(formData.get("telefono-ayuda") || "").trim();
-  const email = String(formData.get("correo-ayuda") || "").trim();
   const type = String(formData.get("tipo-ayuda") || "General").trim();
   const message = String(formData.get("mensaje-ayuda") || "").trim();
-  const contact = [phone, email].filter(Boolean).join(" / ") || getTranslation("ayuda.noContact", currentLang);
+  const contact = phone || getTranslation("ayuda.noContact", currentLang);
   const whatsappMessage = `Hola, soy ${name}. Mi contacto es ${contact}. Solicito ayuda de tipo ${type}: ${message}`;
   const submitButton = helpForm.querySelector('button[type="submit"]');
-
-  if (email && !EMAIL_PATTERN.test(email)) {
-    setHelpStatus("ayuda.invalidEmail", "error");
-    return;
-  }
 
   if (message.length < HELP_MESSAGE_MIN_LENGTH || message.length > HELP_MESSAGE_MAX_LENGTH) {
     setHelpStatus("ayuda.messageLengthError", "error");
@@ -1224,7 +1213,7 @@ helpForm.addEventListener("submit", async (event) => {
       {
         name,
         phone: phone || null,
-        email: email || null,
+        email: null,
         help_type: type || "General",
         message_private: message,
       },

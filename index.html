@@ -35,7 +35,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=22" />
+    <link rel="stylesheet" href="styles.css?v=23" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -154,7 +154,6 @@
             <div class="hero-actions">
               <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
               <a class="button whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
-              <a class="button secondary" href="#ubicacion" data-i18n="hero.ctaSecondary">Cómo llegar</a>
             </div>
           </div>
 
@@ -185,11 +184,11 @@
       <section class="quick-strip" aria-label="Accesos rápidos" data-i18n-aria-label="quickStrip.aria">
         <a href="#reuniones">
           <span data-i18n="quickStrip.visitTitle">Visítanos</span>
-          <strong data-i18n="quickStrip.visitDesc">Domingo 8:30 a.m. y 10:00 a.m.</strong>
+          <strong data-i18n="quickStrip.visitDesc">Horarios de cultos</strong>
         </a>
-        <a href="#ubicacion">
+        <a href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
           <span data-i18n="quickStrip.locationTitle">Cómo llegar</span>
-          <strong>QJRR+HH2, San Juan Opico</strong>
+          <strong data-i18n="quickStrip.locationDesc">Ver en Waze</strong>
         </a>
         <a href="#ayuda">
           <span data-i18n="quickStrip.prayerTitle">Pedir oración</span>
@@ -328,10 +327,6 @@
               <input type="tel" name="telefono-ayuda" autocomplete="tel" placeholder="Tu teléfono (opcional)" data-i18n-placeholder="ayuda.phonePlaceholder" />
             </label>
             <label>
-              <span data-i18n="ayuda.emailLabel">Correo</span>
-              <input type="email" name="correo-ayuda" autocomplete="email" placeholder="Tu correo (opcional)" data-i18n-placeholder="ayuda.emailPlaceholder" />
-            </label>
-            <label>
               <span data-i18n="ayuda.typeLabel">Tipo de ayuda</span>
               <select name="tipo-ayuda">
                 <option value="General" data-i18n="ayuda.typeDefault">Seleccionar tipo (opcional)</option>
@@ -362,13 +357,11 @@
             <div class="section-copy">
               <p class="eyebrow" data-i18n="somos.eyebrow">Somos Shekinah</p>
               <h2 id="somos-title" data-i18n="somos.title">Una iglesia para conocer a Cristo</h2>
-              <p data-i18n="somos.description">Adoramos, aprendemos y servimos en familia.</p>
             </div>
             <div class="identity-grid">
               <article><span>01</span><strong data-i18n="somos.item1Title">Palabra</strong><p data-i18n="somos.item1Desc">La Biblia nos guía.</p></article>
               <article><span>02</span><strong data-i18n="somos.item2Title">Adoración</strong><p data-i18n="somos.item2Desc">Exaltamos a Dios.</p></article>
-              <article><span>03</span><strong data-i18n="somos.item3Title">Comunidad</strong><p data-i18n="somos.item3Desc">Caminamos juntos.</p></article>
-              <article><span>04</span><strong data-i18n="somos.item4Title">Servicio</strong><p data-i18n="somos.item4Desc">Servimos con amor.</p></article>
+              <article><span>03</span><strong data-i18n="somos.item3Title">Servicio</strong><p data-i18n="somos.item3Desc">Servimos con amor.</p></article>
             </div>
           </div>
         </div>
@@ -450,8 +443,8 @@
               <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de presentación de niños">
                 <img src="assets/fotos/presentacion-ninos.webp" alt="Niños participando en una presentación bíblica" loading="lazy" width="640" height="480" />
                 <span class="photo-card-caption">
-                  <span data-i18n="galeria.item7Tag">Familia</span>
-                  <strong data-i18n="galeria.item7Title">Los niños también participan</strong>
+                  <span data-i18n="galeria.item7Tag">Familia, momentos</span>
+                  <strong data-i18n="galeria.item7Title">Recordando momentos de la iglesia</strong>
                 </span>
               </button>
             </article>
@@ -604,6 +597,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js?v=22"></script>
+    <script src="script.js?v=23"></script>
   </body>
 </html>
