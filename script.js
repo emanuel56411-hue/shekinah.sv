@@ -1176,12 +1176,12 @@ scrollTopButton?.addEventListener("click", () => {
 window.addEventListener("scroll", updateScrollTopButton, { passive: true });
 updateScrollTopButton();
 
-contactForm.addEventListener("submit", (event) => {
+contactForm?.addEventListener("submit", (event) => {
   event.preventDefault();
   const formData = new FormData(contactForm);
   const name = formData.get("nombre") || "Visitante";
   const contact = formData.get("contacto") || "Sin contacto";
-  const message = formData.get("mensaje") || "Quiero más información.";
+  const message = formData.get("mensaje") || "Quiero mas informacion.";
   const whatsappMessage = `Hola, soy ${name}. Mi contacto es ${contact}. ${message}`;
 
   window.open(
