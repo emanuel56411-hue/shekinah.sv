@@ -1278,63 +1278,6 @@ body.dark-mode .scripture-grid article {
   stroke-linejoin: round;
 }
 
-/* 8c. FAQ ---------------------------------------------------------- */
-
-.faq-section {
-  background: color-mix(in srgb, var(--surface) 72%, var(--card));
-}
-
-.faq-list {
-  display: grid;
-  gap: 10px;
-  max-width: 760px;
-}
-
-.faq-item {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--soft-shadow);
-}
-
-.faq-item summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 16px 18px;
-  color: var(--ink);
-  font-weight: 750;
-  line-height: 1.35;
-  cursor: pointer;
-  list-style: none;
-}
-
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-item summary::after {
-  content: "+";
-  flex-shrink: 0;
-  color: var(--brand);
-  font-size: 1.2rem;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.faq-item[open] summary::after {
-  content: "−";
-}
-
-.faq-item p {
-  margin: 0;
-  padding: 0 18px 16px;
-  color: var(--muted);
-  font-size: 0.96rem;
-  line-height: 1.55;
-}
-
 /* 8d. Botones flotantes -------------------------------------------- */
 
 .fab-whatsapp,
