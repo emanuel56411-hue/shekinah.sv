@@ -184,7 +184,7 @@ const translations = {
       aria: "Versículo bíblico",
       verseRef: "Isaías 60:1",
       verseText:
-        '"Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti".',
+        '"Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti."',
     },
     galeria: {
       eyebrow: "RECUERDOS DE LA IGLESIA",
@@ -273,7 +273,8 @@ const translations = {
         "Tu información será usada únicamente para coordinar ayuda, oración o contacto pastoral. No publicamos tu teléfono ni correo sin autorización.",
       submitBtn: "Enviar solicitud por WhatsApp",
       saving: "Guardando solicitud...",
-      submitted: "Solicitud guardada. Quedará pendiente de revisión antes de publicarse.",
+      submitted: "Se abrió WhatsApp para coordinar. Si se pudo guardar, quedará pendiente de revisión.",
+      submittedWhatsappOnly: "Se abrió WhatsApp para coordinar tu solicitud.",
       saveError: "No se pudo guardar la solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.",
       offlineError: "Necesitas conexión a internet para enviar tu solicitud. Inténtalo de nuevo cuando tengas señal.",
       configError: "Falta configurar Supabase para guardar solicitudes.",
@@ -522,7 +523,8 @@ const translations = {
         "Your information will only be used to coordinate help, prayer, or pastoral contact. We do not publish your phone or email without authorization.",
       submitBtn: "Send request via WhatsApp",
       saving: "Saving request...",
-      submitted: "Request saved. It will stay pending review before being published.",
+      submitted: "WhatsApp opened to coordinate. If it was saved, it will stay pending review.",
+      submittedWhatsappOnly: "WhatsApp opened to coordinate your request.",
       saveError: "The request could not be saved. Please try again or message us on WhatsApp.",
       offlineError: "You need an internet connection to send your request. Please try again once you are back online.",
       configError: "Supabase must be configured before requests can be saved.",
@@ -1171,24 +1173,20 @@ helpShortcutButtons.forEach((button) => {
   });
 });
 
+function openWhatsappMessage(message) {
+  const url = buildWhatsappUrl(message);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.target = "_blank";
+  anchor.rel = "noopener noreferrer";
+  anchor.style.display = "none";
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+}
+
 helpForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-
-  if (isOffline()) {
-    setHelpStatus("ayuda.offlineError", "error");
-    return;
-  }
-
-  if (!supabaseClient) {
-    setHelpStatus("ayuda.configError", "error");
-    return;
-  }
-
-  const lastSubmit = Number(localStorage.getItem(LAST_HELP_SUBMIT_KEY) || 0);
-  if (Date.now() - lastSubmit < HELP_SUBMIT_COOLDOWN_MS) {
-    setHelpStatus("ayuda.rateLimit", "error");
-    return;
-  }
 
   const formData = new FormData(helpForm);
   const name = String(formData.get("nombre-ayuda") || "").trim();
@@ -1199,8 +1197,19 @@ helpForm.addEventListener("submit", async (event) => {
   const whatsappMessage = `Hola, soy ${name}. Mi contacto es ${contact}. Solicito ayuda de tipo ${type}: ${message}`;
   const submitButton = helpForm.querySelector('button[type="submit"]');
 
+  if (!name) {
+    setHelpStatus("ayuda.messageLengthError", "error");
+    return;
+  }
+
   if (message.length < HELP_MESSAGE_MIN_LENGTH || message.length > HELP_MESSAGE_MAX_LENGTH) {
     setHelpStatus("ayuda.messageLengthError", "error");
+    return;
+  }
+
+  const lastSubmit = Number(localStorage.getItem(LAST_HELP_SUBMIT_KEY) || 0);
+  if (Date.now() - lastSubmit < HELP_SUBMIT_COOLDOWN_MS) {
+    setHelpStatus("ayuda.rateLimit", "error");
     return;
   }
 
@@ -1208,33 +1217,38 @@ helpForm.addEventListener("submit", async (event) => {
   submitButton.textContent = getTranslation("ayuda.saving", currentLang);
   setHelpStatus(null);
 
-  try {
-    const { error } = await supabaseClient.from("help_requests").insert([
-      {
-        name,
-        phone: phone || null,
-        email: null,
-        help_type: type || "General",
-        message_private: message,
-      },
-    ]);
+  // Abrir WhatsApp en el mismo gesto del usuario para evitar bloqueo de popups.
+  openWhatsappMessage(whatsappMessage);
 
-    if (error) {
-      throw error;
+  let saved = false;
+
+  if (supabaseClient && !isOffline()) {
+    try {
+      const { error } = await supabaseClient.from("help_requests").insert([
+        {
+          name,
+          phone: phone || null,
+          email: null,
+          help_type: type || "General",
+          message_private: message,
+        },
+      ]);
+
+      if (error) {
+        throw error;
+      }
+
+      saved = true;
+    } catch (error) {
+      console.error("No se pudo guardar la solicitud de ayuda:", error);
     }
-  } catch (error) {
-    console.error("No se pudo guardar la solicitud de ayuda:", error);
-    setHelpStatus(isOffline() ? "ayuda.offlineError" : "ayuda.saveError", "error");
-    return;
-  } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = getTranslation("ayuda.submitBtn", currentLang);
   }
 
   localStorage.setItem(LAST_HELP_SUBMIT_KEY, String(Date.now()));
-  setHelpStatus("ayuda.submitted", "success");
-  window.open(buildWhatsappUrl(whatsappMessage), "_blank", "noopener,noreferrer");
+  setHelpStatus(saved ? "ayuda.submitted" : "ayuda.submittedWhatsappOnly", saved ? "success" : "info");
   helpForm.reset();
+  submitButton.disabled = false;
+  submitButton.textContent = getTranslation("ayuda.submitBtn", currentLang);
 });
 
 loadPublicHelpRequests();

@@ -224,16 +224,18 @@
               <strong data-i18n="schedule.saturdayActivity">Culto de jóvenes</strong>
               <time>4:30 p.m. - 6:00 p.m.</time>
             </article>
-            <article class="schedule-item">
-              <span data-i18n="common.sunday">Domingo</span>
-              <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
-              <time>8:30 a.m. - 9:40 a.m.</time>
-            </article>
-            <article class="schedule-item">
-              <span data-i18n="common.sunday">Domingo</span>
-              <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
-              <time>10:00 a.m. - 11:30 a.m.</time>
-            </article>
+            <div class="schedule-group" aria-label="Cultos del domingo">
+              <article class="schedule-item">
+                <span data-i18n="common.sunday">Domingo</span>
+                <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
+                <time>8:30 a.m. - 9:40 a.m.</time>
+              </article>
+              <article class="schedule-item">
+                <span data-i18n="common.sunday">Domingo</span>
+                <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
+                <time>10:00 a.m. - 11:30 a.m.</time>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -369,10 +371,10 @@
 
       <section class="section scripture-section" aria-label="Versículo bíblico" data-i18n-aria-label="scripture.aria">
         <div class="section-inner">
-          <article class="scripture-quote-card scripture-quote-standalone">
-            <span data-i18n="scripture.verseRef">Isaías 60:1</span>
-            <p data-i18n="scripture.verseText">"Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti".</p>
-          </article>
+          <blockquote class="scripture-quote-standalone">
+            <p data-i18n="scripture.verseText">"Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti."</p>
+            <cite data-i18n="scripture.verseRef">Isaías 60:1</cite>
+          </blockquote>
         </div>
       </section>
 
@@ -485,12 +487,42 @@
             <h2 data-i18n="ministerios.title">Sirve con nosotros</h2>
           </div>
 
-          <div class="ministry-grid">
-            <article><span>01</span><h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3><p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p></article>
-            <article><span>02</span><h3 data-i18n="ministerios.item2Title">Alabanza</h3><p data-i18n="ministerios.item2Desc">Música y sonido en cada culto.</p></article>
-            <article><span>03</span><h3 data-i18n="ministerios.item3Title">Acomodación</h3><p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p></article>
-            <article><span>04</span><h3 data-i18n="ministerios.item4Title">Escuela bíblica</h3><p data-i18n="ministerios.item4Desc">Enseñanza para crecer en la Palabra.</p></article>
-            <article><span>05</span><h3 data-i18n="ministerios.item5Title">Aseo</h3><p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p></article>
+          <div class="ministry-list">
+            <article class="ministry-row">
+              <span class="ministry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"><path d="M4 20V9.5L12 4l8 5.5V20" /><path d="M8 20V12h2.2v8M11 20V12h2v8M13.8 20V12H16v8" /></svg>
+              </span>
+              <h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3>
+              <p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p>
+            </article>
+            <article class="ministry-row">
+              <span class="ministry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"><path d="M10 17.5V6.2l8-1.7v11.3" /><circle cx="8.2" cy="17.5" r="1.9" /><circle cx="16.2" cy="15.8" r="1.9" /><path d="M10 9.2c1.4.6 2.8.9 4.2.7M10 12c1.4.6 2.8.9 4.2.7" /></svg>
+              </span>
+              <h3 data-i18n="ministerios.item2Title">Alabanza</h3>
+              <p data-i18n="ministerios.item2Desc">Música y sonido en cada culto.</p>
+            </article>
+            <article class="ministry-row">
+              <span class="ministry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="8.2" /><path d="M13.8 8.6 9.2 12l4.6 3.4" /></svg>
+              </span>
+              <h3 data-i18n="ministerios.item3Title">Acomodación</h3>
+              <p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p>
+            </article>
+            <article class="ministry-row">
+              <span class="ministry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"><path d="M7.5 5.5h8.2a1.8 1.8 0 0 1 1.8 1.8V19H9.2a1.7 1.7 0 0 0-1.7 1.7V5.5Z" /><path d="M7.5 5.5v15.2c0-.9.7-1.7 1.7-1.7h10.3" /></svg>
+              </span>
+              <h3 data-i18n="ministerios.item4Title">Escuela bíblica</h3>
+              <p data-i18n="ministerios.item4Desc">Enseñanza para crecer en la Palabra.</p>
+            </article>
+            <article class="ministry-row">
+              <span class="ministry-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false"><path d="M12 3.2 13.6 10.4 20.8 12 13.6 13.6 12 20.8 10.4 13.6 3.2 12l7.2-1.6L12 3.2Z" /></svg>
+              </span>
+              <h3 data-i18n="ministerios.item5Title">Aseo</h3>
+              <p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p>
+            </article>
           </div>
 
           <div class="callout">

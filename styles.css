@@ -834,7 +834,6 @@ body.dark-mode .anniversary-note {
 
 .identity-grid article,
 .updates-grid article,
-.ministry-grid article,
 .help-card,
 .contact-form,
 .help-form,
@@ -852,7 +851,6 @@ body.dark-mode .anniversary-note {
 
 body.dark-mode .identity-grid article,
 body.dark-mode .updates-grid article,
-body.dark-mode .ministry-grid article,
 body.dark-mode .help-card,
 body.dark-mode .contact-form,
 body.dark-mode .help-form,
@@ -869,7 +867,6 @@ body.dark-mode .location-card {
 
 .identity-grid article,
 .updates-grid article,
-.ministry-grid article,
 .help-card,
 .contact-form,
 .help-form,
@@ -881,7 +878,6 @@ body.dark-mode .location-card {
 
 .identity-grid article:hover,
 .updates-grid article:hover,
-.ministry-grid article:hover,
 .help-card:hover,
 .contact-form:focus-within,
 .help-form:focus-within,
@@ -896,7 +892,6 @@ body.dark-mode .location-card {
 
 .identity-grid span,
 .updates-grid span,
-.ministry-grid > article > span,
 .scripture-grid span,
 .help-card > span {
   display: inline-flex;
@@ -914,7 +909,6 @@ body.dark-mode .location-card {
 
 .identity-grid article,
 .updates-grid article,
-.ministry-grid article,
 .help-card {
   padding: 18px;
   background: var(--card);
@@ -929,7 +923,6 @@ body.dark-mode .location-card {
 
 .identity-grid p,
 .updates-grid p,
-.ministry-grid p,
 .help-card p {
   margin: 8px 0 0;
   color: var(--muted);
@@ -978,31 +971,52 @@ body.dark-mode .location-card {
 /* 8. Somos / Palabra ------------------------------------------------------ */
 
 .scripture-section {
-  padding-block: clamp(20px, 3vw, 32px);
+  padding-block: clamp(28px, 4vw, 48px);
 }
 
 .scripture-quote-standalone {
-  max-width: 760px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: clamp(20px, 3vw, 28px);
+  padding: clamp(12px, 2vw, 20px) 0;
   text-align: center;
-  background: var(--card);
-  border: 2px solid var(--gold);
-  border-radius: var(--radius);
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
-}
-
-.scripture-quote-standalone span {
-  display: inline-flex;
-  margin-bottom: 10px;
 }
 
 .scripture-quote-standalone p {
   margin: 0;
-  color: var(--ink);
-  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  color: var(--brand-strong);
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
+body.dark-mode .scripture-quote-standalone p {
+  color: color-mix(in srgb, var(--brand) 72%, var(--ink));
+}
+
+.scripture-quote-standalone cite {
+  display: block;
+  margin-top: 18px;
+  color: color-mix(in srgb, var(--muted) 70%, #c4b49a);
+  font-family: var(--body-font);
+  font-size: 0.78rem;
+  font-style: normal;
   font-weight: 600;
-  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.scripture-quote-standalone cite::before {
+  content: "– ";
+}
+
+body.dark-mode .scripture-quote-standalone cite {
+  color: color-mix(in srgb, var(--muted) 78%, transparent);
 }
 
 .scripture-layout {
@@ -1379,6 +1393,41 @@ body.menu-open .scroll-top {
   background: var(--card);
 }
 
+.schedule-group {
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--soft-shadow);
+}
+
+.schedule-group .schedule-item {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.schedule-group .schedule-item:last-child {
+  border-bottom: 0;
+}
+
+.schedule-group .schedule-item:hover {
+  border-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+body.dark-mode .schedule-group {
+  border-color: color-mix(in srgb, var(--gold) 16%, var(--line));
+}
+
+body.dark-mode .schedule-group .schedule-item {
+  border-bottom-color: color-mix(in srgb, var(--gold) 16%, var(--line));
+}
+
 .schedule-item span {
   color: var(--brand);
   font-weight: 850;
@@ -1598,10 +1647,67 @@ body.menu-open .scroll-top {
   gap: 14px;
 }
 
-.ministry-grid {
+.ministry-list {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
+  gap: 0;
+  border-top: 1px solid color-mix(in srgb, var(--brand-strong) 18%, var(--line));
+}
+
+.ministry-row {
+  display: grid;
+  grid-template-columns: 28px minmax(160px, 0.85fr) minmax(200px, 1.35fr);
+  gap: 14px 28px;
+  align-items: center;
+  padding: 18px 2px;
+  border-bottom: 1px solid color-mix(in srgb, var(--brand-strong) 18%, var(--line));
+  background: transparent;
+}
+
+.ministry-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--brand-strong);
+}
+
+.ministry-icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ministry-row h3 {
+  margin: 0;
+  color: var(--brand-strong);
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1.3;
+}
+
+.ministry-row p {
+  margin: 0;
+  color: var(--brand-strong);
+  font-size: 0.98rem;
+  font-weight: 450;
+  line-height: 1.45;
+  opacity: 0.92;
+}
+
+body.dark-mode .ministry-list,
+body.dark-mode .ministry-row {
+  border-color: color-mix(in srgb, var(--gold) 22%, var(--line));
+}
+
+body.dark-mode .ministry-icon,
+body.dark-mode .ministry-row h3,
+body.dark-mode .ministry-row p {
+  color: color-mix(in srgb, var(--brand) 55%, var(--ink));
 }
 
 .callout {
@@ -1651,7 +1757,7 @@ body.dark-mode .callout {
 
 .help-shortcuts {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 10px;
 }
 
@@ -1988,8 +2094,9 @@ textarea:focus {
 /* 14. Media queries y accesibilidad ------------------------------------------------ */
 
 @media (max-width: 1120px) {
-  .ministry-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .ministry-row {
+    grid-template-columns: 28px minmax(140px, 0.9fr) minmax(180px, 1.3fr);
+    gap: 12px 20px;
   }
 }
 
@@ -2048,8 +2155,14 @@ textarea:focus {
 }
 
 @media (max-width: 860px) {
-  .ministry-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .ministry-row {
+    grid-template-columns: 28px 1fr;
+    gap: 8px 14px;
+    padding: 16px 2px;
+  }
+
+  .ministry-row p {
+    grid-column: 2;
   }
 }
 
@@ -2115,10 +2228,6 @@ textarea:focus {
 
   .quick-strip a:nth-last-child(-n + 2) {
     border-bottom: 0;
-  }
-
-  .ministry-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .identity-grid,
@@ -2198,8 +2307,12 @@ textarea:focus {
 }
 
 @media (max-width: 480px) {
-  .ministry-grid {
-    grid-template-columns: 1fr;
+  .ministry-row h3 {
+    font-size: 1rem;
+  }
+
+  .ministry-row p {
+    font-size: 0.92rem;
   }
 }
 
