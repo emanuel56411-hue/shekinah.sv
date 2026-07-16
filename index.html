@@ -36,6 +36,9 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css?v=24" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/output.css" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -146,96 +149,105 @@
     </header>
 
     <main>
-      <section id="inicio" class="hero">
-        <div class="hero-inner">
-          <div class="hero-content">
-            <h1>Iglesia Bautista Shekinah</h1>
-            <p data-i18n="hero.description">Conoce a Cristo, crece en fe y camina en familia.</p>
-            <div class="hero-actions">
-              <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
-              <a class="button whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
+      <section id="inicio" class="hero relative min-h-[85vh] flex items-center bg-cover bg-center" style="background-image: url('assets/fotos/congregacion-culto.webp')">
+        <div class="absolute inset-0 bg-gradient-to-t from-brand-900/95 via-brand-900/70 to-brand-900/40"></div>
+        <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 space-y-8">
+          <div class="hero-inner">
+            <div class="hero-content">
+              <h1 class="font-display text-5xl md:text-7xl text-white">Iglesia Bautista Shekinah</h1>
+              <p class="text-white/90 text-xl mt-4" data-i18n="hero.description">Conoce a Cristo, crece en fe y camina en familia.</p>
+              <div class="hero-actions">
+                <a class="button primary bg-gold-500 hover:bg-gold-400 text-brand-900 font-semibold px-6 py-3 rounded-full transition-colors" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
+                <a class="button whatsapp border-2 border-white text-white hover:bg-white hover:text-brand-900 font-semibold px-6 py-3 rounded-full transition-colors" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
+              </div>
             </div>
+
+            <aside class="hero-panel bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" aria-label="Resumen de reuniones" data-i18n-aria-label="heroPanel.aria">
+              <span data-i18n="heroPanel.welcome" data-next-service-label>Bienvenido a casa</span>
+              <strong data-i18n="common.sunday" data-next-service-day>Domingo</strong>
+              <p data-i18n="common.sundayTimes" data-next-service-time>8:30 a.m. y 10:00 a.m.</p>
+              <div>
+                <small data-i18n="common.tuesday" data-next-service-row-one-day>Martes</small>
+                <small data-i18n="schedule.tuesdayActivity" data-next-service-row-one-title>Estudio exegético</small>
+              </div>
+              <div>
+                <small data-i18n="common.thursday" data-next-service-row-two-day>Jueves</small>
+                <small data-i18n="schedule.thursdayActivity" data-next-service-row-two-title>Estudio bíblico</small>
+              </div>
+            </aside>
           </div>
 
-          <aside class="hero-panel" aria-label="Resumen de reuniones" data-i18n-aria-label="heroPanel.aria">
-            <span data-i18n="heroPanel.welcome" data-next-service-label>Bienvenido a casa</span>
-            <strong data-i18n="common.sunday" data-next-service-day>Domingo</strong>
-            <p data-i18n="common.sundayTimes" data-next-service-time>8:30 a.m. y 10:00 a.m.</p>
-            <div>
-              <small data-i18n="common.tuesday" data-next-service-row-one-day>Martes</small>
-              <small data-i18n="schedule.tuesdayActivity" data-next-service-row-one-title>Estudio exegético</small>
-            </div>
-            <div>
-              <small data-i18n="common.thursday" data-next-service-row-two-day>Jueves</small>
-              <small data-i18n="schedule.thursdayActivity" data-next-service-row-two-title>Estudio bíblico</small>
-            </div>
-          </aside>
+          <div class="anniversary-note bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" aria-label="Aniversario de la iglesia" data-i18n-aria-label="anniversary.aria">
+            <p class="anniversary-badge">
+              <span class="anniversary-number" aria-hidden="true">19</span>
+              <span data-i18n="anniversary.years">años</span>
+            </p>
+            <p class="anniversary-text" data-i18n="anniversary.text">Llevamos 19 años sirviendo a Cristo en familia.</p>
+          </div>
+
+          <section class="quick-strip" aria-label="Accesos rápidos" data-i18n-aria-label="quickStrip.aria">
+            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="#reuniones">
+              <span data-i18n="quickStrip.visitTitle">Visítanos</span>
+              <strong data-i18n="quickStrip.visitDesc">Horarios de cultos</strong>
+            </a>
+            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
+              <span data-i18n="quickStrip.locationTitle">Cómo llegar</span>
+              <strong data-i18n="quickStrip.locationDesc">Ver en Waze</strong>
+            </a>
+            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="#ayuda">
+              <span data-i18n="quickStrip.prayerTitle">Pedir oración</span>
+              <strong data-i18n="quickStrip.prayerDesc">Oración y apoyo</strong>
+            </a>
+            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="#redes">
+              <span data-i18n="quickStrip.socialTitle">Redes</span>
+              <strong data-i18n="quickStrip.socialDesc">Instagram, Facebook y YouTube</strong>
+            </a>
+          </section>
         </div>
       </section>
 
-      <div class="anniversary-note" aria-label="Aniversario de la iglesia" data-i18n-aria-label="anniversary.aria">
-        <p class="anniversary-badge">
-          <span class="anniversary-number" aria-hidden="true">19</span>
-          <span data-i18n="anniversary.years">años</span>
-        </p>
-        <p class="anniversary-text" data-i18n="anniversary.text">Llevamos 19 años sirviendo a Cristo en familia.</p>
-      </div>
-
-      <section class="quick-strip" aria-label="Accesos rápidos" data-i18n-aria-label="quickStrip.aria">
-        <a href="#reuniones">
-          <span data-i18n="quickStrip.visitTitle">Visítanos</span>
-          <strong data-i18n="quickStrip.visitDesc">Horarios de cultos</strong>
-        </a>
-        <a href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
-          <span data-i18n="quickStrip.locationTitle">Cómo llegar</span>
-          <strong data-i18n="quickStrip.locationDesc">Ver en Waze</strong>
-        </a>
-        <a href="#ayuda">
-          <span data-i18n="quickStrip.prayerTitle">Pedir oración</span>
-          <strong data-i18n="quickStrip.prayerDesc">Oración y apoyo</strong>
-        </a>
-        <a href="#redes">
-          <span data-i18n="quickStrip.socialTitle">Redes</span>
-          <strong data-i18n="quickStrip.socialDesc">Instagram, Facebook y YouTube</strong>
-        </a>
+      <section id="accesos-rapidos" class="py-16 px-6 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <div id="quick-links-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+        </div>
       </section>
 
-      <section id="reuniones" class="section section-tight section-featured">
-        <div class="section-inner two-column">
-          <div class="section-copy">
-            <p class="eyebrow" data-i18n="reuniones.eyebrow">Reuniones</p>
-            <h2 data-i18n="reuniones.title">Horarios de reunión</h2>
-            <p data-i18n="reuniones.description">Domingos y entre semana.</p>
+      <section id="reuniones" class="bg-brand-50 py-20 px-6">
+        <div class="max-w-5xl mx-auto text-center mb-12">
+          <span class="text-gold-500 font-semibold tracking-wide uppercase text-sm">Reuniones</span>
+          <h2 class="font-display text-4xl md:text-5xl text-brand-900 mt-2 mb-3">Horarios de reunión</h2>
+          <p class="text-brand-700/70 text-lg">Domingos y entre semana.</p>
+        </div>
+
+        <div class="max-w-5xl mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 border border-brand-100">
+            <span class="text-gold-500 text-xs font-semibold uppercase tracking-wide">Martes</span>
+            <h3 class="font-display text-xl text-brand-900 mt-1 mb-2">Estudio exegético</h3>
+            <p class="text-brand-700">7:00 p.m. – 8:30 p.m.</p>
           </div>
 
-          <div class="schedule-list">
-            <article class="schedule-item">
-              <span data-i18n="common.tuesday">Martes</span>
-              <strong data-i18n="schedule.tuesdayActivity">Estudio exegético</strong>
-              <time>7:00 p.m. - 8:30 p.m.</time>
-            </article>
-            <article class="schedule-item">
-              <span data-i18n="common.thursday">Jueves</span>
-              <strong data-i18n="schedule.thursdayActivity">Estudio bíblico</strong>
-              <time>7:00 p.m. - 8:30 p.m.</time>
-            </article>
-            <article class="schedule-item">
-              <span data-i18n="common.saturday">Sábado</span>
-              <strong data-i18n="schedule.saturdayActivity">Culto de jóvenes</strong>
-              <time>4:30 p.m. - 6:00 p.m.</time>
-            </article>
-            <div class="schedule-group" aria-label="Cultos del domingo">
-              <article class="schedule-item">
-                <span data-i18n="common.sunday">Domingo</span>
-                <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
-                <time>8:30 a.m. - 9:40 a.m.</time>
-              </article>
-              <article class="schedule-item">
-                <span data-i18n="common.sunday">Domingo</span>
-                <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
-                <time>10:00 a.m. - 11:30 a.m.</time>
-              </article>
-            </div>
+          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 border border-brand-100">
+            <span class="text-gold-500 text-xs font-semibold uppercase tracking-wide">Jueves</span>
+            <h3 class="font-display text-xl text-brand-900 mt-1 mb-2">Estudio bíblico</h3>
+            <p class="text-brand-700">7:00 p.m. – 8:30 p.m.</p>
+          </div>
+
+          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 border border-brand-100">
+            <span class="text-gold-500 text-xs font-semibold uppercase tracking-wide">Sábado</span>
+            <h3 class="font-display text-xl text-brand-900 mt-1 mb-2">Culto de jóvenes</h3>
+            <p class="text-brand-700">4:30 p.m. – 6:00 p.m.</p>
+          </div>
+
+          <div class="bg-brand-600 text-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 sm:col-span-2 lg:col-span-1">
+            <span class="text-gold-400 text-xs font-semibold uppercase tracking-wide">Domingo</span>
+            <h3 class="font-display text-xl mt-1 mb-2">Primer culto devocional</h3>
+            <p class="text-white/85">8:30 a.m. – 9:40 a.m.</p>
+          </div>
+
+          <div class="bg-brand-600 text-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6">
+            <span class="text-gold-400 text-xs font-semibold uppercase tracking-wide">Domingo</span>
+            <h3 class="font-display text-xl mt-1 mb-2">Segundo culto devocional</h3>
+            <p class="text-white/85">10:00 a.m. – 11:30 a.m.</p>
           </div>
         </div>
       </section>
@@ -597,6 +609,67 @@
         </svg>
       </button>
     </div>
+
+    <script type="application/json" id="quick-links-data">
+[
+  {
+    "titulo": "Horarios",
+    "texto": "Encuentra el día y hora para congregarte.",
+    "imagen": "assets/fotos/congregacion-culto.webp",
+    "link": "#reuniones"
+  },
+  {
+    "titulo": "Ubicación",
+    "texto": "Abre la ruta a la iglesia.",
+    "imagen": "assets/fotos/congregacion-culto.webp",
+    "link": "#ubicacion"
+  },
+  {
+    "titulo": "Ministerios",
+    "texto": "Encuentra dónde servir.",
+    "imagen": "assets/fotos/liderazgo-pastoral.webp",
+    "link": "#ministerios"
+  },
+  {
+    "titulo": "Ayuda",
+    "texto": "Pide oración o apoyo.",
+    "imagen": "assets/fotos/ministerio-ninos.webp",
+    "link": "#ayuda"
+  },
+  {
+    "titulo": "Eventos",
+    "texto": "Mira actividades y anuncios.",
+    "imagen": "assets/fotos/aniversario-shekinah.webp",
+    "link": "#eventos"
+  },
+  {
+    "titulo": "Redes",
+    "texto": "Sigue nuestras redes.",
+    "imagen": "assets/fotos/predicacion-shekinah.webp",
+    "link": "#redes"
+  }
+]
+    </script>
+
+    <script>
+      const data = JSON.parse(document.getElementById('quick-links-data').textContent);
+      const grid = document.getElementById('quick-links-grid');
+      data.forEach(item => {
+        grid.innerHTML += `
+          <a href="${item.link}" class="group block rounded-2xl overflow-hidden bg-white border border-brand-100 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
+            <div class="relative h-48 overflow-hidden">
+              <img src="${item.imagen}" alt="${item.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+              <div class="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-transparent to-transparent"></div>
+            </div>
+            <div class="p-5">
+              <h3 class="font-display text-xl text-brand-900 mb-1">${item.titulo}</h3>
+              <p class="text-brand-700/70 text-sm">${item.texto}</p>
+              <span class="inline-flex items-center gap-1 text-gold-500 text-sm font-semibold mt-3 group-hover:gap-2 transition-all">Ver más →</span>
+            </div>
+          </a>
+        `;
+      });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js?v=23"></script>
