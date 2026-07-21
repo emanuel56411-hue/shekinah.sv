@@ -44,6 +44,7 @@ let latestPublicHelpRequests = [];
 let currentHelpStatus = null;
 let currentGalleryIndex = 0;
 let lastGalleryFocus = null;
+let menuScrollY = 0;
 
 function formatPhone(phone) {
   if (phone.length === 11 && phone.startsWith("503")) {
@@ -293,6 +294,8 @@ const translations = {
       oracion: "Oración",
       viveres: "Víveres",
       visita: "Visita a enfermo",
+      santaCena: "Pedir Santa Cena",
+      misiones: "Misiones",
       otra: "Otra ayuda",
     },
     redes: {
@@ -543,6 +546,8 @@ const translations = {
       oracion: "Prayer",
       viveres: "Groceries",
       visita: "Visit to the sick",
+      santaCena: "Request Holy Communion",
+      misiones: "Missions",
       otra: "Other help",
     },
     redes: {
@@ -708,6 +713,8 @@ function getHelpTypeLabel(type) {
     Oracion: "helpTypes.oracion",
     Viveres: "helpTypes.viveres",
     Visita: "helpTypes.visita",
+    "Santa Cena": "helpTypes.santaCena",
+    Misiones: "helpTypes.misiones",
     "Otra ayuda": "helpTypes.otra",
   };
 
@@ -900,13 +907,19 @@ themeToggle.addEventListener("click", () => {
 
 function setMenuOpen(isOpen, returnFocus = false) {
   mainMenu.classList.toggle("is-open", isOpen);
+  mainMenu.setAttribute("aria-hidden", String(!isOpen));
   document.body.classList.toggle("menu-open", isOpen);
   syncMenuButton(currentLang);
 
   if (isOpen) {
+    menuScrollY = window.scrollY;
+    document.body.style.top = `-${menuScrollY}px`;
     (menuClose || mainMenu.querySelector("summary, a, button"))?.focus();
     return;
   }
+
+  document.body.style.top = "";
+  window.scrollTo(0, menuScrollY);
 
   if (returnFocus) {
     menuButton.focus();
