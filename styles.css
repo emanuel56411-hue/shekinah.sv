@@ -81,6 +81,18 @@ body {
   overflow-x: hidden;
 }
 
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 120;
+  height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--brand));
+  box-shadow: 0 1px 8px color-mix(in srgb, var(--gold) 42%, transparent);
+  pointer-events: none;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
 body.dark-mode {
   background: var(--bg);
 }
@@ -202,7 +214,11 @@ h3 {
   border-radius: 14px;
   box-shadow: var(--soft-shadow);
   cursor: pointer;
-  transition: background 170ms ease, border-color 170ms ease, box-shadow 170ms ease, transform 170ms ease;
+  transition:
+    background 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    transform 170ms ease;
 }
 
 .menu-icon {
@@ -251,8 +267,7 @@ h3 {
   padding: clamp(20px, 5vw, 44px);
   color: #fff7ec;
   background:
-    radial-gradient(circle at 85% 0%, rgba(212, 165, 63, 0.12), transparent 24rem),
-    rgba(8, 10, 14, 0.98);
+    radial-gradient(circle at 85% 0%, rgba(212, 165, 63, 0.12), transparent 24rem), rgba(8, 10, 14, 0.98);
   border: 0;
   overflow: hidden;
   overscroll-behavior: contain;
@@ -260,7 +275,10 @@ h3 {
   pointer-events: none;
   transform: translateY(-18px) scale(0.985);
   visibility: hidden;
-  transition: opacity 220ms ease, transform 260ms ease, visibility 0ms linear 260ms;
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease,
+    visibility 0ms linear 260ms;
 }
 
 .main-nav.is-open {
@@ -268,7 +286,10 @@ h3 {
   pointer-events: auto;
   transform: translateY(0) scale(1);
   visibility: visible;
-  transition: opacity 220ms ease, transform 260ms ease, visibility 0ms;
+  transition:
+    opacity 220ms ease,
+    transform 260ms ease,
+    visibility 0ms;
 }
 
 .menu-panel-header,
@@ -303,7 +324,10 @@ h3 {
   border: 0;
   border-radius: 50%;
   cursor: pointer;
-  transition: background 170ms ease, box-shadow 170ms ease, transform 170ms ease;
+  transition:
+    background 170ms ease,
+    box-shadow 170ms ease,
+    transform 170ms ease;
 }
 
 .menu-close span {
@@ -365,7 +389,9 @@ h3 {
   color: rgba(255, 247, 236, 0.7);
   font-size: 0.8em;
   font-weight: 300;
-  transition: color 170ms ease, transform 220ms ease;
+  transition:
+    color 170ms ease,
+    transform 220ms ease;
 }
 
 .menu-group[open] .menu-plus {
@@ -378,7 +404,9 @@ h3 {
   grid-template-rows: 0fr;
   opacity: 0;
   overflow: hidden;
-  transition: grid-template-rows 260ms ease, opacity 220ms ease;
+  transition:
+    grid-template-rows 260ms ease,
+    opacity 220ms ease;
 }
 
 .menu-group[open] .mega-links {
@@ -412,7 +440,10 @@ h3 {
   border: 1px solid transparent;
   border-radius: 18px;
   text-align: left;
-  transition: background 170ms ease, border-color 170ms ease, transform 170ms ease;
+  transition:
+    background 170ms ease,
+    border-color 170ms ease,
+    transform 170ms ease;
 }
 
 .main-nav .mega-link:hover,
@@ -474,7 +505,9 @@ h3 {
   font-weight: 800;
   text-align: center;
   cursor: pointer;
-  transition: background 170ms ease, color 170ms ease;
+  transition:
+    background 170ms ease,
+    color 170ms ease;
 }
 
 .main-nav .theme-toggle:hover,
@@ -518,6 +551,14 @@ main {
   color: #ffffff;
 }
 
+.hero::after {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 72% 34%, rgba(255, 214, 128, 0.12), transparent 28%);
+  content: "";
+  pointer-events: none;
+}
+
 body.dark-mode .hero {
   background:
     linear-gradient(105deg, rgba(5, 6, 9, 0.9) 0%, rgba(92, 25, 34, 0.48) 42%, rgba(6, 8, 12, 0.2) 72%),
@@ -525,6 +566,8 @@ body.dark-mode .hero {
 }
 
 .hero-inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 300px);
   gap: clamp(18px, 3vw, 32px);
@@ -630,7 +673,11 @@ body.dark-mode .hero {
   font-size: 0.94rem;
   font-weight: 750;
   cursor: pointer;
-  transition: background 170ms ease, border-color 170ms ease, box-shadow 170ms ease, color 170ms ease;
+  transition:
+    background 170ms ease,
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    color 170ms ease;
 }
 
 .button:hover,
@@ -892,7 +939,10 @@ body.dark-mode .location-card {
 .schedule-item,
 .contact-item {
   border-radius: var(--radius);
-  transition: border-color 170ms ease, box-shadow 170ms ease, transform 170ms ease;
+  transition:
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    transform 170ms ease;
 }
 
 .identity-grid article:hover,
@@ -1165,7 +1215,9 @@ body.dark-mode .scripture-grid article {
   height: 100%;
   min-height: inherit;
   object-fit: cover;
-  transition: transform 220ms ease, filter 220ms ease;
+  transition:
+    transform 220ms ease,
+    filter 220ms ease;
 }
 
 .photo-card:hover img,
@@ -1255,7 +1307,9 @@ body.dark-mode .scripture-grid article {
   border: 1px solid rgba(255, 255, 255, 0.22);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
   cursor: pointer;
-  transition: background 170ms ease, transform 170ms ease;
+  transition:
+    background 170ms ease,
+    transform 170ms ease;
 }
 
 .gallery-close:hover,
@@ -1328,7 +1382,10 @@ body.dark-mode .scripture-grid article {
   border-radius: 999px;
   box-shadow: var(--shadow);
   cursor: pointer;
-  transition: transform 170ms ease, box-shadow 170ms ease, opacity 170ms ease;
+  transition:
+    transform 170ms ease,
+    box-shadow 170ms ease,
+    opacity 170ms ease;
 }
 
 .fab-whatsapp {
@@ -1609,7 +1666,9 @@ body.dark-mode .schedule-group .schedule-item {
   padding: 10px 12px;
   background: var(--card);
   border-radius: calc(var(--radius) - 4px);
-  transition: border-color 170ms ease, background 170ms ease;
+  transition:
+    border-color 170ms ease,
+    background 170ms ease;
 }
 
 .action-link:hover,
@@ -1668,6 +1727,44 @@ body.dark-mode .schedule-group .schedule-item {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
+}
+
+.featured-carousel {
+  width: 100%;
+  padding: 4px 4px 36px;
+  margin: -4px;
+  overflow: hidden;
+}
+
+.featured-carousel .updates-grid {
+  display: flex;
+  gap: 0;
+}
+
+.featured-carousel .swiper-slide {
+  height: auto;
+}
+
+.featured-carousel .swiper-pagination {
+  bottom: 2px;
+}
+
+.featured-carousel .swiper-pagination-bullet {
+  width: 9px;
+  height: 9px;
+  background: var(--muted);
+  opacity: 0.35;
+  transition:
+    width 180ms ease,
+    background 180ms ease,
+    opacity 180ms ease;
+}
+
+.featured-carousel .swiper-pagination-bullet-active {
+  width: 26px;
+  background: var(--brand);
+  border-radius: 999px;
+  opacity: 1;
 }
 
 .ministry-grid {
@@ -1738,7 +1835,11 @@ body.dark-mode .callout {
   font-weight: 850;
   text-align: left;
   cursor: pointer;
-  transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease, background 170ms ease;
+  transition:
+    transform 170ms ease,
+    box-shadow 170ms ease,
+    border-color 170ms ease,
+    background 170ms ease;
 }
 
 .help-shortcuts button:hover,
@@ -1819,7 +1920,10 @@ textarea {
   background: var(--bg);
   border: 1px solid var(--line);
   border-radius: 12px;
-  transition: border-color 170ms ease, box-shadow 170ms ease, background 170ms ease;
+  transition:
+    border-color 170ms ease,
+    box-shadow 170ms ease,
+    background 170ms ease;
 }
 
 textarea {
@@ -1855,7 +1959,9 @@ textarea:focus {
   color: var(--ink);
   background: var(--card);
   border-radius: var(--radius);
-  transition: border-color 170ms ease, box-shadow 170ms ease;
+  transition:
+    border-color 170ms ease,
+    box-shadow 170ms ease;
 }
 
 .social-card:hover,
@@ -1931,7 +2037,10 @@ textarea:focus {
   padding: 10px 12px;
   background: color-mix(in srgb, var(--card) 70%, transparent);
   border-radius: var(--radius);
-  transition: border-color 170ms ease, background 170ms ease, transform 170ms ease;
+  transition:
+    border-color 170ms ease,
+    background 170ms ease,
+    transform 170ms ease;
 }
 
 .contact-item:hover {
@@ -2129,7 +2238,12 @@ textarea:focus {
   .hero {
     min-height: auto;
     background:
-      linear-gradient(90deg, rgba(21, 14, 10, 0.9) 0%, rgba(95, 26, 31, 0.62) 58%, rgba(21, 14, 10, 0.12) 100%),
+      linear-gradient(
+        90deg,
+        rgba(21, 14, 10, 0.9) 0%,
+        rgba(95, 26, 31, 0.62) 58%,
+        rgba(21, 14, 10, 0.12) 100%
+      ),
       url("assets/fotos/congregacion-culto.webp") 70% center / cover;
   }
 
@@ -2310,5 +2424,9 @@ textarea:focus {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .scroll-progress {
+    display: none;
   }
 }

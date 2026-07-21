@@ -1,3 +1,5 @@
+import { supabaseClient } from "./src/lib/supabase.js";
+
 const menuButton = document.querySelector(".menu-button");
 const mainMenu = document.querySelector("#main-menu");
 const menuClose = document.querySelector(".menu-close");
@@ -10,7 +12,6 @@ const helpStatus = document.querySelector(".form-status");
 const coordinatorPhone = document.body.dataset.phone || "";
 const phoneDisplayNodes = document.querySelectorAll("[data-phone-display]");
 const whatsappLinks = document.querySelectorAll("[data-whatsapp-link]");
-const progressiveSections = document.querySelectorAll("main > section:not(.hero)");
 const defaultHelpCards = Array.from(helpBoard.children).map((card) => card.cloneNode(true));
 const nextServiceLabel = document.querySelector("[data-next-service-label]");
 const nextServiceDay = document.querySelector("[data-next-service-day]");
@@ -28,18 +29,10 @@ const galleryClose = document.querySelector("[data-gallery-close]");
 const galleryPrev = document.querySelector("[data-gallery-prev]");
 const galleryNext = document.querySelector("[data-gallery-next]");
 const scrollTopButton = document.querySelector(".scroll-top");
-const SUPABASE_URL = "https://yjhnqxubicaglqfroiqk.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
 const HELP_SUBMIT_COOLDOWN_MS = 60 * 1000;
 const LAST_HELP_SUBMIT_KEY = "shekinah-last-help-submit";
 const HELP_MESSAGE_MIN_LENGTH = 10;
 const HELP_MESSAGE_MAX_LENGTH = 500;
-const isSupabaseConfigured =
-  SUPABASE_URL.startsWith("https://") &&
-  !SUPABASE_URL.includes("YOUR_PROJECT_ID") &&
-  SUPABASE_ANON_KEY !== "YOUR_SUPABASE_ANON_KEY";
-const supabaseClient =
-  isSupabaseConfigured && window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 let latestPublicHelpRequests = [];
 let currentHelpStatus = null;
 let currentGalleryIndex = 0;
@@ -277,7 +270,8 @@ const translations = {
       submitted: "Se abrió WhatsApp para coordinar. Si se pudo guardar, quedará pendiente de revisión.",
       submittedWhatsappOnly: "Se abrió WhatsApp para coordinar tu solicitud.",
       saveError: "No se pudo guardar la solicitud. Inténtalo de nuevo o escríbenos por WhatsApp.",
-      offlineError: "Necesitas conexión a internet para enviar tu solicitud. Inténtalo de nuevo cuando tengas señal.",
+      offlineError:
+        "Necesitas conexión a internet para enviar tu solicitud. Inténtalo de nuevo cuando tengas señal.",
       configError: "Falta configurar Supabase para guardar solicitudes.",
       rateLimit: "Espera un momento antes de enviar otra solicitud.",
       invalidEmail: "Revisa el correo electrónico o deja el campo vacío.",
@@ -436,8 +430,7 @@ const translations = {
     scripture: {
       aria: "Bible verse",
       verseRef: "Isaiah 60:1",
-      verseText:
-        '"Arise, shine; for your light has come, and the glory of the Lord has risen upon you."',
+      verseText: '"Arise, shine; for your light has come, and the glory of the Lord has risen upon you."',
     },
     galeria: {
       eyebrow: "Church life",
@@ -529,7 +522,8 @@ const translations = {
       submitted: "WhatsApp opened to coordinate. If it was saved, it will stay pending review.",
       submittedWhatsappOnly: "WhatsApp opened to coordinate your request.",
       saveError: "The request could not be saved. Please try again or message us on WhatsApp.",
-      offlineError: "You need an internet connection to send your request. Please try again once you are back online.",
+      offlineError:
+        "You need an internet connection to send your request. Please try again once you are back online.",
       configError: "Supabase must be configured before requests can be saved.",
       rateLimit: "Please wait a moment before sending another request.",
       invalidEmail: "Please check the email address or leave the field empty.",
@@ -718,7 +712,9 @@ function getHelpTypeLabel(type) {
     "Otra ayuda": "helpTypes.otra",
   };
 
-  return getTranslation(typeMap[type], currentLang) || type || getTranslation("ayuda.typeDefault", currentLang);
+  return (
+    getTranslation(typeMap[type], currentLang) || type || getTranslation("ayuda.typeDefault", currentLang)
+  );
 }
 
 function setHelpStatus(key, type = "info") {
@@ -818,13 +814,19 @@ async function loadPublicHelpRequests() {
 function syncThemeButton(lang) {
   const isDark = document.body.classList.contains("dark-mode");
   themeToggle.textContent = getTranslation(isDark ? "theme.toLight" : "theme.toDark", lang);
-  themeToggle.setAttribute("aria-label", getTranslation(isDark ? "theme.ariaToLight" : "theme.ariaToDark", lang));
+  themeToggle.setAttribute(
+    "aria-label",
+    getTranslation(isDark ? "theme.ariaToLight" : "theme.ariaToDark", lang)
+  );
 }
 
 function syncLangButton(lang) {
   const isSpanish = lang === "es";
   langToggle.textContent = getTranslation(isSpanish ? "lang.toEnglish" : "lang.toSpanish", lang);
-  langToggle.setAttribute("aria-label", getTranslation(isSpanish ? "lang.ariaToEnglish" : "lang.ariaToSpanish", lang));
+  langToggle.setAttribute(
+    "aria-label",
+    getTranslation(isSpanish ? "lang.ariaToEnglish" : "lang.ariaToSpanish", lang)
+  );
 }
 
 function syncMenuButton(lang) {
@@ -1265,13 +1267,3 @@ helpForm.addEventListener("submit", async (event) => {
 });
 
 loadPublicHelpRequests();
-
-/* --- PWA: registro del service worker --- */
-
-if ("serviceWorker" in navigator && window.isSecureContext) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("sw.js").catch((error) => {
-      console.error("No se pudo registrar el service worker:", error);
-    });
-  });
-}
