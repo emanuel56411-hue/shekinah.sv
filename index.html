@@ -36,9 +36,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css?v=24" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/output.css" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
@@ -149,105 +146,96 @@
     </header>
 
     <main>
-      <section id="inicio" class="hero relative min-h-[85vh] flex items-center bg-cover bg-center" style="background-image: url('assets/fotos/congregacion-culto.webp')">
-        <div class="absolute inset-0 bg-gradient-to-t from-brand-900/95 via-brand-900/70 to-brand-900/40"></div>
-        <div class="relative z-10 w-full max-w-6xl mx-auto px-6 py-16 space-y-8">
-          <div class="hero-inner">
-            <div class="hero-content">
-              <h1 class="font-display text-5xl md:text-7xl text-white">Iglesia Bautista Shekinah</h1>
-              <p class="text-white/90 text-xl mt-4" data-i18n="hero.description">Conoce a Cristo, crece en fe y camina en familia.</p>
-              <div class="hero-actions">
-                <a class="button primary bg-gold-500 hover:bg-gold-400 text-brand-900 font-semibold px-6 py-3 rounded-full transition-colors" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
-                <a class="button whatsapp border-2 border-white text-white hover:bg-white hover:text-brand-900 font-semibold px-6 py-3 rounded-full transition-colors" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
-              </div>
+      <section id="inicio" class="hero">
+        <div class="hero-inner">
+          <div class="hero-content">
+            <h1>Iglesia Bautista Shekinah</h1>
+            <p data-i18n="hero.description">Conoce a Cristo, crece en fe y camina en familia.</p>
+            <div class="hero-actions">
+              <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
+              <a class="button whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
             </div>
-
-            <aside class="hero-panel bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" aria-label="Resumen de reuniones" data-i18n-aria-label="heroPanel.aria">
-              <span data-i18n="heroPanel.welcome" data-next-service-label>Bienvenido a casa</span>
-              <strong data-i18n="common.sunday" data-next-service-day>Domingo</strong>
-              <p data-i18n="common.sundayTimes" data-next-service-time>8:30 a.m. y 10:00 a.m.</p>
-              <div>
-                <small data-i18n="common.tuesday" data-next-service-row-one-day>Martes</small>
-                <small data-i18n="schedule.tuesdayActivity" data-next-service-row-one-title>Estudio exegético</small>
-              </div>
-              <div>
-                <small data-i18n="common.thursday" data-next-service-row-two-day>Jueves</small>
-                <small data-i18n="schedule.thursdayActivity" data-next-service-row-two-title>Estudio bíblico</small>
-              </div>
-            </aside>
           </div>
 
-          <div class="anniversary-note bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" aria-label="Aniversario de la iglesia" data-i18n-aria-label="anniversary.aria">
-            <p class="anniversary-badge">
-              <span class="anniversary-number" aria-hidden="true">19</span>
-              <span data-i18n="anniversary.years">años</span>
-            </p>
-            <p class="anniversary-text" data-i18n="anniversary.text">Llevamos 19 años sirviendo a Cristo en familia.</p>
-          </div>
-
-          <section class="quick-strip" aria-label="Accesos rápidos" data-i18n-aria-label="quickStrip.aria">
-            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="#reuniones">
-              <span data-i18n="quickStrip.visitTitle">Visítanos</span>
-              <strong data-i18n="quickStrip.visitDesc">Horarios de cultos</strong>
-            </a>
-            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
-              <span data-i18n="quickStrip.locationTitle">Cómo llegar</span>
-              <strong data-i18n="quickStrip.locationDesc">Ver en Waze</strong>
-            </a>
-            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="#ayuda">
-              <span data-i18n="quickStrip.prayerTitle">Pedir oración</span>
-              <strong data-i18n="quickStrip.prayerDesc">Oración y apoyo</strong>
-            </a>
-            <a class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-white" href="#redes">
-              <span data-i18n="quickStrip.socialTitle">Redes</span>
-              <strong data-i18n="quickStrip.socialDesc">Instagram, Facebook y YouTube</strong>
-            </a>
-          </section>
+          <aside class="hero-panel" aria-label="Resumen de reuniones" data-i18n-aria-label="heroPanel.aria">
+            <span data-i18n="heroPanel.welcome" data-next-service-label>Bienvenido a casa</span>
+            <strong data-i18n="common.sunday" data-next-service-day>Domingo</strong>
+            <p data-i18n="common.sundayTimes" data-next-service-time>8:30 a.m. y 10:00 a.m.</p>
+            <div>
+              <small data-i18n="common.tuesday" data-next-service-row-one-day>Martes</small>
+              <small data-i18n="schedule.tuesdayActivity" data-next-service-row-one-title>Estudio exegético</small>
+            </div>
+            <div>
+              <small data-i18n="common.thursday" data-next-service-row-two-day>Jueves</small>
+              <small data-i18n="schedule.thursdayActivity" data-next-service-row-two-title>Estudio bíblico</small>
+            </div>
+          </aside>
         </div>
       </section>
 
-      <section id="accesos-rapidos" class="py-16 px-6 bg-white">
-        <div class="max-w-6xl mx-auto">
-          <div id="quick-links-grid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
-        </div>
+      <div class="anniversary-note" aria-label="Aniversario de la iglesia" data-i18n-aria-label="anniversary.aria">
+        <p class="anniversary-badge">
+          <span class="anniversary-number" aria-hidden="true">19</span>
+          <span data-i18n="anniversary.years">años</span>
+        </p>
+        <p class="anniversary-text" data-i18n="anniversary.text">Llevamos 19 años sirviendo a Cristo en familia.</p>
+      </div>
+
+      <section class="quick-strip" aria-label="Accesos rápidos" data-i18n-aria-label="quickStrip.aria">
+        <a href="#reuniones">
+          <span data-i18n="quickStrip.visitTitle">Visítanos</span>
+          <strong data-i18n="quickStrip.visitDesc">Horarios de cultos</strong>
+        </a>
+        <a href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
+          <span data-i18n="quickStrip.locationTitle">Cómo llegar</span>
+          <strong data-i18n="quickStrip.locationDesc">Ver en Waze</strong>
+        </a>
+        <a href="#ayuda">
+          <span data-i18n="quickStrip.prayerTitle">Pedir oración</span>
+          <strong data-i18n="quickStrip.prayerDesc">Oración y apoyo</strong>
+        </a>
+        <a href="#redes">
+          <span data-i18n="quickStrip.socialTitle">Redes</span>
+          <strong data-i18n="quickStrip.socialDesc">Instagram, Facebook y YouTube</strong>
+        </a>
       </section>
 
-      <section id="reuniones" class="bg-brand-50 py-20 px-6">
-        <div class="max-w-5xl mx-auto text-center mb-12">
-          <span class="text-gold-500 font-semibold tracking-wide uppercase text-sm">Reuniones</span>
-          <h2 class="font-display text-4xl md:text-5xl text-brand-900 mt-2 mb-3">Horarios de reunión</h2>
-          <p class="text-brand-700/70 text-lg">Domingos y entre semana.</p>
-        </div>
-
-        <div class="max-w-5xl mx-auto grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 border border-brand-100">
-            <span class="text-gold-500 text-xs font-semibold uppercase tracking-wide">Martes</span>
-            <h3 class="font-display text-xl text-brand-900 mt-1 mb-2">Estudio exegético</h3>
-            <p class="text-brand-700">7:00 p.m. – 8:30 p.m.</p>
+      <section id="reuniones" class="section section-tight section-featured">
+        <div class="section-inner two-column">
+          <div class="section-copy">
+            <p class="eyebrow" data-i18n="reuniones.eyebrow">Reuniones</p>
+            <h2 data-i18n="reuniones.title">Horarios de reunión</h2>
+            <p data-i18n="reuniones.description">Domingos y entre semana.</p>
           </div>
 
-          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 border border-brand-100">
-            <span class="text-gold-500 text-xs font-semibold uppercase tracking-wide">Jueves</span>
-            <h3 class="font-display text-xl text-brand-900 mt-1 mb-2">Estudio bíblico</h3>
-            <p class="text-brand-700">7:00 p.m. – 8:30 p.m.</p>
-          </div>
-
-          <div class="bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 border border-brand-100">
-            <span class="text-gold-500 text-xs font-semibold uppercase tracking-wide">Sábado</span>
-            <h3 class="font-display text-xl text-brand-900 mt-1 mb-2">Culto de jóvenes</h3>
-            <p class="text-brand-700">4:30 p.m. – 6:00 p.m.</p>
-          </div>
-
-          <div class="bg-brand-600 text-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6 sm:col-span-2 lg:col-span-1">
-            <span class="text-gold-400 text-xs font-semibold uppercase tracking-wide">Domingo</span>
-            <h3 class="font-display text-xl mt-1 mb-2">Primer culto devocional</h3>
-            <p class="text-white/85">8:30 a.m. – 9:40 a.m.</p>
-          </div>
-
-          <div class="bg-brand-600 text-white rounded-2xl shadow-sm hover:shadow-md transition-shadow p-6">
-            <span class="text-gold-400 text-xs font-semibold uppercase tracking-wide">Domingo</span>
-            <h3 class="font-display text-xl mt-1 mb-2">Segundo culto devocional</h3>
-            <p class="text-white/85">10:00 a.m. – 11:30 a.m.</p>
+          <div class="schedule-list">
+            <article class="schedule-item">
+              <span data-i18n="common.tuesday">Martes</span>
+              <strong data-i18n="schedule.tuesdayActivity">Estudio exegético</strong>
+              <time>7:00 p.m. - 8:30 p.m.</time>
+            </article>
+            <article class="schedule-item">
+              <span data-i18n="common.thursday">Jueves</span>
+              <strong data-i18n="schedule.thursdayActivity">Estudio bíblico</strong>
+              <time>7:00 p.m. - 8:30 p.m.</time>
+            </article>
+            <article class="schedule-item">
+              <span data-i18n="common.saturday">Sábado</span>
+              <strong data-i18n="schedule.saturdayActivity">Culto de jóvenes</strong>
+              <time>4:30 p.m. - 6:00 p.m.</time>
+            </article>
+            <div class="schedule-group" aria-label="Cultos del domingo">
+              <article class="schedule-item">
+                <span data-i18n="common.sunday">Domingo</span>
+                <strong data-i18n="schedule.sunday1Activity">Primer culto devocional</strong>
+                <time>8:30 a.m. - 9:40 a.m.</time>
+              </article>
+              <article class="schedule-item">
+                <span data-i18n="common.sunday">Domingo</span>
+                <strong data-i18n="schedule.sunday2Activity">Segundo culto devocional</strong>
+                <time>10:00 a.m. - 11:30 a.m.</time>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -372,7 +360,11 @@
               <p class="eyebrow" data-i18n="somos.eyebrow">Somos Shekinah</p>
               <h2 id="somos-title" data-i18n="somos.title">Una iglesia para conocer a Cristo</h2>
             </div>
-            <div id="somos-grid" class="identity-grid grid gap-5 sm:grid-cols-3"></div>
+            <div class="identity-grid">
+              <article><span>01</span><strong data-i18n="somos.item1Title">Palabra</strong><p data-i18n="somos.item1Desc">La Biblia nos guía.</p></article>
+              <article><span>02</span><strong data-i18n="somos.item2Title">Adoración</strong><p data-i18n="somos.item2Desc">Exaltamos a Dios.</p></article>
+              <article><span>03</span><strong data-i18n="somos.item3Title">Servicio</strong><p data-i18n="somos.item3Desc">Servimos con amor.</p></article>
+            </div>
           </div>
         </div>
       </section>
@@ -394,7 +386,71 @@
             <p data-i18n="galeria.description">Cultos, servicio, familia y gratitud a Dios.</p>
           </div>
 
-          <div id="recuerdos-grid" class="photo-grid grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+          <div class="photo-grid">
+            <article class="photo-card photo-card-large">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de congregación reunida">
+                <img src="assets/fotos/congregacion-culto.webp" alt="Congregación reunida durante un culto" loading="lazy" width="1080" height="732" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item1Tag">Congregación</span>
+                  <strong data-i18n="galeria.item1Title">Nos reunimos como familia</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de ministerio de niños">
+                <img src="assets/fotos/ministerio-ninos.webp" alt="Niños participando en actividad de la iglesia" loading="lazy" width="1280" height="576" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item2Tag">Niños</span>
+                  <strong data-i18n="galeria.item2Title">Formando nuevas generaciones</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de aniversario Shekinah">
+                <img src="assets/fotos/aniversario-shekinah.webp" alt="Celebración de aniversario de Iglesia Bautista Shekinah" loading="lazy" width="1200" height="1600" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item3Tag">Gratitud</span>
+                  <strong data-i18n="galeria.item3Title">Celebramos lo que Dios ha hecho</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de liderazgo pastoral">
+                <img src="assets/fotos/liderazgo-pastoral.webp" alt="Liderazgo pastoral de Iglesia Bautista Shekinah" loading="lazy" width="1600" height="1353" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item4Tag">Comunión</span>
+                  <strong data-i18n="galeria.item4Title">Sirviendo con unidad</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de predicación">
+                <img src="assets/fotos/predicacion-shekinah.webp" alt="Predicación en Iglesia Bautista Shekinah" loading="lazy" width="883" height="1600" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item5Tag">Palabra</span>
+                  <strong data-i18n="galeria.item5Title">La Biblia al centro</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de enseñanza bíblica">
+                <img src="assets/fotos/predicacion-horarios.webp" alt="Enseñanza bíblica en Iglesia Bautista Shekinah" loading="lazy" width="1300" height="1950" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item6Tag">Enseñanza</span>
+                  <strong data-i18n="galeria.item6Title">Aprendemos juntos la Palabra</strong>
+                </span>
+              </button>
+            </article>
+            <article class="photo-card">
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de presentación de niños">
+                <img src="assets/fotos/presentacion-ninos.webp" alt="Niños participando en una presentación bíblica" loading="lazy" width="640" height="480" />
+                <span class="photo-card-caption">
+                  <span data-i18n="galeria.item7Tag">Familia, momentos</span>
+                  <strong data-i18n="galeria.item7Title">Recordando momentos de la iglesia</strong>
+                </span>
+              </button>
+            </article>
+          </div>
         </div>
       </section>
 
@@ -431,7 +487,13 @@
             <h2 data-i18n="ministerios.title">Sirve con nosotros</h2>
           </div>
 
-          <div id="servicio-grid" class="ministry-grid grid gap-5 sm:grid-cols-2 lg:grid-cols-3"></div>
+          <div class="ministry-grid">
+            <article><span>01</span><h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3><p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p></article>
+            <article><span>02</span><h3 data-i18n="ministerios.item2Title">Alabanza</h3><p data-i18n="ministerios.item2Desc">Música y sonido en cada culto.</p></article>
+            <article><span>03</span><h3 data-i18n="ministerios.item3Title">Acomodación</h3><p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p></article>
+            <article><span>04</span><h3 data-i18n="ministerios.item4Title">Escuela bíblica</h3><p data-i18n="ministerios.item4Desc">Enseñanza para crecer en la Palabra.</p></article>
+            <article><span>05</span><h3 data-i18n="ministerios.item5Title">Aseo</h3><p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p></article>
+          </div>
 
           <div class="callout">
             <p data-i18n="ministerios.calloutText">¿Quieres servir?</p>
@@ -535,157 +597,6 @@
         </svg>
       </button>
     </div>
-
-    <script type="application/json" id="quick-links-data">
-[
-  {
-    "titulo": "Horarios",
-    "texto": "Encuentra el día y hora para congregarte.",
-    "imagen": "assets/fotos/congregacion-culto.webp",
-    "link": "#reuniones"
-  },
-  {
-    "titulo": "Ubicación",
-    "texto": "Abre la ruta a la iglesia.",
-    "imagen": "assets/fotos/congregacion-culto.webp",
-    "link": "#ubicacion"
-  },
-  {
-    "titulo": "Ministerios",
-    "texto": "Encuentra dónde servir.",
-    "imagen": "assets/fotos/liderazgo-pastoral.webp",
-    "link": "#ministerios"
-  },
-  {
-    "titulo": "Ayuda",
-    "texto": "Pide oración o apoyo.",
-    "imagen": "assets/fotos/ministerio-ninos.webp",
-    "link": "#ayuda"
-  },
-  {
-    "titulo": "Eventos",
-    "texto": "Mira actividades y anuncios.",
-    "imagen": "assets/fotos/aniversario-shekinah.webp",
-    "link": "#eventos"
-  },
-  {
-    "titulo": "Redes",
-    "texto": "Sigue nuestras redes.",
-    "imagen": "assets/fotos/predicacion-shekinah.webp",
-    "link": "#redes"
-  }
-]
-    </script>
-
-    <script>
-      const data = JSON.parse(document.getElementById('quick-links-data').textContent);
-      const grid = document.getElementById('quick-links-grid');
-      data.forEach(item => {
-        grid.innerHTML += `
-          <a href="${item.link}" class="group block rounded-2xl overflow-hidden bg-white border border-brand-100 shadow-sm hover:shadow-lg transition-all hover:-translate-y-1">
-            <div class="relative h-48 overflow-hidden">
-              <img src="${item.imagen}" alt="${item.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
-              <div class="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-transparent to-transparent"></div>
-            </div>
-            <div class="p-5">
-              <h3 class="font-display text-xl text-brand-900 mb-1">${item.titulo}</h3>
-              <p class="text-brand-700/70 text-sm">${item.texto}</p>
-              <span class="inline-flex items-center gap-1 text-gold-500 text-sm font-semibold mt-3 group-hover:gap-2 transition-all">Ver más →</span>
-            </div>
-          </a>
-        `;
-      });
-    </script>
-
-    <script type="application/json" id="somos-data">
-[
-  { "numero": "01", "titulo": "Palabra", "texto": "La Biblia nos guía." },
-  { "numero": "02", "titulo": "Adoración", "texto": "Exaltamos a Dios." },
-  { "numero": "03", "titulo": "Servicio", "texto": "Servimos con amor." }
-]
-    </script>
-
-    <script type="application/json" id="recuerdos-data">
-[
-  { "titulo": "Congregación", "texto": "Nos reunimos como familia", "imagen": "assets/fotos/congregacion-culto.webp" },
-  { "titulo": "Niños", "texto": "Formando nuevas generaciones", "imagen": "assets/fotos/ministerio-ninos.webp" },
-  { "titulo": "Gratitud", "texto": "Celebramos lo que Dios ha hecho", "imagen": "assets/fotos/aniversario-shekinah.webp" },
-  { "titulo": "Comunión", "texto": "Sirviendo con unidad", "imagen": "assets/fotos/liderazgo-pastoral.webp" },
-  { "titulo": "Palabra", "texto": "La Biblia al centro", "imagen": "assets/fotos/predicacion-shekinah.webp" },
-  { "titulo": "Enseñanza", "texto": "Aprendemos juntos la Palabra", "imagen": "assets/fotos/predicacion-horarios.webp" },
-  { "titulo": "Familia, momentos", "texto": "Recordando momentos de la iglesia", "imagen": "assets/fotos/presentacion-ninos.webp" }
-]
-    </script>
-
-    <script type="application/json" id="servicio-data">
-[
-  { "numero": "01", "titulo": "Diaconado y oficiales", "texto": "Orden y apoyo espiritual en la iglesia." },
-  { "numero": "02", "titulo": "Alabanza", "texto": "Música y sonido en cada culto." },
-  { "numero": "03", "titulo": "Acomodación", "texto": "Recibimos y ubicamos a los visitantes." },
-  { "numero": "04", "titulo": "Escuela bíblica", "texto": "Enseñanza para crecer en la Palabra." },
-  { "numero": "05", "titulo": "Aseo", "texto": "Cuidado y limpieza de los espacios." }
-]
-    </script>
-
-    <script>
-      const somosData = JSON.parse(document.getElementById('somos-data').textContent);
-      const somosGrid = document.getElementById('somos-grid');
-      const somosBg = 'assets/fotos/predicacion-shekinah.webp';
-      somosData.forEach((item) => {
-        somosGrid.innerHTML += `
-          <article class="group relative rounded-2xl overflow-hidden min-h-[280px]">
-            <img src="${somosBg}" alt="${item.titulo}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-900/50 to-brand-900/30"></div>
-            <div class="relative z-10 flex flex-col justify-end min-h-[280px] p-6 text-white">
-              <span class="text-gold-400 text-sm font-semibold">${item.numero}</span>
-              <h3 class="font-display text-2xl mt-1 mb-1">${item.titulo}</h3>
-              <p class="text-white/85 text-sm font-body">${item.texto}</p>
-            </div>
-          </article>
-        `;
-      });
-
-      const recuerdosData = JSON.parse(document.getElementById('recuerdos-data').textContent);
-      const recuerdosGrid = document.getElementById('recuerdos-grid');
-      recuerdosData.forEach((item) => {
-        recuerdosGrid.innerHTML += `
-          <article class="photo-card group relative rounded-2xl overflow-hidden">
-            <button type="button" data-gallery-trigger class="photo-card-button block w-full text-left" aria-label="Ver foto de ${item.titulo}">
-              <div class="relative h-64 sm:h-72 overflow-hidden">
-                <img src="${item.imagen}" alt="${item.titulo}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
-                <div class="absolute inset-0 bg-gradient-to-t from-brand-900/85 via-brand-900/30 to-transparent"></div>
-                <span class="photo-card-caption absolute bottom-0 left-0 right-0 p-5 text-white">
-                  <span class="text-gold-400 text-xs font-semibold uppercase tracking-wide">${item.titulo}</span>
-                  <strong class="block font-display text-lg mt-1">${item.texto}</strong>
-                </span>
-              </div>
-            </button>
-          </article>
-        `;
-      });
-
-      const servicioData = JSON.parse(document.getElementById('servicio-data').textContent);
-      const servicioGrid = document.getElementById('servicio-grid');
-      servicioData.forEach((item) => {
-        servicioGrid.innerHTML += `
-          <article class="bg-brand-50 border border-brand-100 rounded-2xl p-6 hover:shadow-md transition-shadow">
-            <div class="flex items-start gap-4">
-              <span class="font-display text-4xl text-gold-500 leading-none">${item.numero}</span>
-              <div class="flex-1">
-                <div class="mb-3 text-brand-600">
-                  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-                    <path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z" />
-                    <circle cx="12" cy="11" r="2.5" />
-                  </svg>
-                </div>
-                <h3 class="font-display text-xl text-brand-900 mb-2">${item.titulo}</h3>
-                <p class="text-brand-700/70 text-sm font-body">${item.texto}</p>
-              </div>
-            </div>
-          </article>
-        `;
-      });
-    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js?v=23"></script>
