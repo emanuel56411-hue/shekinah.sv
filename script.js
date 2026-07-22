@@ -972,6 +972,25 @@ menuClose.addEventListener("click", () => {
   setMenuOpen(false, true);
 });
 
+const menuGroups = Array.from(mainMenu.querySelectorAll(".menu-group"));
+
+menuGroups.forEach((group) => {
+  const summary = group.querySelector("summary");
+
+  summary?.addEventListener("click", (event) => {
+    if (group.open) {
+      event.preventDefault();
+      return;
+    }
+
+    menuGroups.forEach((other) => {
+      if (other !== group) {
+        other.open = false;
+      }
+    });
+  });
+});
+
 mainMenu.addEventListener("click", (event) => {
   const link = event.target.closest("a");
 
