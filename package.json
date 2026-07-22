@@ -1,6 +1,6 @@
 {
-  "name": "next-site",
-  "version": "0.1.0",
+  "name": "shekinah.sv",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

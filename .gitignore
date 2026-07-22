@@ -1,5 +1,7 @@
 node_modules/
 dist/
 .next/
+out/
 .vercel
 .env*
+next-env.d.ts
