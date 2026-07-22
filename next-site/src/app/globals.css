@@ -1,0 +1,92 @@
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-padding-sm {
+    @apply py-12 sm:py-16;
+  }
+
+  .section-title {
+    @apply mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl;
+  }
+
+  .section-desc {
+    @apply mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg;
+  }
+
+  .eyebrow {
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-shekinah;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 350 20% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 350 20% 12%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 350 20% 12%;
+    --primary: 350 73% 23%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 350 20% 96%;
+    --secondary-foreground: 350 73% 23%;
+    --muted: 350 15% 96%;
+    --muted-foreground: 350 8% 42%;
+    --accent: 350 30% 95%;
+    --accent-foreground: 350 73% 23%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 350 15% 88%;
+    --input: 350 15% 88%;
+    --ring: 350 73% 23%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 350 20% 7%;
+    --foreground: 350 10% 96%;
+    --card: 350 18% 10%;
+    --card-foreground: 350 10% 96%;
+    --popover: 350 18% 10%;
+    --popover-foreground: 350 10% 96%;
+    --primary: 350 55% 45%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 350 15% 16%;
+    --secondary-foreground: 350 10% 96%;
+    --muted: 350 12% 16%;
+    --muted-foreground: 350 8% 68%;
+    --accent: 350 15% 18%;
+    --accent-foreground: 350 10% 96%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 350 10% 20%;
+    --input: 350 10% 20%;
+    --ring: 350 55% 45%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
