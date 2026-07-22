@@ -8,18 +8,13 @@
       content="Sitio web de Iglesia Bautista Shekinah: horarios, ubicación, ministerios, ayuda, donaciones y redes sociales."
     />
     <title>Iglesia Bautista Shekinah</title>
-    <!-- CONFIGURAR: crear assets/og-image.jpg de 1200x630 para mejor vista al compartir -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://emanuel56411-hue.github.io/shekinah.sv/" />
     <meta property="og:title" content="Iglesia Bautista Shekinah" />
     <meta
       property="og:description"
       content="Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador."
     />
-    <meta
-      property="og:image"
-      content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp"
-    />
+    <meta property="og:image" content="/assets/fotos/congregacion-culto.webp" />
     <meta property="og:locale" content="es_SV" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Iglesia Bautista Shekinah" />
@@ -27,13 +22,17 @@
       name="twitter:description"
       content="Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador."
     />
-    <meta
-      name="twitter:image"
-      content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp"
-    />
+    <meta name="twitter:image" content="/assets/fotos/congregacion-culto.webp" />
     <meta name="theme-color" content="#65101a" />
     <link rel="apple-touch-icon" href="assets/logo-shekinah.png" />
     <link rel="icon" href="assets/logo-shekinah.png" />
+    <link
+      rel="preload"
+      as="image"
+      href="assets/fotos/congregacion-culto.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -44,7 +43,7 @@
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
-      <a class="brand" href="#inicio" aria-label="Ir al inicio" data-i18n-aria-label="header.brandAria">
+      <a class="brand" href="#inicio">
         <img
           class="brand-logo"
           src="assets/logo-shekinah.png"
@@ -584,12 +583,7 @@
 
           <div class="photo-grid">
             <article class="photo-card photo-card-large">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de congregación reunida"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/congregacion-culto.webp"
                   alt="Congregación reunida durante un culto"
@@ -604,12 +598,7 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de ministerio de niños"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/ministerio-ninos.webp"
                   alt="Niños participando en actividad de la iglesia"
@@ -624,12 +613,7 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de aniversario Shekinah"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/aniversario-shekinah.webp"
                   alt="Celebración de aniversario de Iglesia Bautista Shekinah"
@@ -644,12 +628,7 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de liderazgo pastoral"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/liderazgo-pastoral.webp"
                   alt="Liderazgo pastoral de Iglesia Bautista Shekinah"
@@ -664,12 +643,7 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de predicación"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/predicacion-shekinah.webp"
                   alt="Predicación en Iglesia Bautista Shekinah"
@@ -684,12 +658,7 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de enseñanza bíblica"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/predicacion-horarios.webp"
                   alt="Enseñanza bíblica en Iglesia Bautista Shekinah"
@@ -704,12 +673,7 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de presentación de niños"
-              >
+              <button class="photo-card-button" type="button" data-gallery-trigger>
                 <img
                   src="assets/fotos/presentacion-ninos.webp"
                   alt="Niños participando en una presentación bíblica"
@@ -737,17 +701,17 @@
             <div class="updates-grid swiper-wrapper">
               <article class="swiper-slide">
                 <span data-i18n="eventos.item1Tag">Próximamente</span>
-                <h3 data-i18n="eventos.item1Title">Eventos por anunciar</h3>
+                <p class="card-title" data-i18n="eventos.item1Title">Eventos por anunciar</p>
                 <p data-i18n="eventos.item1Desc">Vigilias, cultos especiales y actividades familiares.</p>
               </article>
               <article class="swiper-slide">
                 <span data-i18n="eventos.item2Tag">Acción social</span>
-                <h3 data-i18n="eventos.item2Title">Ayuda y donaciones</h3>
+                <p class="card-title" data-i18n="eventos.item2Title">Ayuda y donaciones</p>
                 <p data-i18n="eventos.item2Desc">Apoyo en oración, víveres y visitas.</p>
               </article>
               <article class="swiper-slide">
                 <span data-i18n="nav.redes">Redes</span>
-                <h3 data-i18n="eventos.item3Title">Anuncios recientes</h3>
+                <p class="card-title" data-i18n="eventos.item3Title">Anuncios recientes</p>
                 <p data-i18n="eventos.item3Desc">Avisos, fotos y momentos en Facebook e Instagram.</p>
               </article>
             </div>
@@ -766,27 +730,27 @@
           <div class="ministry-grid">
             <article>
               <span>01</span>
-              <h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3>
+              <p class="card-title" data-i18n="ministerios.item1Title">Diaconado y oficiales</p>
               <p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p>
             </article>
             <article>
               <span>02</span>
-              <h3 data-i18n="ministerios.item2Title">Alabanza</h3>
+              <p class="card-title" data-i18n="ministerios.item2Title">Alabanza</p>
               <p data-i18n="ministerios.item2Desc">Música y sonido en cada culto.</p>
             </article>
             <article>
               <span>03</span>
-              <h3 data-i18n="ministerios.item3Title">Acomodación</h3>
+              <p class="card-title" data-i18n="ministerios.item3Title">Acomodación</p>
               <p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p>
             </article>
             <article>
               <span>04</span>
-              <h3 data-i18n="ministerios.item4Title">Escuela bíblica</h3>
+              <p class="card-title" data-i18n="ministerios.item4Title">Escuela bíblica</p>
               <p data-i18n="ministerios.item4Desc">Enseñanza para crecer en la Palabra.</p>
             </article>
             <article>
               <span>05</span>
-              <h3 data-i18n="ministerios.item5Title">Aseo</h3>
+              <p class="card-title" data-i18n="ministerios.item5Title">Aseo</p>
               <p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p>
             </article>
           </div>
@@ -820,7 +784,6 @@
               href="https://www.instagram.com/shekinahelsalvador"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram de Shekinah"
             >
               <span class="social-label">
                 <svg class="social-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -846,7 +809,6 @@
               href="https://www.facebook.com/share/1L6qRECBoy/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Facebook de Shekinah Versalles"
             >
               <span class="social-label">
                 <svg class="social-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -865,7 +827,6 @@
               href="https://www.youtube.com/results?search_query=Iglesia+Shekinah+Versalles"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="YouTube de Iglesia Shekinah Versalles"
             >
               <span class="social-label">
                 <svg
@@ -940,6 +901,7 @@
       class="gallery-lightbox"
       data-gallery-lightbox
       aria-hidden="true"
+      inert
       role="dialog"
       aria-modal="true"
       aria-label="Visor de fotos"

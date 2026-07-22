@@ -1002,6 +1002,16 @@ body.dark-mode .location-card {
   font-size: 1rem;
 }
 
+.updates-grid .card-title,
+.ministry-grid .card-title {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--heading-font);
+  font-size: 1.32rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
 .identity-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1750,10 +1760,27 @@ body.dark-mode .schedule-group .schedule-item {
 }
 
 .featured-carousel .swiper-pagination-bullet {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  opacity: 1;
+  transition:
+    width 180ms ease,
+    opacity 180ms ease;
+}
+
+.featured-carousel .swiper-pagination-bullet::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 9px;
   height: 9px;
   background: var(--muted);
+  border-radius: 999px;
+  content: "";
   opacity: 0.35;
+  transform: translate(-50%, -50%);
   transition:
     width 180ms ease,
     background 180ms ease,
@@ -1761,9 +1788,12 @@ body.dark-mode .schedule-group .schedule-item {
 }
 
 .featured-carousel .swiper-pagination-bullet-active {
+  width: 32px;
+}
+
+.featured-carousel .swiper-pagination-bullet-active::after {
   width: 26px;
   background: var(--brand);
-  border-radius: 999px;
   opacity: 1;
 }
 

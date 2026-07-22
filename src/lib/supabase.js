@@ -1,5 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
-
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || "https://yjhnqxubicaglqfroiqk.supabase.co";
 const supabasePublishableKey =
   import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || "sb_publishable_Ab-n3U4ens-djPBRbrIyhQ_geFdri1b";
@@ -9,6 +7,16 @@ const isConfigured =
   !supabaseUrl.includes("YOUR_PROJECT_ID") &&
   !supabasePublishableKey.includes("YOUR_SUPABASE");
 
-export const supabaseClient = isConfigured ? createClient(supabaseUrl, supabasePublishableKey) : null;
+let clientPromise;
 
-export const isSupabaseConfigured = isConfigured;
+export function getSupabaseClient() {
+  if (!isConfigured) {
+    return Promise.resolve(null);
+  }
+
+  clientPromise ??= import("@supabase/supabase-js").then(({ createClient }) =>
+    createClient(supabaseUrl, supabasePublishableKey)
+  );
+
+  return clientPromise;
+}

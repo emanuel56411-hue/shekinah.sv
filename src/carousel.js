@@ -16,6 +16,7 @@ export function initializeFeaturedCarousel() {
       enabled: true,
       containerMessage: "Próximas actividades de la iglesia",
       paginationBulletMessage: "Ir a la actividad {{index}}",
+      slideRole: "article",
     },
     grabCursor: true,
     keyboard: {

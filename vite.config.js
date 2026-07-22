@@ -6,7 +6,7 @@ import { VitePWA } from "vite-plugin-pwa";
 const manifest = JSON.parse(readFileSync(new URL("./manifest.json", import.meta.url), "utf8"));
 
 export default defineConfig({
-  base: "/shekinah.sv/",
+  base: "/",
   build: {
     rollupOptions: {
       input: {
@@ -14,7 +14,10 @@ export default defineConfig({
         offline: resolve(import.meta.dirname, "offline.html"),
       },
       output: {
-        assetFileNames: "assets/[name][extname]",
+        assetFileNames: (assetInfo) =>
+          (assetInfo.names ?? []).some((name) => name.endsWith(".webp"))
+            ? "assets/fotos/[name][extname]"
+            : "assets/[name][extname]",
       },
     },
   },

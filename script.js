@@ -1,4 +1,4 @@
-import { supabaseClient } from "./src/lib/supabase.js";
+import { getSupabaseClient } from "./src/lib/supabase.js";
 
 const menuButton = document.querySelector(".menu-button");
 const mainMenu = document.querySelector("#main-menu");
@@ -740,10 +740,11 @@ function createHelpBoardMessage(key) {
   const tag = document.createElement("span");
   tag.textContent = getTranslation("ayuda.eyebrow", currentLang);
 
-  const title = document.createElement("h3");
-  title.textContent = getTranslation(key, currentLang);
+  const message = document.createElement("p");
+  message.className = "help-card-message";
+  message.textContent = getTranslation(key, currentLang);
 
-  card.append(tag, title);
+  card.append(tag, message);
   return card;
 }
 
@@ -790,12 +791,18 @@ function renderPublicHelpRequests(requests) {
 }
 
 async function loadPublicHelpRequests() {
-  if (!supabaseClient || isOffline()) {
+  if (isOffline()) {
     restoreDefaultHelpCards();
     return;
   }
 
   helpBoard.replaceChildren(createHelpBoardMessage("ayuda.loadingRequests"));
+  const supabaseClient = await getSupabaseClient();
+
+  if (!supabaseClient) {
+    restoreDefaultHelpCards();
+    return;
+  }
 
   const { data, error } = await supabaseClient
     .from("public_help_requests")
@@ -1099,6 +1106,7 @@ function openGallery(index) {
   showGalleryImage(index);
   galleryLightbox.classList.add("is-open");
   galleryLightbox.setAttribute("aria-hidden", "false");
+  galleryLightbox.inert = false;
   document.body.classList.add("lightbox-open");
   galleryClose?.focus();
 }
@@ -1110,6 +1118,7 @@ function closeGallery() {
 
   galleryLightbox.classList.remove("is-open");
   galleryLightbox.setAttribute("aria-hidden", "true");
+  galleryLightbox.inert = true;
   document.body.classList.remove("lightbox-open");
 
   if (galleryImage) {
@@ -1236,6 +1245,7 @@ helpForm.addEventListener("submit", async (event) => {
   openWhatsappMessage(whatsappMessage);
 
   let saved = false;
+  const supabaseClient = isOffline() ? null : await getSupabaseClient();
 
   if (supabaseClient && !isOffline()) {
     try {
@@ -1266,4 +1276,13 @@ helpForm.addEventListener("submit", async (event) => {
   submitButton.textContent = getTranslation("ayuda.submitBtn", currentLang);
 });
 
-loadPublicHelpRequests();
+function schedulePublicHelpRequests() {
+  if ("requestIdleCallback" in window) {
+    window.requestIdleCallback(() => loadPublicHelpRequests(), { timeout: 2500 });
+    return;
+  }
+
+  window.setTimeout(loadPublicHelpRequests, 1200);
+}
+
+window.addEventListener("load", schedulePublicHelpRequests, { once: true });
