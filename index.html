@@ -35,7 +35,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=28" />
+    <link rel="stylesheet" href="styles.css?v=29" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   </head>
@@ -68,12 +68,20 @@
         </div>
 
         <div class="menu-groups">
-          <details class="menu-group" open>
-            <summary>
-              <span data-i18n="menu.connect">Conéctate</span>
-              <span class="menu-plus" aria-hidden="true">+</span>
-            </summary>
-            <div class="mega-links">
+          <div class="menu-tablist" role="tablist" aria-label="Secciones del menú">
+            <button type="button" class="menu-tab is-active" role="tab" aria-selected="true" data-menu-tab="connect" data-i18n="menu.connect">
+              Conéctate
+            </button>
+            <button type="button" class="menu-tab" role="tab" aria-selected="false" data-menu-tab="discover" data-i18n="menu.discover">
+              Descubre
+            </button>
+            <button type="button" class="menu-tab" role="tab" aria-selected="false" data-menu-tab="contact" data-i18n="menu.contact">
+              Contacto
+            </button>
+          </div>
+
+          <div class="menu-panels">
+            <div class="menu-panel is-active" role="tabpanel" data-menu-panel="connect">
               <div class="mega-links-inner">
                 <a class="mega-link" href="#reuniones">
                   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg>
@@ -93,14 +101,8 @@
                 </a>
               </div>
             </div>
-          </details>
 
-          <details class="menu-group">
-            <summary>
-              <span data-i18n="menu.discover">Descubre</span>
-              <span class="menu-plus" aria-hidden="true">+</span>
-            </summary>
-            <div class="mega-links">
+            <div class="menu-panel" role="tabpanel" data-menu-panel="discover" hidden>
               <div class="mega-links-inner">
                 <a class="mega-link" href="#ubicacion">
                   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12Z" /><circle cx="12" cy="9" r="2.4" /></svg>
@@ -116,14 +118,8 @@
                 </a>
               </div>
             </div>
-          </details>
 
-          <details class="menu-group">
-            <summary>
-              <span data-i18n="menu.contact">Contacto</span>
-              <span class="menu-plus" aria-hidden="true">+</span>
-            </summary>
-            <div class="mega-links">
+            <div class="menu-panel" role="tabpanel" data-menu-panel="contact" hidden>
               <div class="mega-links-inner">
                 <a class="mega-link" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
                   <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -134,7 +130,7 @@
                 </a>
               </div>
             </div>
-          </details>
+          </div>
         </div>
 
         <div class="menu-panel-actions">
@@ -604,6 +600,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="script.js?v=28"></script>
+    <script src="script.js?v=29"></script>
   </body>
 </html>

@@ -972,22 +972,26 @@ menuClose.addEventListener("click", () => {
   setMenuOpen(false, true);
 });
 
-const menuGroups = Array.from(mainMenu.querySelectorAll(".menu-group"));
+const menuTabs = Array.from(mainMenu.querySelectorAll("[data-menu-tab]"));
+const menuPanels = Array.from(mainMenu.querySelectorAll("[data-menu-panel]"));
 
-menuGroups.forEach((group) => {
-  const summary = group.querySelector("summary");
+function setActiveMenuTab(tabId) {
+  menuTabs.forEach((tab) => {
+    const isActive = tab.dataset.menuTab === tabId;
+    tab.classList.toggle("is-active", isActive);
+    tab.setAttribute("aria-selected", String(isActive));
+  });
 
-  summary?.addEventListener("click", (event) => {
-    if (group.open) {
-      event.preventDefault();
-      return;
-    }
+  menuPanels.forEach((panel) => {
+    const isActive = panel.dataset.menuPanel === tabId;
+    panel.classList.toggle("is-active", isActive);
+    panel.hidden = !isActive;
+  });
+}
 
-    menuGroups.forEach((other) => {
-      if (other !== group) {
-        other.open = false;
-      }
-    });
+menuTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    setActiveMenuTab(tab.dataset.menuTab);
   });
 });
 
