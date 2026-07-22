@@ -16,10 +16,7 @@
       property="og:description"
       content="Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador."
     />
-    <meta
-      property="og:image"
-      content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp"
-    />
+    <meta property="og:image" content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp" />
     <meta property="og:locale" content="es_SV" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Iglesia Bautista Shekinah" />
@@ -27,10 +24,8 @@
       name="twitter:description"
       content="Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador."
     />
-    <meta
-      name="twitter:image"
-      content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp"
-    />
+    <meta name="twitter:image" content="https://emanuel56411-hue.github.io/shekinah.sv/assets/fotos/congregacion-culto.webp" />
+    <link rel="manifest" href="manifest.json" />
     <meta name="theme-color" content="#65101a" />
     <link rel="apple-touch-icon" href="assets/logo-shekinah.png" />
     <link rel="icon" href="assets/logo-shekinah.png" />
@@ -40,31 +35,19 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="styles.css?v=25" />
   </head>
   <body data-phone="50364465489">
     <header class="site-header">
       <a class="brand" href="#inicio" aria-label="Ir al inicio" data-i18n-aria-label="header.brandAria">
-        <img
-          class="brand-logo"
-          src="assets/logo-shekinah.png"
-          alt="Logo de Iglesia Bautista Shekinah"
-          width="46"
-          height="46"
-        />
+        <img class="brand-logo" src="assets/logo-shekinah.png" alt="Logo de Iglesia Bautista Shekinah" width="46" height="46" />
         <span>
           <strong>Iglesia Bautista Shekinah</strong>
           <small>San Juan Opico</small>
         </span>
       </a>
 
-      <button
-        class="menu-button"
-        type="button"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-        aria-controls="main-menu"
-      >
+      <button class="menu-button" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="main-menu">
         <svg class="menu-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M5 7h14" />
           <path d="M5 12h14" />
@@ -74,169 +57,92 @@
       </button>
     </header>
 
-    <nav
-      id="main-menu"
-      class="main-nav"
-      aria-label="Navegación principal"
-      data-i18n-aria-label="header.navAria"
-      aria-hidden="true"
-    >
-      <div class="menu-panel-header">
-        <span class="menu-panel-title" data-i18n="menu.title">Conéctate</span>
-        <button
-          class="menu-close"
-          type="button"
-          aria-label="Cerrar menú"
-          data-i18n-aria-label="menu.closeAria"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <nav id="main-menu" class="main-nav" aria-label="Navegación principal" data-i18n-aria-label="header.navAria" aria-hidden="true">
+        <div class="menu-panel-header">
+          <span class="menu-panel-title" data-i18n="menu.title">Conéctate</span>
+          <button class="menu-close" type="button" aria-label="Cerrar menú" data-i18n-aria-label="menu.closeAria">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-      <div class="menu-groups">
-        <details class="menu-group" open>
-          <summary>
-            <span data-i18n="menu.connect">Conéctate</span>
-            <span class="menu-plus" aria-hidden="true">+</span>
-          </summary>
-          <div class="mega-links">
-            <div class="mega-links-inner">
-              <a class="mega-link" href="#reuniones">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <rect x="4" y="5" width="16" height="15" rx="2" />
-                  <path d="M8 3v4M16 3v4M4 10h16" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.horarios">Horarios</strong
-                  ><small data-i18n="menu.scheduleDesc"
-                    >Encuentra el día y hora para congregarte.</small
-                  ></span
-                >
-              </a>
-              <a class="mega-link" href="#eventos">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M5 5h14v14H5z" />
-                  <path d="M8 3v4M16 3v4M8 13h8M8 16h5" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.eventos">Eventos</strong
-                  ><small data-i18n="menu.eventsDesc">Mira actividades y anuncios.</small></span
-                >
-              </a>
-              <a class="mega-link" href="#ministerios">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.ministerios">Ministerios</strong
-                  ><small data-i18n="menu.ministriesDesc">Encuentra dónde servir.</small></span
-                >
-              </a>
-              <a class="mega-link" href="#ayuda">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 5v14M5 12h14" />
-                  <circle cx="12" cy="12" r="9" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.ayuda">Ayuda</strong
-                  ><small data-i18n="menu.helpDesc">Pide oración o apoyo.</small></span
-                >
-              </a>
+        <div class="menu-groups">
+          <details class="menu-group" open>
+            <summary>
+              <span data-i18n="menu.connect">Conéctate</span>
+              <span class="menu-plus" aria-hidden="true">+</span>
+            </summary>
+            <div class="mega-links">
+              <div class="mega-links-inner">
+                <a class="mega-link" href="#reuniones">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="5" width="16" height="15" rx="2" /><path d="M8 3v4M16 3v4M4 10h16" /></svg>
+                  <span><strong data-i18n="nav.horarios">Horarios</strong><small data-i18n="menu.scheduleDesc">Encuentra el día y hora para congregarte.</small></span>
+                </a>
+                <a class="mega-link" href="#eventos">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5h14v14H5z" /><path d="M8 3v4M16 3v4M8 13h8M8 16h5" /></svg>
+                  <span><strong data-i18n="nav.eventos">Eventos</strong><small data-i18n="menu.eventsDesc">Mira actividades y anuncios.</small></span>
+                </a>
+                <a class="mega-link" href="#ministerios">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z" /></svg>
+                  <span><strong data-i18n="nav.ministerios">Ministerios</strong><small data-i18n="menu.ministriesDesc">Encuentra dónde servir.</small></span>
+                </a>
+                <a class="mega-link" href="#ayuda">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 5v14M5 12h14" /><circle cx="12" cy="12" r="9" /></svg>
+                  <span><strong data-i18n="nav.ayuda">Ayuda</strong><small data-i18n="menu.helpDesc">Pide oración o apoyo.</small></span>
+                </a>
+              </div>
             </div>
-          </div>
-        </details>
+          </details>
 
-        <details class="menu-group">
-          <summary>
-            <span data-i18n="menu.discover">Descubre</span>
-            <span class="menu-plus" aria-hidden="true">+</span>
-          </summary>
-          <div class="mega-links">
-            <div class="mega-links-inner">
-              <a class="mega-link" href="#somos">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 3v18M5 8h14" />
-                  <path d="M7 21h10" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.somos">Somos</strong
-                  ><small data-i18n="menu.aboutDesc">Conoce nuestra iglesia.</small></span
-                >
-              </a>
-              <a class="mega-link" href="#ubicacion">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M12 21s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12Z" />
-                  <circle cx="12" cy="9" r="2.4" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.ubicacion">Ubicación</strong
-                  ><small data-i18n="menu.locationDesc">Abre la ruta a la iglesia.</small></span
-                >
-              </a>
-              <a class="mega-link" href="#redes">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <circle cx="7" cy="12" r="3" />
-                  <circle cx="17" cy="7" r="3" />
-                  <circle cx="17" cy="17" r="3" />
-                  <path d="M9.7 10.8 14.3 8.2M9.7 13.2l4.6 2.6" />
-                </svg>
-                <span
-                  ><strong data-i18n="nav.redes">Redes</strong
-                  ><small data-i18n="menu.socialDesc">Sigue nuestras redes.</small></span
-                >
-              </a>
-              <a class="mega-link" href="#eventos">
-                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path d="M4 6h16M4 12h16M4 18h10" />
-                </svg>
-                <span
-                  ><strong data-i18n="menu.messages">Mensajes</strong
-                  ><small data-i18n="menu.messagesDesc">Predicaciones y recursos por anunciar.</small></span
-                >
-              </a>
+          <details class="menu-group">
+            <summary>
+              <span data-i18n="menu.discover">Descubre</span>
+              <span class="menu-plus" aria-hidden="true">+</span>
+            </summary>
+            <div class="mega-links">
+              <div class="mega-links-inner">
+                <a class="mega-link" href="#somos">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 3v18M5 8h14" /><path d="M7 21h10" /></svg>
+                  <span><strong data-i18n="nav.somos">Somos</strong><small data-i18n="menu.aboutDesc">Conoce nuestra iglesia.</small></span>
+                </a>
+                <a class="mega-link" href="#ubicacion">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12Z" /><circle cx="12" cy="9" r="2.4" /></svg>
+                  <span><strong data-i18n="nav.ubicacion">Ubicación</strong><small data-i18n="menu.locationDesc">Abre la ruta a la iglesia.</small></span>
+                </a>
+                <a class="mega-link" href="#redes">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="7" cy="12" r="3" /><circle cx="17" cy="7" r="3" /><circle cx="17" cy="17" r="3" /><path d="M9.7 10.8 14.3 8.2M9.7 13.2l4.6 2.6" /></svg>
+                  <span><strong data-i18n="nav.redes">Redes</strong><small data-i18n="menu.socialDesc">Sigue nuestras redes.</small></span>
+                </a>
+                <a class="mega-link" href="#eventos">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 6h16M4 12h16M4 18h10" /></svg>
+                  <span><strong data-i18n="menu.messages">Mensajes</strong><small data-i18n="menu.messagesDesc">Predicaciones y recursos por anunciar.</small></span>
+                </a>
+              </div>
             </div>
-          </div>
-        </details>
+          </details>
 
-        <details class="menu-group">
-          <summary>
-            <span data-i18n="menu.contact">Contacto</span>
-            <span class="menu-plus" aria-hidden="true">+</span>
-          </summary>
-          <div class="mega-links">
-            <div class="mega-links-inner">
-              <a
-                class="mega-link"
-                href="#"
-                data-whatsapp-link
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir WhatsApp"
-              >
-                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#25D366"
-                    d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z"
-                  />
-                  <path
-                    fill="#fff"
-                    d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"
-                  />
-                </svg>
-                <span
-                  ><strong>WhatsApp</strong
-                  ><small data-i18n="menu.whatsappDesc">Abre un chat directo con coordinación.</small></span
-                >
-              </a>
+          <details class="menu-group">
+            <summary>
+              <span data-i18n="menu.contact">Contacto</span>
+              <span class="menu-plus" aria-hidden="true">+</span>
+            </summary>
+            <div class="mega-links">
+              <div class="mega-links-inner">
+                <a class="mega-link" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="Abrir WhatsApp">
+                  <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path fill="#25D366" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
+                    <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
+                  </svg>
+                  <span><strong>WhatsApp</strong><small data-i18n="menu.whatsappDesc">Abre un chat directo con coordinación.</small></span>
+                </a>
+              </div>
             </div>
-          </div>
-        </details>
-      </div>
+          </details>
+        </div>
 
-      <div class="menu-panel-actions">
-        <button class="lang-toggle" type="button" aria-label="Cambiar a inglés">EN</button>
-        <button class="theme-toggle" type="button" aria-label="Cambiar modo oscuro">Oscuro</button>
-      </div>
+        <div class="menu-panel-actions">
+          <button class="lang-toggle" type="button" aria-label="Cambiar a inglés">EN</button>
+          <button class="theme-toggle" type="button" aria-label="Cambiar modo oscuro">Oscuro</button>
+        </div>
     </nav>
 
     <main>
@@ -247,15 +153,7 @@
             <p data-i18n="hero.description">Conoce a Cristo, crece en fe y camina en familia.</p>
             <div class="hero-actions">
               <a class="button primary" href="#reuniones" data-i18n="hero.ctaPrimary">Ver horarios</a>
-              <a
-                class="button whatsapp"
-                href="#"
-                data-whatsapp-link
-                target="_blank"
-                rel="noopener noreferrer"
-                data-i18n="hero.ctaWhatsapp"
-                >Escribir por WhatsApp</a
-              >
+              <a class="button whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="hero.ctaWhatsapp">Escribir por WhatsApp</a>
             </div>
           </div>
 
@@ -265,32 +163,22 @@
             <p data-i18n="common.sundayTimes" data-next-service-time>8:30 a.m. y 10:00 a.m.</p>
             <div>
               <small data-i18n="common.tuesday" data-next-service-row-one-day>Martes</small>
-              <small data-i18n="schedule.tuesdayActivity" data-next-service-row-one-title
-                >Estudio exegético</small
-              >
+              <small data-i18n="schedule.tuesdayActivity" data-next-service-row-one-title>Estudio exegético</small>
             </div>
             <div>
               <small data-i18n="common.thursday" data-next-service-row-two-day>Jueves</small>
-              <small data-i18n="schedule.thursdayActivity" data-next-service-row-two-title
-                >Estudio bíblico</small
-              >
+              <small data-i18n="schedule.thursdayActivity" data-next-service-row-two-title>Estudio bíblico</small>
             </div>
           </aside>
         </div>
       </section>
 
-      <div
-        class="anniversary-note"
-        aria-label="Aniversario de la iglesia"
-        data-i18n-aria-label="anniversary.aria"
-      >
+      <div class="anniversary-note" aria-label="Aniversario de la iglesia" data-i18n-aria-label="anniversary.aria">
         <p class="anniversary-badge">
           <span class="anniversary-number" aria-hidden="true">19</span>
           <span data-i18n="anniversary.years">años</span>
         </p>
-        <p class="anniversary-text" data-i18n="anniversary.text">
-          Llevamos 19 años sirviendo a Cristo en familia.
-        </p>
+        <p class="anniversary-text" data-i18n="anniversary.text">Llevamos 19 años sirviendo a Cristo en familia.</p>
       </div>
 
       <section class="quick-strip" aria-label="Accesos rápidos" data-i18n-aria-label="quickStrip.aria">
@@ -298,11 +186,7 @@
           <span data-i18n="quickStrip.visitTitle">Visítanos</span>
           <strong data-i18n="quickStrip.visitDesc">Horarios de cultos</strong>
         </a>
-        <a
-          href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer">
           <span data-i18n="quickStrip.locationTitle">Cómo llegar</span>
           <strong data-i18n="quickStrip.locationDesc">Ver en Waze</strong>
         </a>
@@ -362,63 +246,29 @@
             <p class="eyebrow" data-i18n="ubicacion.eyebrow">Cómo llegar</p>
             <h2 data-i18n="ubicacion.title">Encuéntranos en San Juan Opico</h2>
             <div class="route-actions" aria-label="Opciones para llegar a la iglesia">
-              <a
-                class="action-link maps"
-                href="https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir Google Maps"
-              >
+              <a class="action-link maps" href="https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico" target="_blank" rel="noopener noreferrer" aria-label="Abrir Google Maps">
                 <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#EA4335"
-                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z"
-                  />
+                  <path fill="#EA4335" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7Z" />
                   <circle fill="#fff" cx="12" cy="9" r="2.6" />
                   <circle fill="#4285F4" cx="12" cy="9" r="1.2" />
                 </svg>
                 <span data-i18n="ubicacion.mapsBtn">Google Maps</span>
                 <small data-i18n="ubicacion.mapsHint">Abrir ruta</small>
               </a>
-              <a
-                class="action-link waze"
-                href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Cómo llegar en Waze"
-              >
+              <a class="action-link waze" href="https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes" target="_blank" rel="noopener noreferrer" aria-label="Cómo llegar en Waze">
                 <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <rect x="2" y="2" width="20" height="20" rx="5.5" fill="#33CCFF" />
                   <circle cx="9.25" cy="10.5" r="1.5" fill="#fff" />
                   <circle cx="14.75" cy="10.5" r="1.5" fill="#fff" />
-                  <path
-                    fill="none"
-                    stroke="#fff"
-                    stroke-linecap="round"
-                    stroke-width="1.4"
-                    d="M8.8 13.4c1.1.8 2.4.8 3.5 0 1.1.8 2.4.8 3.5 0"
-                  />
+                  <path fill="none" stroke="#fff" stroke-linecap="round" stroke-width="1.4" d="M8.8 13.4c1.1.8 2.4.8 3.5 0 1.1.8 2.4.8 3.5 0" />
                 </svg>
                 <span data-i18n="ubicacion.wazeBtn">Waze</span>
                 <small data-i18n="ubicacion.wazeHint">Navegar</small>
               </a>
-              <a
-                class="action-link whatsapp"
-                href="#"
-                data-whatsapp-link
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Preguntar por WhatsApp"
-              >
+              <a class="action-link whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" aria-label="Preguntar por WhatsApp">
                 <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <path
-                    fill="#25D366"
-                    d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z"
-                  />
-                  <path
-                    fill="#fff"
-                    d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"
-                  />
+                  <path fill="#25D366" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
+                  <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
                 </svg>
                 <span data-i18n="ubicacion.whatsappBtn">WhatsApp</span>
                 <small data-i18n="ubicacion.whatsappHint">Pedir referencia</small>
@@ -427,13 +277,7 @@
           </div>
 
           <article class="location-card location-card-photo">
-            <img
-              src="assets/fotos/congregacion-culto.webp"
-              alt="Congregación reunida en Iglesia Bautista Shekinah"
-              loading="lazy"
-              width="1080"
-              height="732"
-            />
+            <img src="assets/fotos/congregacion-culto.webp" alt="Congregación reunida en Iglesia Bautista Shekinah" loading="lazy" width="1080" height="732" />
             <div class="location-card-overlay">
               <span data-i18n="nav.ubicacion">Ubicación</span>
               <strong>QJRR+HH2</strong>
@@ -469,23 +313,11 @@
           <form class="help-form" aria-label="Formulario de ayuda" data-i18n-aria-label="ayuda.formAria">
             <label>
               <span data-i18n="form.name">Nombre</span>
-              <input
-                type="text"
-                name="nombre-ayuda"
-                placeholder="Tu nombre"
-                data-i18n-placeholder="form.namePlaceholder"
-                required
-              />
+              <input type="text" name="nombre-ayuda" placeholder="Tu nombre" data-i18n-placeholder="form.namePlaceholder" required />
             </label>
             <label>
               <span data-i18n="ayuda.phoneLabel">Teléfono</span>
-              <input
-                type="tel"
-                name="telefono-ayuda"
-                autocomplete="tel"
-                placeholder="Tu teléfono (opcional)"
-                data-i18n-placeholder="ayuda.phonePlaceholder"
-              />
+              <input type="tel" name="telefono-ayuda" autocomplete="tel" placeholder="Tu teléfono (opcional)" data-i18n-placeholder="ayuda.phonePlaceholder" />
             </label>
             <label>
               <span data-i18n="ayuda.typeLabel">Tipo de ayuda</span>
@@ -501,27 +333,12 @@
             </label>
             <label>
               <span data-i18n="form.message">Mensaje</span>
-              <textarea
-                name="mensaje-ayuda"
-                rows="3"
-                minlength="10"
-                maxlength="500"
-                placeholder="Escribe la necesidad o forma de ayudar"
-                data-i18n-placeholder="ayuda.messagePlaceholder"
-                required
-              ></textarea>
+              <textarea name="mensaje-ayuda" rows="3" minlength="10" maxlength="500" placeholder="Escribe la necesidad o forma de ayudar" data-i18n-placeholder="ayuda.messagePlaceholder" required></textarea>
             </label>
-            <p class="form-note" data-i18n="ayuda.formNote">
-              Se guarda para revisión y se abre WhatsApp para coordinar.
-            </p>
-            <p class="privacy-note" data-i18n="ayuda.privacyNote">
-              Tu información será usada únicamente para coordinar ayuda, oración o contacto pastoral. No
-              publicamos tu teléfono ni correo sin autorización.
-            </p>
+            <p class="form-note" data-i18n="ayuda.formNote">Se guarda para revisión y se abre WhatsApp para coordinar.</p>
+            <p class="privacy-note" data-i18n="ayuda.privacyNote">Tu información será usada únicamente para coordinar ayuda, oración o contacto pastoral. No publicamos tu teléfono ni correo sin autorización.</p>
             <p class="form-status" role="status" aria-live="polite"></p>
-            <button class="button dark" type="submit" data-i18n="ayuda.submitBtn">
-              Enviar solicitud por WhatsApp
-            </button>
+            <button class="button dark" type="submit" data-i18n="ayuda.submitBtn">Enviar solicitud por WhatsApp</button>
           </form>
         </div>
       </section>
@@ -529,27 +346,15 @@
       <section id="somos" class="section identity-section" aria-label="Somos Shekinah">
         <div class="section-inner identity-layout">
           <div class="identity-visual">
-            <img
-              src="assets/fotos/equipo-alabanza.webp"
-              alt="Equipo de alabanza de Iglesia Bautista Shekinah"
-              loading="lazy"
-              width="1008"
-              height="756"
-            />
+            <img src="assets/fotos/equipo-alabanza.webp" alt="Equipo de alabanza de Iglesia Bautista Shekinah" loading="lazy" width="1008" height="756" />
           </div>
         </div>
       </section>
 
-      <section
-        class="section scripture-section"
-        aria-label="Versículo bíblico"
-        data-i18n-aria-label="scripture.aria"
-      >
+      <section class="section scripture-section" aria-label="Versículo bíblico" data-i18n-aria-label="scripture.aria">
         <div class="section-inner">
           <blockquote class="scripture-quote-standalone">
-            <p data-i18n="scripture.verseText">
-              "Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti."
-            </p>
+            <p data-i18n="scripture.verseText">"Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti."</p>
             <cite data-i18n="scripture.verseRef">Isaías 60:1</cite>
           </blockquote>
         </div>
@@ -565,19 +370,8 @@
 
           <div class="photo-grid">
             <article class="photo-card photo-card-large">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de congregación reunida"
-              >
-                <img
-                  src="assets/fotos/congregacion-culto.webp"
-                  alt="Congregación reunida durante un culto"
-                  loading="lazy"
-                  width="1080"
-                  height="732"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de congregación reunida">
+                <img src="assets/fotos/congregacion-culto.webp" alt="Congregación reunida durante un culto" loading="lazy" width="1080" height="732" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item1Tag">Congregación</span>
                   <strong data-i18n="galeria.item1Title">Nos reunimos como familia</strong>
@@ -585,19 +379,8 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de ministerio de niños"
-              >
-                <img
-                  src="assets/fotos/ministerio-ninos.webp"
-                  alt="Niños participando en actividad de la iglesia"
-                  loading="lazy"
-                  width="1280"
-                  height="576"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de ministerio de niños">
+                <img src="assets/fotos/ministerio-ninos.webp" alt="Niños participando en actividad de la iglesia" loading="lazy" width="1280" height="576" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item2Tag">Niños</span>
                   <strong data-i18n="galeria.item2Title">Formando nuevas generaciones</strong>
@@ -605,19 +388,8 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de aniversario Shekinah"
-              >
-                <img
-                  src="assets/fotos/aniversario-shekinah.webp"
-                  alt="Celebración de aniversario de Iglesia Bautista Shekinah"
-                  loading="lazy"
-                  width="1200"
-                  height="1600"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de aniversario Shekinah">
+                <img src="assets/fotos/aniversario-shekinah.webp" alt="Celebración de aniversario de Iglesia Bautista Shekinah" loading="lazy" width="1200" height="1600" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item3Tag">Gratitud</span>
                   <strong data-i18n="galeria.item3Title">Celebramos lo que Dios ha hecho</strong>
@@ -625,19 +397,8 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de liderazgo pastoral"
-              >
-                <img
-                  src="assets/fotos/liderazgo-pastoral.webp"
-                  alt="Liderazgo pastoral de Iglesia Bautista Shekinah"
-                  loading="lazy"
-                  width="1600"
-                  height="1353"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de liderazgo pastoral">
+                <img src="assets/fotos/liderazgo-pastoral.webp" alt="Liderazgo pastoral de Iglesia Bautista Shekinah" loading="lazy" width="1600" height="1353" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item4Tag">Comunión</span>
                   <strong data-i18n="galeria.item4Title">Sirviendo con unidad</strong>
@@ -645,19 +406,8 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de predicación"
-              >
-                <img
-                  src="assets/fotos/predicacion-shekinah.webp"
-                  alt="Predicación en Iglesia Bautista Shekinah"
-                  loading="lazy"
-                  width="883"
-                  height="1600"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de predicación">
+                <img src="assets/fotos/predicacion-shekinah.webp" alt="Predicación en Iglesia Bautista Shekinah" loading="lazy" width="883" height="1600" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item5Tag">Palabra</span>
                   <strong data-i18n="galeria.item5Title">La Biblia al centro</strong>
@@ -665,19 +415,8 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de enseñanza bíblica"
-              >
-                <img
-                  src="assets/fotos/predicacion-horarios.webp"
-                  alt="Enseñanza bíblica en Iglesia Bautista Shekinah"
-                  loading="lazy"
-                  width="1300"
-                  height="1950"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de enseñanza bíblica">
+                <img src="assets/fotos/predicacion-horarios.webp" alt="Enseñanza bíblica en Iglesia Bautista Shekinah" loading="lazy" width="1300" height="1950" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item6Tag">Enseñanza</span>
                   <strong data-i18n="galeria.item6Title">Aprendemos juntos la Palabra</strong>
@@ -685,19 +424,8 @@
               </button>
             </article>
             <article class="photo-card">
-              <button
-                class="photo-card-button"
-                type="button"
-                data-gallery-trigger
-                aria-label="Ver foto de presentación de niños"
-              >
-                <img
-                  src="assets/fotos/presentacion-ninos.webp"
-                  alt="Niños participando en una presentación bíblica"
-                  loading="lazy"
-                  width="640"
-                  height="480"
-                />
+              <button class="photo-card-button" type="button" data-gallery-trigger aria-label="Ver foto de presentación de niños">
+                <img src="assets/fotos/presentacion-ninos.webp" alt="Niños participando en una presentación bíblica" loading="lazy" width="640" height="480" />
                 <span class="photo-card-caption">
                   <span data-i18n="galeria.item7Tag">Familia, momentos</span>
                   <strong data-i18n="galeria.item7Title">Recordando momentos de la iglesia</strong>
@@ -714,25 +442,22 @@
             <p class="eyebrow" data-i18n="eventos.eyebrow">Eventos</p>
             <h2 data-i18n="eventos.title">Próximas actividades</h2>
           </div>
-          <div class="featured-carousel swiper" data-featured-carousel>
-            <div class="updates-grid swiper-wrapper">
-              <article class="swiper-slide">
-                <span data-i18n="eventos.item1Tag">Próximamente</span>
-                <h3 data-i18n="eventos.item1Title">Eventos por anunciar</h3>
-                <p data-i18n="eventos.item1Desc">Vigilias, cultos especiales y actividades familiares.</p>
-              </article>
-              <article class="swiper-slide">
-                <span data-i18n="eventos.item2Tag">Acción social</span>
-                <h3 data-i18n="eventos.item2Title">Ayuda y donaciones</h3>
-                <p data-i18n="eventos.item2Desc">Apoyo en oración, víveres y visitas.</p>
-              </article>
-              <article class="swiper-slide">
-                <span data-i18n="nav.redes">Redes</span>
-                <h3 data-i18n="eventos.item3Title">Anuncios recientes</h3>
-                <p data-i18n="eventos.item3Desc">Avisos, fotos y momentos en Facebook e Instagram.</p>
-              </article>
-            </div>
-            <div class="swiper-pagination"></div>
+          <div class="updates-grid">
+            <article>
+              <span data-i18n="eventos.item1Tag">Próximamente</span>
+              <h3 data-i18n="eventos.item1Title">Eventos por anunciar</h3>
+              <p data-i18n="eventos.item1Desc">Vigilias, cultos especiales y actividades familiares.</p>
+            </article>
+            <article>
+              <span data-i18n="eventos.item2Tag">Acción social</span>
+              <h3 data-i18n="eventos.item2Title">Ayuda y donaciones</h3>
+              <p data-i18n="eventos.item2Desc">Apoyo en oración, víveres y visitas.</p>
+            </article>
+            <article>
+              <span data-i18n="nav.redes">Redes</span>
+              <h3 data-i18n="eventos.item3Title">Anuncios recientes</h3>
+              <p data-i18n="eventos.item3Desc">Avisos, fotos y momentos en Facebook e Instagram.</p>
+            </article>
           </div>
         </div>
       </section>
@@ -745,43 +470,16 @@
           </div>
 
           <div class="ministry-grid">
-            <article>
-              <span>01</span>
-              <h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3>
-              <p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p>
-            </article>
-            <article>
-              <span>02</span>
-              <h3 data-i18n="ministerios.item2Title">Alabanza</h3>
-              <p data-i18n="ministerios.item2Desc">Música y sonido en cada culto.</p>
-            </article>
-            <article>
-              <span>03</span>
-              <h3 data-i18n="ministerios.item3Title">Acomodación</h3>
-              <p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p>
-            </article>
-            <article>
-              <span>04</span>
-              <h3 data-i18n="ministerios.item4Title">Escuela bíblica</h3>
-              <p data-i18n="ministerios.item4Desc">Enseñanza para crecer en la Palabra.</p>
-            </article>
-            <article>
-              <span>05</span>
-              <h3 data-i18n="ministerios.item5Title">Aseo</h3>
-              <p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p>
-            </article>
+            <article><span>01</span><h3 data-i18n="ministerios.item1Title">Diaconado y oficiales</h3><p data-i18n="ministerios.item1Desc">Orden y apoyo espiritual en la iglesia.</p></article>
+            <article><span>02</span><h3 data-i18n="ministerios.item2Title">Alabanza</h3><p data-i18n="ministerios.item2Desc">Música y sonido en cada culto.</p></article>
+            <article><span>03</span><h3 data-i18n="ministerios.item3Title">Acomodación</h3><p data-i18n="ministerios.item3Desc">Recibimos y ubicamos a los visitantes.</p></article>
+            <article><span>04</span><h3 data-i18n="ministerios.item4Title">Escuela bíblica</h3><p data-i18n="ministerios.item4Desc">Enseñanza para crecer en la Palabra.</p></article>
+            <article><span>05</span><h3 data-i18n="ministerios.item5Title">Aseo</h3><p data-i18n="ministerios.item5Desc">Cuidado y limpieza de los espacios.</p></article>
           </div>
 
           <div class="callout">
             <p data-i18n="ministerios.calloutText">¿Quieres servir?</p>
-            <a
-              class="button primary"
-              href="#"
-              data-whatsapp-link
-              target="_blank"
-              rel="noopener noreferrer"
-              data-i18n="ministerios.calloutBtn"
-            >
+            <a class="button primary" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="ministerios.calloutBtn">
               Escribir al encargado
             </a>
           </div>
@@ -796,25 +494,10 @@
             <p data-i18n="redes.description">Fotos y anuncios de la iglesia.</p>
           </div>
           <div class="social-cards">
-            <a
-              class="social-card instagram"
-              href="https://www.instagram.com/shekinahelsalvador"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram de Shekinah"
-            >
+            <a class="social-card instagram" href="https://www.instagram.com/shekinahelsalvador" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Shekinah">
               <span class="social-label">
                 <svg class="social-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                  <rect
-                    x="4"
-                    y="4"
-                    width="16"
-                    height="16"
-                    rx="4.5"
-                    fill="none"
-                    stroke="#d62976"
-                    stroke-width="1.8"
-                  />
+                  <rect x="4" y="4" width="16" height="16" rx="4.5" fill="none" stroke="#d62976" stroke-width="1.8" />
                   <circle cx="12" cy="12" r="3.6" fill="none" stroke="#d62976" stroke-width="1.8" />
                   <circle cx="17" cy="7" r="1.1" fill="#d62976" />
                 </svg>
@@ -822,43 +505,20 @@
               </span>
               <strong>@shekinahelsalvador</strong>
             </a>
-            <a
-              class="social-card facebook"
-              href="https://www.facebook.com/share/1L6qRECBoy/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook de Shekinah Versalles"
-            >
+            <a class="social-card facebook" href="https://www.facebook.com/share/1L6qRECBoy/" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Shekinah Versalles">
               <span class="social-label">
                 <svg class="social-icon brand-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
                   <circle cx="12" cy="12" r="9" fill="none" stroke="#1877f2" stroke-width="1.8" />
-                  <path
-                    fill="#1877f2"
-                    d="M13.4 8h1.8V6.4c-.3-.1-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v1.9H7.2v2.4h1.3v6.1h2.9v-6.1h2.4l.4-2.4h-2.8v-1.8c0-.8.2-1.3 1.4-1.3Z"
-                  />
+                  <path fill="#1877f2" d="M13.4 8h1.8V6.4c-.3-.1-1.3-.2-2.5-.2-2.5 0-4.2 1.5-4.2 4.3v1.9H7.2v2.4h1.3v6.1h2.9v-6.1h2.4l.4-2.4h-2.8v-1.8c0-.8.2-1.3 1.4-1.3Z" />
                 </svg>
                 Facebook
               </span>
               <strong>Shekinah Versalles</strong>
             </a>
-            <a
-              class="social-card youtube"
-              href="https://www.youtube.com/results?search_query=Iglesia+Shekinah+Versalles"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="YouTube de Iglesia Shekinah Versalles"
-            >
+            <a class="social-card youtube" href="https://www.youtube.com/results?search_query=Iglesia+Shekinah+Versalles" target="_blank" rel="noopener noreferrer" aria-label="YouTube de Iglesia Shekinah Versalles">
               <span class="social-label">
-                <svg
-                  class="social-icon brand-icon youtube-icon"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path
-                    fill="#ff0000"
-                    d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.8 4 12 4 12 4s-3.8 0-6.7.2c-.4.1-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.9v1.8c0 1.9.2 3.7.2 3.7s.2 1.5.8 2.1c.8.8 1.9.8 2.4.9 1.7.2 6.4.2 6.4.2s3.8 0 6.7-.2c.4-.1 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.9.2-3.7v-1.8c0-1.9-.2-3.7-.2-3.7Z"
-                  />
+                <svg class="social-icon brand-icon youtube-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path fill="#ff0000" d="M21.6 7.2s-.2-1.5-.8-2.1c-.8-.8-1.7-.8-2.1-.9C15.8 4 12 4 12 4s-3.8 0-6.7.2c-.4.1-1.3.1-2.1.9-.6.6-.8 2.1-.8 2.1S2.2 9 2.2 10.9v1.8c0 1.9.2 3.7.2 3.7s.2 1.5.8 2.1c.8.8 1.9.8 2.4.9 1.7.2 6.4.2 6.4.2s3.8 0 6.7-.2c.4-.1 1.3-.1 2.1-.9.6-.6.8-2.1.8-2.1s.2-1.9.2-3.7v-1.8c0-1.9-.2-3.7-.2-3.7Z" />
                   <path fill="#ffffff" d="m10 14.9 5.2-3-5.2-3v6Z" />
                 </svg>
                 YouTube
@@ -873,15 +533,7 @@
     <nav class="mobile-cta" aria-label="Acciones principales" data-i18n-aria-label="mobileCta.aria">
       <a href="#reuniones" data-i18n="mobileCta.schedule">Horarios</a>
       <a href="#ubicacion" data-i18n="mobileCta.directions">Llegar</a>
-      <a
-        class="mobile-cta-whatsapp"
-        href="#"
-        data-whatsapp-link
-        target="_blank"
-        rel="noopener noreferrer"
-        data-i18n="mobileCta.whatsapp"
-        >WhatsApp</a
-      >
+      <a class="mobile-cta-whatsapp" href="#" data-whatsapp-link target="_blank" rel="noopener noreferrer" data-i18n="mobileCta.whatsapp">WhatsApp</a>
     </nav>
 
     <a
@@ -893,46 +545,20 @@
       data-i18n-aria-label="fab.whatsappAria"
     >
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-        <path
-          fill="currentColor"
-          d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z"
-        />
-        <path
-          fill="#fff"
-          d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z"
-        />
+        <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.08L2 22l5.08-1.33A9.93 9.93 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2Z" />
+        <path fill="#fff" d="M16.2 14.9c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.24-.62.78-.76.94-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.42-1.34-1.66-.14-.24-.02-.36.1-.48.1-.1.24-.26.36-.4.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.2-.48-.4-.42-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.12 3.64.58.25 1.03.4 1.38.52.58.18 1.1.16 1.52.1.46-.07 1.42-.58 1.62-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28Z" />
       </svg>
     </a>
 
-    <button
-      class="scroll-top"
-      type="button"
-      aria-label="Volver arriba"
-      data-i18n-aria-label="fab.scrollTopAria"
-      hidden
-    >
+    <button class="scroll-top" type="button" aria-label="Volver arriba" data-i18n-aria-label="fab.scrollTopAria" hidden>
       <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M12 19V5" />
         <path d="m7 10 5-5 5 5" />
       </svg>
     </button>
 
-    <div
-      class="gallery-lightbox"
-      data-gallery-lightbox
-      aria-hidden="true"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Visor de fotos"
-      data-i18n-aria-label="galeria.viewerAria"
-    >
-      <button
-        class="gallery-close"
-        type="button"
-        data-gallery-close
-        aria-label="Cerrar foto"
-        data-i18n-aria-label="galeria.closeAria"
-      >
+    <div class="gallery-lightbox" data-gallery-lightbox aria-hidden="true" role="dialog" aria-modal="true" aria-label="Visor de fotos" data-i18n-aria-label="galeria.viewerAria">
+      <button class="gallery-close" type="button" data-gallery-close aria-label="Cerrar foto" data-i18n-aria-label="galeria.closeAria">
         <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path d="M6 6l12 12M18 6 6 18" />
         </svg>
@@ -954,6 +580,7 @@
       </button>
     </div>
 
-    <script type="module" src="/src/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js?v=24"></script>
   </body>
 </html>
