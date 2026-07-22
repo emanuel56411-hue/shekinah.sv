@@ -1762,28 +1762,89 @@ body.dark-mode .callout {
   gap: 10px;
 }
 
-.help-shortcuts button {
+/* Estilo inspirado en uiverse.io (fill hover), adaptado a marca #65101a */
+.help-shortcuts .uiverse-help-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
   min-height: 52px;
-  padding: 10px 14px;
-  color: var(--ink);
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  box-shadow: var(--soft-shadow);
+  padding: 12px 18px;
+  overflow: hidden;
+  color: #65101a;
+  background: #ffffff;
+  border: 2px solid #65101a;
+  border-radius: 15px;
+  box-shadow: 4px 8px 19px -3px rgba(101, 16, 26, 0.27);
   font-weight: 850;
   text-align: left;
   cursor: pointer;
-  transition: transform 170ms ease, box-shadow 170ms ease, border-color 170ms ease, background 170ms ease;
+  transition: color 250ms ease, box-shadow 250ms ease, transform 250ms ease, border-color 250ms ease;
 }
 
-.help-shortcuts button:hover,
-.help-shortcuts button:focus-visible,
-.help-shortcuts button.is-selected {
-  background: color-mix(in srgb, var(--gold) 14%, var(--card));
-  border-color: color-mix(in srgb, var(--brand) 45%, var(--line));
-  box-shadow: var(--shadow);
+.help-shortcuts .uiverse-help-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 0;
+  height: 100%;
+  border-radius: 13px;
+  background-color: #65101a;
+  transition: width 250ms ease;
+}
+
+.help-shortcuts .uiverse-help-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.help-shortcuts .uiverse-help-btn:hover,
+.help-shortcuts .uiverse-help-btn:focus-visible,
+.help-shortcuts .uiverse-help-btn.is-selected {
+  color: #ffffff;
+  border-color: #65101a;
+  box-shadow: 4px 8px 22px -3px rgba(101, 16, 26, 0.42);
   outline: none;
-  transform: translateY(-3px);
+  transform: translateY(-2px);
+}
+
+.help-shortcuts .uiverse-help-btn:hover::before,
+.help-shortcuts .uiverse-help-btn:focus-visible::before,
+.help-shortcuts .uiverse-help-btn.is-selected::before {
+  width: 100%;
+}
+
+.help-shortcuts .uiverse-help-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+body.dark-mode .help-shortcuts .uiverse-help-btn {
+  color: #ffd7dc;
+  background: color-mix(in srgb, var(--card) 88%, #65101a);
+  border-color: color-mix(in srgb, #65101a 55%, var(--gold));
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .help-shortcuts .uiverse-help-btn::before {
+  background-color: #65101a;
+}
+
+body.dark-mode .help-shortcuts .uiverse-help-btn:hover,
+body.dark-mode .help-shortcuts .uiverse-help-btn:focus-visible,
+body.dark-mode .help-shortcuts .uiverse-help-btn.is-selected {
+  color: #ffffff;
+  border-color: #65101a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .help-shortcuts .uiverse-help-btn,
+  .help-shortcuts .uiverse-help-btn::before {
+    transition: none;
+  }
 }
 
 .help-form {
