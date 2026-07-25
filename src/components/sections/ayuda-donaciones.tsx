@@ -93,7 +93,7 @@ export function AyudaDonaciones() {
   ];
 
   return (
-    <section id="ayuda" className="section-padding bg-muted/30">
+    <section id="ayuda" className="section-padding section-surface-alt">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <p className="eyebrow">{t("ayuda.eyebrow")}</p>

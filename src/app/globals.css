@@ -18,21 +18,29 @@
   }
 
   .section-title {
-    @apply mt-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl;
+    @apply mt-3 font-heading text-[2rem] font-semibold leading-tight tracking-tight text-foreground;
   }
 
   .section-desc {
-    @apply mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg;
+    @apply mt-4 max-w-2xl text-base font-normal leading-relaxed text-muted-foreground;
   }
 
   .eyebrow {
     @apply text-xs font-bold uppercase tracking-[0.18em] text-shekinah;
   }
+
+  .section-surface {
+    @apply bg-white;
+  }
+
+  .section-surface-alt {
+    background-color: #faf8f3;
+  }
 }
 
 @layer base {
   :root {
-    --background: 40 33% 98%;
+    --background: 0 0% 100%;
     --foreground: 350 25% 12%;
     --card: 0 0% 100%;
     --card-foreground: 350 25% 12%;
@@ -42,7 +50,7 @@
     --primary-foreground: 0 0% 98%;
     --secondary: 350 25% 95%;
     --secondary-foreground: 350 73% 23%;
-    --muted: 40 20% 94%;
+    --muted: 40 33% 97%;
     --muted-foreground: 350 10% 40%;
     --accent: 350 30% 94%;
     --accent-foreground: 350 73% 23%;
@@ -51,7 +59,7 @@
     --border: 350 15% 88%;
     --input: 350 15% 88%;
     --ring: 350 73% 23%;
-    --radius: 0.75rem;
+    --radius: 12px;
   }
 
   .dark {
@@ -85,6 +93,50 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply bg-background font-sans text-base font-normal text-foreground antialiased;
+  }
+
+  h1 {
+    @apply font-heading text-[3rem] font-bold leading-tight tracking-tight;
+  }
+
+  h2 {
+    @apply font-heading text-[2rem] font-semibold leading-tight tracking-tight;
+  }
+
+  h3 {
+    @apply font-heading text-[1.5rem] font-semibold leading-snug tracking-tight;
+  }
+
+  p,
+  label,
+  button,
+  input,
+  textarea,
+  select {
+    @apply font-sans;
+  }
+
+  /* Bordes sutiles + acento marca en tarjetas clave */
+  #reuniones [data-slot="card"],
+  #ubicacion [data-slot="card"],
+  #ayuda [data-slot="card"] {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 2px solid #65101a;
+    box-shadow: 0 2px 12px -2px rgb(0 0 0 / 0.06);
+    transition: box-shadow 0.2s ease;
+  }
+
+  #reuniones [data-slot="card"]:hover,
+  #ubicacion [data-slot="card"]:hover,
+  #ayuda [data-slot="card"]:hover {
+    box-shadow: 0 6px 20px -4px rgb(0 0 0 / 0.1);
+  }
+
+  /* Bloques de acción / contenedores sin data-slot=card en ubicación */
+  #ubicacion a.group,
+  #reuniones .rounded-2xl {
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
   }
 }

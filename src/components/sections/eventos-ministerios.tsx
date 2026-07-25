@@ -13,7 +13,7 @@ export function Eventos() {
   const { t } = useLanguage();
 
   return (
-    <section id="eventos" className="section-padding bg-muted/30">
+    <section id="eventos" className="section-padding section-surface-alt">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <p className="eyebrow">{t("eventos.eyebrow")}</p>
@@ -46,7 +46,7 @@ export function Ministerios() {
   const { t } = useLanguage();
 
   return (
-    <section id="ministerios" className="section-padding">
+    <section id="ministerios" className="section-padding section-surface">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <p className="eyebrow">{t("ministerios.eyebrow")}</p>

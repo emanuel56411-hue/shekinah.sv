@@ -23,7 +23,7 @@ export function Galeria() {
   };
 
   return (
-    <section id="galeria" className="section-padding">
+    <section id="galeria" className="section-padding section-surface">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <p className="eyebrow">{t("galeria.eyebrow")}</p>

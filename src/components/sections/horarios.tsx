@@ -42,7 +42,7 @@ export function Horarios() {
     matchNextId("schedule.sunday2Activity", nextId);
 
   return (
-    <section id="reuniones" className="section-padding bg-muted/30">
+    <section id="reuniones" className="section-padding section-surface-alt">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>
           <p className="eyebrow">{t("reuniones.eyebrow")}</p>

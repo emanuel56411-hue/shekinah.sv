@@ -36,7 +36,7 @@ export function Ubicacion() {
   ];
 
   return (
-    <section id="ubicacion" className="section-padding">
+    <section id="ubicacion" className="section-padding section-surface">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
         <Reveal>
           <p className="eyebrow">{t("ubicacion.eyebrow")}</p>

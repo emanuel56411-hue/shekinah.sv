@@ -9,7 +9,7 @@ export function AnniversaryNote() {
   const { t } = useLanguage();
 
   return (
-    <Reveal className="border-y border-border/60 bg-muted/40">
+    <Reveal className="border-y border-border/60 section-surface-alt">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-8 text-center sm:flex-row sm:justify-center sm:gap-5 sm:px-6">
         <p className="inline-flex items-center gap-2 rounded-full bg-shekinah px-4 py-2 text-sm font-bold text-white shadow-card">
           <span className="text-2xl leading-none">19</span>
@@ -32,7 +32,7 @@ export function QuickStrip() {
   ];
 
   return (
-    <nav aria-label={t("quickStrip.aria")} className="bg-background">
+    <nav aria-label={t("quickStrip.aria")} className="section-surface">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-3 px-4 py-8 sm:grid-cols-4 sm:px-6">
         {items.map((item, index) => (
           <Reveal key={item.href} delay={index * 0.05}>

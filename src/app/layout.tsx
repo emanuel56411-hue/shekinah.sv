@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import type { Metadata } from "next";
 import { AppProviders } from "@/components/providers/app-providers";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -10,6 +10,12 @@ import "./globals.css";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -43,7 +49,7 @@ export const viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} min-h-screen font-sans antialiased`}>
+      <body className={`${inter.variable} ${fraunces.variable} min-h-screen font-sans antialiased`}>
         <AppProviders>
           <SiteHeader />
           {children}
