@@ -15,9 +15,9 @@ export function FabWhatsapp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={t("fab.whatsappAria")}
-      className="fixed bottom-20 right-4 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-all hover:scale-105 hover:bg-green-600 md:bottom-6"
+      className="fixed bottom-[5.5rem] right-3 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-green-600 text-white shadow-lg transition-colors hover:bg-green-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2 sm:h-14 sm:w-14 md:bottom-6 md:right-4"
     >
-      <MessageCircle className="h-7 w-7" />
+      <MessageCircle className="h-6 w-6 sm:h-7 sm:w-7" />
     </a>
   );
 }
@@ -42,7 +42,7 @@ export function ScrollTop() {
       variant="outline"
       aria-label={t("fab.scrollTopAria")}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-36 right-4 z-40 rounded-full bg-background shadow-lg md:bottom-24"
+      className="fixed bottom-[9.25rem] right-3 z-40 rounded-full border-black/30 bg-background shadow-lg focus-visible:ring-2 focus-visible:ring-shekinah md:bottom-24 md:right-4"
     >
       <ArrowUp className="h-5 w-5" />
     </Button>

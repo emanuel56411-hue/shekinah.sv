@@ -10,19 +10,25 @@ export function MobileCta() {
   return (
     <nav
       aria-label={t("mobileCta.aria")}
-      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-border bg-background/95 backdrop-blur md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-black/20 bg-background/95 backdrop-blur md:hidden"
     >
-      <Link href="#reuniones" className="px-3 py-3 text-center text-sm font-medium transition-colors hover:text-shekinah">
+      <Link
+        href="#reuniones"
+        className="px-3 py-3 text-center text-sm font-medium transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
+      >
         {t("mobileCta.schedule")}
       </Link>
-      <Link href="#ubicacion" className="border-x border-border px-3 py-3 text-center text-sm font-medium transition-colors hover:text-shekinah">
+      <Link
+        href="#ubicacion"
+        className="border-x border-black/15 px-3 py-3 text-center text-sm font-medium transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
+      >
         {t("mobileCta.directions")}
       </Link>
       <a
         href={buildWhatsappUrl()}
         target="_blank"
         rel="noopener noreferrer"
-        className="px-3 py-3 text-center text-sm font-semibold text-green-600 transition-colors hover:text-green-700"
+        className="px-3 py-3 text-center text-sm font-medium text-muted-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
       >
         {t("mobileCta.whatsapp")}
       </a>

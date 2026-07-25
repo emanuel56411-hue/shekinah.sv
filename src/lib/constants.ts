@@ -2,6 +2,8 @@ export const COORDINATOR_PHONE = "50364465489";
 
 export const LINKS = {
   maps: "https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico",
+  mapsEmbed:
+    "https://maps.google.com/maps?q=13.7915625,-89.3586875&z=16&output=embed",
   waze: "https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes",
   instagram: "https://www.instagram.com/shekinahelsalvador",
   facebook: "https://www.facebook.com/share/1L6qRECBoy/",

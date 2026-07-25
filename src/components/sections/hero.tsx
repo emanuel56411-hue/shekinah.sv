@@ -39,22 +39,22 @@ export function Hero() {
         className="object-cover object-center"
         sizes="100vw"
       />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/75 via-black/60 to-black/85" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
 
       <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-white sm:px-6">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/85">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
           San Juan Opico, El Salvador
         </p>
-        <h1 className="max-w-4xl">
+        <h1 className="max-w-4xl drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)]">
           Iglesia Bautista Shekinah
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/90 sm:text-xl">{t("hero.description")}</p>
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/95 sm:text-xl">{t("hero.description")}</p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="#reuniones"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "min-w-[160px] bg-shekinah text-white shadow-lg transition-all hover:scale-[1.02] hover:bg-shekinah-700"
+              "min-w-[160px] bg-shekinah text-white shadow-lg transition-all hover:bg-shekinah-700 focus-visible:ring-2 focus-visible:ring-white"
             )}
           >
             {t("hero.ctaPrimary")}
@@ -64,8 +64,8 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              buttonVariants({ size: "lg", variant: "outline" }),
-              "min-w-[160px] border-white/50 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20 hover:text-white"
+              buttonVariants({ size: "lg" }),
+              "min-w-[160px] bg-green-600 text-white shadow-lg transition-all hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-white"
             )}
           >
             {t("hero.ctaWhatsapp")}

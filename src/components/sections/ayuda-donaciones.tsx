@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import { MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Badge } from "@/components/ui/badge";
 import { Button, buttonVariants } from "@/components/ui/button";
@@ -87,11 +88,6 @@ export function AyudaDonaciones() {
     setLoading(false);
   };
 
-  const defaultCards = [
-    { tag: t("helpTypes.oracion"), title: t("ayuda.example1Title"), desc: t("ayuda.example1Desc") },
-    { tag: t("helpTypes.viveres"), title: t("ayuda.example2Title"), desc: t("ayuda.example2Desc") },
-  ];
-
   return (
     <section id="ayuda" className="section-padding section-surface-alt">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -105,9 +101,18 @@ export function AyudaDonaciones() {
           <div className="space-y-6">
             <div className="grid gap-4 sm:grid-cols-2">
               {boardLoading ? (
-                <Card className="col-span-full shadow-card">
-                  <CardContent className="p-6 text-muted-foreground">{t("ayuda.loadingRequests")}</CardContent>
-                </Card>
+                <>
+                  {[0, 1].map((key) => (
+                    <Card key={key} className="shadow-card" aria-busy="true" aria-label={t("ayuda.loadingRequests")}>
+                      <CardContent className="space-y-3 p-6">
+                        <div className="h-5 w-20 animate-pulse rounded bg-muted" />
+                        <div className="h-6 w-3/4 animate-pulse rounded bg-muted" />
+                        <div className="h-16 w-full animate-pulse rounded bg-muted" />
+                        <div className="h-8 w-32 animate-pulse rounded bg-muted" />
+                      </CardContent>
+                    </Card>
+                  ))}
+                </>
               ) : requests.length > 0 ? (
                 requests.map((request) => (
                   <Card key={request.id} className="shadow-card transition-all hover:shadow-card-hover">
@@ -127,27 +132,26 @@ export function AyudaDonaciones() {
                         )}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={cn(buttonVariants({ size: "sm" }), "bg-shekinah hover:bg-shekinah-900")}
+                        className={cn(
+                          buttonVariants({ size: "sm", variant: "outline" }),
+                          "gap-2 border-black/30 text-foreground hover:bg-muted"
+                        )}
                       >
+                        <MessageCircle className="h-4 w-4" />
                         {t("ayuda.coordinateBtn")}
                       </a>
                     </CardContent>
                   </Card>
                 ))
               ) : (
-                defaultCards.map((card) => (
-                  <Card key={card.title} className="shadow-card">
-                    <CardHeader className="pb-2">
-                      <Badge variant="secondary" className="w-fit bg-shekinah/10 text-shekinah">
-                        {card.tag}
-                      </Badge>
-                      <CardTitle className="text-lg">{card.title}</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm text-muted-foreground">{card.desc}</p>
-                    </CardContent>
-                  </Card>
-                ))
+                <Card className="col-span-full shadow-card">
+                  <CardContent className="flex flex-col items-center gap-2 p-8 text-center">
+                    <p className="font-heading text-lg font-semibold text-foreground">
+                      {t("ayuda.emptyRequestsTitle")}
+                    </p>
+                    <p className="max-w-md text-sm text-muted-foreground">{t("ayuda.emptyRequestsDesc")}</p>
+                  </CardContent>
+                </Card>
               )}
             </div>
 

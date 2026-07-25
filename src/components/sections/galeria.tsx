@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
@@ -22,6 +22,23 @@ export function Galeria() {
     setIndex((nextIndex + total) % total);
   };
 
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+      if (event.key === "ArrowLeft") {
+        setIndex((current) => (current - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length);
+      }
+      if (event.key === "ArrowRight") {
+        setIndex((current) => (current + 1) % GALLERY_ITEMS.length);
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
     <section id="galeria" className="section-padding section-surface">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -36,47 +53,54 @@ export function Galeria() {
             const isLarge = "large" in item && item.large;
 
             return (
-              <button
+              <Reveal
                 key={item.src}
-                type="button"
-                aria-label={t(item.titleKey)}
-                onClick={() => {
-                  setIndex(itemIndex);
-                  setOpen(true);
-                }}
-                className={`group relative block w-full overflow-hidden rounded-2xl bg-muted shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah ${
-                  isLarge ? "col-span-2 row-span-2" : ""
-                }`}
+                delay={Math.min(itemIndex * 0.04, 0.2)}
+                className={isLarge ? "col-span-2 row-span-2" : undefined}
               >
-                <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
-                  <Image
-                    src={item.src}
-                    alt={item.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                    sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
-                    <Badge className="mb-2 bg-white/15 text-white">{t(item.tagKey)}</Badge>
-                    <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
+                <button
+                  type="button"
+                  aria-label={t(item.titleKey)}
+                  onClick={() => {
+                    setIndex(itemIndex);
+                    setOpen(true);
+                  }}
+                  className="group relative block h-full w-full overflow-hidden rounded-[12px] bg-muted shadow-card transition-shadow duration-200 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
+                >
+                  <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
+                      <Badge className="mb-2 bg-white/15 text-white">{t(item.tagKey)}</Badge>
+                      <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
+                    </div>
                   </div>
-                </div>
-              </button>
+                </button>
+              </Reveal>
             );
           })}
         </div>
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-5xl border-0 bg-black/95 p-2 sm:p-4" aria-label={t("galeria.viewerAria")}>
+        <DialogContent
+          className="max-w-5xl border-0 bg-transparent p-2 shadow-none ring-0 sm:p-4"
+          aria-label={t("galeria.viewerAria")}
+          showCloseButton={false}
+        >
           <DialogTitle className="sr-only">{t(current.titleKey)}</DialogTitle>
           <div className="relative flex items-center justify-center">
             <Button
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/10"
+              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
               onClick={() => showImage(index - 1)}
               aria-label="Foto anterior"
             >
@@ -98,18 +122,18 @@ export function Galeria() {
               type="button"
               variant="ghost"
               size="icon"
-              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/10"
+              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
               onClick={() => showImage(index + 1)}
               aria-label="Foto siguiente"
             >
               <ChevronRight />
             </Button>
           </div>
-          <p className="text-center text-sm text-white/85">{t(current.titleKey)}</p>
+          <p className="text-center text-sm text-white/90">{t(current.titleKey)}</p>
           <Button
             type="button"
             variant="ghost"
-            className="mx-auto text-white hover:bg-white/10"
+            className="mx-auto text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
             onClick={() => setOpen(false)}
           >
             <X className="mr-2 h-4 w-4" />

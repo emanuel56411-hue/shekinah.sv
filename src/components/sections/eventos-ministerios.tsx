@@ -74,7 +74,10 @@ export function Ministerios() {
               href={buildWhatsappUrl()}
               target="_blank"
               rel="noopener noreferrer"
-              className={cn(buttonVariants(), "bg-shekinah hover:bg-shekinah-900")}
+              className={cn(
+                buttonVariants({ variant: "outline" }),
+                "border-black/30 text-foreground hover:bg-muted focus-visible:ring-2 focus-visible:ring-shekinah"
+              )}
             >
               {t("ministerios.calloutBtn")}
             </a>
