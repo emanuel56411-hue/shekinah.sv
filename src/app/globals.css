@@ -30,58 +30,58 @@
   }
 
   .section-surface {
-    @apply bg-white dark:bg-card;
+    @apply bg-white dark:bg-[hsl(350_18%_12%)];
   }
 
   .section-surface-alt {
-    @apply bg-[#FAF8F3] dark:bg-[hsl(350_16%_10%)];
+    @apply bg-[#FAF8F3] dark:bg-[hsl(350_20%_9%)];
   }
 }
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 350 28% 10%;
+    --background: 40 33% 99%;
+    --foreground: 350 35% 12%;
     --card: 0 0% 100%;
-    --card-foreground: 350 28% 10%;
+    --card-foreground: 350 35% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 350 28% 10%;
+    --popover-foreground: 350 35% 12%;
     --primary: 350 73% 23%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 350 25% 95%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 20% 95%;
     --secondary-foreground: 350 73% 23%;
-    --muted: 40 25% 96%;
-    --muted-foreground: 350 12% 32%;
-    --accent: 350 30% 94%;
+    --muted: 40 20% 95%;
+    --muted-foreground: 350 14% 28%;
+    --accent: 350 25% 94%;
     --accent-foreground: 350 73% 23%;
     --destructive: 0 84% 45%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 22%;
-    --input: 0 0% 26%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 350 10% 78%;
+    --input: 350 10% 72%;
     --ring: 350 73% 23%;
     --radius: 12px;
   }
 
   .dark {
-    --background: 350 22% 7%;
-    --foreground: 40 25% 96%;
-    --card: 350 18% 12%;
-    --card-foreground: 40 25% 96%;
-    --popover: 350 18% 12%;
-    --popover-foreground: 40 25% 96%;
-    --primary: 350 55% 62%;
+    --background: 350 24% 8%;
+    --foreground: 40 30% 96%;
+    --card: 350 20% 13%;
+    --card-foreground: 40 30% 96%;
+    --popover: 350 20% 13%;
+    --popover-foreground: 40 30% 96%;
+    --primary: 350 48% 58%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 350 14% 18%;
-    --secondary-foreground: 40 20% 96%;
-    --muted: 350 12% 18%;
-    --muted-foreground: 40 12% 78%;
-    --accent: 350 14% 20%;
-    --accent-foreground: 40 20% 96%;
+    --secondary: 350 16% 16%;
+    --secondary-foreground: 40 25% 95%;
+    --muted: 350 14% 16%;
+    --muted-foreground: 40 14% 82%;
+    --accent: 350 16% 18%;
+    --accent-foreground: 40 25% 95%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 78%;
-    --input: 0 0% 72%;
-    --ring: 350 55% 62%;
+    --border: 350 10% 28%;
+    --input: 350 10% 32%;
+    --ring: 350 48% 58%;
   }
 
   * {
@@ -111,15 +111,22 @@
   }
 
   h1 {
-    @apply font-heading text-[3rem] font-bold leading-tight tracking-tight text-foreground;
+    @apply font-heading text-[3rem] font-bold leading-tight tracking-tight;
   }
 
   h2 {
-    @apply font-heading text-[2rem] font-semibold leading-tight tracking-tight text-foreground;
+    @apply font-heading text-[2rem] font-semibold leading-tight tracking-tight;
   }
 
   h3 {
-    @apply font-heading text-[1.5rem] font-semibold leading-snug tracking-tight text-foreground;
+    @apply font-heading text-[1.5rem] font-semibold leading-snug tracking-tight;
+  }
+
+  .dark body {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(101, 16, 26, 0.35), transparent 55%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(101, 16, 26, 0.18), transparent 50%);
+    background-attachment: fixed;
   }
 
   p,
@@ -137,8 +144,8 @@
   }
 
   .dark [data-slot="card"] {
-    --tw-ring-color: rgb(255 255 255 / 0.18);
-    border-color: rgb(255 255 255 / 0.22);
+    --tw-ring-color: rgb(255 255 255 / 0.12);
+    border-color: rgb(255 255 255 / 0.14);
   }
 
   [data-slot="input"],
@@ -165,9 +172,9 @@
   .dark #reuniones [data-slot="card"],
   .dark #ubicacion [data-slot="card"],
   .dark #ayuda [data-slot="card"] {
-    border: 1px solid rgb(255 255 255 / 0.22);
-    border-top: 2px solid hsl(350 55% 62%);
-    box-shadow: 0 2px 16px -4px rgb(0 0 0 / 0.45);
+    border: 1px solid rgb(255 255 255 / 0.14);
+    border-top: 2px solid hsl(350 48% 58%);
+    box-shadow: 0 4px 20px -6px rgb(0 0 0 / 0.55);
   }
 
   #reuniones [data-slot="card"]:hover,

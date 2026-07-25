@@ -45,7 +45,7 @@ export function Hero() {
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
           San Juan Opico, El Salvador
         </p>
-        <h1 className="max-w-4xl drop-shadow-[0_2px_16px_rgba(0,0,0,0.55)]">
+        <h1 className="max-w-4xl text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)]">
           Iglesia Bautista Shekinah
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-white/95 sm:text-xl">{t("hero.description")}</p>
