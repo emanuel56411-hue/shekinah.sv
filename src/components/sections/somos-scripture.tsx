@@ -52,10 +52,10 @@ export function Scripture() {
 
       <Reveal>
         <blockquote className="relative mx-auto max-w-4xl px-6 text-center sm:px-8">
-          <p className="font-heading text-[1.65rem] font-medium italic leading-snug tracking-tight text-foreground drop-shadow-sm sm:text-3xl md:text-[2.35rem] md:leading-tight">
+          <p className="font-heading text-[1.65rem] font-medium italic leading-snug tracking-tight text-[#1a1a1a] drop-shadow-sm sm:text-3xl md:text-[2.35rem] md:leading-tight">
             {t("scripture.verseText")}
           </p>
-          <cite className="mt-6 block font-sans text-sm font-semibold not-italic uppercase tracking-[0.2em] text-shekinah dark:text-shekinah-300">
+          <cite className="mt-6 block font-sans text-sm font-semibold not-italic uppercase tracking-[0.2em] text-shekinah">
             {t("scripture.verseRef")}
           </cite>
         </blockquote>
