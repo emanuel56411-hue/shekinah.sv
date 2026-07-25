@@ -32,36 +32,39 @@ export function Galeria() {
         </Reveal>
 
         <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {GALLERY_ITEMS.map((item, itemIndex) => (
-            <Reveal key={item.src} delay={itemIndex * 0.04}>
+          {GALLERY_ITEMS.map((item, itemIndex) => {
+            const isLarge = "large" in item && item.large;
+
+            return (
               <button
+                key={item.src}
                 type="button"
                 aria-label={t(item.titleKey)}
                 onClick={() => {
                   setIndex(itemIndex);
                   setOpen(true);
                 }}
-                className={`group relative overflow-hidden rounded-2xl shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah ${
-                  "large" in item && item.large
-                    ? "col-span-2 row-span-2 min-h-[280px] md:min-h-[360px]"
-                    : "min-h-[180px]"
+                className={`group relative block w-full overflow-hidden rounded-2xl bg-muted shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah ${
+                  isLarge ? "col-span-2 row-span-2" : ""
                 }`}
               >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes={"large" in item && item.large ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
-                  <Badge className="mb-2 bg-white/15 text-white">{t(item.tagKey)}</Badge>
-                  <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
+                <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
+                    <Badge className="mb-2 bg-white/15 text-white">{t(item.tagKey)}</Badge>
+                    <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
+                  </div>
                 </div>
               </button>
-            </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
 
