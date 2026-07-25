@@ -164,7 +164,7 @@ export function getUpcomingServices(now = new Date(), count = 3): UpcomingServic
     for (const slot of ordered) {
       if (results.length >= count) break;
 
-      let dayDiff = slot.day - parts.weekday + weekOffset * 7;
+      const dayDiff = slot.day - parts.weekday + weekOffset * 7;
       if (weekOffset === 0 && dayDiff < 0) continue;
 
       const start = toMinutes(slot.startHour, slot.startMinute);
