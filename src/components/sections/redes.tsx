@@ -1,18 +1,45 @@
 "use client";
 
-import { ExternalLink, Facebook, Instagram, Youtube, type LucideIcon } from "lucide-react";
+import type { ReactNode } from "react";
+import { ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/components/providers/language-provider";
 import { LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
+function InstagramGlyph({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden fill="none" stroke="currentColor" strokeWidth="2">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function FacebookGlyph({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden fill="currentColor">
+      <path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-1.2C13 9.4 13.4 9 14 9z" />
+    </svg>
+  );
+}
+
+function YoutubeGlyph({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden fill="currentColor">
+      <path d="M22.5 7.2a2.9 2.9 0 0 0-2-2C18.7 4.8 12 4.8 12 4.8s-6.7 0-8.5.4a2.9 2.9 0 0 0-2 2A30 30 0 0 0 1.2 12a30 30 0 0 0 .3 4.8 2.9 2.9 0 0 0 2 2c1.8.4 8.5.4 8.5.4s6.7 0 8.5-.4a2.9 2.9 0 0 0 2-2A30 30 0 0 0 22.8 12a30 30 0 0 0-.3-4.8zM10 15.2V8.8L15.5 12 10 15.2z" />
+    </svg>
+  );
+}
+
 const socialLinks: {
   key: string;
   href: string;
   label: string;
   handle: string;
-  icon: LucideIcon;
+  icon: (props: { className?: string }) => ReactNode;
   iconClass: string;
   className: string;
 }[] = [
@@ -21,7 +48,7 @@ const socialLinks: {
     href: LINKS.instagram,
     label: "Instagram",
     handle: "@shekinahelsalvador",
-    icon: Instagram,
+    icon: InstagramGlyph,
     iconClass: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white",
     className: "hover:border-pink-300 hover:bg-pink-50 dark:hover:bg-pink-950/20",
   },
@@ -30,7 +57,7 @@ const socialLinks: {
     href: LINKS.facebook,
     label: "Facebook",
     handle: "Shekinah Versalles",
-    icon: Facebook,
+    icon: FacebookGlyph,
     iconClass: "bg-[#1877F2] text-white",
     className: "hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/20",
   },
@@ -39,7 +66,7 @@ const socialLinks: {
     href: LINKS.youtube,
     label: "YouTube",
     handle: "@Iglesia_ShekinahVersalles",
-    icon: Youtube,
+    icon: YoutubeGlyph,
     iconClass: "bg-[#FF0000] text-white",
     className: "hover:border-red-300 hover:bg-red-50 dark:hover:bg-red-950/20",
   },
@@ -49,7 +76,7 @@ function BrandIcon({
   icon: Icon,
   className,
 }: {
-  icon: LucideIcon;
+  icon: (props: { className?: string }) => ReactNode;
   className: string;
 }) {
   return (
@@ -60,7 +87,7 @@ function BrandIcon({
       )}
       aria-hidden
     >
-      <Icon className="h-5 w-5" strokeWidth={2.25} />
+      <Icon className="h-5 w-5" />
     </span>
   );
 }
@@ -99,7 +126,9 @@ export function Redes() {
                     </div>
                     <div className="flex items-center justify-center gap-3">
                       <BrandIcon icon={social.icon} className={social.iconClass} />
-                      <strong className="text-center text-base text-shekinah sm:text-lg">{social.handle}</strong>
+                      <strong className="min-w-0 break-all text-center text-base text-shekinah sm:text-lg">
+                        {social.handle}
+                      </strong>
                       <BrandIcon icon={social.icon} className={social.iconClass} />
                     </div>
                   </CardContent>
