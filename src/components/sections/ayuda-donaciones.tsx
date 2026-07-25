@@ -230,7 +230,7 @@ export function AyudaDonaciones() {
                   {status && (
                     <p
                       role="status"
-                      className={`text-sm ${status.type === "error" ? "text-destructive" : status.type === "success" ? "text-green-600" : "text-muted-foreground"}`}
+                      className={`text-sm ${status.type === "error" ? "text-destructive" : status.type === "success" ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}`}
                     >
                       {status.text}
                     </p>

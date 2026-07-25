@@ -48,16 +48,16 @@ export function Eventos() {
             const Icon = eventIcons[event.icon];
             return (
               <Reveal key={event.id} delay={index * 0.05}>
-                <Card className="h-full border-black/15 bg-white/70 shadow-none transition-all hover:border-shekinah/30 hover:bg-white">
+                <Card className="h-full border-black/15 bg-white/70 shadow-none transition-all hover:border-shekinah/30 hover:bg-white dark:border-white/20 dark:bg-card dark:hover:border-shekinah/50 dark:hover:bg-card">
                   <CardContent className="flex h-full flex-col gap-5 p-6 sm:p-7">
                     <div className="flex items-center justify-between gap-3">
                       <span
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-shekinah/15 bg-shekinah/[0.04] text-shekinah"
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-shekinah/15 bg-shekinah/[0.04] text-shekinah dark:border-shekinah/40 dark:bg-shekinah/15 dark:text-shekinah-300"
                         aria-hidden
                       >
                         <Icon className="h-5 w-5" strokeWidth={1.5} />
                       </span>
-                      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-shekinah/80">
+                      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-shekinah dark:text-shekinah-300">
                         {t(event.tagKey)}
                       </span>
                     </div>
@@ -95,10 +95,10 @@ export function Ministerios() {
             const Icon = ministryIcons[ministry.icon];
             return (
               <Reveal key={ministry.id} delay={index * 0.05}>
-                <Card className="h-full border-black/20 shadow-none transition-all hover:border-shekinah/35 hover:shadow-card">
+                <Card className="h-full border-black/20 shadow-none transition-all hover:border-shekinah/35 hover:shadow-card dark:border-white/20 dark:hover:border-shekinah/50">
                   <CardContent className="flex h-full flex-col gap-4 p-6">
                     <span
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah dark:border-shekinah/40 dark:bg-shekinah/15 dark:text-shekinah-300"
                       aria-hidden
                     >
                       <Icon className="h-5 w-5" strokeWidth={1.6} />
@@ -119,7 +119,7 @@ export function Ministerios() {
         </div>
 
         <Reveal className="mt-10">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-black/20 bg-[#FAF8F3] p-6 text-center sm:flex-row sm:text-left">
+          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-black/20 bg-[#FAF8F3] p-6 text-center dark:border-white/20 dark:bg-secondary sm:flex-row sm:text-left">
             <p className="font-heading text-lg font-semibold text-foreground">
               {t("ministerios.calloutText")}
             </p>
@@ -129,7 +129,7 @@ export function Ministerios() {
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "border-black/30 text-foreground hover:bg-white focus-visible:ring-2 focus-visible:ring-shekinah"
+                "border-black/30 text-foreground hover:bg-white focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/30 dark:hover:bg-muted"
               )}
             >
               {t("ministerios.calloutBtn")}

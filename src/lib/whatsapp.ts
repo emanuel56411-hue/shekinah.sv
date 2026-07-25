@@ -5,6 +5,10 @@ export function buildWhatsappUrl(message = ""): string {
   return message ? `${baseUrl}?text=${encodeURIComponent(message)}` : baseUrl;
 }
 
+export function buildTelUrl(phone = COORDINATOR_PHONE): string {
+  return `tel:+${phone.replace(/\D/g, "")}`;
+}
+
 export function openWhatsapp(message = ""): void {
   if (typeof window === "undefined") return;
   window.open(buildWhatsappUrl(message), "_blank", "noopener,noreferrer");

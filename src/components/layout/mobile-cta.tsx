@@ -10,17 +10,17 @@ export function MobileCta() {
   return (
     <nav
       aria-label={t("mobileCta.aria")}
-      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-black/20 bg-background/95 backdrop-blur md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-black/20 bg-background/95 backdrop-blur dark:border-white/15 md:hidden"
     >
       <Link
         href="#reuniones"
-        className="px-3 py-3 text-center text-sm font-medium transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
+        className="px-3 py-3 text-center text-sm font-medium text-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
       >
         {t("mobileCta.schedule")}
       </Link>
       <Link
         href="#ubicacion"
-        className="border-x border-black/15 px-3 py-3 text-center text-sm font-medium transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
+        className="border-x border-black/15 px-3 py-3 text-center text-sm font-medium text-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah dark:border-white/15"
       >
         {t("mobileCta.directions")}
       </Link>

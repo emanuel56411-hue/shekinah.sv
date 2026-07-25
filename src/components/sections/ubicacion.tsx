@@ -56,13 +56,13 @@ export function Ubicacion() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "group flex items-center gap-3 rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah",
+                  "group flex items-center gap-3 rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/20",
                   action.className
                 )}
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10 dark:border-white/15",
                     action.iconWrapClass
                   )}
                 >

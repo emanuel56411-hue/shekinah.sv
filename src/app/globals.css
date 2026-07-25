@@ -26,62 +26,62 @@
   }
 
   .eyebrow {
-    @apply text-xs font-bold uppercase tracking-[0.18em] text-shekinah;
+    @apply text-xs font-bold uppercase tracking-[0.18em] text-shekinah dark:text-shekinah-300;
   }
 
   .section-surface {
-    @apply bg-white;
+    @apply bg-white dark:bg-card;
   }
 
   .section-surface-alt {
-    background-color: #faf8f3;
+    @apply bg-[#FAF8F3] dark:bg-[hsl(350_16%_10%)];
   }
 }
 
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 350 25% 12%;
+    --foreground: 350 28% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 350 25% 12%;
+    --card-foreground: 350 28% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 350 25% 12%;
+    --popover-foreground: 350 28% 10%;
     --primary: 350 73% 23%;
     --primary-foreground: 0 0% 98%;
     --secondary: 350 25% 95%;
     --secondary-foreground: 350 73% 23%;
-    --muted: 40 33% 97%;
-    --muted-foreground: 350 10% 40%;
+    --muted: 40 25% 96%;
+    --muted-foreground: 350 12% 32%;
     --accent: 350 30% 94%;
     --accent-foreground: 350 73% 23%;
-    --destructive: 0 84% 60%;
+    --destructive: 0 84% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 18%;
-    --input: 0 0% 22%;
+    --border: 0 0% 22%;
+    --input: 0 0% 26%;
     --ring: 350 73% 23%;
     --radius: 12px;
   }
 
   .dark {
-    --background: 350 20% 8%;
-    --foreground: 40 20% 96%;
-    --card: 350 18% 11%;
-    --card-foreground: 40 20% 96%;
-    --popover: 350 18% 11%;
-    --popover-foreground: 40 20% 96%;
-    --primary: 350 55% 50%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 350 15% 16%;
+    --background: 350 22% 7%;
+    --foreground: 40 25% 96%;
+    --card: 350 18% 12%;
+    --card-foreground: 40 25% 96%;
+    --popover: 350 18% 12%;
+    --popover-foreground: 40 25% 96%;
+    --primary: 350 55% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 14% 18%;
     --secondary-foreground: 40 20% 96%;
-    --muted: 350 12% 16%;
-    --muted-foreground: 350 8% 65%;
-    --accent: 350 15% 18%;
+    --muted: 350 12% 18%;
+    --muted-foreground: 40 12% 78%;
+    --accent: 350 14% 20%;
     --accent-foreground: 40 20% 96%;
-    --destructive: 0 62% 45%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 72%;
-    --input: 0 0% 68%;
-    --ring: 350 55% 50%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 78%;
+    --input: 0 0% 72%;
+    --ring: 350 55% 62%;
   }
 
   * {
@@ -101,21 +101,25 @@
     outline-offset: 2px;
   }
 
+  .dark :focus-visible {
+    outline-color: hsl(350 55% 62%);
+  }
+
   a:focus:not(:focus-visible),
   button:focus:not(:focus-visible) {
     outline: none;
   }
 
   h1 {
-    @apply font-heading text-[3rem] font-bold leading-tight tracking-tight;
+    @apply font-heading text-[3rem] font-bold leading-tight tracking-tight text-foreground;
   }
 
   h2 {
-    @apply font-heading text-[2rem] font-semibold leading-tight tracking-tight;
+    @apply font-heading text-[2rem] font-semibold leading-tight tracking-tight text-foreground;
   }
 
   h3 {
-    @apply font-heading text-[1.5rem] font-semibold leading-snug tracking-tight;
+    @apply font-heading text-[1.5rem] font-semibold leading-snug tracking-tight text-foreground;
   }
 
   p,
@@ -127,10 +131,14 @@
     @apply font-sans;
   }
 
-  /* Contorno más negro en tarjetas / inputs / botones outline */
   [data-slot="card"] {
-    --tw-ring-color: rgb(0 0 0 / 0.28);
+    --tw-ring-color: rgb(0 0 0 / 0.22);
     border-color: rgb(0 0 0 / 0.28);
+  }
+
+  .dark [data-slot="card"] {
+    --tw-ring-color: rgb(255 255 255 / 0.18);
+    border-color: rgb(255 255 255 / 0.22);
   }
 
   [data-slot="input"],
@@ -139,7 +147,12 @@
     border-color: rgb(0 0 0 / 0.35);
   }
 
-  /* Bordes + acento marca en tarjetas clave */
+  .dark [data-slot="input"],
+  .dark [data-slot="textarea"],
+  .dark [data-slot="select-trigger"] {
+    border-color: rgb(255 255 255 / 0.28);
+  }
+
   #reuniones [data-slot="card"],
   #ubicacion [data-slot="card"],
   #ayuda [data-slot="card"] {
@@ -149,16 +162,34 @@
     transition: box-shadow 0.2s ease;
   }
 
+  .dark #reuniones [data-slot="card"],
+  .dark #ubicacion [data-slot="card"],
+  .dark #ayuda [data-slot="card"] {
+    border: 1px solid rgb(255 255 255 / 0.22);
+    border-top: 2px solid hsl(350 55% 62%);
+    box-shadow: 0 2px 16px -4px rgb(0 0 0 / 0.45);
+  }
+
   #reuniones [data-slot="card"]:hover,
   #ubicacion [data-slot="card"]:hover,
   #ayuda [data-slot="card"]:hover {
     box-shadow: 0 6px 20px -4px rgb(0 0 0 / 0.1);
   }
 
-  /* Bloques de acción / contenedores sin data-slot=card en ubicación */
+  .dark #reuniones [data-slot="card"]:hover,
+  .dark #ubicacion [data-slot="card"]:hover,
+  .dark #ayuda [data-slot="card"]:hover {
+    box-shadow: 0 8px 24px -6px rgb(0 0 0 / 0.55);
+  }
+
   #ubicacion a.group,
   #reuniones .rounded-2xl {
     border: 1px solid rgb(0 0 0 / 0.35);
     border-radius: 12px;
+  }
+
+  .dark #ubicacion a.group,
+  .dark #reuniones .rounded-2xl {
+    border-color: rgb(255 255 255 / 0.22);
   }
 }

@@ -50,7 +50,7 @@ const socialLinks: {
     handle: "@shekinahelsalvador",
     icon: InstagramGlyph,
     iconClass: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white",
-    className: "hover:border-pink-300 hover:bg-pink-50 dark:hover:bg-pink-950/20",
+                className: "hover:border-pink-300 hover:bg-pink-50 dark:hover:border-pink-400/40 dark:hover:bg-pink-950/40",
   },
   {
     key: "facebook",
@@ -59,7 +59,7 @@ const socialLinks: {
     handle: "Shekinah Versalles",
     icon: FacebookGlyph,
     iconClass: "bg-[#1877F2] text-white",
-    className: "hover:border-blue-300 hover:bg-blue-50 dark:hover:bg-blue-950/20",
+    className: "hover:border-blue-300 hover:bg-blue-50 dark:hover:border-blue-400/40 dark:hover:bg-blue-950/40",
   },
   {
     key: "youtube",
@@ -68,7 +68,7 @@ const socialLinks: {
     handle: "@Iglesia_ShekinahVersalles",
     icon: YoutubeGlyph,
     iconClass: "bg-[#FF0000] text-white",
-    className: "hover:border-red-300 hover:bg-red-50 dark:hover:bg-red-950/20",
+    className: "hover:border-red-300 hover:bg-red-50 dark:hover:border-red-400/40 dark:hover:bg-red-950/40",
   },
 ];
 
@@ -126,7 +126,7 @@ export function Redes() {
                     </div>
                     <div className="flex items-center gap-3">
                       <BrandIcon icon={social.icon} className={social.iconClass} />
-                      <strong className="min-w-0 break-all text-base text-shekinah sm:text-lg">
+                      <strong className="min-w-0 break-all text-base text-shekinah dark:text-shekinah-300 sm:text-lg">
                         {social.handle}
                       </strong>
                     </div>

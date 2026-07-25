@@ -12,6 +12,7 @@ import {
   Menu,
   MessageCircle,
   Moon,
+  Phone,
   Share2,
   Sun,
   Users,
@@ -28,7 +29,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { buildWhatsappUrl } from "@/lib/whatsapp";
+import { buildTelUrl, buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
 type NavItem = {
@@ -57,12 +58,12 @@ export function SiteHeader() {
   const closeMenu = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md dark:bg-background/95">
+    <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md dark:border-white/15 dark:bg-background/95">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <Link href="#inicio" aria-label={t("header.brandAria")} className="flex items-center gap-3">
           <Image src="/assets/logo-shekinah.png" alt="Logo Shekinah" width={46} height={46} className="rounded-full" />
           <span className="leading-tight">
-            <strong className="block text-sm font-bold sm:text-base">Iglesia Bautista Shekinah</strong>
+            <strong className="block text-sm font-bold text-foreground sm:text-base">Iglesia Bautista Shekinah</strong>
             <small className="text-xs text-muted-foreground">San Juan Opico</small>
           </span>
         </Link>
@@ -131,11 +132,25 @@ export function SiteHeader() {
                 {t("menu.whatsappCta")}
               </a>
 
+              <p className="px-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/50">
+                {t("menu.settings")}
+              </p>
+
+              <a
+                href={buildTelUrl()}
+                onClick={closeMenu}
+                aria-label={t("menu.callAria")}
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white px-4 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+              >
+                <Phone className="h-4 w-4" strokeWidth={1.75} />
+                {t("menu.call")}
+              </a>
+
               <div className="flex gap-2">
                 <button
                   type="button"
                   onClick={() => setLang(lang === "es" ? "en" : "es")}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                   aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
                 >
                   {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
@@ -143,7 +158,7 @@ export function SiteHeader() {
                 <button
                   type="button"
                   onClick={toggleTheme}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                   aria-label={theme === "dark" ? t("theme.ariaToLight") : t("theme.ariaToDark")}
                 >
                   {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}

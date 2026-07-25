@@ -38,6 +38,9 @@ export const translations: Record<Lang, TranslationTree> = {
       messagesDesc: "Predicaciones y recursos por anunciar.",
       whatsappDesc: "Abre un chat directo con coordinación.",
       whatsappCta: "Escribir por WhatsApp",
+      call: "Llamar",
+      callAria: "Llamar al teléfono de la iglesia",
+      settings: "Ajustes",
     },
     theme: {
       toDark: "Oscuro",
@@ -262,6 +265,9 @@ export const translations: Record<Lang, TranslationTree> = {
       messagesDesc: "Sermons and resources to be announced.",
       whatsappDesc: "Open a direct chat with coordination.",
       whatsappCta: "Message on WhatsApp",
+      call: "Call",
+      callAria: "Call the church phone number",
+      settings: "Settings",
     },
     theme: {
       toDark: "Dark",
