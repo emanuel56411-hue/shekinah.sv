@@ -124,12 +124,11 @@ export function Redes() {
                       <span className="font-semibold">{social.label}</span>
                       <ExternalLink className="h-4 w-4 text-muted-foreground" />
                     </div>
-                    <div className="flex items-center justify-center gap-3">
+                    <div className="flex items-center gap-3">
                       <BrandIcon icon={social.icon} className={social.iconClass} />
-                      <strong className="min-w-0 break-all text-center text-base text-shekinah sm:text-lg">
+                      <strong className="min-w-0 break-all text-base text-shekinah sm:text-lg">
                         {social.handle}
                       </strong>
-                      <BrandIcon icon={social.icon} className={social.iconClass} />
                     </div>
                   </CardContent>
                 </Card>
