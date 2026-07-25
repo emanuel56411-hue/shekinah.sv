@@ -58,24 +58,19 @@ export function SiteHeader() {
   const closeMenu = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[100] border-b border-black/10 bg-white/95 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-[hsl(350_22%_9%)]/95">
+    <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md dark:border-white/15 dark:bg-background/95">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <Link href="#inicio" aria-label={t("header.brandAria")} className="flex items-center gap-3">
           <Image src="/assets/logo-shekinah.png" alt="Logo Shekinah" width={46} height={46} className="rounded-full" />
           <span className="leading-tight">
-            <strong className="block text-sm font-bold text-shekinah dark:text-white sm:text-base">
-              Iglesia Bautista Shekinah
-            </strong>
-            <small className="text-xs text-muted-foreground dark:text-white/75">San Juan Opico</small>
+            <strong className="block text-sm font-bold text-foreground sm:text-base">Iglesia Bautista Shekinah</strong>
+            <small className="text-xs text-muted-foreground">San Juan Opico</small>
           </span>
         </Link>
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger
-            className={cn(
-              buttonVariants({ variant: "outline", size: "sm" }),
-              "gap-2 border-black/25 text-foreground hover:bg-muted dark:border-white/30 dark:text-white dark:hover:bg-white/10 dark:hover:text-white"
-            )}
+            className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-2")}
             aria-label={t("menu.openAria")}
           >
             <Menu className="h-4 w-4" />
