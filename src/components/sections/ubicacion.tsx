@@ -48,7 +48,7 @@ export function Ubicacion() {
                 href={action.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group flex flex-col rounded-xl border border-border bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover ${action.className}`}
+                className={`group flex flex-col rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover ${action.className}`}
               >
                 <action.icon className="mb-2 h-5 w-5 text-shekinah" />
                 <span className="font-semibold">{action.label}</span>

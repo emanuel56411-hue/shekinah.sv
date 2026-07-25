@@ -9,7 +9,7 @@ export function AnniversaryNote() {
   const { t } = useLanguage();
 
   return (
-    <Reveal className="border-y border-border/60 section-surface-alt">
+    <Reveal className="border-y border-black/30 section-surface-alt">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-3 px-4 py-8 text-center sm:flex-row sm:justify-center sm:gap-5 sm:px-6">
         <p className="inline-flex items-center gap-2 rounded-full bg-shekinah px-4 py-2 text-sm font-bold text-white shadow-card">
           <span className="text-2xl leading-none">19</span>
@@ -41,7 +41,7 @@ export function QuickStrip() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-xl border border-border/70 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover"
+                className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover"
               >
                 <span className="text-xs font-semibold uppercase tracking-wide text-shekinah">{item.title}</span>
                 <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah">
@@ -51,7 +51,7 @@ export function QuickStrip() {
             ) : (
               <Link
                 href={item.href}
-                className="group block rounded-xl border border-border/70 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover"
+                className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover"
               >
                 <span className="text-xs font-semibold uppercase tracking-wide text-shekinah">{item.title}</span>
                 <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah">

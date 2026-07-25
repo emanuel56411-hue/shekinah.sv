@@ -56,8 +56,8 @@
     --accent-foreground: 350 73% 23%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    --border: 350 15% 88%;
-    --input: 350 15% 88%;
+    --border: 0 0% 18%;
+    --input: 0 0% 22%;
     --ring: 350 73% 23%;
     --radius: 12px;
   }
@@ -79,8 +79,8 @@
     --accent-foreground: 40 20% 96%;
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 98%;
-    --border: 350 10% 22%;
-    --input: 350 10% 22%;
+    --border: 0 0% 72%;
+    --input: 0 0% 68%;
     --ring: 350 55% 50%;
   }
 
@@ -117,11 +117,23 @@
     @apply font-sans;
   }
 
-  /* Bordes sutiles + acento marca en tarjetas clave */
+  /* Contorno más negro en tarjetas / inputs / botones outline */
+  [data-slot="card"] {
+    --tw-ring-color: rgb(0 0 0 / 0.28);
+    border-color: rgb(0 0 0 / 0.28);
+  }
+
+  [data-slot="input"],
+  [data-slot="textarea"],
+  [data-slot="select-trigger"] {
+    border-color: rgb(0 0 0 / 0.35);
+  }
+
+  /* Bordes + acento marca en tarjetas clave */
   #reuniones [data-slot="card"],
   #ubicacion [data-slot="card"],
   #ayuda [data-slot="card"] {
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgb(0 0 0 / 0.35);
     border-top: 2px solid #65101a;
     box-shadow: 0 2px 12px -2px rgb(0 0 0 / 0.06);
     transition: box-shadow 0.2s ease;
@@ -136,7 +148,7 @@
   /* Bloques de acción / contenedores sin data-slot=card en ubicación */
   #ubicacion a.group,
   #reuniones .rounded-2xl {
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgb(0 0 0 / 0.35);
     border-radius: 12px;
   }
 }
