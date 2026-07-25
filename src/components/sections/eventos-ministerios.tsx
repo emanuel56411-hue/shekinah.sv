@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import {
   Baby,
   BookOpen,
@@ -32,6 +34,44 @@ const eventIcons: Record<(typeof EVENTS)[number]["icon"], LucideIcon> = {
   share: Share2,
 };
 
+const eventCardStyles: Record<
+  (typeof EVENTS)[number]["id"],
+  {
+    image: string;
+    href: string;
+    linkLabel: string;
+    accentIcon: string;
+    accentTag: string;
+    accentLink: string;
+  }
+> = {
+  upcoming: {
+    image: "/assets/fotos/aniversario-shekinah.webp",
+    href: "#reuniones",
+    linkLabel: "Ver calendario →",
+    accentIcon:
+      "border-shekinah/40 bg-shekinah/25 text-white dark:border-shekinah/50 dark:bg-shekinah/35 dark:text-white",
+    accentTag: "text-shekinah-300",
+    accentLink: "text-shekinah-300 hover:text-white",
+  },
+  help: {
+    image: "/assets/fotos/ministerio-ninos.webp",
+    href: "#ayuda",
+    linkLabel: "Cómo ayudar →",
+    accentIcon: "border-amber-400/50 bg-amber-500/25 text-amber-100",
+    accentTag: "text-amber-300",
+    accentLink: "text-amber-300 hover:text-amber-100",
+  },
+  social: {
+    image: "/assets/fotos/equipo-alabanza.webp",
+    href: "#redes",
+    linkLabel: "Síguenos →",
+    accentIcon: "border-sky-400/50 bg-sky-500/25 text-sky-100",
+    accentTag: "text-sky-300",
+    accentLink: "text-sky-300 hover:text-sky-100",
+  },
+};
+
 export function Eventos() {
   const { t } = useLanguage();
 
@@ -46,28 +86,56 @@ export function Eventos() {
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {EVENTS.map((event, index) => {
             const Icon = eventIcons[event.icon];
+            const style = eventCardStyles[event.id];
             return (
               <Reveal key={event.id} delay={index * 0.05}>
-                <Card className="h-full border-black/15 bg-white/70 shadow-none transition-all hover:border-shekinah/30 hover:bg-white dark:border-white/20 dark:bg-card dark:hover:border-shekinah/50 dark:hover:bg-card">
-                  <CardContent className="flex h-full flex-col gap-5 p-6 sm:p-7">
+                <Card className="group relative h-full gap-0 overflow-hidden border-black/20 bg-neutral-900 p-0 shadow-none ring-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] dark:border-white/15">
+                  <Image
+                    src={style.image}
+                    alt=""
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/25"
+                    aria-hidden
+                  />
+                  <CardContent className="relative z-10 flex h-full min-h-[280px] flex-col gap-5 px-6 py-6 sm:px-7 sm:py-7">
                     <div className="flex items-center justify-between gap-3">
                       <span
-                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-shekinah/15 bg-shekinah/[0.04] text-shekinah dark:border-shekinah/40 dark:bg-shekinah/15 dark:text-shekinah-300"
+                        className={cn(
+                          "inline-flex h-10 w-10 items-center justify-center rounded-full border",
+                          style.accentIcon
+                        )}
                         aria-hidden
                       >
                         <Icon className="h-5 w-5" strokeWidth={1.5} />
                       </span>
-                      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-shekinah dark:text-shekinah-300">
+                      <span
+                        className={cn(
+                          "text-[0.7rem] font-semibold uppercase tracking-[0.16em]",
+                          style.accentTag
+                        )}
+                      >
                         {t(event.tagKey)}
                       </span>
                     </div>
                     <div className="space-y-2">
-                      <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
+                      <h3 className="font-heading text-xl font-semibold tracking-tight text-white">
                         {t(event.titleKey)}
                       </h3>
-                      <p className="text-sm leading-relaxed text-muted-foreground">{t(event.descKey)}</p>
+                      <p className="text-sm leading-relaxed text-white/85">{t(event.descKey)}</p>
                     </div>
-                    <div className="mt-auto h-px w-10 bg-shekinah/25" aria-hidden />
+                    <Link
+                      href={style.href}
+                      className={cn(
+                        "mt-auto text-sm font-medium transition-colors duration-200",
+                        style.accentLink
+                      )}
+                    >
+                      {style.linkLabel}
+                    </Link>
                   </CardContent>
                 </Card>
               </Reveal>
