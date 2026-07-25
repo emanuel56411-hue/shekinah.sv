@@ -49,7 +49,7 @@ export function Horarios() {
           <h2 className="section-title">{t("reuniones.title")}</h2>
           <p className="section-desc">{t("reuniones.description")}</p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-shekinah">
+            <p className="mt-3 text-sm font-medium text-shekinah dark:text-shekinah-300">
               {isLive ? t("heroPanel.live") : t("heroPanel.next")}: {t(nextDayKey)}
             </p>
           ) : null}
@@ -74,13 +74,13 @@ export function Horarios() {
                           className={cn(
                             isNext
                               ? "bg-shekinah text-white"
-                              : "bg-shekinah/10 text-shekinah"
+                              : "bg-shekinah/10 text-shekinah dark:bg-shekinah/20 dark:text-shekinah-300"
                           )}
                         >
                           {t(item.dayKey)}
                         </Badge>
                         {isNext ? (
-                          <span className="text-xs font-semibold uppercase tracking-wide text-shekinah">
+                          <span className="text-xs font-semibold uppercase tracking-wide text-shekinah dark:text-shekinah-300">
                             {isLive ? t("heroPanel.live") : t("heroPanel.next")}
                           </span>
                         ) : null}
@@ -112,13 +112,13 @@ export function Horarios() {
                             className={cn(
                               isNext || !nextId
                                 ? "bg-shekinah text-white"
-                                : "bg-shekinah/10 text-shekinah"
+                                : "bg-shekinah/10 text-shekinah dark:bg-shekinah/20 dark:text-shekinah-300"
                             )}
                           >
                             {t(item.dayKey)}
                           </Badge>
                           {isNext ? (
-                            <span className="text-xs font-semibold uppercase tracking-wide text-shekinah">
+                            <span className="text-xs font-semibold uppercase tracking-wide text-shekinah dark:text-shekinah-300">
                               {isLive ? t("heroPanel.live") : t("heroPanel.next")}
                             </span>
                           ) : null}

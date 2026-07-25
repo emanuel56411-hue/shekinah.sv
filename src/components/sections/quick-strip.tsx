@@ -55,8 +55,10 @@ export function QuickStrip() {
                 rel="noopener noreferrer"
                 className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/20"
               >
-                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah">{item.title}</span>
-                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah">
+                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah dark:text-shekinah-300">
+                  {item.title}
+                </span>
+                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah dark:group-hover:text-shekinah-300">
                   {item.desc}
                 </strong>
               </a>
@@ -65,8 +67,10 @@ export function QuickStrip() {
                 href={item.href}
                 className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/20"
               >
-                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah">{item.title}</span>
-                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah">
+                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah dark:text-shekinah-300">
+                  {item.title}
+                </span>
+                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah dark:group-hover:text-shekinah-300">
                   {item.desc}
                 </strong>
               </Link>

@@ -117,7 +117,10 @@ export function AyudaDonaciones() {
                 requests.map((request) => (
                   <Card key={request.id} className="shadow-card transition-all hover:shadow-card-hover">
                     <CardHeader className="pb-2">
-                      <Badge variant="secondary" className="w-fit bg-shekinah/10 text-shekinah">
+                      <Badge
+                        variant="secondary"
+                        className="w-fit bg-shekinah/10 text-shekinah dark:bg-shekinah/20 dark:text-shekinah-300"
+                      >
                         {request.help_type}
                       </Badge>
                       <CardTitle className="text-lg">

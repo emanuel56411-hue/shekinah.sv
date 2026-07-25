@@ -14,13 +14,13 @@ export function MobileCta() {
     >
       <Link
         href="#reuniones"
-        className="px-3 py-3 text-center text-sm font-medium text-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
+        className="px-3 py-3 text-center text-sm font-medium text-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah dark:hover:text-shekinah-300"
       >
         {t("mobileCta.schedule")}
       </Link>
       <Link
         href="#ubicacion"
-        className="border-x border-black/15 px-3 py-3 text-center text-sm font-medium text-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah dark:border-white/15"
+        className="border-x border-black/15 px-3 py-3 text-center text-sm font-medium text-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah dark:border-white/15 dark:hover:text-shekinah-300"
       >
         {t("mobileCta.directions")}
       </Link>
@@ -28,7 +28,7 @@ export function MobileCta() {
         href={buildWhatsappUrl()}
         target="_blank"
         rel="noopener noreferrer"
-        className="px-3 py-3 text-center text-sm font-medium text-muted-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah"
+        className="px-3 py-3 text-center text-sm font-medium text-muted-foreground transition-colors hover:text-shekinah focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-shekinah dark:hover:text-shekinah-300"
       >
         {t("mobileCta.whatsapp")}
       </a>

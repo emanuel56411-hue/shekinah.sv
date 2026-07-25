@@ -30,11 +30,11 @@
   }
 
   .section-surface {
-    @apply bg-white dark:bg-[hsl(350_18%_12%)];
+    @apply bg-white dark:bg-[hsl(225_12%_11%)];
   }
 
   .section-surface-alt {
-    @apply bg-[#FAF8F3] dark:bg-[hsl(350_20%_9%)];
+    @apply bg-[#FAF8F3] dark:bg-[hsl(225_14%_8%)];
   }
 }
 
@@ -63,25 +63,26 @@
   }
 
   .dark {
-    --background: 350 24% 8%;
-    --foreground: 40 30% 96%;
-    --card: 350 20% 13%;
-    --card-foreground: 40 30% 96%;
-    --popover: 350 20% 13%;
-    --popover-foreground: 40 30% 96%;
-    --primary: 350 48% 58%;
+    /* Neutral blue-gray base (~#14161c); wine stays as accent via --primary / shekinah */
+    --background: 225 16% 9%;
+    --foreground: 40 20% 96%;
+    --card: 225 12% 12%;
+    --card-foreground: 40 20% 96%;
+    --popover: 225 12% 12%;
+    --popover-foreground: 40 20% 96%;
+    --primary: 350 55% 62%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 350 16% 16%;
-    --secondary-foreground: 40 25% 95%;
-    --muted: 350 14% 16%;
-    --muted-foreground: 40 14% 82%;
-    --accent: 350 16% 18%;
-    --accent-foreground: 40 25% 95%;
+    --secondary: 225 10% 14%;
+    --secondary-foreground: 40 20% 95%;
+    --muted: 225 10% 15%;
+    --muted-foreground: 220 12% 78%;
+    --accent: 225 10% 16%;
+    --accent-foreground: 40 20% 95%;
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
-    --border: 350 10% 28%;
-    --input: 350 10% 32%;
-    --ring: 350 48% 58%;
+    --border: 225 8% 26%;
+    --input: 225 8% 24%;
+    --ring: 350 55% 62%;
   }
 
   * {
@@ -123,9 +124,11 @@
   }
 
   .dark body {
-    background-image:
-      radial-gradient(ellipse 80% 50% at 50% -10%, rgba(101, 16, 26, 0.35), transparent 55%),
-      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(101, 16, 26, 0.18), transparent 50%);
+    background-image: radial-gradient(
+      ellipse 70% 45% at 50% -12%,
+      rgba(101, 16, 26, 0.12),
+      transparent 55%
+    );
     background-attachment: fixed;
   }
 

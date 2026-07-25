@@ -55,7 +55,7 @@ export function Scripture() {
           <p className="font-heading text-[1.65rem] font-medium italic leading-snug tracking-tight text-foreground drop-shadow-sm sm:text-3xl md:text-[2.35rem] md:leading-tight">
             {t("scripture.verseText")}
           </p>
-          <cite className="mt-6 block font-sans text-sm font-semibold not-italic uppercase tracking-[0.2em] text-shekinah">
+          <cite className="mt-6 block font-sans text-sm font-semibold not-italic uppercase tracking-[0.2em] text-shekinah dark:text-shekinah-300">
             {t("scripture.verseRef")}
           </cite>
         </blockquote>
