@@ -22,11 +22,11 @@ export const SUNDAY_SCHEDULE = [
 ] as const;
 
 export const MINISTRIES = [
-  { num: "01", titleKey: "ministerios.item1Title", descKey: "ministerios.item1Desc" },
-  { num: "02", titleKey: "ministerios.item2Title", descKey: "ministerios.item2Desc" },
-  { num: "03", titleKey: "ministerios.item3Title", descKey: "ministerios.item3Desc" },
-  { num: "04", titleKey: "ministerios.item4Title", descKey: "ministerios.item4Desc" },
-  { num: "05", titleKey: "ministerios.item5Title", descKey: "ministerios.item5Desc" },
+  { id: "diaconado", icon: "book", titleKey: "ministerios.item1Title", descKey: "ministerios.item1Desc" },
+  { id: "alabanza", icon: "music", titleKey: "ministerios.item2Title", descKey: "ministerios.item2Desc" },
+  { id: "acomodacion", icon: "welcome", titleKey: "ministerios.item3Title", descKey: "ministerios.item3Desc" },
+  { id: "escuela", icon: "child", titleKey: "ministerios.item4Title", descKey: "ministerios.item4Desc" },
+  { id: "aseo", icon: "clean", titleKey: "ministerios.item5Title", descKey: "ministerios.item5Desc" },
 ] as const;
 
 export const EVENTS = [
