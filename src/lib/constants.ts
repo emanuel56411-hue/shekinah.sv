@@ -30,9 +30,9 @@ export const MINISTRIES = [
 ] as const;
 
 export const EVENTS = [
-  { tagKey: "eventos.item1Tag", titleKey: "eventos.item1Title", descKey: "eventos.item1Desc" },
-  { tagKey: "eventos.item2Tag", titleKey: "eventos.item2Title", descKey: "eventos.item2Desc" },
-  { tagKey: "nav.redes", titleKey: "eventos.item3Title", descKey: "eventos.item3Desc" },
+  { id: "upcoming", icon: "calendar", tagKey: "eventos.item1Tag", titleKey: "eventos.item1Title", descKey: "eventos.item1Desc" },
+  { id: "help", icon: "heart", tagKey: "eventos.item2Tag", titleKey: "eventos.item2Title", descKey: "eventos.item2Desc" },
+  { id: "social", icon: "share", tagKey: "nav.redes", titleKey: "eventos.item3Title", descKey: "eventos.item3Desc" },
 ] as const;
 
 export const GALLERY_ITEMS = [

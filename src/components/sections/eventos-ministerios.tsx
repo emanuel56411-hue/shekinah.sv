@@ -1,9 +1,17 @@
 "use client";
 
-import { Baby, BookOpen, HeartHandshake, Music2, Sparkles, type LucideIcon } from "lucide-react";
+import {
+  Baby,
+  BookOpen,
+  CalendarDays,
+  HeartHandshake,
+  Music2,
+  Share2,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/components/providers/language-provider";
 import { EVENTS, MINISTRIES } from "@/lib/constants";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
@@ -18,6 +26,12 @@ const ministryIcons: Record<(typeof MINISTRIES)[number]["icon"], LucideIcon> = {
   clean: Sparkles,
 };
 
+const eventIcons: Record<(typeof EVENTS)[number]["icon"], LucideIcon> = {
+  calendar: CalendarDays,
+  heart: HeartHandshake,
+  share: Share2,
+};
+
 export function Eventos() {
   const { t } = useLanguage();
 
@@ -29,22 +43,36 @@ export function Eventos() {
           <h2 className="section-title">{t("eventos.title")}</h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {EVENTS.map((event, index) => (
-            <Reveal key={event.titleKey} delay={index * 0.07}>
-              <Card className="h-full shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover">
-                <CardHeader>
-                  <Badge variant="secondary" className="w-fit bg-shekinah/10 text-shekinah">
-                    {t(event.tagKey)}
-                  </Badge>
-                  <CardTitle>{t(event.titleKey)}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-muted-foreground">{t(event.descKey)}</p>
-                </CardContent>
-              </Card>
-            </Reveal>
-          ))}
+        <div className="mt-10 grid gap-4 md:grid-cols-3">
+          {EVENTS.map((event, index) => {
+            const Icon = eventIcons[event.icon];
+            return (
+              <Reveal key={event.id} delay={index * 0.05}>
+                <Card className="h-full border-black/15 bg-white/70 shadow-none transition-all hover:border-shekinah/30 hover:bg-white">
+                  <CardContent className="flex h-full flex-col gap-5 p-6 sm:p-7">
+                    <div className="flex items-center justify-between gap-3">
+                      <span
+                        className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-shekinah/15 bg-shekinah/[0.04] text-shekinah"
+                        aria-hidden
+                      >
+                        <Icon className="h-5 w-5" strokeWidth={1.5} />
+                      </span>
+                      <span className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-shekinah/80">
+                        {t(event.tagKey)}
+                      </span>
+                    </div>
+                    <div className="space-y-2">
+                      <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
+                        {t(event.titleKey)}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-muted-foreground">{t(event.descKey)}</p>
+                    </div>
+                    <div className="mt-auto h-px w-10 bg-shekinah/25" aria-hidden />
+                  </CardContent>
+                </Card>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
