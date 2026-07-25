@@ -46,7 +46,7 @@ const eventCardStyles: Record<
   }
 > = {
   upcoming: {
-    image: "/assets/fotos/aniversario-shekinah.webp",
+    image: "/assets/fotos/congregacion-culto-lateral.png",
     href: "#reuniones",
     linkLabel: "Ver calendario →",
     accentIcon:
@@ -55,7 +55,7 @@ const eventCardStyles: Record<
     accentLink: "text-shekinah-300 hover:text-white",
   },
   help: {
-    image: "/assets/fotos/ministerio-ninos.webp",
+    image: "/assets/fotos/ayuda-comunidad-ninos.png",
     href: "#ayuda",
     linkLabel: "Cómo ayudar →",
     accentIcon: "border-amber-400/50 bg-amber-500/25 text-amber-100",
@@ -63,7 +63,7 @@ const eventCardStyles: Record<
     accentLink: "text-amber-300 hover:text-amber-100",
   },
   social: {
-    image: "/assets/fotos/equipo-alabanza.webp",
+    image: "/assets/fotos/presentacion-ninos-escenario.png",
     href: "#redes",
     linkLabel: "Síguenos →",
     accentIcon: "border-sky-400/50 bg-sky-500/25 text-sky-100",
