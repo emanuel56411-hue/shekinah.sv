@@ -2,12 +2,25 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Menu } from "lucide-react";
+import {
+  Calendar,
+  Clock,
+  Heart,
+  Home,
+  Images,
+  MapPin,
+  Menu,
+  MessageCircle,
+  Moon,
+  Share2,
+  Sun,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
 import { useTheme } from "@/components/providers/theme-provider";
-import { Button, buttonVariants } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -18,39 +31,30 @@ import {
 import { buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
-const menuGroups = {
-  connect: [
-    { href: "#reuniones", titleKey: "nav.horarios", descKey: "menu.scheduleDesc" },
-    { href: "#eventos", titleKey: "nav.eventos", descKey: "menu.eventsDesc" },
-    { href: "#ministerios", titleKey: "nav.ministerios", descKey: "menu.ministriesDesc" },
-    { href: "#ayuda", titleKey: "nav.ayuda", descKey: "menu.helpDesc" },
-  ],
-  discover: [
-    { href: "#ubicacion", titleKey: "nav.ubicacion", descKey: "menu.locationDesc" },
-    { href: "#redes", titleKey: "nav.redes", descKey: "menu.socialDesc" },
-    { href: "#eventos", titleKey: "menu.messages", descKey: "menu.messagesDesc" },
-  ],
-  contact: [{ href: buildWhatsappUrl(), title: "WhatsApp", descKey: "menu.whatsappDesc", external: true }],
-} as const;
+type NavItem = {
+  href: string;
+  titleKey: string;
+  icon: LucideIcon;
+  external?: boolean;
+};
+
+const navItems: NavItem[] = [
+  { href: "#inicio", titleKey: "nav.inicio", icon: Home },
+  { href: "#reuniones", titleKey: "nav.horarios", icon: Clock },
+  { href: "#eventos", titleKey: "nav.eventos", icon: Calendar },
+  { href: "#ministerios", titleKey: "nav.ministerios", icon: Users },
+  { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },
+  { href: "#ubicacion", titleKey: "nav.ubicacion", icon: MapPin },
+  { href: "#galeria", titleKey: "nav.galeria", icon: Images },
+  { href: "#redes", titleKey: "nav.redes", icon: Share2 },
+];
 
 export function SiteHeader() {
   const { t, lang, setLang } = useLanguage();
   const { theme, toggleTheme } = useTheme();
-  const [tab, setTab] = useState<"connect" | "discover" | "contact">("connect");
   const [open, setOpen] = useState(false);
 
-  const tabs = [
-    { id: "connect" as const, label: t("menu.connect") },
-    { id: "discover" as const, label: t("menu.discover") },
-    { id: "contact" as const, label: t("menu.contact") },
-  ];
-
-  const currentLinks =
-    tab === "contact"
-      ? menuGroups.contact
-      : tab === "discover"
-        ? menuGroups.discover
-        : menuGroups.connect;
+  const closeMenu = () => setOpen(false);
 
   return (
     <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md dark:bg-background/95">
@@ -71,71 +75,81 @@ export function SiteHeader() {
             <Menu className="h-4 w-4" />
             <span className="hidden sm:inline">Menú</span>
           </SheetTrigger>
-          <SheetContent side="right" className="flex w-full flex-col sm:max-w-md">
-            <SheetHeader>
-              <SheetTitle>{t("menu.title")}</SheetTitle>
+
+          <SheetContent
+            side="left"
+            showCloseButton
+            className="flex w-[min(100%,20rem)] flex-col gap-0 border-r border-white/10 bg-black p-0 text-white sm:max-w-xs [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
+          >
+            <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
+              <div className="flex items-center gap-3 pr-8">
+                <Image
+                  src="/assets/logo-shekinah.png"
+                  alt="Logo Shekinah"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+                <div>
+                  <SheetTitle className="font-heading text-base font-semibold text-white">
+                    Shekinah
+                  </SheetTitle>
+                  <p className="text-xs text-white/60">San Juan Opico</p>
+                </div>
+              </div>
             </SheetHeader>
 
-            <div className="mt-6 flex gap-2">
-              {tabs.map((item) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  onClick={() => setTab(item.id)}
-                  className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
-                    tab === item.id ? "bg-shekinah text-white" : "bg-muted text-muted-foreground hover:text-foreground"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-6 space-y-3 overflow-y-auto">
-              {currentLinks.map((link) => {
-                const title = "titleKey" in link ? t(link.titleKey) : link.title;
-                const desc = t(link.descKey);
-                const external = "external" in link && link.external;
-
-                if (external) {
+            <nav aria-label={t("menu.title")} className="flex-1 overflow-y-auto px-3 py-4">
+              <ul className="space-y-1">
+                {navItems.map((item) => {
+                  const Icon = item.icon;
                   return (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={() => setOpen(false)}
-                      className="block rounded-xl border border-border p-4 transition-all hover:border-shekinah/30 hover:bg-muted/50"
-                    >
-                      <strong className="block">{title}</strong>
-                      <small className="text-muted-foreground">{desc}</small>
-                    </a>
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        onClick={closeMenu}
+                        className="group flex items-center gap-4 rounded-full px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                      >
+                        <Icon className="h-[1.35rem] w-[1.35rem] shrink-0 text-white" strokeWidth={1.75} />
+                        <span>{t(item.titleKey)}</span>
+                      </Link>
+                    </li>
                   );
-                }
+                })}
+              </ul>
+            </nav>
 
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="block rounded-xl border border-border p-4 transition-all hover:border-shekinah/30 hover:bg-muted/50"
-                  >
-                    <strong className="block">{title}</strong>
-                    <small className="text-muted-foreground">{desc}</small>
-                  </Link>
-                );
-              })}
-            </div>
+            <div className="mt-auto space-y-3 border-t border-white/10 p-4">
+              <a
+                href={buildWhatsappUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-shekinah px-5 py-3.5 text-sm font-bold text-white transition-colors hover:bg-shekinah-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <MessageCircle className="h-5 w-5" />
+                {t("menu.whatsappCta")}
+              </a>
 
-            <Separator className="my-6" />
-
-            <div className="mt-auto flex gap-2">
-              <Button variant="outline" className="flex-1" onClick={() => setLang(lang === "es" ? "en" : "es")}>
-                {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
-              </Button>
-              <Button variant="outline" className="flex-1" onClick={toggleTheme}>
-                {theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
-              </Button>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLang(lang === "es" ? "en" : "es")}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
+                >
+                  {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
+                </button>
+                <button
+                  type="button"
+                  onClick={toggleTheme}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  aria-label={theme === "dark" ? t("theme.ariaToLight") : t("theme.ariaToDark")}
+                >
+                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                  {theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
+                </button>
+              </div>
             </div>
           </SheetContent>
         </Sheet>

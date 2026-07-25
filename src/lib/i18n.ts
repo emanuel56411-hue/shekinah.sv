@@ -12,15 +12,17 @@ export const translations: Record<Lang, TranslationTree> = {
     },
     header: { brandAria: "Ir al inicio", navAria: "Navegación principal" },
     nav: {
+      inicio: "Inicio",
       horarios: "Horarios",
       ubicacion: "Ubicación",
       ministerios: "Ministerios",
       ayuda: "Ayuda",
       redes: "Redes",
       eventos: "Eventos",
+      galeria: "Galería",
     },
     menu: {
-      title: "Conéctate",
+      title: "Menú",
       connect: "Conéctate",
       discover: "Descubre",
       contact: "Contacto",
@@ -35,6 +37,7 @@ export const translations: Record<Lang, TranslationTree> = {
       messages: "Mensajes",
       messagesDesc: "Predicaciones y recursos por anunciar.",
       whatsappDesc: "Abre un chat directo con coordinación.",
+      whatsappCta: "Escribir por WhatsApp",
     },
     theme: {
       toDark: "Oscuro",
@@ -233,15 +236,17 @@ export const translations: Record<Lang, TranslationTree> = {
     },
     header: { brandAria: "Go to homepage", navAria: "Main navigation" },
     nav: {
+      inicio: "Home",
       horarios: "Schedule",
       ubicacion: "Location",
       ministerios: "Ministries",
       ayuda: "Help",
       redes: "Social",
       eventos: "Events",
+      galeria: "Gallery",
     },
     menu: {
-      title: "Connect",
+      title: "Menu",
       connect: "Connect",
       discover: "Discover",
       contact: "Contact",
@@ -256,6 +261,7 @@ export const translations: Record<Lang, TranslationTree> = {
       messages: "Messages",
       messagesDesc: "Sermons and resources to be announced.",
       whatsappDesc: "Open a direct chat with coordination.",
+      whatsappCta: "Message on WhatsApp",
     },
     theme: {
       toDark: "Dark",
