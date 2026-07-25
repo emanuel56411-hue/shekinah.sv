@@ -1,15 +1,33 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "@/components/providers/language-provider";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
+import {
+  getDefaultHeroServices,
+  getFeaturedTimeLabel,
+  getHeroServices,
+  type UpcomingService,
+} from "@/lib/schedule";
 import { cn } from "@/lib/utils";
 
 export function Hero() {
   const { t } = useLanguage();
+  const [services, setServices] = useState<UpcomingService[]>(getDefaultHeroServices);
+
+  useEffect(() => {
+    const refresh = () => setServices(getHeroServices(new Date()));
+    refresh();
+    const id = window.setInterval(refresh, 60_000);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const [featured, ...others] = services;
+  const statusKey = featured.isLive ? "heroPanel.live" : "heroPanel.next";
 
   return (
     <section id="inicio" className="relative min-h-[92vh] overflow-hidden bg-shekinah-950">
@@ -54,22 +72,26 @@ export function Hero() {
           </a>
         </div>
 
-        <Card className="mt-14 w-full max-w-md border-white/20 bg-white/10 text-left text-white shadow-2xl backdrop-blur-md">
+        <Card
+          className="mt-14 w-full max-w-md border-white/20 bg-white/10 text-left text-white shadow-2xl backdrop-blur-md"
+          aria-label={t("heroPanel.aria")}
+        >
           <CardContent className="space-y-3 p-6">
-            <p className="text-sm font-medium text-white/80">{t("heroPanel.welcome")}</p>
+            <p className="text-sm font-medium text-white/80">{t(statusKey)}</p>
             <div>
-              <p className="text-2xl font-bold">{t("common.sunday")}</p>
-              <p className="text-white/90">{t("common.sundayTimes")}</p>
+              <p className="text-2xl font-bold">{t(featured.dayKey)}</p>
+              <p className="text-white/90">{getFeaturedTimeLabel(featured)}</p>
+              {featured.id !== "sunday1" || featured.isLive ? (
+                <p className="mt-1 text-sm text-white/70">{t(featured.titleKey)}</p>
+              ) : null}
             </div>
             <div className="grid grid-cols-2 gap-3 border-t border-white/20 pt-3 text-sm">
-              <div>
-                <p className="text-white/70">{t("common.tuesday")}</p>
-                <p className="font-medium">{t("schedule.tuesdayActivity")}</p>
-              </div>
-              <div>
-                <p className="text-white/70">{t("common.thursday")}</p>
-                <p className="font-medium">{t("schedule.thursdayActivity")}</p>
-              </div>
+              {others.map((item) => (
+                <div key={`${item.id}-${item.sortKey}`}>
+                  <p className="text-white/70">{t(item.dayKey)}</p>
+                  <p className="font-medium">{t(item.titleKey)}</p>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>

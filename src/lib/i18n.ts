@@ -72,7 +72,12 @@ export const translations: Record<Lang, TranslationTree> = {
       saturday: "Sábado",
       sundayTimes: "8:30 a.m. y 10:00 a.m.",
     },
-    heroPanel: { aria: "Resumen de reuniones", welcome: "Bienvenido a casa" },
+    heroPanel: {
+      aria: "Resumen de reuniones",
+      welcome: "Bienvenido a casa",
+      next: "Próximo culto",
+      live: "En curso ahora",
+    },
     hero: {
       description: "Conoce a Cristo, crece en fe y camina en familia.",
       ctaPrimary: "Ver horarios",
@@ -286,7 +291,12 @@ export const translations: Record<Lang, TranslationTree> = {
       saturday: "Saturday",
       sundayTimes: "8:30 a.m. and 10:00 a.m.",
     },
-    heroPanel: { aria: "Meeting summary", welcome: "Welcome home" },
+    heroPanel: {
+      aria: "Meeting summary",
+      welcome: "Welcome home",
+      next: "Next service",
+      live: "Happening now",
+    },
     hero: {
       description: "Know Christ, grow in faith and walk as family.",
       ctaPrimary: "See times",
