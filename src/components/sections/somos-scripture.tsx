@@ -30,43 +30,31 @@ export function Scripture() {
 
   return (
     <section
-      className="relative overflow-hidden py-24 sm:py-32"
+      className="relative overflow-hidden border-y border-shekinah/10 bg-[#FAF8F3] py-20 sm:py-28"
       aria-label={t("scripture.aria")}
     >
-      <Image
-        src="/assets/fotos/predicacion-shekinah.webp"
-        alt=""
-        fill
-        className="object-cover object-center"
-        sizes="100vw"
-        priority={false}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-shekinah/25 to-transparent"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-[#3a0a10]/88 via-[#65101a]/90 to-[#2d060c]/92"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#FAF8F3]/40 to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white/25 to-transparent"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-shekinah/25 to-transparent"
       />
 
       <Reveal>
         <blockquote className="relative mx-auto max-w-3xl px-6 text-center sm:px-8">
           <span
             aria-hidden
-            className="mb-2 block font-heading text-6xl leading-none text-white/25 sm:text-7xl"
+            className="mb-4 block font-heading text-5xl font-normal leading-none text-shekinah/25 sm:text-6xl"
           >
             “
           </span>
-          <p className="font-heading text-[1.7rem] font-medium italic leading-snug tracking-tight text-white sm:text-3xl md:text-[2.4rem] md:leading-tight">
+          <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-[#1a1214] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
             {t("scripture.verseText")}
           </p>
-          <cite className="mt-8 block font-sans text-sm font-semibold not-italic uppercase tracking-[0.22em] text-white/80">
-            — {t("scripture.verseRef")}
+          <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-shekinah">
+            {t("scripture.verseRef")}
           </cite>
         </blockquote>
       </Reveal>
