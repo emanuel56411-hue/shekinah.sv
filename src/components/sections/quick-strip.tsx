@@ -9,7 +9,7 @@ export function AnniversaryNote() {
   const { t } = useLanguage();
 
   return (
-    <Reveal className="border-y border-black/30 section-surface-alt dark:border-white/15">
+    <Reveal className="border-y border-black/30 section-surface-alt ">
       <div
         className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 overflow-hidden px-4 py-12 text-center sm:flex-row sm:justify-center sm:gap-8 sm:px-6 sm:text-left"
         aria-label={t("anniversary.aria")}
@@ -53,24 +53,24 @@ export function QuickStrip() {
                 href={item.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/20"
+                className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah "
               >
-                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah dark:text-shekinah-300">
+                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah ">
                   {item.title}
                 </span>
-                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah dark:group-hover:text-shekinah-300">
+                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah ">
                   {item.desc}
                 </strong>
               </a>
             ) : (
               <Link
                 href={item.href}
-                className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/20"
+                className="group block rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:border-shekinah/30 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah "
               >
-                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah dark:text-shekinah-300">
+                <span className="text-xs font-semibold uppercase tracking-wide text-shekinah ">
                   {item.title}
                 </span>
-                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah dark:group-hover:text-shekinah-300">
+                <strong className="mt-1 block text-sm font-semibold text-foreground group-hover:text-shekinah ">
                   {item.desc}
                 </strong>
               </Link>

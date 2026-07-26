@@ -1,5 +1,6 @@
 import { Fraunces, Inter } from "next/font/google";
 import type { Metadata } from "next";
+import Script from "next/script";
 import { AppProviders } from "@/components/providers/app-providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -50,6 +51,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="es" suppressHydrationWarning>
       <body className={`${inter.variable} ${fraunces.variable} min-h-screen font-sans antialiased`}>
+        <Script id="force-light-theme" strategy="beforeInteractive">
+          {`document.documentElement.classList.remove("dark");try{localStorage.removeItem("shekinah-theme")}catch(e){}`}
+        </Script>
         <AppProviders>
           <SiteHeader />
           {children}

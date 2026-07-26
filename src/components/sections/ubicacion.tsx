@@ -29,7 +29,7 @@ export function Ubicacion() {
       iconSrc: "/assets/icons/google-maps.png",
       iconAlt: "Google Maps",
       iconWrapClass: "bg-white",
-      className: "hover:border-red-300 hover:bg-red-50 dark:hover:bg-red-950/30",
+      className: "hover:border-red-300 hover:bg-red-50 ",
     },
     {
       href: LINKS.waze,
@@ -38,7 +38,7 @@ export function Ubicacion() {
       iconSrc: "/assets/icons/waze.png",
       iconAlt: "Waze",
       iconWrapClass: "bg-black",
-      className: "hover:border-sky-300 hover:bg-sky-50 dark:hover:bg-sky-950/30",
+      className: "hover:border-sky-300 hover:bg-sky-50 ",
     },
   ];
 
@@ -56,13 +56,13 @@ export function Ubicacion() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "group flex items-center gap-3 rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/20",
+                  "group flex items-center gap-3 rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah ",
                   action.className
                 )}
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10 dark:border-white/15",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10 ",
                     action.iconWrapClass
                   )}
                 >
@@ -85,7 +85,7 @@ export function Ubicacion() {
             href={buildWhatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-shekinah hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah dark:hover:text-shekinah-300"
+            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-shekinah hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah "
           >
             <MessageCircle className="h-4 w-4" />
             <span>

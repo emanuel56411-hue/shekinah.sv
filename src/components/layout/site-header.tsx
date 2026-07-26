@@ -11,16 +11,13 @@ import {
   MapPin,
   Menu,
   MessageCircle,
-  Moon,
   Phone,
   Share2,
-  Sun,
   Users,
   type LucideIcon,
 } from "lucide-react";
 import { useState } from "react";
 import { useLanguage } from "@/components/providers/language-provider";
-import { useTheme } from "@/components/providers/theme-provider";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -52,13 +49,12 @@ const navItems: NavItem[] = [
 
 export function SiteHeader() {
   const { t, lang, setLang } = useLanguage();
-  const { theme, toggleTheme } = useTheme();
   const [open, setOpen] = useState(false);
 
   const closeMenu = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md dark:border-white/15 dark:bg-background/95">
+    <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
         <Link href="#inicio" aria-label={t("header.brandAria")} className="flex items-center gap-3">
           <Image src="/assets/logo-shekinah.png" alt="Logo Shekinah" width={46} height={46} className="rounded-full" />
@@ -74,7 +70,7 @@ export function SiteHeader() {
             aria-label={t("menu.openAria")}
           >
             <Menu className="h-4 w-4" />
-            <span className="hidden sm:inline">Menú</span>
+            <span className="hidden sm:inline">Men?</span>
           </SheetTrigger>
 
           <SheetContent
@@ -146,25 +142,14 @@ export function SiteHeader() {
                 {t("menu.call")}
               </a>
 
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => setLang(lang === "es" ? "en" : "es")}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                  aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
-                >
-                  {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
-                </button>
-                <button
-                  type="button"
-                  onClick={toggleTheme}
-                  className="flex flex-1 items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                  aria-label={theme === "dark" ? t("theme.ariaToLight") : t("theme.ariaToDark")}
-                >
-                  {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-                  {theme === "dark" ? t("theme.toLight") : t("theme.toDark")}
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => setLang(lang === "es" ? "en" : "es")}
+                className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
+              >
+                {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
+              </button>
             </div>
           </SheetContent>
         </Sheet>

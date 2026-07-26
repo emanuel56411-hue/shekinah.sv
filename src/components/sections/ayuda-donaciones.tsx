@@ -119,7 +119,7 @@ export function AyudaDonaciones() {
                     <CardHeader className="pb-2">
                       <Badge
                         variant="secondary"
-                        className="w-fit bg-shekinah/10 text-shekinah dark:bg-shekinah/20 dark:text-shekinah-300"
+                        className="w-fit bg-shekinah/10 text-shekinah  "
                       >
                         {request.help_type}
                       </Badge>
@@ -233,7 +233,7 @@ export function AyudaDonaciones() {
                   {status && (
                     <p
                       role="status"
-                      className={`text-sm ${status.type === "error" ? "text-destructive" : status.type === "success" ? "text-green-600 dark:text-green-400" : "text-muted-foreground"}`}
+                      className={`text-sm ${status.type === "error" ? "text-destructive" : status.type === "success" ? "text-green-600 " : "text-muted-foreground"}`}
                     >
                       {status.text}
                     </p>

@@ -56,7 +56,7 @@ export function Horarios() {
           <h2 className="section-title">{t("reuniones.title")}</h2>
           <p className="section-desc">{t("reuniones.description")}</p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-shekinah dark:text-shekinah-300">
+            <p className="mt-3 text-sm font-medium text-shekinah ">
               {statusLabel}: {t(nextDayKey)}
             </p>
           ) : null}

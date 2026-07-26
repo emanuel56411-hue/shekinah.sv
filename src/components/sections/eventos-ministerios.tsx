@@ -58,7 +58,7 @@ const eventCardStyles: Record<
     href: "#reuniones",
     linkLabel: "Ver calendario →",
     accentIcon:
-      "border-shekinah/40 bg-shekinah/25 text-white dark:border-shekinah/50 dark:bg-shekinah/35 dark:text-white",
+      "border-shekinah/40 bg-shekinah/25 text-white   ",
     accentTag: "text-shekinah-300",
     accentLink: "text-shekinah-300 hover:text-white",
   },
@@ -97,7 +97,7 @@ export function Eventos() {
             const style = eventCardStyles[event.id];
             return (
               <Reveal key={event.id} delay={index * 0.05}>
-                <Card className="group relative h-full gap-0 overflow-hidden border-black/20 bg-neutral-900 p-0 shadow-none ring-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] dark:border-white/15">
+                <Card className="group relative h-full gap-0 overflow-hidden border-black/20 bg-neutral-900 p-0 shadow-none ring-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] ">
                   <Image
                     src={style.image}
                     alt=""
@@ -178,19 +178,19 @@ export function Ministerios() {
               >
                 <Card
                   className={cn(
-                    "group h-full border-black/20 shadow-none transition-all duration-200 hover:-translate-y-1 hover:border-shekinah/35 hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.18)] dark:border-white/20 dark:hover:border-shekinah/50",
+                    "group h-full border-black/20 shadow-none transition-all duration-200 hover:-translate-y-1 hover:border-shekinah/35 hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.18)]  ",
                     ministryTopBorders[index]
                   )}
                 >
                   <CardContent className="relative flex h-full flex-col gap-4 p-6">
                     <span
-                      className="pointer-events-none absolute right-5 top-5 font-heading text-sm font-light tracking-wide text-foreground/20 dark:text-white/20"
+                      className="pointer-events-none absolute right-5 top-5 font-heading text-sm font-light tracking-wide text-foreground/20 "
                       aria-hidden
                     >
                       {number}
                     </span>
                     <span
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah transition-colors duration-200 group-hover:border-shekinah group-hover:bg-shekinah group-hover:text-white dark:border-shekinah/40 dark:bg-shekinah/15 dark:text-shekinah-300 dark:group-hover:border-shekinah dark:group-hover:bg-shekinah dark:group-hover:text-white"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah transition-colors duration-200 group-hover:border-shekinah group-hover:bg-shekinah group-hover:text-white      "
                       aria-hidden
                     >
                       <Icon className="h-5 w-5" strokeWidth={1.5} />
@@ -211,7 +211,7 @@ export function Ministerios() {
         </div>
 
         <Reveal className="mt-10">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-black/20 bg-[#FAF8F3] p-6 text-center dark:border-white/20 dark:bg-secondary sm:flex-row sm:text-left">
+          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-black/20 bg-[#FAF8F3] p-6 text-center   sm:flex-row sm:text-left">
             <p className="font-heading text-lg font-semibold text-foreground">
               {t("ministerios.calloutText")}
             </p>
@@ -221,7 +221,7 @@ export function Ministerios() {
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "border-black/30 text-foreground hover:bg-white focus-visible:ring-2 focus-visible:ring-shekinah dark:border-white/30 dark:hover:bg-muted"
+                "border-black/30 text-foreground hover:bg-white focus-visible:ring-2 focus-visible:ring-shekinah  "
               )}
             >
               {t("ministerios.calloutBtn")}

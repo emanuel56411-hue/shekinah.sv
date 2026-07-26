@@ -42,12 +42,6 @@ export const translations: Record<Lang, TranslationTree> = {
       callAria: "Llamar al teléfono de la iglesia",
       settings: "Ajustes",
     },
-    theme: {
-      toDark: "Oscuro",
-      toLight: "Claro",
-      ariaToDark: "Cambiar a modo oscuro",
-      ariaToLight: "Cambiar a modo claro",
-    },
     lang: {
       toEnglish: "EN",
       toSpanish: "ES",
@@ -268,12 +262,6 @@ export const translations: Record<Lang, TranslationTree> = {
       call: "Call",
       callAria: "Call the church phone number",
       settings: "Settings",
-    },
-    theme: {
-      toDark: "Dark",
-      toLight: "Light",
-      ariaToDark: "Switch to dark mode",
-      ariaToLight: "Switch to light mode",
     },
     lang: {
       toEnglish: "EN",
