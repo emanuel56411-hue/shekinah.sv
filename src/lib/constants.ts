@@ -7,7 +7,7 @@ export const LINKS = {
   waze: "https://waze.com/ul?ll=13.7915625%2C-89.3586875&navigate=yes",
   instagram: "https://www.instagram.com/shekinahelsalvador",
   facebook: "https://www.facebook.com/share/1L6qRECBoy/",
-  youtube: "https://www.youtube.com/results?search_query=Iglesia+Shekinah+Versalles",
+  youtube: "https://www.youtube.com/@Iglesia_ShekinahVersalles",
 } as const;
 
 export const SCHEDULE = [

@@ -1,4 +1,4 @@
-import { Fraunces, Inter } from "next/font/google";
+import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AppProviders } from "@/components/providers/app-providers";
@@ -8,15 +8,16 @@ import { MobileCta } from "@/components/layout/mobile-cta";
 import { FabWhatsapp, ScrollTop } from "@/components/layout/floating-actions";
 import "./globals.css";
 
-const inter = Inter({
+const sourceSans = Source_Sans_3({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-sans",
   display: "swap",
 });
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  weight: ["500", "600", "700"],
+  variable: "--font-heading",
   display: "swap",
 });
 
@@ -50,7 +51,7 @@ export const viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.variable} ${fraunces.variable} min-h-screen font-sans antialiased`}>
+      <body className={`${sourceSans.variable} ${cormorant.variable} min-h-screen font-sans antialiased`}>
         <Script id="force-light-theme" strategy="beforeInteractive">
           {`document.documentElement.classList.remove("dark");try{localStorage.removeItem("shekinah-theme")}catch(e){}`}
         </Script>

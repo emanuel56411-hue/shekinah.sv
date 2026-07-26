@@ -67,12 +67,12 @@ const config: Config = {
         "2xl": "var(--radius)",
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "system-ui", "sans-serif"],
-        heading: ["var(--font-fraunces)", "Georgia", "serif"],
+        sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+        heading: ["var(--font-heading)", "Georgia", "serif"],
       },
       boxShadow: {
-        card: "0 2px 12px -2px rgb(0 0 0 / 0.06)",
-        "card-hover": "0 6px 20px -4px rgb(0 0 0 / 0.10)",
+        card: "0 3px 16px -4px rgb(0 0 0 / 0.09)",
+        "card-hover": "0 10px 28px -8px rgb(0 0 0 / 0.14)",
       },
     },
   },
