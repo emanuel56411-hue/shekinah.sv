@@ -3,13 +3,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Baby,
   BookOpen,
   CalendarDays,
+  GraduationCap,
   HeartHandshake,
   Music2,
   Share2,
-  Sparkles,
+  SprayCan,
   type LucideIcon,
 } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
@@ -24,9 +24,17 @@ const ministryIcons: Record<(typeof MINISTRIES)[number]["icon"], LucideIcon> = {
   book: BookOpen,
   music: Music2,
   welcome: HeartHandshake,
-  child: Baby,
-  clean: Sparkles,
+  child: GraduationCap,
+  clean: SprayCan,
 };
+
+const ministryTopBorders = [
+  "border-t-[3px] border-t-[#65101a]",
+  "border-t-[3px] border-t-[#9a3a4a]",
+  "border-t-[3px] border-t-[#b85c6a]",
+  "border-t-[3px] border-t-[#c4a35a]",
+  "border-t-[3px] border-t-[#8b4a5c]",
+] as const;
 
 const eventIcons: Record<(typeof EVENTS)[number]["icon"], LucideIcon> = {
   calendar: CalendarDays,
@@ -158,24 +166,40 @@ export function Ministerios() {
           <h2 className="section-title">{t("ministerios.title")}</h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           {MINISTRIES.map((ministry, index) => {
             const Icon = ministryIcons[ministry.icon];
+            const number = String(index + 1).padStart(2, "0");
             return (
-              <Reveal key={ministry.id} delay={index * 0.05}>
-                <Card className="h-full border-black/20 shadow-none transition-all hover:border-shekinah/35 hover:shadow-card dark:border-white/20 dark:hover:border-shekinah/50">
-                  <CardContent className="flex h-full flex-col gap-4 p-6">
+              <Reveal
+                key={ministry.id}
+                delay={index * 0.05}
+                className={cn("sm:col-span-1 lg:col-span-2", index === 3 && "lg:col-start-2")}
+              >
+                <Card
+                  className={cn(
+                    "group h-full border-black/20 shadow-none transition-all duration-200 hover:-translate-y-1 hover:border-shekinah/35 hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.18)] dark:border-white/20 dark:hover:border-shekinah/50",
+                    ministryTopBorders[index]
+                  )}
+                >
+                  <CardContent className="relative flex h-full flex-col gap-4 p-6">
                     <span
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah dark:border-shekinah/40 dark:bg-shekinah/15 dark:text-shekinah-300"
+                      className="pointer-events-none absolute right-5 top-5 font-heading text-sm font-light tracking-wide text-foreground/20 dark:text-white/20"
                       aria-hidden
                     >
-                      <Icon className="h-5 w-5" strokeWidth={1.6} />
+                      {number}
+                    </span>
+                    <span
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah transition-colors duration-200 group-hover:border-shekinah group-hover:bg-shekinah group-hover:text-white dark:border-shekinah/40 dark:bg-shekinah/15 dark:text-shekinah-300 dark:group-hover:border-shekinah dark:group-hover:bg-shekinah dark:group-hover:text-white"
+                      aria-hidden
+                    >
+                      <Icon className="h-5 w-5" strokeWidth={1.5} />
                     </span>
                     <div>
                       <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
                         {t(ministry.titleKey)}
                       </h3>
-                      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      <p className="mt-2 font-sans text-[0.9rem] leading-relaxed text-muted-foreground">
                         {t(ministry.descKey)}
                       </p>
                     </div>
