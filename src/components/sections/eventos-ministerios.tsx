@@ -28,14 +28,6 @@ const ministryIcons: Record<(typeof MINISTRIES)[number]["icon"], LucideIcon> = {
   clean: SprayCan,
 };
 
-const ministryTopBorders = [
-  "border-t-[3px] border-t-[#65101a]",
-  "border-t-[3px] border-t-[#9a3a4a]",
-  "border-t-[3px] border-t-[#b85c6a]",
-  "border-t-[3px] border-t-[#c4a35a]",
-  "border-t-[3px] border-t-[#8b4a5c]",
-] as const;
-
 const eventIcons: Record<(typeof EVENTS)[number]["icon"], LucideIcon> = {
   calendar: CalendarDays,
   heart: HeartHandshake,
@@ -176,32 +168,41 @@ export function Ministerios() {
                 delay={index * 0.05}
                 className={cn("sm:col-span-1 lg:col-span-2", index === 3 && "lg:col-start-2")}
               >
-                <Card
-                  className={cn(
-                    "group h-full border-black/20 shadow-none transition-all duration-200 hover:-translate-y-1 hover:border-shekinah/35 hover:shadow-[0_10px_24px_-8px_rgba(0,0,0,0.18)]  ",
-                    ministryTopBorders[index]
-                  )}
-                >
-                  <CardContent className="relative flex h-full flex-col gap-4 p-6">
-                    <span
-                      className="pointer-events-none absolute right-5 top-5 font-heading text-sm font-light tracking-wide text-foreground/20 "
-                      aria-hidden
-                    >
-                      {number}
-                    </span>
-                    <span
-                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-shekinah/20 bg-shekinah/5 text-shekinah transition-colors duration-200 group-hover:border-shekinah group-hover:bg-shekinah group-hover:text-white      "
-                      aria-hidden
-                    >
-                      <Icon className="h-5 w-5" strokeWidth={1.5} />
-                    </span>
-                    <div>
-                      <h3 className="font-heading text-xl font-semibold tracking-tight text-foreground">
-                        {t(ministry.titleKey)}
-                      </h3>
-                      <p className="mt-2 font-sans text-[0.9rem] leading-relaxed text-muted-foreground">
-                        {t(ministry.descKey)}
-                      </p>
+                <Card className="group h-full gap-0 overflow-hidden rounded-[12px] border border-black/25 bg-white p-0 shadow-none ring-0 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_-10px_rgba(0,0,0,0.2)] dark:border-white/20 dark:bg-card">
+                  <CardContent className="relative flex h-full min-h-[168px] gap-0 p-0">
+                    <div className="flex w-14 shrink-0 flex-col items-center justify-center bg-neutral-950 px-2 py-6 dark:bg-black">
+                      <span
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/80 text-white transition-colors duration-200 group-hover:bg-white group-hover:text-neutral-950"
+                        aria-hidden
+                      >
+                        <Icon className="h-4 w-4" strokeWidth={1.5} />
+                      </span>
+                    </div>
+
+                    <div className="relative flex flex-1 flex-col justify-center px-5 py-6 sm:px-6">
+                      <span
+                        className="pointer-events-none absolute right-4 top-4 font-sans text-[0.7rem] font-light tracking-[0.14em] text-foreground/25 dark:text-white/25"
+                        aria-hidden
+                      >
+                        {number}
+                      </span>
+
+                      <div className="relative max-w-[15rem] pl-3 pt-2">
+                        <span
+                          className="pointer-events-none absolute -left-0.5 -top-1 h-10 w-10 border-l border-t border-neutral-900 dark:border-white/70"
+                          aria-hidden
+                        />
+                        <span
+                          className="pointer-events-none absolute -bottom-1 -right-2 h-10 w-10 border-b border-r border-neutral-900 dark:border-white/70"
+                          aria-hidden
+                        />
+                        <h3 className="font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-foreground">
+                          {t(ministry.titleKey)}
+                        </h3>
+                        <p className="mt-2 font-sans text-[0.8rem] font-normal leading-relaxed text-muted-foreground">
+                          {t(ministry.descKey)}
+                        </p>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
