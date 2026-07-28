@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
+import Image from "next/image";
 import { CalendarDays } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -40,7 +41,7 @@ function ScheduleCard({
     <article
       className={cn(
         "relative overflow-hidden rounded-2xl border border-white/10 bg-[#141414] px-4 py-4 shadow-[0_10px_28px_-12px_rgba(0,0,0,0.65)] sm:px-5 sm:py-5",
-        isHighlighted && "ring-2 ring-[#65101a] ring-offset-2 ring-offset-[hsl(var(--background))]"
+        isHighlighted && "ring-2 ring-[#65101a] ring-offset-2 ring-offset-black/80"
       )}
     >
       <div
@@ -92,14 +93,31 @@ export function Horarios() {
   const statusLabel = isLive ? t("heroPanel.live") : t("heroPanel.next");
 
   return (
-    <section id="reuniones" className="section-padding section-surface-alt">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+    <section id="reuniones" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+      <Image
+        src="/assets/fotos/manos-alabanza.png"
+        alt=""
+        fill
+        className="object-cover object-center"
+        sizes="100vw"
+        aria-hidden
+        priority={false}
+      />
+      <div aria-hidden className="absolute inset-0 bg-black/70" />
+
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>
-          <p className="eyebrow">{t("reuniones.eyebrow")}</p>
-          <h2 className="section-title">{t("reuniones.title")}</h2>
-          <p className="section-desc">{t("reuniones.description")}</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#e8a0a0]">
+            {t("reuniones.eyebrow")}
+          </p>
+          <h2 className="mt-3 font-heading text-[2rem] font-semibold leading-tight tracking-tight text-[#f4f0e8] sm:text-[2.35rem]">
+            {t("reuniones.title")}
+          </h2>
+          <p className="mt-4 max-w-2xl text-base font-normal leading-relaxed text-white/80">
+            {t("reuniones.description")}
+          </p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-shekinah">
+            <p className="mt-3 text-sm font-medium text-[#f4cfcf]">
               {statusLabel}: {t(nextDayKey)}
             </p>
           ) : null}
