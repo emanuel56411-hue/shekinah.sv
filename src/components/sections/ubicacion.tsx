@@ -29,7 +29,7 @@ export function Ubicacion() {
       iconSrc: "/assets/icons/google-maps.png",
       iconAlt: "Google Maps",
       iconWrapClass: "bg-white",
-      className: "hover:border-red-300 hover:bg-red-50 ",
+      className: "hover:border-white/35 hover:bg-white/95",
     },
     {
       href: LINKS.waze,
@@ -38,7 +38,7 @@ export function Ubicacion() {
       iconSrc: "/assets/icons/waze.png",
       iconAlt: "Waze",
       iconWrapClass: "bg-black",
-      className: "hover:border-sky-300 hover:bg-sky-50 ",
+      className: "hover:border-white/35 hover:bg-white/95",
     },
   ];
 

@@ -50,7 +50,7 @@ const socialLinks: {
     handle: "@shekinahelsalvador",
     icon: InstagramGlyph,
     iconClass: "bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] text-white",
-                className: "hover:border-pink-300 hover:bg-pink-50  ",
+    className: "hover:border-pink-400/40 hover:bg-white",
   },
   {
     key: "facebook",
@@ -59,7 +59,7 @@ const socialLinks: {
     handle: "Shekinah Versalles",
     icon: FacebookGlyph,
     iconClass: "bg-[#1877F2] text-white",
-    className: "hover:border-blue-300 hover:bg-blue-50  ",
+    className: "hover:border-blue-400/40 hover:bg-white",
   },
   {
     key: "youtube",
@@ -68,7 +68,7 @@ const socialLinks: {
     handle: "@Iglesia_ShekinahVersalles",
     icon: YoutubeGlyph,
     iconClass: "bg-[#FF0000] text-white",
-    className: "hover:border-red-300 hover:bg-red-50  ",
+    className: "hover:border-red-400/40 hover:bg-white",
   },
 ];
 

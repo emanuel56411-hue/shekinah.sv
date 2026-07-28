@@ -30,7 +30,7 @@ export function Scripture() {
 
   return (
     <section
-      className="section-surface-alt relative overflow-hidden border-y border-white/15 py-20 sm:py-28"
+      className="section-surface relative overflow-hidden border-y border-white/10 py-20 sm:py-28"
       aria-label={t("scripture.aria")}
     >
       <div
@@ -49,7 +49,7 @@ export function Scripture() {
         >
           <div
             aria-hidden
-            className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/45 to-black/55"
+            className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/58 to-black/65"
           />
           <div className="relative z-10 flex min-h-[16rem] flex-col items-center justify-center px-6 py-10 text-center sm:min-h-[18rem] sm:px-10 sm:py-12">
             <span
@@ -58,7 +58,7 @@ export function Scripture() {
             >
               “
             </span>
-            <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
+            <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-[#f5f5f5] drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
               {t("scripture.verseText")}
             </p>
             <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-[#f4a8b1] drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">

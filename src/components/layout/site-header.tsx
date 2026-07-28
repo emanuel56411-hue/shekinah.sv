@@ -66,7 +66,7 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-[100] border-b border-transparent bg-transparent transition-opacity",
+          "site-header-overlay fixed inset-x-0 top-0 z-[100] border-b border-transparent transition-opacity",
           open && "pointer-events-none opacity-0"
         )}
       >

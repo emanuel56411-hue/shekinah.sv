@@ -18,47 +18,38 @@
   }
 
   /*
-   * Todas las secciones con .section-surface* llevan overlay oscuro sobre la foto,
-   * así que título/subtítulo van en blanco de forma global (no hace falta clase extra
-   * solo para EVENTOS/SERVICIO/REDES: el mismo patrón aplica a Ubicación, Galería, etc.).
+   * Sistema visual oscuro uniforme:
+   * el overlay vive en .site-bg; las secciones son transparentes
+   * para que el scroll no salte de claro a oscuro.
    */
   .section-title {
     @apply mt-3 font-heading text-[2.15rem] font-semibold leading-[1.15] tracking-tight sm:text-[2.35rem];
-    color: #ffffff;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    color: #f5f5f5;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
   }
 
   .section-desc {
     @apply mt-4 max-w-2xl font-sans text-[1.05rem] font-normal leading-7;
-    color: rgba(255, 255, 255, 0.95);
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+    color: rgba(245, 245, 245, 0.92);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
   }
 
-  /* Etiqueta pequeña en rojo (legible sobre overlay oscuro; no es el título) */
   .eyebrow {
-    @apply text-[0.7rem] font-bold uppercase tracking-[0.2em] text-shekinah-400;
+    @apply text-[0.7rem] font-bold uppercase tracking-[0.2em];
+    color: #f4a8b1;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   }
 
-  /* Overlay oscuro uniforme sobre la foto global (WCAG AA con texto claro) */
-  .section-surface {
-    @apply relative;
-    background-color: rgba(0, 0, 0, 0.55);
-    background-image: none;
-  }
-
-  .section-surface-alt {
-    @apply relative;
-    background-color: rgba(0, 0, 0, 0.58);
-    background-image: none;
-  }
-
+  /* Misma superficie en todas las secciones (sin tintas distintas) */
+  .section-surface,
+  .section-surface-alt,
   .section-overlay-dark {
     @apply relative;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: transparent;
+    background-image: none;
   }
 
-  /* Capa de fondo a viewport completo (evita negro en portrait móvil) */
+  /* Capa de fondo a viewport completo + overlay oscuro estándar */
   .site-bg {
     position: fixed;
     inset: 0;
@@ -67,12 +58,34 @@
     min-height: 100dvh;
     height: 100dvh;
     pointer-events: none;
-    background-color: transparent;
+    background-color: #0a0708;
     background-image: url("/assets/fotos/fondo-adoracion.webp");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
     background-attachment: scroll;
+  }
+
+  .site-bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.5) 0%,
+      rgba(0, 0, 0, 0.58) 45%,
+      rgba(0, 0, 0, 0.65) 100%
+    );
+  }
+
+  /* Overlay sutil del header (mismo criterio, más ligero arriba) */
+  .site-header-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.45) 0%,
+      rgba(0, 0, 0, 0.2) 55%,
+      rgba(0, 0, 0, 0) 100%
+    );
   }
 }
 
@@ -106,19 +119,20 @@
 
   html {
     scroll-behavior: smooth;
-    background-color: transparent;
+    background-color: #0a0708;
     min-height: 100dvh;
   }
 
   body {
-    @apply font-sans text-base font-normal leading-relaxed text-foreground antialiased;
+    @apply font-sans text-base font-normal leading-relaxed antialiased;
+    color: #f5f5f5;
     min-height: 100dvh;
     background-color: transparent;
     background-image: none;
   }
 
   footer.page-bg-footer {
-    background-color: rgba(101, 16, 26, 0.86);
+    background-color: rgba(0, 0, 0, 0.72);
   }
 
   :focus-visible {

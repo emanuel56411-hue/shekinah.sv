@@ -218,8 +218,8 @@ export function Ministerios() {
         </div>
 
         <Reveal className="mt-10">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-black/20 bg-[#FAF8F3] p-6 text-center   sm:flex-row sm:text-left">
-            <p className="font-heading text-lg font-semibold text-foreground">
+          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-white/15 bg-black/45 p-6 text-center backdrop-blur-sm sm:flex-row sm:text-left">
+            <p className="font-heading text-lg font-semibold text-[#f5f5f5]">
               {t("ministerios.calloutText")}
             </p>
             <a
@@ -228,7 +228,7 @@ export function Ministerios() {
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "border-black/30 text-foreground hover:bg-white focus-visible:ring-2 focus-visible:ring-shekinah  "
+                "border-white/30 bg-transparent text-[#f5f5f5] hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-shekinah"
               )}
             >
               {t("ministerios.calloutBtn")}

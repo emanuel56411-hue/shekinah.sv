@@ -29,20 +29,15 @@ export function Hero() {
   const statusKey = featured.isLive ? "heroPanel.live" : "heroPanel.next";
 
   return (
-    <section id="inicio" className="section-overlay-dark relative min-h-[92vh] overflow-hidden">
-      <div
-        aria-hidden
-        className="absolute inset-0 z-[1] bg-gradient-to-b from-black/35 via-black/20 to-black/45"
-      />
-
-      <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-white sm:px-6">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]">
+    <section id="inicio" className="section-surface relative min-h-[92vh] overflow-hidden">
+      <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-[#f5f5f5] sm:px-6">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#f5f5f5] drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]">
           San Juan Opico, El Salvador
         </p>
-        <h1 className="max-w-4xl text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)]">
+        <h1 className="max-w-4xl text-[#f5f5f5] drop-shadow-[0_2px_18px_rgba(0,0,0,0.75)]">
           Iglesia Bautista Shekinah
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] sm:text-xl">
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-[#f5f5f5] drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] sm:text-xl">
           {t("hero.description")}
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
