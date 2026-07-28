@@ -141,8 +141,8 @@ export function Horarios() {
                     key={item.titleKey}
                     className={cn(isNext && "rounded-md bg-white/5 px-2 py-1 sm:-mx-2")}
                   >
-                    <p className="text-sm text-[#f4f0e8]/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                    <time className="block text-sm font-medium text-white/85">{item.time}</time>
+                    <p className="text-sm text-[#f4f0e8] sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                    <time className="block text-sm font-medium text-white/90">{item.time}</time>
                   </div>
                 );
               })}
