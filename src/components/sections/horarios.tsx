@@ -95,10 +95,10 @@ export function Horarios() {
     <section id="reuniones" className="section-overlay-dark relative overflow-hidden py-16 sm:py-20 lg:py-24">
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#e8a0a0]">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#f0c0c0] drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]">
             {t("reuniones.eyebrow")}
           </p>
-          <h2 className="mt-3 font-heading text-[2rem] font-semibold leading-tight tracking-tight text-[#f4f0e8] sm:text-[2.35rem]">
+          <h2 className="mt-3 font-heading text-[2rem] font-semibold leading-tight tracking-tight text-[#f4f0e8] drop-shadow-[0_1px_4px_rgba(0,0,0,0.55)] sm:text-[2.35rem]">
             {t("reuniones.title")}
           </h2>
           <p className="mt-4 max-w-2xl text-base font-normal leading-relaxed text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]">
@@ -121,8 +121,8 @@ export function Horarios() {
                   isHighlighted={isNext}
                   statusLabel={statusLabel}
                 >
-                  <p className="text-sm text-[#f4f0e8]/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                  <time className="block text-sm font-medium text-white/85">{item.time}</time>
+                  <p className="text-sm text-[#f4f0e8] sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                  <time className="block text-sm font-medium text-white/90">{item.time}</time>
                 </ScheduleCard>
               </Reveal>
             );

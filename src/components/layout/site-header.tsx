@@ -69,7 +69,7 @@ export function SiteHeader() {
             <Image src="/assets/logo-shekinah.png" alt="Logo Shekinah" width={46} height={46} className="rounded-full" />
             <span className="leading-tight">
               <strong className="block text-sm font-bold text-foreground sm:text-base">Iglesia Bautista Shekinah</strong>
-              <small className="text-xs text-foreground/70">San Juan Opico</small>
+              <small className="text-xs text-foreground/80">San Juan Opico</small>
             </span>
           </Link>
 

@@ -199,9 +199,9 @@ export function Ministerios() {
                         <h3 className="font-heading text-[1.35rem] font-semibold leading-snug tracking-tight text-foreground">
                           {t(ministry.titleKey)}
                         </h3>
-                        <p className="mt-2 font-sans text-[0.8rem] font-normal leading-relaxed text-muted-foreground">
-                          {t(ministry.descKey)}
-                        </p>
+                      <p className="mt-2 font-sans text-[0.8rem] font-normal leading-relaxed text-foreground/85">
+                        {t(ministry.descKey)}
+                      </p>
                       </div>
                     </div>
                   </CardContent>

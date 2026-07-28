@@ -23,7 +23,7 @@ export function SiteFooter() {
         <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
           <div>
             <p className="text-lg font-bold">Iglesia Bautista Shekinah</p>
-            <p className="mt-2 text-sm text-white/80">{t("footer.tagline")}</p>
+            <p className="mt-2 text-sm text-white/90">{t("footer.tagline")}</p>
             <p className="mt-4 text-sm">
               WhatsApp:{" "}
               <a href={buildWhatsappUrl()} className="font-semibold underline-offset-4 hover:underline">
