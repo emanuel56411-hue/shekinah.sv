@@ -64,7 +64,12 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[100] border-b border-transparent bg-transparent">
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-[100] border-b border-transparent bg-transparent transition-opacity",
+          open && "pointer-events-none opacity-0"
+        )}
+      >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <Link href="#inicio" aria-label={t("header.brandAria")} className="flex min-w-0 items-center gap-3">
             <Image
@@ -74,7 +79,7 @@ export function SiteHeader() {
               height={46}
               className="h-[46px] w-[46px] shrink-0 rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.45)] ring-1 ring-white/70"
             />
-            <span className="min-w-0 leading-tight [text-shadow:0_0_1px_#000,0_1px_2px_rgba(0,0,0,0.95),0_2px_6px_rgba(0,0,0,0.85),0_0_18px_rgba(0,0,0,0.65)]">
+            <span className="min-w-0 leading-tight [text-shadow:0_0_4px_rgba(0,0,0,0.95),0_0_10px_rgba(0,0,0,0.7)]">
               <strong className="block truncate text-sm font-bold text-white sm:text-base">
                 Iglesia Bautista Shekinah
               </strong>
@@ -86,7 +91,7 @@ export function SiteHeader() {
             <SheetTrigger
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "gap-2 border-white/80 bg-transparent text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.85)] shadow-none hover:bg-white/10 hover:text-white"
+                "gap-2 border-white/80 bg-transparent text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-white/10 hover:text-white"
               )}
               aria-label={t("menu.openAria")}
             >
