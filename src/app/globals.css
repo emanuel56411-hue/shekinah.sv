@@ -17,19 +17,27 @@
     @apply py-12 sm:py-16;
   }
 
+  /*
+   * Todas las secciones con .section-surface* llevan overlay oscuro sobre la foto,
+   * así que título/subtítulo van en blanco de forma global (no hace falta clase extra
+   * solo para EVENTOS/SERVICIO/REDES: el mismo patrón aplica a Ubicación, Galería, etc.).
+   */
   .section-title {
-    @apply mt-3 font-heading text-[2.15rem] font-semibold leading-[1.15] tracking-tight text-[#f5f5f5] sm:text-[2.35rem];
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+    @apply mt-3 font-heading text-[2.15rem] font-semibold leading-[1.15] tracking-tight sm:text-[2.35rem];
+    color: #ffffff;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   }
 
   .section-desc {
-    @apply mt-4 max-w-2xl font-sans text-[1.05rem] font-normal leading-7 text-white/90;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    @apply mt-4 max-w-2xl font-sans text-[1.05rem] font-normal leading-7;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
   }
 
+  /* Etiqueta pequeña en rojo (legible sobre overlay oscuro; no es el título) */
   .eyebrow {
-    @apply text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#f4a8b1];
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+    @apply text-[0.7rem] font-bold uppercase tracking-[0.2em] text-shekinah-400;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
   }
 
   /* Overlay oscuro uniforme sobre la foto global (WCAG AA con texto claro) */
