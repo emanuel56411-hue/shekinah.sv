@@ -85,7 +85,7 @@ export function Ubicacion() {
             href={buildWhatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground underline-offset-4 transition-colors hover:text-shekinah hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah "
+            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-foreground/80 underline-offset-4 transition-colors hover:text-shekinah hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah "
           >
             <MessageCircle className="h-4 w-4" />
             <span>

@@ -101,11 +101,11 @@ export function Horarios() {
           <h2 className="mt-3 font-heading text-[2rem] font-semibold leading-tight tracking-tight text-[#f4f0e8] sm:text-[2.35rem]">
             {t("reuniones.title")}
           </h2>
-          <p className="mt-4 max-w-2xl text-base font-normal leading-relaxed text-white/80">
+          <p className="mt-4 max-w-2xl text-base font-normal leading-relaxed text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.45)]">
             {t("reuniones.description")}
           </p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-[#f4cfcf]">
+            <p className="mt-3 text-sm font-medium text-[#f4cfcf] drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
               {statusLabel}: {t(nextDayKey)}
             </p>
           ) : null}
@@ -122,7 +122,7 @@ export function Horarios() {
                   statusLabel={statusLabel}
                 >
                   <p className="text-sm text-[#f4f0e8]/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                  <time className="block text-sm font-medium text-white/60">{item.time}</time>
+                  <time className="block text-sm font-medium text-white/85">{item.time}</time>
                 </ScheduleCard>
               </Reveal>
             );
@@ -142,7 +142,7 @@ export function Horarios() {
                     className={cn(isNext && "rounded-md bg-white/5 px-2 py-1 sm:-mx-2")}
                   >
                     <p className="text-sm text-[#f4f0e8]/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                    <time className="block text-sm font-medium text-white/60">{item.time}</time>
+                    <time className="block text-sm font-medium text-white/85">{item.time}</time>
                   </div>
                 );
               })}

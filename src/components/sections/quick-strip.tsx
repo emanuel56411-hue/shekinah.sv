@@ -29,7 +29,9 @@ export function AnniversaryNote() {
             </span>
           </div>
         </div>
-        <p className="relative max-w-xl text-base text-foreground sm:text-lg">{t("anniversary.text")}</p>
+        <p className="relative max-w-xl text-base text-foreground drop-shadow-[0_1px_2px_rgba(255,255,255,0.55)] sm:text-lg">
+          {t("anniversary.text")}
+        </p>
       </div>
     </Reveal>
   );
