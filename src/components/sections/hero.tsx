@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -30,16 +29,8 @@ export function Hero() {
   const statusKey = featured.isLive ? "heroPanel.live" : "heroPanel.next";
 
   return (
-    <section id="inicio" className="relative min-h-[92vh] overflow-hidden bg-shekinah-950">
-      <Image
-        src="/assets/fotos/congregacion-culto.webp"
-        alt="Congregación en Iglesia Bautista Shekinah"
-        fill
-        priority
-        className="object-cover object-center"
-        sizes="100vw"
-      />
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
+    <section id="inicio" className="page-bg-dark relative min-h-[92vh] overflow-hidden">
+      <div className="page-bg-dark-overlay absolute inset-0 z-[1]" aria-hidden />
 
       <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-white sm:px-6">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
