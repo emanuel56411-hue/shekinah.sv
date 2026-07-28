@@ -31,7 +31,7 @@
 
   .section-surface {
     @apply relative;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.91);
     background-image: none;
   }
 
@@ -43,7 +43,7 @@
 
   .section-overlay-dark {
     @apply relative;
-    background-color: rgba(0, 0, 0, 0.62);
+    background-color: rgba(0, 0, 0, 0.58);
   }
 }
 
@@ -96,12 +96,12 @@
     body {
       background-attachment: scroll;
       background-size: cover;
-      background-position: center top;
+      background-position: center center;
     }
   }
 
   footer.page-bg-footer {
-    background-color: rgba(101, 16, 26, 0.78);
+    background-color: rgba(101, 16, 26, 0.72);
   }
 
   :focus-visible {

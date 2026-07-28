@@ -93,8 +93,6 @@ export function Horarios() {
 
   return (
     <section id="reuniones" className="section-overlay-dark relative overflow-hidden py-16 sm:py-20 lg:py-24">
-      <div aria-hidden className="absolute inset-0 bg-black/15" />
-
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#e8a0a0]">

@@ -30,7 +30,7 @@ export function Scripture() {
 
   return (
     <section
-      className="relative overflow-hidden border-y border-shekinah/10 bg-[#FAF8F3]/90 py-20 sm:py-28"
+      className="section-surface-alt relative overflow-hidden border-y border-shekinah/10 py-20 sm:py-28"
       aria-label={t("scripture.aria")}
     >
       <div
