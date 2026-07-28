@@ -43,19 +43,30 @@ export function Scripture() {
       />
 
       <Reveal>
-        <blockquote className="relative mx-auto max-w-3xl rounded-2xl border border-black/10 bg-[#FAF8F3] px-6 py-8 text-center shadow-[0_12px_32px_-10px_rgba(0,0,0,0.45)] sm:px-10 sm:py-10">
-          <span
+        <blockquote className="relative mx-auto max-w-3xl overflow-hidden rounded-2xl border border-white/20 shadow-[0_12px_32px_-10px_rgba(0,0,0,0.45)]">
+          <Image
+            src="/assets/fotos/fondo-versiculo.png"
+            alt=""
+            fill
+            className="object-cover object-center"
+            sizes="(max-width: 768px) 100vw, 768px"
             aria-hidden
-            className="mb-4 block font-heading text-5xl font-normal leading-none text-shekinah/50 sm:text-6xl"
-          >
-            “
-          </span>
-          <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-[#1a1214] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
-            {t("scripture.verseText")}
-          </p>
-          <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-shekinah">
-            {t("scripture.verseRef")}
-          </cite>
+          />
+          <div aria-hidden className="absolute inset-0 bg-black/55" />
+          <div className="relative z-10 px-6 py-10 text-center sm:px-10 sm:py-12">
+            <span
+              aria-hidden
+              className="mb-4 block font-heading text-5xl font-normal leading-none text-[#f4a8b1] sm:text-6xl"
+            >
+              “
+            </span>
+            <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
+              {t("scripture.verseText")}
+            </p>
+            <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-[#f4a8b1] drop-shadow-[0_1px_3px_rgba(0,0,0,0.5)]">
+              {t("scripture.verseRef")}
+            </cite>
+          </div>
         </blockquote>
       </Reveal>
     </section>
