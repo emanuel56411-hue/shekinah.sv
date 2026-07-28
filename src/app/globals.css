@@ -70,13 +70,15 @@
     content: "";
     position: absolute;
     inset: 0;
-    /* Overlay más fuerte: el atardecer tiene sol brillante al centro */
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.55) 0%,
-      rgba(0, 0, 0, 0.62) 45%,
-      rgba(0, 0, 0, 0.7) 100%
-    );
+    /* Oscurece el flare azul claro (arriba-derecha) para texto blanco legible */
+    background:
+      radial-gradient(ellipse 70% 55% at 85% 12%, rgba(0, 0, 0, 0.45) 0%, transparent 70%),
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.52) 0%,
+        rgba(0, 0, 0, 0.58) 45%,
+        rgba(0, 0, 0, 0.68) 100%
+      );
   }
 
   /* Overlay sutil del header (mismo criterio, más ligero arriba) */
