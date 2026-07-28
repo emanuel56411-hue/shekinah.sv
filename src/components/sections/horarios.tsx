@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
+import { CalendarDays } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SCHEDULE, SUNDAY_SCHEDULE } from "@/lib/constants";
@@ -15,40 +16,6 @@ const DAY_ABBR: Record<string, { es: string; en: string }> = {
   "common.sunday": { es: "DOM", en: "SUN" },
 };
 
-/** Estilo A = texto a la derecha; B = franja blanca con hora rotada (como la referencia). */
-type CardLayout = "right" | "sidebar";
-
-const CARD_META: Record<
-  string,
-  { image: string; alt: string; tint: string; layout: CardLayout }
-> = {
-  "schedule.tuesdayActivity": {
-    image: "/assets/fotos/predicacion-shekinah.webp",
-    alt: "Predicación y estudio bíblico",
-    tint: "#65101a",
-    layout: "right",
-  },
-  "schedule.thursdayActivity": {
-    image: "/assets/fotos/predicacion-horarios.webp",
-    alt: "Enseñanza y estudio bíblico",
-    tint: "#4a0c14",
-    layout: "sidebar",
-  },
-  "schedule.saturdayActivity": {
-    image: "/assets/fotos/equipo-alabanza.webp",
-    alt: "Alabanza y culto de jóvenes",
-    tint: "#8b1e2d",
-    layout: "sidebar",
-  },
-};
-
-const SUNDAY_META = {
-  image: "/assets/fotos/congregacion-culto.webp",
-  alt: "Congregación en culto dominical",
-  tint: "#65101a",
-  layout: "right" as const,
-};
-
 function matchNextId(titleKey: string, nextId: string | null): boolean {
   if (!nextId) return false;
   if (titleKey === "schedule.tuesdayActivity") return nextId === "tuesday";
@@ -59,19 +26,45 @@ function matchNextId(titleKey: string, nextId: string | null): boolean {
   return false;
 }
 
-/** Convierte "7:00 p.m. - 8:30 p.m." → "7PM" para la franja lateral. */
-function shortTime(time: string) {
-  const match = time.match(/(\d{1,2})(?::\d{2})?\s*(a\.m\.|p\.m\.|am|pm)/i);
-  if (!match) return time;
-  const period = /p/i.test(match[2]) ? "PM" : "AM";
-  return `${match[1]}${period}`;
-}
-
-function StatusBadge({ label }: { label: string }) {
+function ScheduleCard({
+  day,
+  isHighlighted,
+  statusLabel,
+  children,
+}: {
+  day: string;
+  isHighlighted: boolean;
+  statusLabel?: string | null;
+  children: ReactNode;
+}) {
   return (
-    <span className="inline-flex w-fit rounded-full bg-white/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white shadow-sm backdrop-blur-sm">
-      {label}
-    </span>
+    <article
+      className={cn(
+        "relative overflow-hidden rounded-2xl border border-white/10 bg-[#141414] px-4 py-4 shadow-[0_10px_28px_-12px_rgba(0,0,0,0.65)] sm:px-5 sm:py-5",
+        isHighlighted && "ring-2 ring-[#65101a] ring-offset-2 ring-offset-black"
+      )}
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-y-0 right-0 w-2/5 bg-gradient-to-l from-[#65101a]/35 to-transparent"
+      />
+      <div className="relative z-10 flex items-start gap-3 sm:gap-4">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#65101a] text-white sm:h-12 sm:w-12">
+          <CalendarDays className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={1.75} />
+        </div>
+        <div className="min-w-0 flex-1">
+          {isHighlighted && statusLabel ? (
+            <span className="mb-1.5 inline-flex rounded-full bg-[#65101a]/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#f4cfcf]">
+              {statusLabel}
+            </span>
+          ) : null}
+          <p className="font-heading text-[1.65rem] font-semibold leading-none tracking-tight text-[#f4f0e8] sm:text-[1.85rem]">
+            {day}
+          </p>
+          <div className="mt-1.5 space-y-1.5">{children}</div>
+        </div>
+      </div>
+    </article>
   );
 }
 
@@ -100,14 +93,30 @@ export function Horarios() {
   const statusLabel = isLive ? t("heroPanel.live") : t("heroPanel.next");
 
   return (
-    <section id="reuniones" className="section-padding section-surface-alt">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+    <section id="reuniones" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
+      <Image
+        src="/assets/fotos/congregacion-culto.webp"
+        alt=""
+        fill
+        className="object-cover object-center brightness-[0.35] saturate-[0.7]"
+        sizes="100vw"
+        aria-hidden
+      />
+      <div aria-hidden className="absolute inset-0 bg-black/75" />
+
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>
-          <p className="eyebrow">{t("reuniones.eyebrow")}</p>
-          <h2 className="section-title">{t("reuniones.title")}</h2>
-          <p className="section-desc">{t("reuniones.description")}</p>
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#c45c5c]">
+            {t("reuniones.eyebrow")}
+          </p>
+          <h2 className="mt-3 font-heading text-[2rem] font-semibold leading-tight tracking-tight text-[#f4f0e8] sm:text-[2.35rem]">
+            {t("reuniones.title")}
+          </h2>
+          <p className="mt-4 max-w-2xl text-base font-normal leading-relaxed text-white/75">
+            {t("reuniones.description")}
+          </p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-shekinah">
+            <p className="mt-3 text-sm font-medium text-[#e8a0a0]">
               {statusLabel}: {t(nextDayKey)}
             </p>
           ) : null}
@@ -116,119 +125,39 @@ export function Horarios() {
         <div className="space-y-3">
           {SCHEDULE.map((item, index) => {
             const isNext = matchNextId(item.titleKey, nextId);
-            const meta = CARD_META[item.titleKey] ?? CARD_META["schedule.tuesdayActivity"];
-            const day = DAY_ABBR[item.dayKey]?.[lang] ?? "";
-            const activity = t(item.titleKey);
-            const isSidebar = meta.layout === "sidebar";
-
             return (
               <Reveal key={item.titleKey} delay={index * 0.06}>
-                <article
-                  className={cn(
-                    "relative flex min-h-[7.75rem] overflow-hidden rounded-2xl text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)] sm:min-h-[8.5rem]",
-                    isNext &&
-                      "ring-2 ring-white/85 ring-offset-2 ring-offset-[hsl(var(--background))]"
-                  )}
+                <ScheduleCard
+                  day={DAY_ABBR[item.dayKey]?.[lang] ?? ""}
+                  isHighlighted={isNext}
+                  statusLabel={statusLabel}
                 >
-                  <Image
-                    src={meta.image}
-                    alt={meta.alt}
-                    fill
-                    className="object-cover object-center grayscale-[30%]"
-                    sizes="(max-width: 1024px) 100vw, 560px"
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0"
-                    style={{
-                      background: isSidebar
-                        ? `linear-gradient(90deg, ${meta.tint}cc 0%, ${meta.tint}99 55%, ${meta.tint}66 100%)`
-                        : `linear-gradient(90deg, ${meta.tint}55 0%, ${meta.tint}aa 45%, ${meta.tint}f2 100%)`,
-                    }}
-                  />
-
-                  {isSidebar ? (
-                    <>
-                      <div className="relative z-10 flex w-11 shrink-0 items-center justify-center bg-white sm:w-12">
-                        <span className="origin-center -rotate-90 whitespace-nowrap text-sm font-extrabold tracking-wide text-[#1a1a1a] sm:text-base">
-                          {shortTime(item.time)}
-                        </span>
-                      </div>
-                      <div className="relative z-10 flex min-w-0 flex-1 flex-col justify-center gap-1.5 px-4 py-4 sm:px-5">
-                        {isNext ? <StatusBadge label={statusLabel} /> : null}
-                        <p className="font-sans text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
-                          {day}
-                        </p>
-                        <p className="text-sm font-medium uppercase tracking-wide text-white/95 sm:text-base">
-                          {activity}
-                        </p>
-                        <time className="text-xs font-semibold text-white/85 sm:text-sm">{item.time}</time>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="relative z-10 flex min-w-0 flex-1 flex-col items-end justify-center gap-1.5 px-5 py-4 text-right sm:px-6">
-                      {isNext ? <StatusBadge label={statusLabel} /> : null}
-                      <p className="font-sans text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
-                        {day}
-                      </p>
-                      <p className="max-w-[16rem] text-sm font-medium uppercase tracking-wide text-white/95 sm:text-base">
-                        {activity}
-                      </p>
-                      <time className="text-xs font-semibold text-white/85 sm:text-sm">{item.time}</time>
-                    </div>
-                  )}
-                </article>
+                  <p className="text-sm text-[#f4f0e8]/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                  <time className="block text-sm font-medium text-white/60">{item.time}</time>
+                </ScheduleCard>
               </Reveal>
             );
           })}
 
           <Reveal delay={0.2}>
-            <article
-              className={cn(
-                "relative flex min-h-[9rem] overflow-hidden rounded-2xl text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)] sm:min-h-[9.75rem]",
-                sundayHasNext &&
-                  "ring-2 ring-white/85 ring-offset-2 ring-offset-[hsl(var(--background))]"
-              )}
+            <ScheduleCard
+              day={DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
+              isHighlighted={sundayHasNext}
+              statusLabel={statusLabel}
             >
-              <Image
-                src={SUNDAY_META.image}
-                alt={SUNDAY_META.alt}
-                fill
-                className="object-cover object-center grayscale-[30%]"
-                sizes="(max-width: 1024px) 100vw, 560px"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(90deg, ${SUNDAY_META.tint}55 0%, ${SUNDAY_META.tint}aa 45%, ${SUNDAY_META.tint}f2 100%)`,
-                }}
-              />
-
-              <div className="relative z-10 flex min-w-0 flex-1 flex-col items-end justify-center gap-2 px-5 py-4 text-right sm:px-6">
-                {sundayHasNext ? <StatusBadge label={statusLabel} /> : null}
-                <p className="font-sans text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
-                  {DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
-                </p>
-                {SUNDAY_SCHEDULE.map((item) => {
-                  const isNext = matchNextId(item.titleKey, nextId);
-                  return (
-                    <div
-                      key={item.titleKey}
-                      className={cn(
-                        "flex max-w-[18rem] flex-col items-end gap-0.5",
-                        isNext && "rounded-md bg-white/15 px-2 py-1.5"
-                      )}
-                    >
-                      <span className="text-sm font-medium uppercase tracking-wide text-white/95 sm:text-base">
-                        {t(item.titleKey)}
-                      </span>
-                      <time className="text-xs font-semibold text-white/85 sm:text-sm">{item.time}</time>
-                    </div>
-                  );
-                })}
-              </div>
-            </article>
+              {SUNDAY_SCHEDULE.map((item) => {
+                const isNext = matchNextId(item.titleKey, nextId);
+                return (
+                  <div
+                    key={item.titleKey}
+                    className={cn(isNext && "rounded-md bg-white/5 px-2 py-1 sm:-mx-2")}
+                  >
+                    <p className="text-sm text-[#f4f0e8]/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                    <time className="block text-sm font-medium text-white/60">{item.time}</time>
+                  </div>
+                );
+              })}
+            </ScheduleCard>
           </Reveal>
         </div>
       </div>
