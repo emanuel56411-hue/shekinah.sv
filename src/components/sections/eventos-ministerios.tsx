@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Card, CardContent } from "@/components/ui/card";
+import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
 import { EVENTS, MINISTRIES } from "@/lib/constants";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
@@ -38,7 +39,8 @@ const eventCardStyles: Record<
   (typeof EVENTS)[number]["id"],
   {
     image: string;
-    href: string;
+    href?: string;
+    openCalendar?: boolean;
     linkLabel: string;
     accentIcon: string;
     accentTag: string;
@@ -47,33 +49,33 @@ const eventCardStyles: Record<
 > = {
   upcoming: {
     image: "/assets/fotos/congregacion-culto-lateral.png",
-    href: "#reuniones",
+    openCalendar: true,
     linkLabel: "Ver calendario →",
-    accentIcon:
-      "border-shekinah/40 bg-shekinah/25 text-white   ",
-    accentTag: "text-shekinah-300",
-    accentLink: "text-shekinah-300 hover:text-white",
+    accentIcon: "border-white/30 bg-[#65101a] text-white shadow-sm",
+    accentTag: "text-[#ffc9d0]",
+    accentLink: "text-[#ffc9d0] hover:text-white",
   },
   help: {
     image: "/assets/fotos/ayuda-comunidad-ninos.png",
     href: "#ayuda",
     linkLabel: "Cómo ayudar →",
-    accentIcon: "border-amber-400/50 bg-amber-500/25 text-amber-100",
-    accentTag: "text-amber-300",
-    accentLink: "text-amber-300 hover:text-amber-100",
+    accentIcon: "border-white/30 bg-amber-600 text-white shadow-sm",
+    accentTag: "text-[#ffe08a]",
+    accentLink: "text-[#ffe08a] hover:text-white",
   },
   social: {
     image: "/assets/fotos/presentacion-ninos-escenario.png",
     href: "#redes",
     linkLabel: "Síguenos →",
-    accentIcon: "border-sky-400/50 bg-sky-500/25 text-sky-100",
-    accentTag: "text-sky-300",
-    accentLink: "text-sky-300 hover:text-sky-100",
+    accentIcon: "border-white/30 bg-sky-600 text-white shadow-sm",
+    accentTag: "text-[#b8e4ff]",
+    accentLink: "text-[#b8e4ff] hover:text-white",
   },
 };
 
 export function Eventos() {
   const { t } = useLanguage();
+  const { openCalendar } = useCalendarModal();
 
   return (
     <section id="eventos" className="section-padding section-surface-alt">
@@ -87,9 +89,13 @@ export function Eventos() {
           {EVENTS.map((event, index) => {
             const Icon = eventIcons[event.icon];
             const style = eventCardStyles[event.id];
+            const linkClass = cn(
+              "mt-auto text-left text-sm font-semibold transition-colors duration-200",
+              style.accentLink
+            );
             return (
               <Reveal key={event.id} delay={index * 0.05}>
-                <Card className="group relative h-full gap-0 overflow-hidden border-black/20 bg-neutral-900 p-0 shadow-none ring-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)] ">
+                <Card className="group relative h-full gap-0 overflow-hidden border-black/20 bg-neutral-900 p-0 shadow-none ring-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)]">
                   <Image
                     src={style.image}
                     alt=""
@@ -98,7 +104,7 @@ export function Eventos() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-black/25"
+                    className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10"
                     aria-hidden
                   />
                   <CardContent className="relative z-10 flex h-full min-h-[280px] flex-col gap-5 px-6 py-6 sm:px-7 sm:py-7">
@@ -114,28 +120,28 @@ export function Eventos() {
                       </span>
                       <span
                         className={cn(
-                          "text-[0.7rem] font-semibold uppercase tracking-[0.16em]",
+                          "rounded-sm bg-black/45 px-2 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] backdrop-blur-[2px]",
                           style.accentTag
                         )}
                       >
                         {t(event.tagKey)}
                       </span>
                     </div>
-                    <div className="space-y-2">
-                      <h3 className="font-heading text-xl font-semibold tracking-tight text-white">
+                    <div className="space-y-2 rounded-md bg-black/40 p-3 backdrop-blur-[2px]">
+                      <h3 className="font-heading text-xl font-semibold tracking-tight text-white drop-shadow-sm">
                         {t(event.titleKey)}
                       </h3>
-                      <p className="text-sm leading-relaxed text-white/85">{t(event.descKey)}</p>
+                      <p className="text-sm leading-relaxed text-white/95">{t(event.descKey)}</p>
                     </div>
-                    <Link
-                      href={style.href}
-                      className={cn(
-                        "mt-auto text-sm font-medium transition-colors duration-200",
-                        style.accentLink
-                      )}
-                    >
-                      {style.linkLabel}
-                    </Link>
+                    {style.openCalendar ? (
+                      <button type="button" onClick={openCalendar} className={linkClass}>
+                        {style.linkLabel}
+                      </button>
+                    ) : (
+                      <Link href={style.href!} className={linkClass}>
+                        {style.linkLabel}
+                      </Link>
+                    )}
                   </CardContent>
                 </Card>
               </Reveal>

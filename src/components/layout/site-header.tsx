@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { CalendarModal } from "@/components/calendar/calendar-modal";
+import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -51,14 +52,14 @@ const navItems: NavItem[] = [
 
 export function SiteHeader() {
   const { t, lang, setLang } = useLanguage();
+  const { open: calendarOpen, setOpen: setCalendarOpen, openCalendar } = useCalendarModal();
   const [open, setOpen] = useState(false);
-  const [calendarOpen, setCalendarOpen] = useState(false);
 
   const closeMenu = () => setOpen(false);
 
-  const openCalendar = () => {
+  const handleOpenCalendar = () => {
     setOpen(false);
-    setCalendarOpen(true);
+    openCalendar();
   };
 
   return (
@@ -133,7 +134,7 @@ export function SiteHeader() {
                   <li>
                     <button
                       type="button"
-                      onClick={openCalendar}
+                      onClick={handleOpenCalendar}
                       className="group flex w-full items-center gap-4 rounded-full px-4 py-3 text-left text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                     >
                       <CalendarDays className="h-[1.35rem] w-[1.35rem] shrink-0 text-white" strokeWidth={1.75} />
