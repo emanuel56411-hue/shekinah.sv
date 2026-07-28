@@ -30,22 +30,20 @@
   }
 
   .section-surface {
-    @apply relative bg-white;
-    background-image: radial-gradient(
-      ellipse 90% 55% at 50% -10%,
-      rgba(101, 16, 26, 0.045),
-      transparent 60%
-    );
+    @apply relative;
+    background-color: rgba(255, 255, 255, 0.9);
+    background-image: none;
   }
 
   .section-surface-alt {
-    @apply relative bg-[#FAF8F3];
-    background-image: linear-gradient(
-      180deg,
-      #faf8f3 0%,
-      #f3eee6 55%,
-      rgba(101, 16, 26, 0.04) 100%
-    );
+    @apply relative;
+    background-color: rgba(250, 248, 243, 0.9);
+    background-image: none;
+  }
+
+  .section-overlay-dark {
+    @apply relative;
+    background-color: rgba(0, 0, 0, 0.62);
   }
 }
 
@@ -79,10 +77,31 @@
 
   html {
     scroll-behavior: smooth;
+    background-color: #1a1214;
+    min-height: 100%;
   }
 
   body {
-    @apply bg-background font-sans text-base font-normal leading-relaxed text-foreground antialiased;
+    @apply font-sans text-base font-normal leading-relaxed text-foreground antialiased;
+    min-height: 100%;
+    background-color: transparent;
+    background-image: url("/assets/fotos/fondo-adoracion.webp");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      background-attachment: scroll;
+      background-size: cover;
+      background-position: center top;
+    }
+  }
+
+  footer.page-bg-footer {
+    background-color: rgba(101, 16, 26, 0.78);
   }
 
   :focus-visible {

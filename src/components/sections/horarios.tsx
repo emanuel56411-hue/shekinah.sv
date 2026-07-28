@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import Image from "next/image";
 import { CalendarDays } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -93,17 +92,8 @@ export function Horarios() {
   const statusLabel = isLive ? t("heroPanel.live") : t("heroPanel.next");
 
   return (
-    <section id="reuniones" className="relative overflow-hidden py-16 sm:py-20 lg:py-24">
-      <Image
-        src="/assets/fotos/manos-alabanza.png"
-        alt=""
-        fill
-        className="object-cover object-center"
-        sizes="100vw"
-        aria-hidden
-        priority={false}
-      />
-      <div aria-hidden className="absolute inset-0 bg-black/70" />
+    <section id="reuniones" className="section-overlay-dark relative overflow-hidden py-16 sm:py-20 lg:py-24">
+      <div aria-hidden className="absolute inset-0 bg-black/15" />
 
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>

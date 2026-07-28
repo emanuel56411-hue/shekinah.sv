@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,15 +14,9 @@ import {
 } from "@/lib/schedule";
 import { cn } from "@/lib/utils";
 
-const HERO_POSTER = "/assets/fotos/congregacion-culto.webp";
-const HERO_VIDEO_DESKTOP = "/assets/videos/hero-bg.mp4";
-const HERO_VIDEO_MOBILE = "/assets/videos/hero-bg-mobile.mp4";
-
 export function Hero() {
   const { t } = useLanguage();
-  const videoRef = useRef<HTMLVideoElement>(null);
   const [services, setServices] = useState<UpcomingService[]>(getDefaultHeroServices);
-  const [videoSrc, setVideoSrc] = useState(HERO_VIDEO_DESKTOP);
 
   useEffect(() => {
     const refresh = () => setServices(getHeroServices(new Date()));
@@ -32,68 +25,15 @@ export function Hero() {
     return () => window.clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    const pickSource = () => {
-      const mobile = window.matchMedia("(max-width: 768px)").matches;
-      setVideoSrc(mobile ? HERO_VIDEO_MOBILE : HERO_VIDEO_DESKTOP);
-    };
-
-    pickSource();
-    const mq = window.matchMedia("(max-width: 768px)");
-    mq.addEventListener("change", pickSource);
-    return () => mq.removeEventListener("change", pickSource);
-  }, []);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    video.muted = true;
-    video.defaultMuted = true;
-    video.setAttribute("muted", "");
-    video.playsInline = true;
-
-    const tryPlay = () => {
-      void video.play().catch(() => undefined);
-    };
-
-    tryPlay();
-    video.addEventListener("loadeddata", tryPlay);
-    video.addEventListener("canplay", tryPlay);
-    return () => {
-      video.removeEventListener("loadeddata", tryPlay);
-      video.removeEventListener("canplay", tryPlay);
-    };
-  }, [videoSrc]);
-
   const [featured, ...others] = services;
   const statusKey = featured.isLive ? "heroPanel.live" : "heroPanel.next";
 
   return (
-    <section id="inicio" className="relative min-h-[92vh] overflow-hidden bg-shekinah-950">
-      <Image
-        src={HERO_POSTER}
-        alt="Congregación en Iglesia Bautista Shekinah"
-        fill
-        priority
-        className="object-cover object-center"
-        sizes="100vw"
-      />
-      <video
-        key={videoSrc}
-        ref={videoRef}
-        className="absolute inset-0 z-0 h-full w-full object-cover object-center"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        poster={HERO_POSTER}
+    <section id="inicio" className="section-overlay-dark relative min-h-[92vh] overflow-hidden">
+      <div
         aria-hidden
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/70 via-black/55 to-black/80" />
+        className="absolute inset-0 z-[1] bg-gradient-to-b from-black/45 via-black/35 to-black/55"
+      />
 
       <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-white sm:px-6">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-white/90">
