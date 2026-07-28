@@ -74,11 +74,11 @@ export function SiteHeader() {
               height={46}
               className="h-[46px] w-[46px] shrink-0 rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.45)] ring-1 ring-white/70"
             />
-            <span className="min-w-0 leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.75),0_0_12px_rgba(0,0,0,0.45)]">
+            <span className="min-w-0 leading-tight [text-shadow:0_0_1px_#000,0_1px_2px_rgba(0,0,0,0.95),0_2px_6px_rgba(0,0,0,0.85),0_0_18px_rgba(0,0,0,0.65)]">
               <strong className="block truncate text-sm font-bold text-white sm:text-base">
                 Iglesia Bautista Shekinah
               </strong>
-              <small className="block text-xs font-medium text-white/90">San Juan Opico</small>
+              <small className="block text-xs font-medium text-white">San Juan Opico</small>
             </span>
           </Link>
 
@@ -86,7 +86,7 @@ export function SiteHeader() {
             <SheetTrigger
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "gap-2 border-white/70 bg-black/40 text-white shadow-[0_1px_4px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:bg-black/55 hover:text-white"
+                "gap-2 border-white/80 bg-transparent text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.85)] shadow-none hover:bg-white/10 hover:text-white"
               )}
               aria-label={t("menu.openAria")}
             >
