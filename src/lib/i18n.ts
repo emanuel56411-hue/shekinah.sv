@@ -20,6 +20,7 @@ export const translations: Record<Lang, TranslationTree> = {
       redes: "Redes",
       eventos: "Eventos",
       galeria: "Galería",
+      calendario: "Calendario",
     },
     menu: {
       title: "Menú",
@@ -41,6 +42,15 @@ export const translations: Record<Lang, TranslationTree> = {
       call: "Llamar",
       callAria: "Llamar al teléfono de la iglesia",
       settings: "Ajustes",
+    },
+    calendar: {
+      title: "Calendario",
+      description: "Consulta actividades y cultos del mes.",
+      today: "Hoy",
+      prevMonth: "Mes anterior",
+      nextMonth: "Mes siguiente",
+      pickDay: "Selecciona un día",
+      noEvents: "No hay eventos en este día.",
     },
     lang: {
       toEnglish: "EN",
@@ -241,6 +251,7 @@ export const translations: Record<Lang, TranslationTree> = {
       redes: "Social",
       eventos: "Events",
       galeria: "Gallery",
+      calendario: "Calendar",
     },
     menu: {
       title: "Menu",
@@ -262,6 +273,15 @@ export const translations: Record<Lang, TranslationTree> = {
       call: "Call",
       callAria: "Call the church phone number",
       settings: "Settings",
+    },
+    calendar: {
+      title: "Calendar",
+      description: "See activities and services for the month.",
+      today: "Today",
+      prevMonth: "Previous month",
+      nextMonth: "Next month",
+      pickDay: "Select a day",
+      noEvents: "No events on this day.",
     },
     lang: {
       toEnglish: "EN",
