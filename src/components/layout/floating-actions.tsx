@@ -42,9 +42,9 @@ export function ScrollTop() {
       variant="outline"
       aria-label={t("fab.scrollTopAria")}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className="fixed bottom-[9.25rem] right-3 z-40 rounded-full border-black/30 bg-background shadow-lg focus-visible:ring-2 focus-visible:ring-shekinah md:bottom-24 md:right-4"
+      className="fixed bottom-[9.25rem] right-3 z-40 rounded-full border-black/25 bg-white text-[#1a1214] shadow-lg hover:bg-[#FAF8F3] hover:text-[#65101a] focus-visible:ring-2 focus-visible:ring-shekinah md:bottom-24 md:right-4"
     >
-      <ArrowUp className="h-5 w-5" />
+      <ArrowUp className="h-5 w-5 text-[#1a1214]" />
     </Button>
   );
 }
