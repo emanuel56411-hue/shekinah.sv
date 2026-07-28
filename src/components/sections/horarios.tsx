@@ -15,24 +15,38 @@ const DAY_ABBR: Record<string, { es: string; en: string }> = {
   "common.sunday": { es: "DOM", en: "SUN" },
 };
 
-const SCHEDULE_IMAGES: Record<string, { src: string; alt: string }> = {
+/** Estilo A = texto a la derecha; B = franja blanca con hora rotada (como la referencia). */
+type CardLayout = "right" | "sidebar";
+
+const CARD_META: Record<
+  string,
+  { image: string; alt: string; tint: string; layout: CardLayout }
+> = {
   "schedule.tuesdayActivity": {
-    src: "/assets/fotos/predicacion-shekinah.webp",
+    image: "/assets/fotos/predicacion-shekinah.webp",
     alt: "Predicación y estudio bíblico",
+    tint: "#65101a",
+    layout: "right",
   },
   "schedule.thursdayActivity": {
-    src: "/assets/fotos/predicacion-horarios.webp",
+    image: "/assets/fotos/predicacion-horarios.webp",
     alt: "Enseñanza y estudio bíblico",
+    tint: "#4a0c14",
+    layout: "sidebar",
   },
   "schedule.saturdayActivity": {
-    src: "/assets/fotos/equipo-alabanza.webp",
+    image: "/assets/fotos/equipo-alabanza.webp",
     alt: "Alabanza y culto de jóvenes",
+    tint: "#8b1e2d",
+    layout: "sidebar",
   },
 };
 
-const SUNDAY_IMAGE = {
-  src: "/assets/fotos/congregacion-culto.webp",
+const SUNDAY_META = {
+  image: "/assets/fotos/congregacion-culto.webp",
   alt: "Congregación en culto dominical",
+  tint: "#65101a",
+  layout: "right" as const,
 };
 
 function matchNextId(titleKey: string, nextId: string | null): boolean {
@@ -43,6 +57,22 @@ function matchNextId(titleKey: string, nextId: string | null): boolean {
   if (titleKey === "schedule.sunday1Activity") return nextId === "sunday1";
   if (titleKey === "schedule.sunday2Activity") return nextId === "sunday2";
   return false;
+}
+
+/** Convierte "7:00 p.m. - 8:30 p.m." → "7PM" para la franja lateral. */
+function shortTime(time: string) {
+  const match = time.match(/(\d{1,2})(?::\d{2})?\s*(a\.m\.|p\.m\.|am|pm)/i);
+  if (!match) return time;
+  const period = /p/i.test(match[2]) ? "PM" : "AM";
+  return `${match[1]}${period}`;
+}
+
+function StatusBadge({ label }: { label: string }) {
+  return (
+    <span className="inline-flex w-fit rounded-full bg-white/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white shadow-sm backdrop-blur-sm">
+      {label}
+    </span>
+  );
 }
 
 export function Horarios() {
@@ -86,55 +116,67 @@ export function Horarios() {
         <div className="space-y-3">
           {SCHEDULE.map((item, index) => {
             const isNext = matchNextId(item.titleKey, nextId);
-            const image = SCHEDULE_IMAGES[item.titleKey] ?? SCHEDULE_IMAGES["schedule.tuesdayActivity"];
+            const meta = CARD_META[item.titleKey] ?? CARD_META["schedule.tuesdayActivity"];
+            const day = DAY_ABBR[item.dayKey]?.[lang] ?? "";
+            const activity = t(item.titleKey);
+            const isSidebar = meta.layout === "sidebar";
+
             return (
               <Reveal key={item.titleKey} delay={index * 0.06}>
                 <article
                   className={cn(
-                    "relative min-h-[7.5rem] overflow-hidden rounded-2xl text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.4)] sm:min-h-[8.25rem]",
+                    "relative flex min-h-[7.75rem] overflow-hidden rounded-2xl text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)] sm:min-h-[8.5rem]",
                     isNext &&
                       "ring-2 ring-white/85 ring-offset-2 ring-offset-[hsl(var(--background))]"
                   )}
                 >
                   <Image
-                    src={image.src}
-                    alt={image.alt}
+                    src={meta.image}
+                    alt={meta.alt}
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-center grayscale-[30%]"
                     sizes="(max-width: 1024px) 100vw, 560px"
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-r from-[#65101a]/95 via-[#65101a]/88 to-[#65101a]/62"
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10"
+                    className="absolute inset-0"
+                    style={{
+                      background: isSidebar
+                        ? `linear-gradient(90deg, ${meta.tint}cc 0%, ${meta.tint}99 55%, ${meta.tint}66 100%)`
+                        : `linear-gradient(90deg, ${meta.tint}55 0%, ${meta.tint}aa 45%, ${meta.tint}f2 100%)`,
+                    }}
                   />
 
-                  <div className="relative z-10 flex h-full min-h-[7.5rem] items-stretch gap-4 px-5 py-4 sm:min-h-[8.25rem] sm:px-6">
-                    <div className="flex min-w-[4.25rem] shrink-0 items-center sm:min-w-[5rem]">
-                      <span className="font-sans text-[1.75rem] font-extrabold leading-none tracking-tight drop-shadow-sm sm:text-4xl">
-                        {DAY_ABBR[item.dayKey]?.[lang] ?? ""}
-                      </span>
-                    </div>
-                    <div className="w-px shrink-0 self-stretch bg-white/45" aria-hidden />
-                    <div className="flex min-w-0 flex-1 flex-col justify-center gap-1.5 py-0.5">
-                      {isNext ? (
-                        <span className="inline-flex w-fit rounded-full bg-white/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white shadow-sm backdrop-blur-sm">
-                          {statusLabel}
-                        </span>
-                      ) : null}
-                      <div className="flex min-w-0 flex-col gap-0.5 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-3">
-                        <time className="shrink-0 text-base font-bold leading-snug drop-shadow-sm sm:text-lg">
-                          {item.time}
-                        </time>
-                        <span className="text-sm font-normal leading-snug text-white/95 sm:text-[0.95rem]">
-                          {t(item.titleKey)}
+                  {isSidebar ? (
+                    <>
+                      <div className="relative z-10 flex w-11 shrink-0 items-center justify-center bg-white sm:w-12">
+                        <span className="origin-center -rotate-90 whitespace-nowrap text-sm font-extrabold tracking-wide text-[#1a1a1a] sm:text-base">
+                          {shortTime(item.time)}
                         </span>
                       </div>
+                      <div className="relative z-10 flex min-w-0 flex-1 flex-col justify-center gap-1.5 px-4 py-4 sm:px-5">
+                        {isNext ? <StatusBadge label={statusLabel} /> : null}
+                        <p className="font-sans text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
+                          {day}
+                        </p>
+                        <p className="text-sm font-medium uppercase tracking-wide text-white/95 sm:text-base">
+                          {activity}
+                        </p>
+                        <time className="text-xs font-semibold text-white/85 sm:text-sm">{item.time}</time>
+                      </div>
+                    </>
+                  ) : (
+                    <div className="relative z-10 flex min-w-0 flex-1 flex-col items-end justify-center gap-1.5 px-5 py-4 text-right sm:px-6">
+                      {isNext ? <StatusBadge label={statusLabel} /> : null}
+                      <p className="font-sans text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
+                        {day}
+                      </p>
+                      <p className="max-w-[16rem] text-sm font-medium uppercase tracking-wide text-white/95 sm:text-base">
+                        {activity}
+                      </p>
+                      <time className="text-xs font-semibold text-white/85 sm:text-sm">{item.time}</time>
                     </div>
-                  </div>
+                  )}
                 </article>
               </Reveal>
             );
@@ -143,60 +185,48 @@ export function Horarios() {
           <Reveal delay={0.2}>
             <article
               className={cn(
-                "relative min-h-[9rem] overflow-hidden rounded-2xl text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.4)] sm:min-h-[9.5rem]",
+                "relative flex min-h-[9rem] overflow-hidden rounded-2xl text-white shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)] sm:min-h-[9.75rem]",
                 sundayHasNext &&
                   "ring-2 ring-white/85 ring-offset-2 ring-offset-[hsl(var(--background))]"
               )}
             >
               <Image
-                src={SUNDAY_IMAGE.src}
-                alt={SUNDAY_IMAGE.alt}
+                src={SUNDAY_META.image}
+                alt={SUNDAY_META.alt}
                 fill
-                className="object-cover object-center"
+                className="object-cover object-center grayscale-[30%]"
                 sizes="(max-width: 1024px) 100vw, 560px"
               />
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-r from-[#65101a]/95 via-[#65101a]/88 to-[#65101a]/62"
-              />
-              <div
-                aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-black/10"
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(90deg, ${SUNDAY_META.tint}55 0%, ${SUNDAY_META.tint}aa 45%, ${SUNDAY_META.tint}f2 100%)`,
+                }}
               />
 
-              <div className="relative z-10 flex h-full min-h-[9rem] items-stretch gap-4 px-5 py-4 sm:min-h-[9.5rem] sm:px-6">
-                <div className="flex min-w-[4.25rem] shrink-0 items-center sm:min-w-[5rem]">
-                  <span className="font-sans text-[1.75rem] font-extrabold leading-none tracking-tight drop-shadow-sm sm:text-4xl">
-                    {DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
-                  </span>
-                </div>
-                <div className="w-px shrink-0 self-stretch bg-white/45" aria-hidden />
-                <div className="flex min-w-0 flex-1 flex-col justify-center gap-2.5 py-0.5">
-                  {sundayHasNext ? (
-                    <span className="inline-flex w-fit rounded-full bg-white/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-white shadow-sm backdrop-blur-sm">
-                      {statusLabel}
-                    </span>
-                  ) : null}
-                  {SUNDAY_SCHEDULE.map((item) => {
-                    const isNext = matchNextId(item.titleKey, nextId);
-                    return (
-                      <div
-                        key={item.titleKey}
-                        className={cn(
-                          "flex min-w-0 flex-col gap-0.5 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-3",
-                          isNext && "rounded-md bg-white/15 px-2 py-1.5 sm:-mx-2"
-                        )}
-                      >
-                        <time className="shrink-0 text-base font-bold leading-snug drop-shadow-sm sm:text-lg">
-                          {item.time}
-                        </time>
-                        <span className="text-sm font-normal leading-snug text-white/95 sm:text-[0.95rem]">
-                          {t(item.titleKey)}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
+              <div className="relative z-10 flex min-w-0 flex-1 flex-col items-end justify-center gap-2 px-5 py-4 text-right sm:px-6">
+                {sundayHasNext ? <StatusBadge label={statusLabel} /> : null}
+                <p className="font-sans text-3xl font-extrabold uppercase leading-none tracking-tight sm:text-4xl">
+                  {DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
+                </p>
+                {SUNDAY_SCHEDULE.map((item) => {
+                  const isNext = matchNextId(item.titleKey, nextId);
+                  return (
+                    <div
+                      key={item.titleKey}
+                      className={cn(
+                        "flex max-w-[18rem] flex-col items-end gap-0.5",
+                        isNext && "rounded-md bg-white/15 px-2 py-1.5"
+                      )}
+                    >
+                      <span className="text-sm font-medium uppercase tracking-wide text-white/95 sm:text-base">
+                        {t(item.titleKey)}
+                      </span>
+                      <time className="text-xs font-semibold text-white/85 sm:text-sm">{item.time}</time>
+                    </div>
+                  );
+                })}
               </div>
             </article>
           </Reveal>
