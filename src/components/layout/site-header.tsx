@@ -64,7 +64,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[100] border-b border-black/15 bg-white shadow-sm">
+      <header className="fixed inset-x-0 top-0 z-[100] border-b border-transparent bg-transparent">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <Link href="#inicio" aria-label={t("header.brandAria")} className="flex min-w-0 items-center gap-3">
             <Image
@@ -72,19 +72,22 @@ export function SiteHeader() {
               alt="Logo Shekinah"
               width={46}
               height={46}
-              className="h-[46px] w-[46px] shrink-0 rounded-full"
+              className="h-[46px] w-[46px] shrink-0 rounded-full shadow-[0_1px_4px_rgba(0,0,0,0.45)] ring-1 ring-white/70"
             />
-            <span className="min-w-0 leading-tight">
-              <strong className="block truncate text-sm font-bold text-[#1a1214] sm:text-base">
+            <span className="min-w-0 leading-tight [text-shadow:0_1px_3px_rgba(0,0,0,0.75),0_0_12px_rgba(0,0,0,0.45)]">
+              <strong className="block truncate text-sm font-bold text-white sm:text-base">
                 Iglesia Bautista Shekinah
               </strong>
-              <small className="block text-xs font-medium text-[#65101a]/80">San Juan Opico</small>
+              <small className="block text-xs font-medium text-white/90">San Juan Opico</small>
             </span>
           </Link>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
-              className={cn(buttonVariants({ variant: "outline", size: "sm" }), "gap-2")}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "gap-2 border-white/70 bg-black/40 text-white shadow-[0_1px_4px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:bg-black/55 hover:text-white"
+              )}
               aria-label={t("menu.openAria")}
             >
               <Menu className="h-4 w-4" />
