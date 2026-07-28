@@ -63,7 +63,7 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[100] border-b border-border/70 bg-white/95 shadow-sm backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-[100] border-b border-white/20 bg-white/40 shadow-sm backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
           <Link href="#inicio" aria-label={t("header.brandAria")} className="flex items-center gap-3">
             <Image src="/assets/logo-shekinah.png" alt="Logo Shekinah" width={46} height={46} className="rounded-full" />

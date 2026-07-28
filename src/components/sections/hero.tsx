@@ -32,7 +32,7 @@ export function Hero() {
     <section id="inicio" className="section-overlay-dark relative min-h-[92vh] overflow-hidden">
       <div
         aria-hidden
-        className="absolute inset-0 z-[1] bg-gradient-to-b from-black/20 via-transparent to-black/30"
+        className="absolute inset-0 z-[1] bg-gradient-to-b from-black/15 via-transparent to-black/25"
       />
 
       <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-white sm:px-6">

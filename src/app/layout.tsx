@@ -56,6 +56,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {`document.documentElement.classList.remove("dark");try{localStorage.removeItem("shekinah-theme")}catch(e){}`}
         </Script>
         <AppProviders>
+          <div className="site-bg" aria-hidden />
           <SiteHeader />
           {children}
           <SiteFooter />
