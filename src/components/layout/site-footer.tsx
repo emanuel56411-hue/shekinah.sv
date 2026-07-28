@@ -52,7 +52,7 @@ export function SiteFooter() {
         </div>
 
         <Separator className="my-8 bg-white/20" />
-        <p className="text-center text-xs text-white/70">
+        <p className="text-center text-xs text-[#f5f5f5]/85">
           © {new Date().getFullYear()} Iglesia Bautista Shekinah. {t("footer.rights")}
         </p>
       </div>

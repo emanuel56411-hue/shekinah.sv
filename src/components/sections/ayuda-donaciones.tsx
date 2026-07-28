@@ -162,7 +162,7 @@ export function AyudaDonaciones() {
               <Button
                 type="button"
                 variant="outline"
-                className="rounded-full border-shekinah/30 px-6 transition-all hover:border-shekinah hover:bg-shekinah hover:text-white"
+                className="rounded-full border-[#65101a]/40 bg-white px-6 font-semibold text-[#1a1214] transition-all hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
                 onClick={() => applyShortcut("General", "Pedir apoyo con: ")}
               >
                 {t("ayuda.quickSupport")}
@@ -170,7 +170,7 @@ export function AyudaDonaciones() {
               <Button
                 type="button"
                 variant="outline"
-                className="rounded-full border-shekinah/30 px-6 transition-all hover:border-shekinah hover:bg-shekinah hover:text-white"
+                className="rounded-full border-[#65101a]/40 bg-white px-6 font-semibold text-[#1a1214] transition-all hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
                 onClick={() => applyShortcut("Otra ayuda", "Quiero donar para: ")}
               >
                 {t("ayuda.quickDonate")}
