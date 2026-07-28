@@ -18,13 +18,15 @@ export function AnniversaryNote() {
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,168,177,0.14)_0%,transparent_70%)] sm:left-[28%]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(101,16,26,0.35)_0%,transparent_68%)] sm:left-[28%]"
         />
-        <div className="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full border border-white/25 bg-black/45 shadow-[0_8px_28px_-8px_rgba(0,0,0,0.55)] backdrop-blur-sm sm:h-32 sm:w-32">
-          <div className="absolute inset-2 rounded-full border border-dashed border-white/20" />
+        <div className="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full border-[3px] border-[#f4f0e8] bg-[#65101a] shadow-[0_10px_32px_-6px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.12)] sm:h-32 sm:w-32">
+          <div className="absolute inset-[7px] rounded-full border border-dashed border-[#f4a8b1]/70" />
           <div className="relative text-center leading-none">
-            <span className="font-heading text-5xl font-bold text-[#f5f5f5] sm:text-6xl">19</span>
-            <span className="mt-1 block text-[0.65rem] font-bold uppercase tracking-[0.18em] text-[#f4a8b1]">
+            <span className="font-heading text-5xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] sm:text-6xl">
+              19
+            </span>
+            <span className="mt-1.5 block text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#f4f0e8]">
               {t("anniversary.years")}
             </span>
           </div>
