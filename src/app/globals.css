@@ -32,19 +32,19 @@
   /* Overlays de sección: siempre con alpha < 1 para que se vea la foto */
   .section-surface {
     @apply relative;
-    background-color: rgba(255, 255, 255, 0.48);
+    background-color: rgba(255, 255, 255, 0.32);
     background-image: none;
   }
 
   .section-surface-alt {
     @apply relative;
-    background-color: rgba(250, 248, 243, 0.45);
+    background-color: rgba(250, 248, 243, 0.28);
     background-image: none;
   }
 
   .section-overlay-dark {
     @apply relative;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.48);
   }
 
   /* Capa de fondo a viewport completo (evita negro en portrait móvil) */
