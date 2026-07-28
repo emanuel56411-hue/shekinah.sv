@@ -85,10 +85,10 @@ export function Ubicacion() {
             href={buildWhatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-foreground/80 underline-offset-4 transition-colors hover:text-shekinah hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah "
+            className="mt-4 mb-24 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-black/75 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah md:mb-0"
           >
-            <MessageCircle className="h-4 w-4" />
-            <span>
+            <MessageCircle className="h-4 w-4 shrink-0 text-[#25D366]" />
+            <span className="min-w-0 break-words">
               {t("ubicacion.whatsappBtn")} — {t("ubicacion.whatsappHint")}
             </span>
           </a>

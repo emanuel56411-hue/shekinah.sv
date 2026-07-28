@@ -11,14 +11,14 @@ export function AnniversaryNote() {
   const { t } = useLanguage();
 
   return (
-    <Reveal className="border-y border-black/30 section-surface-alt ">
+    <Reveal className="border-y border-white/15 section-surface-alt">
       <div
         className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 overflow-hidden px-4 py-12 text-center sm:flex-row sm:justify-center sm:gap-8 sm:px-6 sm:text-left"
         aria-label={t("anniversary.aria")}
       >
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(101,16,26,0.18)_0%,rgba(250,248,243,0)_70%)] sm:left-[28%]"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(244,168,177,0.18)_0%,transparent_70%)] sm:left-[28%]"
         />
         <div className="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full border-2 border-shekinah/40 bg-gradient-to-br from-white via-[#FAF8F3] to-shekinah/10 shadow-[0_8px_28px_-8px_rgba(101,16,26,0.35)] sm:h-32 sm:w-32">
           <div className="absolute inset-2 rounded-full border border-dashed border-shekinah/30" />
@@ -29,7 +29,7 @@ export function AnniversaryNote() {
             </span>
           </div>
         </div>
-        <p className="relative max-w-xl text-base text-foreground drop-shadow-[0_1px_2px_rgba(255,255,255,0.55)] sm:text-lg">
+        <p className="relative max-w-xl text-base text-[#f5f5f5] drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)] sm:text-lg">
           {t("anniversary.text")}
         </p>
       </div>
