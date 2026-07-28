@@ -63,13 +63,21 @@ export function SiteHeader() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[100] border-b border-black/10 bg-white/92 shadow-sm backdrop-blur-md">
+      <header className="fixed inset-x-0 top-0 z-[100] border-b border-black/15 bg-white shadow-sm">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-          <Link href="#inicio" aria-label={t("header.brandAria")} className="flex items-center gap-3">
-            <Image src="/assets/logo-shekinah.png" alt="Logo Shekinah" width={46} height={46} className="rounded-full" />
-            <span className="leading-tight">
-              <strong className="block text-sm font-bold text-foreground sm:text-base">Iglesia Bautista Shekinah</strong>
-              <small className="text-xs text-foreground/80">San Juan Opico</small>
+          <Link href="#inicio" aria-label={t("header.brandAria")} className="flex min-w-0 items-center gap-3">
+            <Image
+              src="/assets/logo-shekinah.png"
+              alt="Logo Shekinah"
+              width={46}
+              height={46}
+              className="h-[46px] w-[46px] shrink-0 rounded-full"
+            />
+            <span className="min-w-0 leading-tight">
+              <strong className="block truncate text-sm font-bold text-[#1a1214] sm:text-base">
+                Iglesia Bautista Shekinah
+              </strong>
+              <small className="block text-xs font-medium text-[#65101a]/80">San Juan Opico</small>
             </span>
           </Link>
 
