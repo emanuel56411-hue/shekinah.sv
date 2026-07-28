@@ -43,14 +43,14 @@ export function Scripture() {
       />
 
       <Reveal>
-        <blockquote className="relative mx-auto max-w-3xl rounded-2xl bg-[#FAF8F3]/88 px-6 py-8 text-center shadow-[0_8px_28px_-12px_rgba(0,0,0,0.18)] backdrop-blur-sm sm:px-10 sm:py-10">
+        <blockquote className="relative mx-auto max-w-3xl rounded-2xl border border-black/10 bg-[#FAF8F3] px-6 py-8 text-center shadow-[0_12px_32px_-10px_rgba(0,0,0,0.45)] sm:px-10 sm:py-10">
           <span
             aria-hidden
-            className="mb-4 block font-heading text-5xl font-normal leading-none text-shekinah/45 sm:text-6xl"
+            className="mb-4 block font-heading text-5xl font-normal leading-none text-shekinah/50 sm:text-6xl"
           >
             “
           </span>
-          <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-[#1a1214] drop-shadow-[0_1px_2px_rgba(255,255,255,0.4)] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
+          <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-[#1a1214] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
             {t("scripture.verseText")}
           </p>
           <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-shekinah">
