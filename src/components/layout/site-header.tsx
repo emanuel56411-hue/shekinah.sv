@@ -70,18 +70,16 @@ export function SiteHeader() {
           open && "pointer-events-none opacity-0"
         )}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
           <Link href="#inicio" aria-label={t("header.brandAria")} className="flex min-w-0 items-center gap-3">
-            <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-[0_1px_4px_rgba(0,0,0,0.45)] ring-1 ring-white/80 sm:h-14 sm:w-14">
-              <Image
-                src="/assets/logo-shekinah.png"
-                alt="Logo Shekinah"
-                width={56}
-                height={56}
-                className="h-[90%] w-[90%] object-contain"
-                priority
-              />
-            </span>
+            <Image
+              src="/assets/logo-shekinah.png"
+              alt="Logo Shekinah"
+              width={64}
+              height={64}
+              className="h-14 w-14 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_1px_4px_rgba(0,0,0,0.45)] ring-1 ring-white/80 sm:h-16 sm:w-16"
+              priority
+            />
             <span className="min-w-0 leading-tight [text-shadow:0_0_4px_rgba(0,0,0,0.95),0_0_10px_rgba(0,0,0,0.7)]">
               <strong className="block truncate text-sm font-bold text-white sm:text-base">
                 Iglesia Bautista Shekinah
@@ -109,15 +107,13 @@ export function SiteHeader() {
             >
               <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
                 <div className="flex items-center gap-3 pr-8">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
-                    <Image
-                      src="/assets/logo-shekinah.png"
-                      alt="Logo Shekinah"
-                      width={44}
-                      height={44}
-                      className="h-[90%] w-[90%] object-contain"
-                    />
-                  </span>
+                  <Image
+                    src="/assets/logo-shekinah.png"
+                    alt="Logo Shekinah"
+                    width={48}
+                    height={48}
+                    className="h-12 w-12 shrink-0 rounded-xl bg-white object-contain p-1"
+                  />
                   <div>
                     <SheetTitle className="font-heading text-base font-semibold text-white">
                       Shekinah
