@@ -12,7 +12,7 @@ export default function HomePage() {
   return (
     <main className="pb-24 pt-[4.25rem] md:pb-0">
       <Hero />
-      {/* Fondo camino + fade suave desde el hero (hero intacto) */}
+      {/* Fondo culto + fade suave desde el hero (hero intacto) */}
       <section className="post-hero-band" aria-label="Aniversario y accesos">
         <div className="post-hero-band__bg" aria-hidden />
         <div className="post-hero-band__seam" aria-hidden />
