@@ -12,8 +12,15 @@ export default function HomePage() {
   return (
     <main className="pb-24 pt-[4.25rem] md:pb-0">
       <Hero />
-      <AnniversaryNote />
-      <QuickStrip />
+      {/* Fondo camino + fade suave desde el hero (hero intacto) */}
+      <section className="post-hero-band" aria-label="Aniversario y accesos">
+        <div className="post-hero-band__bg" aria-hidden />
+        <div className="post-hero-band__seam" aria-hidden />
+        <div className="relative z-10">
+          <AnniversaryNote />
+          <QuickStrip />
+        </div>
+      </section>
       <Horarios />
       <Ubicacion />
       <AyudaDonaciones />

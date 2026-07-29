@@ -11,7 +11,7 @@ export function AnniversaryNote() {
   const { t } = useLanguage();
 
   return (
-    <Reveal className="border-y border-white/10 section-surface">
+    <Reveal className="section-surface">
       <div
         className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 overflow-hidden px-4 py-12 text-center sm:flex-row sm:justify-center sm:gap-8 sm:px-6 sm:text-left"
         aria-label={t("anniversary.aria")}

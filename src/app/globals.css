@@ -90,6 +90,123 @@
       rgba(0, 0, 0, 0) 100%
     );
   }
+
+  /*
+   * Contiene el stacking del hero. No cambia el video/imagen de fondo.
+   */
+  #inicio {
+    z-index: 0;
+  }
+
+  /* Fundido a negro al final del hero (solo velo; el video queda igual) */
+  #inicio::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    pointer-events: none;
+    height: clamp(140px, 22vw, 200px);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.82) 78%,
+      #000 100%
+    );
+  }
+
+  /*
+   * Banda post-hero: imagen del camino.
+   * Empieza en negro (continúa el final del hero) y revela el camino con fade.
+   */
+  .post-hero-band {
+    position: relative;
+    z-index: 1;
+    isolation: isolate;
+  }
+
+  .post-hero-band__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-color: #000;
+    background-image: url("/assets/fotos/fondo-camino.webp");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /* Fade inferior hacia el resto del sitio */
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 78%,
+      rgba(0, 0, 0, 0.55) 90%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 78%,
+      rgba(0, 0, 0, 0.55) 90%,
+      transparent 100%
+    );
+  }
+
+  .post-hero-band__bg::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(20, 10, 12, 0.48) 35%,
+        rgba(0, 0, 0, 0.52) 60%,
+        rgba(10, 7, 8, 0.58) 100%
+      ),
+      linear-gradient(
+        90deg,
+        rgba(101, 16, 26, 0.14) 0%,
+        transparent 42%,
+        transparent 58%,
+        rgba(101, 16, 26, 0.1) 100%
+      );
+  }
+
+  /* Revela el camino desde negro (empalme continuo con el final del hero) */
+  .post-hero-band__seam {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+    height: clamp(160px, 30vw, 260px);
+    background: linear-gradient(
+      to bottom,
+      #000 0%,
+      rgba(0, 0, 0, 0.72) 18%,
+      rgba(0, 0, 0, 0.38) 42%,
+      rgba(0, 0, 0, 0.12) 68%,
+      transparent 100%
+    );
+  }
+
+  .post-hero-band__seam::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 50%;
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      rgba(101, 16, 26, 0.1)
+    );
+  }
 }
 
 @layer base {
