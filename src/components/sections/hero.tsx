@@ -113,12 +113,12 @@ export function Hero() {
         <p className="mx-auto mt-6 max-w-2xl text-lg text-[#f5f5f5] drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)] sm:text-xl">
           {t("hero.description")}
         </p>
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-10 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
           <Link
             href="#reuniones"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "min-w-[160px] bg-shekinah text-white shadow-lg transition-all hover:bg-shekinah-700 focus-visible:ring-2 focus-visible:ring-white"
+              "h-11 w-full min-w-[160px] bg-shekinah text-white shadow-lg transition-all hover:bg-shekinah-700 focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
             )}
           >
             {t("hero.ctaPrimary")}
@@ -129,7 +129,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "min-w-[160px] bg-green-600 text-white shadow-lg transition-all hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-white"
+              "h-11 w-full min-w-[160px] bg-green-600 text-white shadow-lg transition-all hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
             )}
           >
             {t("hero.ctaWhatsapp")}
@@ -149,11 +149,11 @@ export function Hero() {
                 <p className="mt-1 text-sm text-white/85">{t(featured.titleKey)}</p>
               ) : null}
             </div>
-            <div className="grid grid-cols-2 gap-3 border-t border-white/25 pt-3 text-sm">
+            <div className="grid grid-cols-2 gap-3 border-t border-white/25 pt-3 text-xs sm:text-sm">
               {others.map((item) => (
-                <div key={`${item.id}-${item.sortKey}`}>
+                <div key={`${item.id}-${item.sortKey}`} className="min-w-0">
                   <p className="text-white/80">{t(item.dayKey)}</p>
-                  <p className="font-medium text-white">{t(item.titleKey)}</p>
+                  <p className="font-medium leading-snug text-white">{t(item.titleKey)}</p>
                 </div>
               ))}
             </div>

@@ -46,7 +46,7 @@ export function AyudaDonaciones() {
     event.preventDefault();
 
     if (!name.trim()) {
-      setStatus({ type: "error", text: t("ayuda.messageLengthError") });
+      setStatus({ type: "error", text: t("ayuda.nameRequired") });
       return;
     }
 
@@ -189,6 +189,7 @@ export function AyudaDonaciones() {
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t("form.namePlaceholder")}
                       required
+                      className="h-10 bg-white"
                     />
                   </div>
                   <div className="space-y-2">
@@ -199,12 +200,13 @@ export function AyudaDonaciones() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder={t("ayuda.phonePlaceholder")}
                       autoComplete="tel"
+                      className="h-10 bg-white"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">{t("ayuda.typeLabel")}</label>
                     <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-                      <SelectTrigger>
+                      <SelectTrigger className="h-10 w-full bg-white">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -226,6 +228,7 @@ export function AyudaDonaciones() {
                       minLength={10}
                       maxLength={500}
                       required
+                      className="bg-white"
                     />
                   </div>
                   <p className="text-xs text-muted-foreground">{t("ayuda.formNote")}</p>
@@ -238,7 +241,7 @@ export function AyudaDonaciones() {
                       {status.text}
                     </p>
                   )}
-                  <Button type="submit" disabled={loading} className="w-full bg-shekinah hover:bg-shekinah-900">
+                  <Button type="submit" disabled={loading} className="h-11 w-full bg-shekinah hover:bg-shekinah-900">
                     {loading ? t("ayuda.saving") : t("ayuda.submitBtn")}
                   </Button>
                 </form>

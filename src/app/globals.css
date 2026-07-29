@@ -36,8 +36,8 @@
 
   .eyebrow {
     @apply text-[0.7rem] font-bold uppercase tracking-[0.2em];
-    color: #f4a8b1;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
+    color: #ffc9d0;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(0, 0, 0, 0.45);
   }
 
   /* Misma superficie en todas las secciones (sin tintas distintas) */
@@ -72,12 +72,12 @@
     inset: 0;
     /* Oscurece luces azules brillantes para texto blanco legible */
     background:
-      radial-gradient(ellipse 75% 50% at 50% 15%, rgba(0, 0, 0, 0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 75% 50% at 50% 15%, rgba(0, 0, 0, 0.48) 0%, transparent 70%),
       linear-gradient(
         180deg,
-        rgba(0, 8, 20, 0.5) 0%,
-        rgba(0, 0, 0, 0.55) 45%,
-        rgba(0, 0, 0, 0.68) 100%
+        rgba(0, 8, 20, 0.55) 0%,
+        rgba(0, 0, 0, 0.62) 45%,
+        rgba(0, 0, 0, 0.74) 100%
       );
   }
 
@@ -160,13 +160,13 @@
     inset: 0;
     /* Overlay para legibilidad sobre luces azules brillantes */
     background:
-      radial-gradient(ellipse 80% 45% at 50% 18%, rgba(0, 0, 0, 0.35) 0%, transparent 65%),
+      radial-gradient(ellipse 80% 45% at 50% 18%, rgba(0, 0, 0, 0.42) 0%, transparent 65%),
       linear-gradient(
         180deg,
-        rgba(0, 8, 20, 0.45) 0%,
-        rgba(0, 0, 0, 0.42) 35%,
-        rgba(0, 0, 0, 0.55) 70%,
-        rgba(0, 7, 12, 0.62) 100%
+        rgba(0, 8, 20, 0.5) 0%,
+        rgba(0, 0, 0, 0.48) 35%,
+        rgba(0, 0, 0, 0.6) 70%,
+        rgba(0, 7, 12, 0.68) 100%
       );
   }
 
@@ -246,12 +246,17 @@
     background-image: none;
   }
 
+  /* Evita que el header fijo tape títulos al navegar por anclas */
+  main [id] {
+    scroll-margin-top: 5.5rem;
+  }
+
   footer.page-bg-footer {
     background-color: rgba(0, 0, 0, 0.72);
   }
 
   :focus-visible {
-    outline: 2px solid #65101a;
+    outline: 2px solid #ffc9d0;
     outline-offset: 2px;
   }
 

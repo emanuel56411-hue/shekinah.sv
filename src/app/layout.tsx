@@ -22,13 +22,13 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://emanuel56411-hue.github.io/shekinah.sv"),
+  metadataBase: new URL("https://shekinah-sv.vercel.app"),
   title: "Iglesia Bautista Shekinah",
   description:
     "Sitio web de Iglesia Bautista Shekinah: horarios, ubicación, ministerios, ayuda, donaciones y redes sociales.",
   openGraph: {
     type: "website",
-    url: "https://emanuel56411-hue.github.io/shekinah.sv/",
+    url: "https://shekinah-sv.vercel.app/",
     title: "Iglesia Bautista Shekinah",
     description:
       "Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador.",

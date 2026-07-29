@@ -53,7 +53,7 @@ function ScheduleCard({
         </div>
         <div className="min-w-0 flex-1">
           {isHighlighted && statusLabel ? (
-            <span className="mb-1.5 inline-flex rounded-full bg-[#65101a]/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#f4cfcf]">
+            <span className="mb-1.5 inline-flex rounded-full bg-[#65101a]/25 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[#ffc9d0]">
               {statusLabel}
             </span>
           ) : null}
@@ -99,7 +99,7 @@ export function Horarios() {
           <h2 className="section-title">{t("reuniones.title")}</h2>
           <p className="section-desc">{t("reuniones.description")}</p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-[#f4cfcf] drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
+            <p className="mt-3 text-sm font-medium text-[#ffc9d0] drop-shadow-[0_1px_3px_rgba(0,0,0,0.55)]">
               {statusLabel}: {t(nextDayKey)}
             </p>
           ) : null}

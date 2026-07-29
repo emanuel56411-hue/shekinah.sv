@@ -41,7 +41,7 @@ const eventCardStyles: Record<
     image: string;
     href?: string;
     openCalendar?: boolean;
-    linkLabel: string;
+    linkKey: string;
     accentIcon: string;
     accentTag: string;
     accentLink: string;
@@ -50,7 +50,7 @@ const eventCardStyles: Record<
   upcoming: {
     image: "/assets/fotos/congregacion-culto-lateral.png",
     openCalendar: true,
-    linkLabel: "Ver calendario →",
+    linkKey: "eventos.item1Link",
     accentIcon: "border-white/30 bg-[#65101a] text-white shadow-sm",
     accentTag: "text-[#ffc9d0]",
     accentLink: "text-[#ffc9d0] hover:text-white",
@@ -58,7 +58,7 @@ const eventCardStyles: Record<
   help: {
     image: "/assets/fotos/ayuda-comunidad-ninos.png",
     href: "#ayuda",
-    linkLabel: "Cómo ayudar →",
+    linkKey: "eventos.item2Link",
     accentIcon: "border-white/30 bg-amber-600 text-white shadow-sm",
     accentTag: "text-[#ffe08a]",
     accentLink: "text-[#ffe08a] hover:text-white",
@@ -66,7 +66,7 @@ const eventCardStyles: Record<
   social: {
     image: "/assets/fotos/presentacion-ninos-escenario.png",
     href: "#redes",
-    linkLabel: "Síguenos →",
+    linkKey: "eventos.item3Link",
     accentIcon: "border-white/30 bg-sky-600 text-white shadow-sm",
     accentTag: "text-[#b8e4ff]",
     accentLink: "text-[#b8e4ff] hover:text-white",
@@ -135,11 +135,11 @@ export function Eventos() {
                     </div>
                     {style.openCalendar ? (
                       <button type="button" onClick={openCalendar} className={linkClass}>
-                        {style.linkLabel}
+                        {t(style.linkKey)}
                       </button>
                     ) : (
                       <Link href={style.href!} className={linkClass}>
-                        {style.linkLabel}
+                        {t(style.linkKey)}
                       </Link>
                     )}
                   </CardContent>

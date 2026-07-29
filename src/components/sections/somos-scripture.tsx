@@ -54,14 +54,14 @@ export function Scripture() {
           <div className="relative z-10 flex min-h-[16rem] flex-col items-center justify-center px-6 py-10 text-center sm:min-h-[18rem] sm:px-10 sm:py-12">
             <span
               aria-hidden
-              className="mb-4 block font-heading text-5xl font-normal leading-none text-[#f4a8b1] drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] sm:text-6xl"
+              className="mb-4 block font-heading text-5xl font-normal leading-none text-[#ffc9d0] drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)] sm:text-6xl"
             >
               “
             </span>
             <p className="font-heading text-[1.55rem] font-medium leading-snug tracking-tight text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.75)] sm:text-[1.85rem] md:text-[2.1rem] md:leading-[1.35]">
               {t("scripture.verseText")}
             </p>
-            <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-[#f4a8b1] drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
+            <cite className="mt-8 block font-sans text-xs font-semibold not-italic uppercase tracking-[0.22em] text-[#ffc9d0] drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
               {t("scripture.verseRef")}
             </cite>
           </div>
