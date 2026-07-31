@@ -235,16 +235,11 @@
     background: rgba(0, 0, 0, 0.58);
   }
 
-  /* Overlay sutil del header (mismo criterio, más ligero arriba) */
+  /* Header sin velo: el fondo se lee continuo al scrollear */
   .site-header-overlay {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.5) 0%,
-      rgba(0, 0, 0, 0.22) 55%,
-      rgba(0, 0, 0, 0) 100%
-    );
-    -webkit-backdrop-filter: blur(8px) saturate(1.15);
-    backdrop-filter: blur(8px) saturate(1.15);
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
   }
 
   #inicio {
