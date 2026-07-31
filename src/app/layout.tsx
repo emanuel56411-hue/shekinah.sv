@@ -5,7 +5,6 @@ import { AppProviders } from "@/components/providers/app-providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { MobileCta } from "@/components/layout/mobile-cta";
-import { FabWhatsapp, ScrollTop } from "@/components/layout/floating-actions";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -61,8 +60,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <SiteFooter />
           <MobileCta />
-          <FabWhatsapp />
-          <ScrollTop />
         </AppProviders>
       </body>
     </html>
