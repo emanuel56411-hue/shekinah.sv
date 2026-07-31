@@ -131,14 +131,14 @@ export function SiteHeader() {
               alt="Logo Shekinah"
               width={64}
               height={64}
-              className="h-14 w-14 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_8px_20px_-8px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.9)] ring-1 ring-white/80 sm:h-16 sm:w-16"
+              className="h-12 w-12 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] ring-1 ring-white/70 sm:h-14 sm:w-14"
               priority
             />
-            <span className="min-w-0 leading-tight [text-shadow:0_0_4px_rgba(0,0,0,0.95),0_0_10px_rgba(0,0,0,0.7)]">
-              <strong className="block truncate text-sm font-bold text-white sm:text-base">
+            <span className="min-w-0 leading-tight [text-shadow:0_1px_8px_rgba(0,0,0,0.65)]">
+              <strong className="block truncate text-sm font-semibold text-white sm:text-[0.95rem]">
                 Iglesia Bautista Shekinah
               </strong>
-              <small className="block text-xs font-medium text-white">San Juan Opico</small>
+              <small className="block text-xs font-medium text-white/85">San Juan Opico</small>
             </span>
           </Link>
 

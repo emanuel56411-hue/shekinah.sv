@@ -126,7 +126,7 @@ export function Redes() {
                     </div>
                     <div className="flex items-center gap-3">
                       <BrandIcon icon={social.icon} className={social.iconClass} />
-                      <strong className="min-w-0 break-all text-base text-shekinah  sm:text-lg">
+                      <strong className="min-w-0 break-all text-base font-semibold text-[#65101a] sm:text-lg">
                         {social.handle}
                       </strong>
                     </div>

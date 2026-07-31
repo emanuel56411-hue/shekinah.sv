@@ -7,8 +7,8 @@ export function SiteFooter() {
 
   return (
     <footer className="page-bg-footer text-white">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
-        <p className="text-center text-xs text-[#f5f5f5]/85">
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+        <p className="text-center text-xs tracking-wide text-white/70">
           © {new Date().getFullYear()} Iglesia Bautista Shekinah. {t("footer.rights")}
         </p>
       </div>
