@@ -15,7 +15,7 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CalendarModal } from "@/components/calendar/calendar-modal";
 import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -50,6 +50,30 @@ export function SiteHeader() {
   const { t, lang, setLang } = useLanguage();
   const { open: calendarOpen, setOpen: setCalendarOpen, openCalendar } = useCalendarModal();
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    lastScrollY.current = window.scrollY;
+
+    const onScroll = () => {
+      const current = window.scrollY;
+      const delta = current - lastScrollY.current;
+
+      if (open || current < 48) {
+        setHidden(false);
+      } else if (delta > 8) {
+        setHidden(true);
+      } else if (delta < -8) {
+        setHidden(false);
+      }
+
+      lastScrollY.current = current;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
 
   const closeMenu = () => setOpen(false);
 
@@ -62,8 +86,9 @@ export function SiteHeader() {
     <>
       <header
         className={cn(
-          "site-header-overlay fixed inset-x-0 top-0 z-[100] border-b border-transparent transition-opacity",
-          open && "pointer-events-none opacity-0"
+          "site-header-overlay fixed inset-x-0 top-0 z-[100] border-b border-transparent transition-transform duration-300 ease-out motion-reduce:transition-none",
+          (open || hidden) && "pointer-events-none -translate-y-full",
+          open && "opacity-0"
         )}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
