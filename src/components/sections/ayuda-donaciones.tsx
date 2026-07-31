@@ -36,12 +36,6 @@ export function AyudaDonaciones() {
       .finally(() => setBoardLoading(false));
   }, []);
 
-  const applyShortcut = (type: string, preset: string) => {
-    setHelpType(type);
-    if (!message.trim()) setMessage(preset);
-    document.getElementById("help-form")?.scrollIntoView({ behavior: "smooth", block: "center" });
-  };
-
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
@@ -158,24 +152,6 @@ export function AyudaDonaciones() {
               )}
             </div>
 
-            <div className="flex flex-wrap gap-3">
-              <Button
-                type="button"
-                variant="outline"
-                className="surface-porcelain rounded-full border-[#65101a]/35 px-6 font-semibold text-[#1a1214] hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
-                onClick={() => applyShortcut("General", "Pedir apoyo con: ")}
-              >
-                {t("ayuda.quickSupport")}
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                className="surface-porcelain rounded-full border-[#65101a]/35 px-6 font-semibold text-[#1a1214] hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
-                onClick={() => applyShortcut("Otra ayuda", "Quiero donar para: ")}
-              >
-                {t("ayuda.quickDonate")}
-              </Button>
-            </div>
           </div>
 
           <Reveal delay={0.1}>
@@ -231,7 +207,6 @@ export function AyudaDonaciones() {
                       className="control-inset bg-white"
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground">{t("ayuda.formNote")}</p>
                   <p className="text-xs text-muted-foreground">{t("ayuda.privacyNote")}</p>
                   {status && (
                     <p

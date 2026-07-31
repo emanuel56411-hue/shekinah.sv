@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Calendar,
   CalendarDays,
   Clock,
   Heart,
@@ -13,7 +12,6 @@ import {
   Menu,
   MessageCircle,
   Phone,
-  Share2,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -42,12 +40,10 @@ type NavItem = {
 const navItems: NavItem[] = [
   { href: "#inicio", titleKey: "nav.inicio", icon: Home },
   { href: "#reuniones", titleKey: "nav.horarios", icon: Clock },
-  { href: "#eventos", titleKey: "nav.eventos", icon: Calendar },
-  { href: "#ministerios", titleKey: "nav.ministerios", icon: Users },
-  { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },
   { href: "#ubicacion", titleKey: "nav.ubicacion", icon: MapPin },
+  { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },
+  { href: "#ministerios", titleKey: "nav.ministerios", icon: Users },
   { href: "#galeria", titleKey: "nav.galeria", icon: Images },
-  { href: "#redes", titleKey: "nav.redes", icon: Share2 },
 ];
 
 export function SiteHeader() {

@@ -1,11 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { LINKS } from "@/lib/constants";
-import { buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
 type DirectionAction = {
@@ -15,7 +13,6 @@ type DirectionAction = {
   iconSrc: string;
   iconAlt: string;
   iconWrapClass: string;
-  className: string;
 };
 
 export function Ubicacion() {
@@ -29,7 +26,6 @@ export function Ubicacion() {
       iconSrc: "/assets/icons/google-maps.png",
       iconAlt: "Google Maps",
       iconWrapClass: "bg-white",
-      className: "hover:border-white/35 hover:bg-white/95",
     },
     {
       href: LINKS.waze,
@@ -38,7 +34,6 @@ export function Ubicacion() {
       iconSrc: "/assets/icons/waze.png",
       iconAlt: "Waze",
       iconWrapClass: "bg-black",
-      className: "hover:border-white/35 hover:bg-white/95",
     },
   ];
 
@@ -56,13 +51,12 @@ export function Ubicacion() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "surface-porcelain group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah",
-                  action.className
+                  "surface-porcelain group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                 )}
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10",
                     action.iconWrapClass
                   )}
                 >
@@ -81,17 +75,6 @@ export function Ubicacion() {
               </a>
             ))}
           </div>
-          <a
-            href={buildWhatsappUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="surface-glass mt-4 inline-flex max-w-full items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-          >
-            <MessageCircle className="h-4 w-4 shrink-0 text-[#25D366]" />
-            <span className="min-w-0 break-words">
-              {t("ubicacion.whatsappBtn")} — {t("ubicacion.whatsappHint")}
-            </span>
-          </a>
         </Reveal>
 
         <Reveal delay={0.08}>
@@ -107,7 +90,6 @@ export function Ubicacion() {
               />
             </div>
             <div className="border-t border-black/20 px-5 py-4">
-              <p className="text-sm uppercase tracking-wide text-muted-foreground">{t("nav.ubicacion")}</p>
               <p className="font-heading text-xl font-semibold text-foreground">QJRR+HH2</p>
               <p className="text-sm text-muted-foreground">San Juan Opico, La Libertad</p>
             </div>

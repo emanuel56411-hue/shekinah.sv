@@ -4,21 +4,22 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/components/providers/language-provider";
 import { GALLERY_ITEMS } from "@/lib/constants";
+
+const VISIBLE_GALLERY = GALLERY_ITEMS.slice(0, 4);
 
 export function Galeria() {
   const { t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [index, setIndex] = useState(0);
 
-  const current = GALLERY_ITEMS[index];
+  const current = VISIBLE_GALLERY[index];
 
   const showImage = (nextIndex: number) => {
-    const total = GALLERY_ITEMS.length;
+    const total = VISIBLE_GALLERY.length;
     setIndex((nextIndex + total) % total);
   };
 
@@ -28,10 +29,10 @@ export function Galeria() {
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") setOpen(false);
       if (event.key === "ArrowLeft") {
-        setIndex((current) => (current - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length);
+        setIndex((current) => (current - 1 + VISIBLE_GALLERY.length) % VISIBLE_GALLERY.length);
       }
       if (event.key === "ArrowRight") {
-        setIndex((current) => (current + 1) % GALLERY_ITEMS.length);
+        setIndex((current) => (current + 1) % VISIBLE_GALLERY.length);
       }
     };
 
@@ -48,43 +49,34 @@ export function Galeria() {
           <p className="section-desc">{t("galeria.description")}</p>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {GALLERY_ITEMS.map((item, itemIndex) => {
-            const isLarge = "large" in item && item.large;
-
-            return (
-              <Reveal
-                key={item.src}
-                delay={Math.min(itemIndex * 0.04, 0.2)}
-                className={isLarge ? "col-span-2 row-span-2" : undefined}
+        <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {VISIBLE_GALLERY.map((item, itemIndex) => (
+            <Reveal key={item.src} delay={Math.min(itemIndex * 0.04, 0.16)}>
+              <button
+                type="button"
+                aria-label={t(item.titleKey)}
+                onClick={() => {
+                  setIndex(itemIndex);
+                  setOpen(true);
+                }}
+                className="group relative block h-full w-full overflow-hidden rounded-[12px] border border-white/15 bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
               >
-                <button
-                  type="button"
-                  aria-label={t(item.titleKey)}
-                  onClick={() => {
-                    setIndex(itemIndex);
-                    setOpen(true);
-                  }}
-                  className="group relative block h-full w-full overflow-hidden rounded-[12px] border border-white/15 bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
-                >
-                  <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
-                      <Badge className="mb-2 border border-white/20 bg-black/45 text-white backdrop-blur-md">{t(item.tagKey)}</Badge>
-                      <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
-                    </div>
-                  </div>
-                </button>
-              </Reveal>
-            );
-          })}
+                <div className="relative aspect-[4/3] w-full">
+                  <Image
+                    src={item.src}
+                    alt={item.alt}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+                  <strong className="absolute bottom-0 left-0 right-0 p-3 text-left text-sm font-semibold text-white">
+                    {t(item.titleKey)}
+                  </strong>
+                </div>
+              </button>
+            </Reveal>
+          ))}
         </div>
       </div>
 
