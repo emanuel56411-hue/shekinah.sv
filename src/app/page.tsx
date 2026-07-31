@@ -10,7 +10,7 @@ import { Redes } from "@/components/sections/redes";
 
 export default function HomePage() {
   return (
-    <main className="pb-24 pt-[4.25rem] md:pb-0">
+    <main className="pt-[4.25rem]">
       <Hero />
       <AnniversaryNote />
       <Horarios />

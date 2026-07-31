@@ -4,7 +4,6 @@ import Script from "next/script";
 import { AppProviders } from "@/components/providers/app-providers";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
-import { MobileCta } from "@/components/layout/mobile-cta";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -59,7 +58,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <SiteHeader />
           {children}
           <SiteFooter />
-          <MobileCta />
         </AppProviders>
       </body>
     </html>
