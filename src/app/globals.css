@@ -210,7 +210,10 @@
     background-image: none;
   }
 
-  /* Capa de fondo a viewport completo + overlay oscuro estándar */
+  /*
+   * Fondo fijo continuo. La foto tiene una línea natural (pantalla/público);
+   * la encuadramos más abajo para que ese corte no quede a media pantalla.
+   */
   .site-bg {
     position: fixed;
     inset: 0;
@@ -222,7 +225,7 @@
     background-color: #000814;
     background-image: url("/assets/fotos/fondo-culto-adoracion.webp");
     background-size: cover;
-    background-position: center center;
+    background-position: center 72%;
     background-repeat: no-repeat;
     background-attachment: scroll;
   }
@@ -231,10 +234,8 @@
     content: "";
     position: absolute;
     inset: 0;
-    /* Profundidad fija (no se mueve con el scroll → sin cortes por sección) */
-    background:
-      radial-gradient(ellipse 110% 65% at 50% 0%, rgba(0, 0, 0, 0.28) 0%, transparent 58%),
-      rgba(0, 0, 0, 0.52);
+    /* Overlay uniforme: sin bandas ni radiales que se lean como corte */
+    background: rgba(0, 0, 0, 0.55);
   }
 
   /* Header transparente: sin banda/velo duro */
@@ -246,24 +247,6 @@
 
   #inicio {
     z-index: 0;
-  }
-
-  /* Fundido corto y suave hero → contenido (nunca a negro sólido) */
-  #inicio::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 5;
-    pointer-events: none;
-    height: clamp(64px, 10vw, 110px);
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgba(0, 0, 0, 0.14) 50%,
-      rgba(0, 0, 0, 0.28) 100%
-    );
   }
 
 }
