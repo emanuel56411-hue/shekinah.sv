@@ -46,33 +46,59 @@ const navItems: NavItem[] = [
   { href: "#galeria", titleKey: "nav.galeria", icon: Images },
 ];
 
+function getScrollY() {
+  return (
+    window.scrollY ||
+    window.pageYOffset ||
+    document.documentElement.scrollTop ||
+    document.body.scrollTop ||
+    0
+  );
+}
+
 export function SiteHeader() {
   const { t, lang, setLang } = useLanguage();
   const { open: calendarOpen, setOpen: setCalendarOpen, openCalendar } = useCalendarModal();
   const [open, setOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    lastScrollY.current = window.scrollY;
+    lastScrollY.current = getScrollY();
 
-    const onScroll = () => {
-      const current = window.scrollY;
+    const update = () => {
+      ticking.current = false;
+      const current = getScrollY();
       const delta = current - lastScrollY.current;
 
-      if (open || current < 48) {
+      // Menú abierto o cerca del tope: siempre visible
+      if (open || current < 64) {
         setHidden(false);
-      } else if (delta > 8) {
+      } else if (delta > 4) {
+        // Bajando
         setHidden(true);
-      } else if (delta < -8) {
+      } else if (delta < -4) {
+        // Subiendo
         setHidden(false);
       }
 
       lastScrollY.current = current;
     };
 
+    const onScroll = () => {
+      if (!ticking.current) {
+        ticking.current = true;
+        window.requestAnimationFrame(update);
+      }
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    document.addEventListener("scroll", onScroll, { passive: true, capture: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      document.removeEventListener("scroll", onScroll, true);
+    };
   }, [open]);
 
   const closeMenu = () => setOpen(false);
@@ -82,14 +108,21 @@ export function SiteHeader() {
     openCalendar();
   };
 
+  const shouldHide = open || hidden;
+
   return (
     <>
       <header
         className={cn(
-          "site-header-overlay fixed inset-x-0 top-0 z-[100] border-b border-transparent transition-transform duration-300 ease-out motion-reduce:transition-none",
-          (open || hidden) && "pointer-events-none -translate-y-full",
-          open && "opacity-0"
+          "site-header-overlay fixed inset-x-0 top-0 z-[100] border-b border-transparent will-change-transform",
+          "transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none",
+          shouldHide && "pointer-events-none"
         )}
+        style={{
+          transform: shouldHide ? "translate3d(0, -110%, 0)" : "translate3d(0, 0, 0)",
+          opacity: open ? 0 : 1,
+        }}
+        data-header-hidden={shouldHide ? "true" : "false"}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
           <Link href="#inicio" aria-label={t("header.brandAria")} className="flex min-w-0 items-center gap-3">
