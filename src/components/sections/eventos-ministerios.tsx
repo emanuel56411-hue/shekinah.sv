@@ -95,7 +95,7 @@ export function Eventos() {
             );
             return (
               <Reveal key={event.id} delay={index * 0.05}>
-                <Card className="group relative h-full gap-0 overflow-hidden border-black/20 bg-neutral-900 p-0 shadow-none ring-0 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_28px_-10px_rgba(0,0,0,0.45)]">
+                <Card className="surface-glass surface-glass-lift group relative h-full gap-0 overflow-hidden border-white/20 bg-neutral-900/80 p-0 ring-0">
                   <Image
                     src={style.image}
                     alt=""
@@ -104,14 +104,14 @@ export function Eventos() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                   />
                   <div
-                    className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/35 to-black/10"
+                    className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/15"
                     aria-hidden
                   />
                   <CardContent className="relative z-10 flex h-full min-h-[280px] flex-col gap-5 px-6 py-6 sm:px-7 sm:py-7">
                     <div className="flex items-center justify-between gap-3">
                       <span
                         className={cn(
-                          "inline-flex h-10 w-10 items-center justify-center rounded-full border",
+                          "inline-flex h-10 w-10 items-center justify-center rounded-full border shadow-[inset_0_1px_0_rgba(255,255,255,0.28)]",
                           style.accentIcon
                         )}
                         aria-hidden
@@ -120,14 +120,14 @@ export function Eventos() {
                       </span>
                       <span
                         className={cn(
-                          "rounded-sm bg-black/45 px-2 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] backdrop-blur-[2px]",
+                          "rounded-sm border border-white/15 bg-black/50 px-2 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] backdrop-blur-md",
                           style.accentTag
                         )}
                       >
                         {t(event.tagKey)}
                       </span>
                     </div>
-                    <div className="space-y-2 rounded-md bg-black/40 p-3 backdrop-blur-[2px]">
+                    <div className="space-y-2 rounded-md border border-white/10 bg-black/45 p-3 backdrop-blur-md">
                       <h3 className="font-heading text-xl font-semibold tracking-tight text-white drop-shadow-sm">
                         {t(event.titleKey)}
                       </h3>
@@ -174,11 +174,11 @@ export function Ministerios() {
                 delay={index * 0.05}
                 className={cn("sm:col-span-1 lg:col-span-2", index === 3 && "lg:col-start-2")}
               >
-                <Card className="group h-full gap-0 overflow-hidden rounded-[12px] border border-black/25 bg-white p-0 shadow-none ring-0 transition-all duration-200 hover:-translate-y-1 hover:shadow-[0_10px_24px_-10px_rgba(0,0,0,0.2)] dark:border-white/20 dark:bg-card">
+                <Card className="surface-porcelain group h-full gap-0 overflow-hidden p-0 ring-0">
                   <CardContent className="relative flex h-full min-h-[168px] gap-0 p-0">
-                    <div className="flex w-14 shrink-0 flex-col items-center justify-center bg-neutral-950 px-2 py-6 dark:bg-black">
+                    <div className="flex w-14 shrink-0 flex-col items-center justify-center bg-gradient-to-b from-neutral-900 to-neutral-950 px-2 py-6 shadow-[inset_-1px_0_0_rgba(255,255,255,0.08)]">
                       <span
-                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/80 text-white transition-colors duration-200 group-hover:bg-white group-hover:text-neutral-950"
+                        className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/80 text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.25)] transition-colors duration-200 group-hover:bg-white group-hover:text-neutral-950"
                         aria-hidden
                       >
                         <Icon className="h-4 w-4" strokeWidth={1.5} />
@@ -218,7 +218,7 @@ export function Ministerios() {
         </div>
 
         <Reveal className="mt-10">
-          <div className="flex flex-col items-center justify-between gap-4 rounded-[12px] border border-white/15 bg-black/45 p-6 text-center backdrop-blur-sm sm:flex-row sm:text-left">
+          <div className="surface-glass flex flex-col items-center justify-between gap-4 p-6 text-center sm:flex-row sm:text-left">
             <p className="font-heading text-lg font-semibold text-[#e8c4a8]">
               {t("ministerios.calloutText")}
             </p>
@@ -228,7 +228,7 @@ export function Ministerios() {
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "border-white/30 bg-transparent text-[#f5f5f5] hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-shekinah"
+                "btn-skeuo border-transparent text-white hover:text-white focus-visible:ring-2 focus-visible:ring-shekinah"
               )}
             >
               {t("ministerios.calloutBtn")}

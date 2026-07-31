@@ -65,7 +65,7 @@ export function Galeria() {
                     setIndex(itemIndex);
                     setOpen(true);
                   }}
-                  className="group relative block h-full w-full overflow-hidden rounded-[12px] bg-muted shadow-card transition-shadow duration-200 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
+                  className="group relative block h-full w-full overflow-hidden rounded-[12px] border border-white/15 bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
                 >
                   <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
                     <Image
@@ -77,7 +77,7 @@ export function Galeria() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
-                      <Badge className="mb-2 bg-white/15 text-white">{t(item.tagKey)}</Badge>
+                      <Badge className="mb-2 border border-white/20 bg-black/45 text-white backdrop-blur-md">{t(item.tagKey)}</Badge>
                       <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
                     </div>
                   </div>

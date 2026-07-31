@@ -77,7 +77,7 @@ export function SiteHeader() {
               alt="Logo Shekinah"
               width={64}
               height={64}
-              className="h-14 w-14 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_1px_4px_rgba(0,0,0,0.45)] ring-1 ring-white/80 sm:h-16 sm:w-16"
+              className="h-14 w-14 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_8px_20px_-8px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.9)] ring-1 ring-white/80 sm:h-16 sm:w-16"
               priority
             />
             <span className="min-w-0 leading-tight [text-shadow:0_0_4px_rgba(0,0,0,0.95),0_0_10px_rgba(0,0,0,0.7)]">
@@ -92,7 +92,7 @@ export function SiteHeader() {
             <SheetTrigger
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "gap-2 border-white/80 bg-transparent text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-white/10 hover:text-white"
+                "surface-glass gap-2 border-white/30 text-white [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:text-white"
               )}
               aria-label={t("menu.openAria")}
             >
@@ -103,7 +103,7 @@ export function SiteHeader() {
             <SheetContent
               side="left"
               showCloseButton
-              className="flex w-[min(100%,20rem)] flex-col gap-0 border-r border-white/10 bg-black p-0 text-white sm:max-w-xs [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
+              className="flex w-[min(100%,20rem)] flex-col gap-0 border-r border-white/20 bg-black/90 p-0 text-white shadow-[8px_0_40px_-12px_rgba(0,0,0,0.65),inset_-1px_0_0_rgba(255,255,255,0.08)] backdrop-blur-xl sm:max-w-xs [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
             >
               <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
                 <div className="flex items-center gap-3 pr-8">
@@ -159,7 +159,7 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={closeMenu}
-                  className="flex w-full items-center justify-center gap-2 rounded-full bg-shekinah px-5 py-3.5 text-sm font-bold text-white transition-colors hover:bg-shekinah-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                  className="btn-skeuo flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                 >
                   <MessageCircle className="h-5 w-5" />
                   {t("menu.whatsappCta")}

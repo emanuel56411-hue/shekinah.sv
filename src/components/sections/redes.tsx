@@ -82,7 +82,7 @@ function BrandIcon({
   return (
     <span
       className={cn(
-        "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full shadow-sm",
+        "inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full shadow-[0_6px_14px_-6px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.35)]",
         className
       )}
       aria-hidden
@@ -115,7 +115,7 @@ export function Redes() {
               >
                 <Card
                   className={cn(
-                    "h-full shadow-card transition-all hover:-translate-y-1 hover:shadow-card-hover",
+                    "surface-porcelain h-full ring-0",
                     social.className
                   )}
                 >

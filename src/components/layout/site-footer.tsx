@@ -18,7 +18,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="page-bg-footer border-t border-white/15 text-white">
+    <footer className="page-bg-footer border-t border-white/20 text-white">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
           <div>

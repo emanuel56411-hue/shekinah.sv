@@ -56,13 +56,13 @@ export function Ubicacion() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "group flex items-center gap-3 rounded-xl border border-black/35 bg-card p-4 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-card-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah ",
+                  "surface-porcelain group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah",
                   action.className
                 )}
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10 ",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)]",
                     action.iconWrapClass
                   )}
                 >
@@ -85,7 +85,7 @@ export function Ubicacion() {
             href={buildWhatsappUrl()}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-black/75 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_4px_16px_-4px_rgba(0,0,0,0.5)] backdrop-blur-sm transition-colors hover:bg-black/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+            className="surface-glass mt-4 inline-flex max-w-full items-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
           >
             <MessageCircle className="h-4 w-4 shrink-0 text-[#25D366]" />
             <span className="min-w-0 break-words">
@@ -95,7 +95,7 @@ export function Ubicacion() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="overflow-hidden rounded-[12px] border border-black/35 bg-card shadow-card">
+          <div className="surface-porcelain overflow-hidden">
             <div className="relative aspect-[4/3] w-full bg-[#0a1218]">
               <iframe
                 title={t("ubicacion.title")}

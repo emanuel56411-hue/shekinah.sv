@@ -20,10 +20,10 @@ export function AnniversaryNote() {
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 h-52 w-52 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(101,16,26,0.35)_0%,transparent_68%)] sm:left-[28%]"
         />
-        <div className="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full border-[3px] border-[#f4f0e8] bg-[#65101a] shadow-[0_10px_32px_-6px_rgba(0,0,0,0.65),0_0_0_1px_rgba(255,255,255,0.12)] sm:h-32 sm:w-32">
+        <div className="relative flex h-28 w-28 shrink-0 items-center justify-center rounded-full border-[3px] border-[#f4f0e8] bg-gradient-to-b from-[#8a1a28] via-[#65101a] to-[#4a0c14] shadow-[0_14px_36px_-8px_rgba(0,0,0,0.7),0_0_0_1px_rgba(255,255,255,0.14),inset_0_2px_0_rgba(255,255,255,0.28),inset_0_-2px_4px_rgba(0,0,0,0.35)] sm:h-32 sm:w-32">
           <div className="absolute inset-[7px] rounded-full border border-dashed border-[#ffc9d0]/70" />
           <div className="relative text-center leading-none">
-            <span className="font-heading text-5xl font-bold text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.35)] sm:text-6xl">
+            <span className="font-heading text-5xl font-bold text-white drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)] sm:text-6xl">
               19
             </span>
             <span className="mt-1.5 block text-[0.7rem] font-bold uppercase tracking-[0.2em] text-[#f4f0e8]">
@@ -77,7 +77,7 @@ export function QuickStrip() {
   ];
 
   const cardClass =
-    "group relative flex h-full flex-col gap-4 overflow-hidden rounded-[12px] border border-white/15 bg-black/45 p-5 shadow-[0_8px_24px_-10px_rgba(0,0,0,0.45)] backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-white/30 hover:bg-black/55 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah";
+    "surface-glass surface-glass-lift group relative flex h-full flex-col gap-4 overflow-hidden p-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah";
 
   return (
     <nav aria-label={t("quickStrip.aria")} className="section-surface">

@@ -39,16 +39,16 @@ function ScheduleCard({
   return (
     <article
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-white/10 bg-[#141414] px-4 py-4 shadow-[0_10px_28px_-12px_rgba(0,0,0,0.65)] sm:px-5 sm:py-5",
+        "surface-glass relative overflow-hidden rounded-2xl px-4 py-4 sm:px-5 sm:py-5",
         isHighlighted && "ring-2 ring-[#65101a] ring-offset-2 ring-offset-black/80"
       )}
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-y-0 right-0 w-2/5 bg-gradient-to-l from-[#65101a]/35 to-transparent"
+        className="pointer-events-none absolute inset-y-0 right-0 z-[1] w-2/5 bg-gradient-to-l from-[#65101a]/35 to-transparent"
       />
       <div className="relative z-10 flex items-start gap-3 sm:gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#65101a] text-white sm:h-12 sm:w-12">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-b from-[#8a1a28] to-[#4a0c14] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.28),0_4px_10px_-4px_rgba(0,0,0,0.5)] sm:h-12 sm:w-12">
           <CalendarDays className="h-5 w-5 sm:h-6 sm:w-6" strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">

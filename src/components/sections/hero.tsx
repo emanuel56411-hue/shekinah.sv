@@ -118,7 +118,7 @@ export function Hero() {
             href="#reuniones"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "h-11 w-full min-w-[160px] bg-shekinah text-white shadow-lg transition-all hover:bg-shekinah-700 focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
+              "btn-skeuo h-11 w-full min-w-[160px] focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
             )}
           >
             {t("hero.ctaPrimary")}
@@ -129,7 +129,7 @@ export function Hero() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ size: "lg" }),
-              "h-11 w-full min-w-[160px] bg-green-600 text-white shadow-lg transition-all hover:bg-green-700 focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
+              "btn-skeuo-green h-11 w-full min-w-[160px] focus-visible:ring-2 focus-visible:ring-white sm:w-auto"
             )}
           >
             {t("hero.ctaWhatsapp")}
@@ -137,7 +137,7 @@ export function Hero() {
         </div>
 
         <Card
-          className="mt-14 w-full max-w-md border-white/25 bg-black/55 text-left text-white shadow-2xl backdrop-blur-md"
+          className="surface-glass mt-14 w-full max-w-md text-left text-white ring-0"
           aria-label={t("heroPanel.aria")}
         >
           <CardContent className="space-y-3 p-6">

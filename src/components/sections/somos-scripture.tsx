@@ -9,7 +9,7 @@ export function Somos() {
     <section id="somos" className="section-padding section-surface" aria-label="Somos Shekinah">
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <Reveal>
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[12px] border border-black/10 shadow-card-hover">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[12px] border border-white/15 shadow-[0_16px_40px_-14px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)]">
             <Image
               src="/assets/fotos/equipo-alabanza.webp"
               alt="Equipo de alabanza de Iglesia Bautista Shekinah"
@@ -17,7 +17,7 @@ export function Somos() {
               className="object-cover"
               sizes="(max-width: 896px) 100vw, 896px"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-white/5" />
           </div>
         </Reveal>
       </div>
@@ -43,13 +43,15 @@ export function Scripture() {
       />
 
       <Reveal>
-        <blockquote
-          className="relative mx-auto min-h-[16rem] max-w-3xl overflow-hidden rounded-2xl border border-white/25 bg-cover bg-center bg-no-repeat shadow-[0_12px_32px_-10px_rgba(0,0,0,0.45)] sm:min-h-[18rem]"
-          style={{ backgroundImage: 'url("/assets/fotos/fondo-versiculo.webp")' }}
-        >
+        <blockquote className="surface-glass relative mx-auto min-h-[16rem] max-w-3xl overflow-hidden rounded-2xl sm:min-h-[18rem]">
           <div
             aria-hidden
-            className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/62 to-black/70"
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: 'url("/assets/fotos/fondo-versiculo.webp")' }}
+          />
+          <div
+            aria-hidden
+            className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/58 to-black/68"
           />
           <div className="relative z-10 flex min-h-[16rem] flex-col items-center justify-center px-6 py-10 text-center sm:min-h-[18rem] sm:px-10 sm:py-12">
             <span

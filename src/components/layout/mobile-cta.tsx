@@ -10,7 +10,7 @@ export function MobileCta() {
   return (
     <nav
       aria-label={t("mobileCta.aria")}
-      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-black/15 bg-white shadow-[0_-4px_16px_-4px_rgba(0,0,0,0.2)] md:hidden"
+      className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-3 border-t border-black/10 bg-gradient-to-b from-white to-[#FAF8F3] shadow-[0_-10px_28px_-12px_rgba(0,0,0,0.28),inset_0_1px_0_rgba(255,255,255,0.9)] backdrop-blur-md md:hidden"
     >
       <Link
         href="#reuniones"

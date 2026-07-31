@@ -162,7 +162,7 @@ export function AyudaDonaciones() {
               <Button
                 type="button"
                 variant="outline"
-                className="rounded-full border-[#65101a]/40 bg-white px-6 font-semibold text-[#1a1214] transition-all hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
+                className="surface-porcelain rounded-full border-[#65101a]/35 px-6 font-semibold text-[#1a1214] hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
                 onClick={() => applyShortcut("General", "Pedir apoyo con: ")}
               >
                 {t("ayuda.quickSupport")}
@@ -170,7 +170,7 @@ export function AyudaDonaciones() {
               <Button
                 type="button"
                 variant="outline"
-                className="rounded-full border-[#65101a]/40 bg-white px-6 font-semibold text-[#1a1214] transition-all hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
+                className="surface-porcelain rounded-full border-[#65101a]/35 px-6 font-semibold text-[#1a1214] hover:border-[#65101a] hover:bg-[#65101a] hover:text-white"
                 onClick={() => applyShortcut("Otra ayuda", "Quiero donar para: ")}
               >
                 {t("ayuda.quickDonate")}
@@ -179,7 +179,7 @@ export function AyudaDonaciones() {
           </div>
 
           <Reveal delay={0.1}>
-            <Card id="help-form" className="shadow-card">
+            <Card id="help-form" className="surface-porcelain ring-0">
               <CardContent className="p-6">
                 <form aria-label={t("ayuda.formAria")} className="space-y-4" onSubmit={handleSubmit}>
                   <div className="space-y-2">
@@ -189,7 +189,7 @@ export function AyudaDonaciones() {
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t("form.namePlaceholder")}
                       required
-                      className="h-10 bg-white"
+                      className="control-inset h-10 bg-white"
                     />
                   </div>
                   <div className="space-y-2">
@@ -200,13 +200,13 @@ export function AyudaDonaciones() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder={t("ayuda.phonePlaceholder")}
                       autoComplete="tel"
-                      className="h-10 bg-white"
+                      className="control-inset h-10 bg-white"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">{t("ayuda.typeLabel")}</label>
                     <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-                      <SelectTrigger className="h-10 w-full bg-white">
+                      <SelectTrigger className="control-inset h-10 w-full bg-white">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -228,7 +228,7 @@ export function AyudaDonaciones() {
                       minLength={10}
                       maxLength={500}
                       required
-                      className="bg-white"
+                      className="control-inset bg-white"
                     />
                   </div>
                   <p className="text-xs text-muted-foreground">{t("ayuda.formNote")}</p>
@@ -241,7 +241,7 @@ export function AyudaDonaciones() {
                       {status.text}
                     </p>
                   )}
-                  <Button type="submit" disabled={loading} className="h-11 w-full bg-shekinah hover:bg-shekinah-900">
+                  <Button type="submit" disabled={loading} className="btn-skeuo h-11 w-full">
                     {loading ? t("ayuda.saving") : t("ayuda.submitBtn")}
                   </Button>
                 </form>
