@@ -73,13 +73,11 @@ export function SiteHeader() {
       const delta = current - lastScrollY.current;
 
       // Menú abierto o cerca del tope: siempre visible
-      if (open || current < 64) {
+      if (open || current < 72) {
         setHidden(false);
-      } else if (delta > 4) {
-        // Bajando
+      } else if (delta > 6) {
         setHidden(true);
-      } else if (delta < -4) {
-        // Subiendo
+      } else if (delta < -6) {
         setHidden(false);
       }
 
@@ -115,12 +113,14 @@ export function SiteHeader() {
       <header
         className={cn(
           "site-header-overlay fixed inset-x-0 top-0 z-[100] border-b border-transparent will-change-transform",
-          "transition-[transform,opacity] duration-300 ease-out motion-reduce:transition-none",
+          "motion-reduce:transition-none",
           shouldHide && "pointer-events-none"
         )}
         style={{
-          transform: shouldHide ? "translate3d(0, -110%, 0)" : "translate3d(0, 0, 0)",
-          opacity: open ? 0 : 1,
+          transform: shouldHide ? "translate3d(0, -100%, 0)" : "translate3d(0, 0, 0)",
+          opacity: shouldHide ? 0 : 1,
+          transition:
+            "transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 380ms cubic-bezier(0.22, 1, 0.36, 1)",
         }}
         data-header-hidden={shouldHide ? "true" : "false"}
       >

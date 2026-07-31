@@ -231,11 +231,13 @@
     content: "";
     position: absolute;
     inset: 0;
-    /* Overlay uniforme: sin bandas que se lean como cortes al scrollear */
-    background: rgba(0, 0, 0, 0.58);
+    /* Profundidad fija (no se mueve con el scroll → sin cortes por sección) */
+    background:
+      radial-gradient(ellipse 110% 65% at 50% 0%, rgba(0, 0, 0, 0.28) 0%, transparent 58%),
+      rgba(0, 0, 0, 0.52);
   }
 
-  /* Header sin velo: el fondo se lee continuo al scrollear */
+  /* Header transparente: sin banda/velo duro */
   .site-header-overlay {
     background: transparent;
     -webkit-backdrop-filter: none;
@@ -244,6 +246,24 @@
 
   #inicio {
     z-index: 0;
+  }
+
+  /* Fundido corto y suave hero → contenido (nunca a negro sólido) */
+  #inicio::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    pointer-events: none;
+    height: clamp(64px, 10vw, 110px);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.14) 50%,
+      rgba(0, 0, 0, 0.28) 100%
+    );
   }
 
 }
@@ -301,7 +321,7 @@
   }
 
   footer.page-bg-footer {
-    background: transparent;
+    background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.22) 100%);
     border-color: transparent;
     box-shadow: none;
   }
