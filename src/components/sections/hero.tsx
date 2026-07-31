@@ -10,7 +10,7 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section id="inicio" className="section-surface relative min-h-[92vh] overflow-hidden">
+    <section id="inicio" className="section-surface relative min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[92vh] max-w-6xl flex-col items-center justify-center px-4 py-20 text-center text-[#f5f5f5] sm:px-6">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-[#f5f5f5]/95">
           San Juan Opico, El Salvador

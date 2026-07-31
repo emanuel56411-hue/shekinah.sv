@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Separator } from "@/components/ui/separator";
 import { useLanguage } from "@/components/providers/language-provider";
 import { COORDINATOR_PHONE, LINKS } from "@/lib/constants";
 import { buildWhatsappUrl, formatPhone } from "@/lib/whatsapp";
@@ -18,7 +17,7 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="page-bg-footer border-t border-white/20 text-white">
+    <footer className="page-bg-footer text-white">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
           <div>
@@ -51,8 +50,7 @@ export function SiteFooter() {
           </nav>
         </div>
 
-        <Separator className="my-8 bg-white/20" />
-        <p className="text-center text-xs text-[#f5f5f5]/85">
+        <p className="mt-10 text-center text-xs text-[#f5f5f5]/85">
           © {new Date().getFullYear()} Iglesia Bautista Shekinah. {t("footer.rights")}
         </p>
       </div>

@@ -91,8 +91,8 @@ export function Ministerios() {
           })}
         </div>
 
-        <Reveal className="mt-8">
-          <div className="flex flex-col items-center justify-between gap-4 border-t border-white/15 pt-8 text-center sm:flex-row sm:text-left">
+        <Reveal className="mt-10">
+          <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
             <p className="font-heading text-lg font-semibold text-[#e8c4a8]">
               {t("ministerios.calloutText")}
             </p>
