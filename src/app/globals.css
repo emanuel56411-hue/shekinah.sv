@@ -181,6 +181,24 @@
   #inicio {
     z-index: 0;
   }
+
+  /* Fundido suave del hero (sin negro sólido) para recuperar sensación al bajar */
+  #inicio::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    pointer-events: none;
+    height: clamp(64px, 10vw, 110px);
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.14) 50%,
+      rgba(0, 0, 0, 0.26) 100%
+    );
+  }
 }
 
 @layer base {
