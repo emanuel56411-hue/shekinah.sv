@@ -77,7 +77,9 @@ export function Galeria() {
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
-                      <Badge className="mb-2 border border-white/20 bg-black/45 text-white backdrop-blur-md">{t(item.tagKey)}</Badge>
+                      <Badge className="mb-2 rounded-md border border-white/15 bg-black/35 px-2.5 py-1.5 text-[0.68rem] font-medium text-white/95 shadow-none backdrop-blur-[8px] [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                        {t(item.tagKey)}
+                      </Badge>
                       <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
                     </div>
                   </div>
