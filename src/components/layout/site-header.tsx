@@ -15,8 +15,9 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
 import { CalendarModal } from "@/components/calendar/calendar-modal";
+import { BibleIcon } from "@/components/icons/bible-icon";
 import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
 import { buttonVariants } from "@/components/ui/button";
@@ -30,15 +31,18 @@ import {
 import { buildTelUrl, buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
+type NavIcon = LucideIcon | ComponentType<SVGProps<SVGSVGElement> & { strokeWidth?: number }>;
+
 type NavItem = {
   href: string;
   titleKey: string;
-  icon: LucideIcon;
+  icon: NavIcon;
   external?: boolean;
 };
 
 const navItems: NavItem[] = [
   { href: "#inicio", titleKey: "nav.inicio", icon: Home },
+  { href: "#palabra", titleKey: "nav.palabra", icon: BibleIcon },
   { href: "#reuniones", titleKey: "nav.horarios", icon: Clock },
   { href: "#ubicacion", titleKey: "nav.ubicacion", icon: MapPin },
   { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },

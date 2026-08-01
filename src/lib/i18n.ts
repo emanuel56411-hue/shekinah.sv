@@ -13,6 +13,7 @@ export const translations: Record<Lang, TranslationTree> = {
     header: { brandAria: "Ir al inicio", navAria: "Navegación principal" },
     nav: {
       inicio: "Inicio",
+      palabra: "Palabra del Día",
       horarios: "Horarios",
       ubicacion: "Ubicación",
       ministerios: "Ministerios",
@@ -110,6 +111,18 @@ export const translations: Record<Lang, TranslationTree> = {
       verseRef: "Isaías 60:1",
       verseText:
         "Levántate, resplandece; porque ha venido tu luz, y la gloria de Jehová ha nacido sobre ti.",
+    },
+    pastor: {
+      aria: "Palabra del Día",
+      eyebrow: "De la Palabra",
+      title: "Palabra del Día",
+      description: "Mensaje, versículo o anuncio compartido por el pastor.",
+      loading: "Cargando publicación...",
+      emptyTitle: "Aún no hay ningún mensaje publicado",
+      emptyDesc: "Cuando el pastor publique un versículo, anuncio o mensaje, aparecerá aquí.",
+      typeVersiculo: "Versículo",
+      typeAnuncio: "Anuncio",
+      typeMensaje: "Mensaje",
     },
     galeria: {
       eyebrow: "RECUERDOS DE LA IGLESIA",
@@ -248,6 +261,7 @@ export const translations: Record<Lang, TranslationTree> = {
     header: { brandAria: "Go to homepage", navAria: "Main navigation" },
     nav: {
       inicio: "Home",
+      palabra: "Word of the Day",
       horarios: "Schedule",
       ubicacion: "Location",
       ministerios: "Ministries",
@@ -345,6 +359,18 @@ export const translations: Record<Lang, TranslationTree> = {
       verseRef: "Isaiah 60:1",
       verseText:
         "Arise, shine; for your light has come, and the glory of the Lord has risen upon you.",
+    },
+    pastor: {
+      aria: "Word of the Day",
+      eyebrow: "From the Word",
+      title: "Word of the Day",
+      description: "A verse, announcement, or message shared by the pastor.",
+      loading: "Loading post...",
+      emptyTitle: "No message has been published yet",
+      emptyDesc: "When the pastor publishes a verse, announcement, or message, it will appear here.",
+      typeVersiculo: "Verse",
+      typeAnuncio: "Announcement",
+      typeMensaje: "Message",
     },
     galeria: {
       eyebrow: "Church life",

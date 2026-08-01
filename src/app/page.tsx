@@ -1,5 +1,6 @@
 import { Hero } from "@/components/sections/hero";
 import { AnniversaryNote } from "@/components/sections/quick-strip";
+import { MensajePastor } from "@/components/sections/mensaje-pastor";
 import { Horarios } from "@/components/sections/horarios";
 import { Ubicacion } from "@/components/sections/ubicacion";
 import { AyudaDonaciones } from "@/components/sections/ayuda-donaciones";
@@ -13,6 +14,7 @@ export default function HomePage() {
     <main className="pt-[4.25rem]">
       <Hero />
       <AnniversaryNote />
+      <MensajePastor />
       <Horarios />
       <Ubicacion />
       <AyudaDonaciones />
