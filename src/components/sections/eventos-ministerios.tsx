@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import {
   BookOpen,
   CalendarDays,
@@ -85,23 +84,19 @@ export function Eventos() {
           <h2 className="section-title">{t("eventos.title")}</h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {EVENTS.map((event, index) => {
+        <div className="mt-10 grid max-w-xl gap-4 md:max-w-none md:grid-cols-1 lg:max-w-lg">
+          {EVENTS.filter((event) => event.id === "upcoming").map((event) => {
             const Icon = eventIcons[event.icon];
             const style = eventCardStyles[event.id];
-            const linkClass = cn(
-              "mt-auto text-left text-sm font-semibold transition-colors duration-200",
-              style.accentLink
-            );
             return (
-              <Reveal key={event.id} delay={index * 0.05}>
+              <Reveal key={event.id}>
                 <Card className="surface-glass surface-glass-lift group relative h-full gap-0 overflow-hidden border-white/20 bg-neutral-900/80 p-0 ring-0">
                   <Image
                     src={style.image}
                     alt=""
                     fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    sizes="(max-width: 768px) 100vw, 480px"
                   />
                   <div
                     className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/15"
@@ -133,15 +128,16 @@ export function Eventos() {
                       </h3>
                       <p className="text-sm leading-relaxed text-white/95">{t(event.descKey)}</p>
                     </div>
-                    {style.openCalendar ? (
-                      <button type="button" onClick={openCalendar} className={linkClass}>
-                        {t(style.linkKey)}
-                      </button>
-                    ) : (
-                      <Link href={style.href!} className={linkClass}>
-                        {t(style.linkKey)}
-                      </Link>
-                    )}
+                    <button
+                      type="button"
+                      onClick={openCalendar}
+                      className={cn(
+                        "mt-auto text-left text-sm font-semibold transition-colors duration-200",
+                        style.accentLink
+                      )}
+                    >
+                      {t(style.linkKey)}
+                    </button>
                   </CardContent>
                 </Card>
               </Reveal>

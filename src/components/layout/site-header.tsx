@@ -128,7 +128,7 @@ export function SiteHeader() {
         }}
         data-header-hidden={shouldHide ? "true" : "false"}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2.5 sm:px-6 sm:py-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-2.5 sm:px-6 sm:py-3">
           <Link href="#inicio" aria-label={t("header.brandAria")} className="flex min-w-0 items-center gap-3">
             <Image
               src="/assets/logo-shekinah.png"
@@ -146,11 +146,36 @@ export function SiteHeader() {
             </span>
           </Link>
 
+          <div className="ml-auto flex items-center gap-2">
+          <nav
+            aria-label={t("header.navAria")}
+            className="hidden items-center gap-0.5 lg:flex"
+          >
+            {navItems
+              .filter((item) => item.href !== "#inicio")
+              .map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                >
+                  {t(item.titleKey)}
+                </Link>
+              ))}
+            <button
+              type="button"
+              onClick={openCalendar}
+              className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+            >
+              {t("nav.calendario")}
+            </button>
+          </nav>
+
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger
               className={cn(
                 buttonVariants({ variant: "outline", size: "sm" }),
-                "surface-glass gap-2 border-white/30 text-white [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:text-white"
+                "surface-glass gap-2 border-white/30 text-white [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:text-white lg:hidden"
               )}
               aria-label={t("menu.openAria")}
             >
@@ -248,6 +273,7 @@ export function SiteHeader() {
               </div>
             </SheetContent>
           </Sheet>
+          </div>
         </div>
       </header>
 

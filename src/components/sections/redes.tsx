@@ -111,22 +111,17 @@ export function Redes() {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
+                className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
               >
-                <Card
-                  className={cn(
-                    "surface-porcelain h-full ring-0",
-                    social.className
-                  )}
-                >
+                <Card className="surface-glass h-full ring-0">
                   <CardContent className="flex h-full flex-col justify-between gap-5 p-6">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold">{social.label}</span>
-                      <ExternalLink className="h-4 w-4 text-muted-foreground" />
+                      <span className="font-semibold text-white">{social.label}</span>
+                      <ExternalLink className="h-4 w-4 text-white/55" />
                     </div>
                     <div className="flex items-center gap-3">
                       <BrandIcon icon={social.icon} className={social.iconClass} />
-                      <strong className="min-w-0 break-all text-base font-semibold text-[#65101a] sm:text-lg">
+                      <strong className="min-w-0 break-all text-base font-semibold text-[#f3c4cb] sm:text-lg">
                         {social.handle}
                       </strong>
                     </div>

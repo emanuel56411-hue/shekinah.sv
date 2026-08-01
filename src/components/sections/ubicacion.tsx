@@ -51,12 +51,12 @@ export function Ubicacion() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className={cn(
-                  "surface-porcelain group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  "surface-glass group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                 )}
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-black/10",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/15",
                     action.iconWrapClass
                   )}
                 >
@@ -69,8 +69,8 @@ export function Ubicacion() {
                   />
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-semibold text-foreground">{action.label}</span>
-                  <small className="text-xs text-muted-foreground">{action.hint}</small>
+                  <span className="block font-semibold text-white">{action.label}</span>
+                  <small className="text-xs text-white/70">{action.hint}</small>
                 </span>
               </a>
             ))}
@@ -78,7 +78,7 @@ export function Ubicacion() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="surface-porcelain overflow-hidden">
+          <div className="surface-glass overflow-hidden">
             <div className="relative aspect-[4/3] w-full bg-[#0a1218]">
               <iframe
                 title={t("ubicacion.title")}
@@ -89,9 +89,9 @@ export function Ubicacion() {
                 allowFullScreen
               />
             </div>
-            <div className="border-t border-black/20 px-5 py-4">
-              <p className="font-heading text-xl font-semibold text-foreground">QJRR+HH2</p>
-              <p className="text-sm text-muted-foreground">San Juan Opico, La Libertad</p>
+            <div className="border-t border-white/15 px-5 py-4">
+              <p className="font-heading text-xl font-semibold text-white">QJRR+HH2</p>
+              <p className="text-sm text-white/70">San Juan Opico, La Libertad</p>
             </div>
           </div>
         </Reveal>

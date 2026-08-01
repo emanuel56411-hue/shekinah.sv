@@ -109,20 +109,20 @@ export function AyudaDonaciones() {
                 </>
               ) : requests.length > 0 ? (
                 requests.map((request) => (
-                  <Card key={request.id} className="shadow-card transition-all hover:shadow-card-hover">
+                  <Card key={request.id} className="surface-glass ring-0">
                     <CardHeader className="pb-2">
                       <Badge
                         variant="secondary"
-                        className="w-fit bg-shekinah/10 text-shekinah  "
+                        className="w-fit border-white/15 bg-white/10 text-[#f3c4cb]"
                       >
                         {request.help_type}
                       </Badge>
-                      <CardTitle className="text-lg">
+                      <CardTitle className="text-lg text-white">
                         {request.display_name || t("ayuda.anonymousName")}
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <p className="text-sm text-muted-foreground">{request.public_message}</p>
+                      <p className="text-sm text-white/75">{request.public_message}</p>
                       <a
                         href={buildWhatsappUrl(
                           `Hola, quiero ayudar o consultar sobre esta solicitud: ${request.help_type} - ${request.public_message}`
@@ -131,7 +131,7 @@ export function AyudaDonaciones() {
                         rel="noopener noreferrer"
                         className={cn(
                           buttonVariants({ size: "sm", variant: "outline" }),
-                          "gap-2 border-black/30 text-foreground hover:bg-muted"
+                          "gap-2 border-white/25 bg-white/5 text-white hover:bg-white/10"
                         )}
                       >
                         <MessageCircle className="h-4 w-4" />
@@ -141,12 +141,12 @@ export function AyudaDonaciones() {
                   </Card>
                 ))
               ) : (
-                <Card className="col-span-full shadow-card">
+                <Card className="surface-glass col-span-full ring-0">
                   <CardContent className="flex flex-col items-center gap-2 p-8 text-center">
-                    <p className="font-heading text-lg font-semibold text-foreground">
+                    <p className="font-heading text-lg font-semibold text-white">
                       {t("ayuda.emptyRequestsTitle")}
                     </p>
-                    <p className="max-w-md text-sm text-muted-foreground">{t("ayuda.emptyRequestsDesc")}</p>
+                    <p className="max-w-md text-sm text-white/75">{t("ayuda.emptyRequestsDesc")}</p>
                   </CardContent>
                 </Card>
               )}
@@ -155,34 +155,34 @@ export function AyudaDonaciones() {
           </div>
 
           <Reveal delay={0.1}>
-            <Card id="help-form" className="surface-porcelain ring-0">
+            <Card id="help-form" className="surface-glass ring-0">
               <CardContent className="p-6">
                 <form aria-label={t("ayuda.formAria")} className="space-y-4" onSubmit={handleSubmit}>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">{t("form.name")}</label>
+                    <label className="text-sm font-medium text-white">{t("form.name")}</label>
                     <Input
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t("form.namePlaceholder")}
                       required
-                      className="control-inset h-10 bg-white"
+                      className="control-inset h-10 border-white/20 bg-white/95"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">{t("ayuda.phoneLabel")}</label>
+                    <label className="text-sm font-medium text-white">{t("ayuda.phoneLabel")}</label>
                     <Input
                       type="tel"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder={t("ayuda.phonePlaceholder")}
                       autoComplete="tel"
-                      className="control-inset h-10 bg-white"
+                      className="control-inset h-10 border-white/20 bg-white/95"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">{t("ayuda.typeLabel")}</label>
+                    <label className="text-sm font-medium text-white">{t("ayuda.typeLabel")}</label>
                     <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-                      <SelectTrigger className="control-inset h-10 w-full bg-white">
+                      <SelectTrigger className="control-inset h-10 w-full border-white/20 bg-white/95">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -195,7 +195,7 @@ export function AyudaDonaciones() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">{t("form.message")}</label>
+                    <label className="text-sm font-medium text-white">{t("form.message")}</label>
                     <Textarea
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
@@ -204,10 +204,10 @@ export function AyudaDonaciones() {
                       minLength={10}
                       maxLength={500}
                       required
-                      className="control-inset bg-white"
+                      className="control-inset border-white/20 bg-white/95"
                     />
                   </div>
-                  <p className="text-xs text-muted-foreground">{t("ayuda.privacyNote")}</p>
+                  <p className="text-xs text-white/65">{t("ayuda.privacyNote")}</p>
                   {status && (
                     <p
                       role="status"

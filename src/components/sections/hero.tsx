@@ -14,9 +14,6 @@ function WhatsappIcon({ className }: { className?: string }) {
   );
 }
 
-const heroBtnBase =
-  "inline-flex w-full min-w-[168px] items-center justify-center gap-2.5 rounded-[10px] px-8 py-[15px] font-sans text-[0.95rem] font-semibold text-white transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto";
-
 export function Hero() {
   const { t } = useLanguage();
 
@@ -32,15 +29,17 @@ export function Hero() {
         <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/90 sm:mt-6 sm:text-xl">
           {t("hero.description")}
         </p>
-        <div className="mt-9 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:gap-4">
+        <div className="mt-9 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:gap-3.5">
           <Link
             href="#reuniones"
             className={cn(
-              heroBtnBase,
-              "bg-gradient-to-b from-[#7a1f2e] to-[#5a1220] shadow-[0_6px_16px_-6px_rgba(0,0,0,0.45)] hover:-translate-y-0.5 hover:shadow-[0_10px_22px_-8px_rgba(0,0,0,0.5)] active:translate-y-0"
+              "inline-flex w-full min-w-[190px] items-center justify-center gap-2.5 rounded-[10px] px-9 py-4 font-sans text-base font-semibold text-white transition-all duration-200 ease-out",
+              "bg-gradient-to-b from-[#7a1f2e] to-[#5a1220] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.5)]",
+              "hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.55)] active:translate-y-0",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto"
             )}
           >
-            <Clock3 className="h-[1.15rem] w-[1.15rem] shrink-0" strokeWidth={2} aria-hidden />
+            <Clock3 className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />
             {t("hero.ctaPrimary")}
           </Link>
           <a
@@ -48,11 +47,12 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              heroBtnBase,
-              "bg-gradient-to-b from-[#25D366] to-[#1DA851] shadow-[0_5px_14px_-6px_rgba(0,0,0,0.35)] hover:-translate-y-0.5 hover:shadow-[0_8px_18px_-6px_rgba(0,0,0,0.4)] active:translate-y-0"
+              "inline-flex w-full min-w-[168px] items-center justify-center gap-2.5 rounded-[10px] border border-[#25D366]/55 bg-[#25D366]/12 px-7 py-[14px] font-sans text-[0.92rem] font-semibold text-[#d9ffe8] backdrop-blur-sm transition-all duration-200 ease-out",
+              "shadow-[0_4px_12px_-6px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 hover:border-[#25D366]/80 hover:bg-[#25D366]/20 hover:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.35)] active:translate-y-0",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto"
             )}
           >
-            <WhatsappIcon className="h-[1.15rem] w-[1.15rem] shrink-0" />
+            <WhatsappIcon className="h-[1.1rem] w-[1.1rem] shrink-0 text-[#25D366]" />
             {t("hero.ctaWhatsapp")}
           </a>
         </div>
