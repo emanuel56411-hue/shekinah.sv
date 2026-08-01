@@ -53,8 +53,7 @@ export function MensajePastor() {
     <section id="palabra" className="section-padding section-surface" aria-label={t("pastor.aria")}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <Reveal>
-          <p className="eyebrow text-center">{t("pastor.eyebrow")}</p>
-          <h2 className="section-title text-center">{t("pastor.title")}</h2>
+          <h2 className="section-title mt-0 text-center">{t("pastor.title")}</h2>
           <p className="section-desc mx-auto text-center">{t("pastor.description")}</p>
         </Reveal>
 

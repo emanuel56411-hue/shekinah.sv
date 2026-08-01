@@ -165,7 +165,7 @@ export function AyudaDonaciones() {
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t("form.namePlaceholder")}
                       required
-                      className="control-inset h-10 border-white/20 bg-white/95"
+                      className="control-inset h-10 border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
                     />
                   </div>
                   <div className="space-y-2">
@@ -176,13 +176,13 @@ export function AyudaDonaciones() {
                       onChange={(e) => setPhone(e.target.value)}
                       placeholder={t("ayuda.phonePlaceholder")}
                       autoComplete="tel"
-                      className="control-inset h-10 border-white/20 bg-white/95"
+                      className="control-inset h-10 border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-white">{t("ayuda.typeLabel")}</label>
                     <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-                      <SelectTrigger className="control-inset h-10 w-full border-white/20 bg-white/95">
+                      <SelectTrigger className="control-inset h-10 w-full border-black/15 bg-white text-[#1a1214]">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -204,7 +204,7 @@ export function AyudaDonaciones() {
                       minLength={10}
                       maxLength={500}
                       required
-                      className="control-inset border-white/20 bg-white/95"
+                      className="control-inset border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
                     />
                   </div>
                   <p className="text-xs text-white/65">{t("ayuda.privacyNote")}</p>

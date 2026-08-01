@@ -350,6 +350,19 @@
     color: #f5f5f5;
   }
 
+  /* Inputs claros: el color blanco del card no debe heredar al texto */
+  #ayuda [data-slot="input"],
+  #ayuda [data-slot="textarea"],
+  #ayuda [data-slot="select-trigger"] {
+    color: #1a1214;
+    background-color: #fff;
+  }
+
+  #ayuda [data-slot="input"]::placeholder,
+  #ayuda [data-slot="textarea"]::placeholder {
+    color: rgba(26, 18, 20, 0.45);
+  }
+
   #ayuda [data-slot="card"] .text-muted-foreground,
   #ubicacion a.group small {
     color: rgba(255, 255, 255, 0.72);
