@@ -160,8 +160,8 @@
     background-color: #0a0708;
     background-image: url("/assets/fotos/fondo-culto-adoracion.webp");
     background-size: cover;
-    /* Encuadre bajo: saca de pantalla la línea natural de la foto */
-    background-position: center bottom;
+    /* Móvil: un poco más abajo. Laptop: centro, para no mostrar solo la zona oscura */
+    background-position: center 58%;
     background-repeat: no-repeat;
     background-attachment: scroll;
   }
@@ -170,8 +170,28 @@
     content: "";
     position: absolute;
     inset: 0;
-    /* Menos oscuro: se ve la foto y sigue legible el texto */
-    background: rgba(6, 4, 6, 0.46);
+    /* Velo más suave en el centro para que se note la foto */
+    background: linear-gradient(
+      to bottom,
+      rgba(6, 4, 6, 0.42) 0%,
+      rgba(6, 4, 6, 0.28) 42%,
+      rgba(6, 4, 6, 0.5) 100%
+    );
+  }
+
+  @media (min-width: 1024px) {
+    .site-bg {
+      background-position: center 40%;
+    }
+
+    .site-bg::after {
+      background: linear-gradient(
+        to bottom,
+        rgba(6, 4, 6, 0.3) 0%,
+        rgba(6, 4, 6, 0.16) 40%,
+        rgba(6, 4, 6, 0.42) 100%
+      );
+    }
   }
 
   .site-header-overlay {

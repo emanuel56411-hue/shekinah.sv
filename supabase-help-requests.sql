@@ -1,7 +1,7 @@
 -- Supabase setup for Iglesia Bautista Shekinah help requests.
 -- Run this file in the Supabase SQL editor for the target project.
 
-create extension if not exists pgcrypto;
+create extension if not exists pgcrypto with schema extensions;
 
 create table if not exists public.help_requests (
   id uuid primary key default gen_random_uuid(),
@@ -46,7 +46,7 @@ execute function public.set_updated_at();
 drop view if exists public.public_help_requests;
 
 create view public.public_help_requests
-with (security_barrier = true)
+with (security_invoker = true)
 as
 select
   id,
@@ -77,9 +77,31 @@ with check (
   and published_at is null
 );
 
+drop policy if exists "Anyone can read published help requests" on public.help_requests;
+
+create policy "Anyone can read published help requests"
+on public.help_requests
+for select
+to anon, authenticated
+using (
+  is_public = true
+  and status in ('approved', 'in_process')
+  and published_at >= now() - interval '14 days'
+);
+
 revoke all on public.help_requests from anon, authenticated;
 grant usage on schema public to anon, authenticated;
 grant insert on public.help_requests to anon, authenticated;
+-- Solo columnas públicas (no phone/email/message_private).
+grant select (
+  id,
+  display_name,
+  help_type,
+  public_message,
+  status,
+  published_at,
+  is_public
+) on public.help_requests to anon, authenticated;
 
 revoke all on public.public_help_requests from anon, authenticated;
 grant select on public.public_help_requests to anon, authenticated;

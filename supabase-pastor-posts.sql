@@ -1,7 +1,6 @@
 -- Publicaciones del pastor (versículos, anuncios, mensajes).
--- Ejecutar en el SQL Editor de Supabase del proyecto Shekinah.
-
-create extension if not exists pgcrypto;
+-- Ejecutar en el SQL Editor de Supabase.
+-- IMPORTANTE: desactiva Google Translate en esta página antes de pegar.
 
 create table if not exists public.app_secrets (
   key text primary key,
@@ -48,8 +47,9 @@ execute function public.set_updated_at();
 
 drop view if exists public.public_pastor_posts;
 
+-- security_invoker: usa permisos del usuario que consulta (evita el lint SECURITY DEFINER).
 create view public.public_pastor_posts
-with (security_barrier = true)
+with (security_invoker = true)
 as
 select
   id,
@@ -68,11 +68,27 @@ revoke all on public.app_secrets from anon, authenticated;
 revoke all on public.public_pastor_posts from anon, authenticated;
 
 grant usage on schema public to anon, authenticated;
+grant select on public.pastor_posts to anon, authenticated;
 grant select on public.public_pastor_posts to anon, authenticated;
 
--- Contraseña inicial del panel /admin (cámbiala después de la primera configuración).
+drop policy if exists "Anyone can read active pastor posts" on public.pastor_posts;
+
+create policy "Anyone can read active pastor posts"
+on public.pastor_posts
+for select
+to anon, authenticated
+using (is_active = true);
+
+create or replace function public.pastor_token_hash(p_token text)
+returns text
+language sql
+immutable
+as $$
+  select md5('shekinah-pastor-v1:' || coalesce(p_token, ''));
+$$;
+
 insert into public.app_secrets (key, value_hash)
-values ('pastor_admin', crypt('shekinah-pastor', gen_salt('bf')))
+values ('pastor_admin', public.pastor_token_hash('shekinah-pastor'))
 on conflict (key) do nothing;
 
 create or replace function public.pastor_admin_ok(p_token text)
@@ -86,7 +102,7 @@ as $$
     select 1
     from public.app_secrets
     where key = 'pastor_admin'
-      and value_hash = crypt(p_token, value_hash)
+      and value_hash = public.pastor_token_hash(p_token)
   );
 $$;
 
@@ -253,7 +269,7 @@ begin
   end if;
 
   insert into public.app_secrets (key, value_hash, updated_at)
-  values ('pastor_admin', crypt(trim(p_new_token), gen_salt('bf')), now())
+  values ('pastor_admin', public.pastor_token_hash(trim(p_new_token)), now())
   on conflict (key) do update
   set
     value_hash = excluded.value_hash,
@@ -263,6 +279,7 @@ begin
 end;
 $$;
 
+revoke all on function public.pastor_token_hash(text) from public;
 revoke all on function public.pastor_admin_ok(text) from public;
 revoke all on function public.verify_pastor_admin(text) from public;
 revoke all on function public.list_pastor_posts_admin(text) from public;

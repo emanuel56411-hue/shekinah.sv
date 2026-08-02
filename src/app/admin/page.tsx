@@ -1,8 +1,9 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Pencil, Plus, Trash2 } from "lucide-react";
+import { ImagePlus, Pencil, Plus, Trash2 } from "lucide-react";
 import { BibleIcon } from "@/components/icons/bible-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,11 +11,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import type { PastorMediaKind } from "@/lib/pastor-media";
+import { isLikelyImageUrl, toVideoEmbedUrl } from "@/lib/pastor-media";
 import {
   createPastorPost,
   deletePastorPost,
   listPastorPostsAdmin,
   updatePastorPost,
+  uploadPastorImage,
   verifyPastorAdmin,
   type PastorPost,
   type PastorPostType,
@@ -26,6 +30,9 @@ const TYPE_OPTIONS: { value: PastorPostType; label: string }[] = [
   { value: "versiculo", label: "Versículo" },
   { value: "anuncio", label: "Anuncio" },
   { value: "mensaje", label: "Mensaje" },
+  { value: "oracion", label: "Oración" },
+  { value: "foto", label: "Foto" },
+  { value: "video", label: "Video" },
 ];
 
 function emptyForm() {
@@ -34,6 +41,8 @@ function emptyForm() {
     post_type: "mensaje" as PastorPostType,
     reference: "",
     is_active: true,
+    media_kind: "none" as PastorMediaKind,
+    media_url: "",
   };
 }
 
@@ -59,6 +68,7 @@ export default function AdminPastorPage() {
   const [posts, setPosts] = useState<PastorPost[]>([]);
   const [loadingList, setLoadingList] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm());
@@ -133,6 +143,8 @@ export default function AdminPastorPage() {
       post_type: post.post_type,
       reference: post.reference || "",
       is_active: post.is_active,
+      media_kind: post.media_kind || "none",
+      media_url: post.media_url || "",
     });
     setStatus(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -143,11 +155,64 @@ export default function AdminPastorPage() {
     setForm(emptyForm());
   };
 
+  const handleImageFile = async (file: File | null) => {
+    if (!file) return;
+    setUploading(true);
+    setStatus(null);
+    try {
+      const url = await uploadPastorImage(token, file);
+      setForm((prev) => ({
+        ...prev,
+        media_kind: "image",
+        media_url: url,
+        post_type: prev.post_type === "mensaje" ? "foto" : prev.post_type,
+      }));
+      setStatus({ type: "success", text: "Foto subida. Ya puedes publicar." });
+    } catch (error) {
+      const code = error instanceof Error ? error.message : "";
+      const text =
+        code === "too_large"
+          ? "La imagen supera 5 MB."
+          : code === "invalid_type"
+            ? "Solo se permiten JPG, PNG, WEBP o GIF."
+            : code === "unauthorized"
+              ? "Sesión no válida. Vuelve a iniciar sesión."
+              : "No se pudo subir la imagen. Ejecuta supabase-pastor-media-upgrade.sql en Supabase.";
+      setStatus({ type: "error", text });
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSave = async (event: FormEvent) => {
     event.preventDefault();
     const content = form.content.trim();
-    if (content.length < 1) {
-      setStatus({ type: "error", text: "Escribe el contenido de la publicación." });
+    let mediaKind = form.media_kind;
+    let mediaUrl = form.media_url.trim();
+
+    if (form.post_type === "video" || mediaKind === "video") {
+      const embed = toVideoEmbedUrl(mediaUrl);
+      if (!embed && mediaUrl) {
+        setStatus({
+          type: "error",
+          text: "Pega un enlace válido de YouTube, Vimeo o Facebook.",
+        });
+        return;
+      }
+      if (embed) {
+        mediaKind = "video";
+        mediaUrl = embed;
+      }
+    } else if (mediaUrl && mediaKind !== "image") {
+      if (isLikelyImageUrl(mediaUrl) || mediaUrl.includes("/pastor-media/")) {
+        mediaKind = "image";
+      }
+    }
+
+    if (mediaKind === "none") mediaUrl = "";
+
+    if (!content && !mediaUrl) {
+      setStatus({ type: "error", text: "Escribe un texto o agrega una foto/video." });
       return;
     }
 
@@ -156,10 +221,12 @@ export default function AdminPastorPage() {
 
     try {
       const payload = {
-        content,
+        content: content || (mediaKind === "image" ? "Foto" : mediaKind === "video" ? "Video" : ""),
         post_type: form.post_type,
         reference: form.reference.trim() || null,
         is_active: form.is_active,
+        media_url: mediaUrl || null,
+        media_kind: mediaUrl ? mediaKind : ("none" as PastorMediaKind),
       };
 
       if (editingId) {
@@ -173,9 +240,10 @@ export default function AdminPastorPage() {
       resetForm();
       await loadPosts(token);
     } catch (error) {
-      const message = error instanceof Error && error.message === "unauthorized"
-        ? "Sesión no válida. Vuelve a iniciar sesión."
-        : "No se pudo guardar. Revisa la conexión o el esquema de Supabase.";
+      const message =
+        error instanceof Error && error.message === "unauthorized"
+          ? "Sesión no válida. Vuelve a iniciar sesión."
+          : "No se pudo guardar. Ejecuta supabase-pastor-media-upgrade.sql si aún no lo hiciste.";
       setStatus({ type: "error", text: message });
     } finally {
       setSaving(false);
@@ -206,7 +274,7 @@ export default function AdminPastorPage() {
             <p className="eyebrow">Panel pastoral</p>
             <h1 className="section-title">Publicaciones</h1>
             <p className="section-desc">
-              Publica versículos, anuncios o mensajes. Solo aparecen en el sitio si están activos.
+              Publica versículos, oraciones, fotos, videos o anuncios. Solo aparecen en el sitio si están activos.
             </p>
           </div>
           <BibleIcon className="mt-2 h-10 w-10 text-shekinah" strokeWidth={1.5} />
@@ -277,9 +345,30 @@ export default function AdminPastorPage() {
                     <label className="text-sm font-medium">Tipo</label>
                     <Select
                       value={form.post_type}
-                      onValueChange={(value) =>
-                        setForm((prev) => ({ ...prev, post_type: (value as PastorPostType) || "mensaje" }))
-                      }
+                      onValueChange={(value) => {
+                        const next = (value as PastorPostType) || "mensaje";
+                        setForm((prev) => {
+                          let mediaKind = prev.media_kind;
+                          let mediaUrl = prev.media_url;
+
+                          if (next === "video") {
+                            mediaKind = "video";
+                            if (prev.media_kind !== "video") mediaUrl = "";
+                          } else if (next === "foto") {
+                            mediaKind = "image";
+                          } else if (prev.media_kind === "video") {
+                            mediaKind = "none";
+                            mediaUrl = "";
+                          }
+
+                          return {
+                            ...prev,
+                            post_type: next,
+                            media_kind: mediaKind,
+                            media_url: mediaUrl,
+                          };
+                        });
+                      }}
                     >
                       <SelectTrigger className="control-inset h-10 w-full bg-white">
                         <SelectValue />
@@ -296,7 +385,7 @@ export default function AdminPastorPage() {
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium" htmlFor="post-content">
-                      Contenido
+                      Texto / descripción
                     </label>
                     <Textarea
                       id="post-content"
@@ -304,8 +393,7 @@ export default function AdminPastorPage() {
                       onChange={(e) => setForm((prev) => ({ ...prev, content: e.target.value }))}
                       rows={5}
                       maxLength={4000}
-                      required
-                      placeholder="Escribe o pega el versículo, anuncio o mensaje..."
+                      placeholder="Escribe el mensaje, oración, pie de foto o descripción del video..."
                       className="control-inset bg-white"
                     />
                   </div>
@@ -322,6 +410,114 @@ export default function AdminPastorPage() {
                       maxLength={120}
                       className="control-inset h-10 bg-white"
                     />
+                  </div>
+
+                  <div className="space-y-3 rounded-[14px] border border-black/10 bg-black/[0.02] p-4">
+                    <p className="text-sm font-medium">Foto o video</p>
+
+                    {form.post_type === "video" || form.media_kind === "video" ? (
+                      <div className="space-y-2">
+                        <label className="text-sm text-muted-foreground" htmlFor="video-url">
+                          Enlace de YouTube, Vimeo o Facebook
+                        </label>
+                        <Input
+                          id="video-url"
+                          value={form.media_url}
+                          onChange={(e) =>
+                            setForm((prev) => ({
+                              ...prev,
+                              media_kind: "video",
+                              media_url: e.target.value,
+                            }))
+                          }
+                          placeholder="https://www.youtube.com/watch?v=..."
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+                    ) : (
+                      <>
+                        <div className="space-y-2">
+                          <label className="text-sm text-muted-foreground" htmlFor="image-file">
+                            Subir foto (máx. 5 MB)
+                          </label>
+                          <Input
+                            id="image-file"
+                            type="file"
+                            accept="image/jpeg,image/png,image/webp,image/gif"
+                            disabled={uploading}
+                            onChange={(e) => handleImageFile(e.target.files?.[0] || null)}
+                            className="control-inset h-10 bg-white file:mr-3 file:border-0 file:bg-transparent file:text-sm"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm text-muted-foreground" htmlFor="image-url">
+                            O pega la URL de una imagen
+                          </label>
+                          <Input
+                            id="image-url"
+                            value={form.media_kind === "image" ? form.media_url : ""}
+                            onChange={(e) =>
+                              setForm((prev) => ({
+                                ...prev,
+                                media_kind: e.target.value.trim() ? "image" : "none",
+                                media_url: e.target.value,
+                              }))
+                            }
+                            placeholder="https://..."
+                            className="control-inset h-10 bg-white"
+                          />
+                        </div>
+                      </>
+                    )}
+
+                    {form.media_kind === "image" && form.media_url ? (
+                      <div className="relative mt-2 overflow-hidden rounded-xl border border-black/10">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={form.media_url} alt="Vista previa" className="max-h-56 w-full object-cover" />
+                        <Button
+                          type="button"
+                          size="sm"
+                          variant="secondary"
+                          className="absolute right-2 top-2"
+                          onClick={() => setForm((prev) => ({ ...prev, media_kind: "none", media_url: "" }))}
+                        >
+                          Quitar foto
+                        </Button>
+                      </div>
+                    ) : null}
+
+                    {form.post_type !== "video" && form.media_kind !== "video" ? (
+                      <button
+                        type="button"
+                        className="text-sm font-medium text-shekinah underline-offset-4 hover:underline"
+                        onClick={() =>
+                          setForm((prev) => ({
+                            ...prev,
+                            post_type: "video",
+                            media_kind: "video",
+                            media_url: "",
+                          }))
+                        }
+                      >
+                        Prefiero agregar un video por enlace
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="inline-flex items-center gap-1.5 text-sm font-medium text-shekinah underline-offset-4 hover:underline"
+                        onClick={() =>
+                          setForm((prev) => ({
+                            ...prev,
+                            post_type: prev.post_type === "video" ? "foto" : prev.post_type,
+                            media_kind: "none",
+                            media_url: "",
+                          }))
+                        }
+                      >
+                        <ImagePlus className="h-3.5 w-3.5" />
+                        Prefiero agregar una foto
+                      </button>
+                    )}
                   </div>
 
                   <label className="flex items-center gap-2 text-sm font-medium">
@@ -341,8 +537,8 @@ export default function AdminPastorPage() {
                   )}
 
                   <div className="flex flex-wrap gap-2">
-                    <Button type="submit" disabled={saving} className="btn-skeuo h-11 min-w-36">
-                      {saving ? "Guardando..." : editingId ? "Guardar cambios" : "Publicar"}
+                    <Button type="submit" disabled={saving || uploading} className="btn-skeuo h-11 min-w-36">
+                      {uploading ? "Subiendo foto..." : saving ? "Guardando..." : editingId ? "Guardar cambios" : "Publicar"}
                     </Button>
                     {editingId ? (
                       <Button type="button" variant="outline" className="h-11" onClick={resetForm}>
@@ -374,11 +570,30 @@ export default function AdminPastorPage() {
                             <Badge variant="secondary" className="bg-shekinah/10 text-shekinah">
                               {typeLabel(post.post_type)}
                             </Badge>
-                            <Badge variant="secondary" className={post.is_active ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}>
+                            {post.media_kind !== "none" ? (
+                              <Badge variant="secondary" className="bg-black/5">
+                                {post.media_kind === "image" ? "Con foto" : "Con video"}
+                              </Badge>
+                            ) : null}
+                            <Badge
+                              variant="secondary"
+                              className={post.is_active ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}
+                            >
                               {post.is_active ? "Activo" : "Inactivo"}
                             </Badge>
                             <span className="text-xs text-muted-foreground">{formatDate(post.published_at)}</span>
                           </div>
+                          {post.media_kind === "image" && post.media_url ? (
+                            <div className="relative h-40 overflow-hidden rounded-xl bg-black/5">
+                              <Image
+                                src={post.media_url}
+                                alt=""
+                                fill
+                                unoptimized
+                                className="object-cover"
+                              />
+                            </div>
+                          ) : null}
                           <p className="text-sm leading-relaxed text-foreground">{post.content}</p>
                           {post.reference ? (
                             <p className="text-xs font-semibold uppercase tracking-[0.16em] text-shekinah">
