@@ -51,7 +51,7 @@ export function Ubicacion() {
                 href={action.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="surface-glass group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                className="group flex items-center gap-3 py-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
               >
                 <span
                   className={cn(

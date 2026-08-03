@@ -90,7 +90,7 @@ export function MensajePastor() {
                 <div className="mx-auto h-20 w-full max-w-xl animate-pulse rounded bg-white/10" />
               </div>
             ) : post ? (
-              <article className="surface-glass px-5 py-8 text-center sm:px-8">
+              <article className="px-1 py-4 text-center sm:px-2">
                 <p className="text-[0.75rem] font-medium text-[#f3c4cb]">{typeLabel}</p>
 
                 {post.media_kind === "image" && post.media_url ? (
@@ -142,7 +142,7 @@ export function MensajePastor() {
                 </time>
               </article>
             ) : (
-              <div className="surface-glass flex flex-col items-center gap-4 px-6 py-12 text-center">
+              <div className="flex flex-col items-center gap-4 px-2 py-8 text-center">
                 <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/80">
                   <BibleIcon className="h-8 w-8" strokeWidth={1.5} />
                 </span>

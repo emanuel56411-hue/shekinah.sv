@@ -105,7 +105,7 @@ export function SocialCards() {
           rel="noopener noreferrer"
           className="block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
         >
-          <Card className="surface-glass h-full ring-0">
+          <Card className="h-full border-0 bg-transparent shadow-none ring-0">
             <CardContent className="flex h-full flex-col justify-between gap-5 p-5">
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-white">{social.label}</span>

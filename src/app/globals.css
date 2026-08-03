@@ -374,7 +374,6 @@
 
   /* Un solo sistema: glass oscuro */
   #ubicacion [data-slot="card"],
-  #ayuda [data-slot="card"],
   #redes [data-slot="card"],
   #ministerios [data-slot="card"],
   #eventos [data-slot="card"],
@@ -385,37 +384,32 @@
     box-shadow: none !important;
     --tw-ring-shadow: 0 0 #0000 !important;
     --tw-ring-color: transparent !important;
-    border-radius: var(--radius);
-    background: rgba(10, 8, 12, 0.42);
-    color: #f5f5f5;
+    background: transparent !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
+    color: #f5f5f5;
   }
 
-  #ubicacion [data-slot="card"]:hover,
-  #ayuda [data-slot="card"]:hover,
-  #redes [data-slot="card"]:hover,
-  #ministerios [data-slot="card"]:hover,
-  #eventos [data-slot="card"]:hover {
-    transform: translateY(-2px);
-    background: rgba(10, 8, 12, 0.52);
+  /* Solo el formulario de ayuda conserva fondo suave, sin línea */
+  #ayuda [data-slot="card"] {
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    background: rgba(10, 8, 12, 0.35) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    color: #f5f5f5;
   }
 
   #ubicacion a.group {
     border: 0 !important;
     outline: none !important;
     box-shadow: none !important;
-    border-radius: var(--radius);
-    background: rgba(10, 8, 12, 0.42);
-    color: #f5f5f5;
+    background: transparent !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-  }
-
-  #ubicacion a.group:hover {
-    transform: translateY(-2px);
-    background: rgba(10, 8, 12, 0.52);
+    color: #f5f5f5;
   }
 
   #ayuda label,

@@ -45,12 +45,7 @@ function ScheduleCard({
   children: ReactNode;
 }) {
   return (
-    <article
-      className={cn(
-        "surface-glass relative overflow-hidden px-4 py-4 sm:px-5 sm:py-5",
-        isHighlighted && "bg-white/[0.08]"
-      )}
-    >
+    <article className="relative py-3 sm:py-4">
       <div className="relative z-10 flex items-start gap-3 sm:gap-4">
         <div
           className={cn(
@@ -107,7 +102,7 @@ export function Horarios() {
           <p className="section-desc">{t("reuniones.description")}</p>
         </Reveal>
 
-        <div className="space-y-3">
+        <div className="space-y-1">
           {SCHEDULE.map((item, index) => {
             const isNext = matchNextId(item.titleKey, nextId);
             const Icon = SCHEDULE_ICONS[item.titleKey] ?? BookOpen;
@@ -138,7 +133,7 @@ export function Horarios() {
                 return (
                   <div
                     key={item.titleKey}
-                    className={cn(isNext && "rounded-md bg-white/5 px-2 py-1 sm:-mx-2")}
+                    className={cn(isNext && "text-[#f3c4cb]")}
                   >
                     <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
                     <time className="block text-sm font-medium text-white/75">{item.time}</time>

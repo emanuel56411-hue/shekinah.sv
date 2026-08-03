@@ -26,7 +26,7 @@ export function Eventos() {
         </Reveal>
 
         <Reveal className="mt-8 max-w-lg">
-          <Card className="surface-glass surface-glass-lift group relative h-full gap-0 overflow-hidden border-0 p-0 ring-0">
+          <Card className="group relative h-full gap-0 overflow-hidden border-0 bg-transparent p-0 shadow-none ring-0">
             <Image
               src="/assets/fotos/congregacion-culto-lateral.png"
               alt=""
@@ -73,8 +73,8 @@ export function Ministerios() {
             const number = String(index + 1).padStart(2, "0");
             return (
               <Reveal key={ministry.id} delay={index * 0.04}>
-                <Card className="surface-glass h-full gap-0 border-0 p-0 ring-0">
-                  <CardContent className="flex h-full items-start gap-4 p-5">
+                <Card className="h-full gap-0 border-0 bg-transparent p-0 shadow-none ring-0">
+                  <CardContent className="flex h-full items-start gap-4 p-2 sm:p-3">
                     <span
                       className="font-heading text-3xl font-semibold leading-none text-[#f3c4cb]/90"
                       aria-hidden
