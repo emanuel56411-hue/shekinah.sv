@@ -7,7 +7,8 @@ import { AyudaDonaciones } from "@/components/sections/ayuda-donaciones";
 import { Scripture } from "@/components/sections/somos-scripture";
 import { Galeria } from "@/components/sections/galeria";
 import { Eventos, Ministerios } from "@/components/sections/eventos-ministerios";
-import { Redes } from "@/components/sections/redes";
+// Sección "Síguenos" movida al menú (panel/modal). El componente se conserva.
+// import { Redes } from "@/components/sections/redes";
 
 export default function HomePage() {
   return (
@@ -22,7 +23,7 @@ export default function HomePage() {
       <Galeria />
       <Eventos />
       <Ministerios />
-      <Redes />
+      {/* <Redes /> */}
     </main>
   );
 }

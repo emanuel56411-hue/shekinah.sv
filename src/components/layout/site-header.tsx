@@ -12,6 +12,7 @@ import {
   Menu,
   MessageCircle,
   Phone,
+  Share2,
   Users,
   type LucideIcon,
 } from "lucide-react";
@@ -20,6 +21,7 @@ import { CalendarModal } from "@/components/calendar/calendar-modal";
 import { BibleIcon } from "@/components/icons/bible-icon";
 import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
+import { SocialPanel } from "@/components/social/social-panel";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
@@ -38,6 +40,7 @@ type NavItem = {
   titleKey: string;
   icon: NavIcon;
   external?: boolean;
+  action?: "social";
 };
 
 const navItems: NavItem[] = [
@@ -46,6 +49,7 @@ const navItems: NavItem[] = [
   { href: "#reuniones", titleKey: "nav.horarios", icon: Clock },
   { href: "#ubicacion", titleKey: "nav.ubicacion", icon: MapPin },
   { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },
+  { href: "#redes", titleKey: "nav.redes", icon: Share2, action: "social" },
   { href: "#ministerios", titleKey: "nav.ministerios", icon: Users },
   { href: "#galeria", titleKey: "nav.galeria", icon: Images },
 ];
@@ -64,9 +68,33 @@ export function SiteHeader() {
   const { t, lang, setLang } = useLanguage();
   const { open: calendarOpen, setOpen: setCalendarOpen, openCalendar } = useCalendarModal();
   const [open, setOpen] = useState(false);
+  const [socialOpen, setSocialOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+
+  const openSocial = () => {
+    setOpen(false);
+    setSocialOpen(true);
+  };
+
+  const handleSocialOpenChange = (next: boolean) => {
+    setSocialOpen(next);
+    if (!next && typeof window !== "undefined" && window.location.hash === "#redes") {
+      history.replaceState(null, "", `${window.location.pathname}${window.location.search}`);
+    }
+  };
+
+  useEffect(() => {
+    const syncHash = () => {
+      if (window.location.hash === "#redes") {
+        setSocialOpen(true);
+      }
+    };
+    syncHash();
+    window.addEventListener("hashchange", syncHash);
+    return () => window.removeEventListener("hashchange", syncHash);
+  }, []);
 
   useEffect(() => {
     lastScrollY.current = getScrollY();
@@ -153,15 +181,26 @@ export function SiteHeader() {
           >
             {navItems
               .filter((item) => item.href !== "#inicio")
-              .map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                >
-                  {t(item.titleKey)}
-                </Link>
-              ))}
+              .map((item) =>
+                item.action === "social" ? (
+                  <button
+                    key={item.href}
+                    type="button"
+                    onClick={openSocial}
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  >
+                    {t(item.titleKey)}
+                  </button>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                  >
+                    {t(item.titleKey)}
+                  </Link>
+                )
+              )}
             <button
               type="button"
               onClick={openCalendar}
@@ -210,6 +249,20 @@ export function SiteHeader() {
                 <ul className="space-y-1">
                   {navItems.map((item) => {
                     const Icon = item.icon;
+                    if (item.action === "social") {
+                      return (
+                        <li key={item.href}>
+                          <button
+                            type="button"
+                            onClick={openSocial}
+                            className="group flex w-full items-center gap-4 rounded-full px-4 py-3 text-left text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                          >
+                            <Icon className="h-[1.35rem] w-[1.35rem] shrink-0 text-white" strokeWidth={1.75} />
+                            <span>{t(item.titleKey)}</span>
+                          </button>
+                        </li>
+                      );
+                    }
                     return (
                       <li key={item.href}>
                         <Link
@@ -278,6 +331,7 @@ export function SiteHeader() {
       </header>
 
       <CalendarModal open={calendarOpen} onOpenChange={setCalendarOpen} />
+      <SocialPanel open={socialOpen} onOpenChange={handleSocialOpenChange} />
     </>
   );
 }
