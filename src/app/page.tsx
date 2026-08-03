@@ -12,7 +12,7 @@ import { Eventos, Ministerios } from "@/components/sections/eventos-ministerios"
 export default function HomePage() {
   return (
     <main className="pt-[4.25rem]">
-      {/* Prioridad: Hero, Horarios, Ayuda, Galería. El resto va más simple. */}
+      {/* IMPORTANTE: las secciones usan <Reveal> para el scroll interactivo. NO quitar. */}
       <Hero />
       <Horarios />
       <AyudaDonaciones />

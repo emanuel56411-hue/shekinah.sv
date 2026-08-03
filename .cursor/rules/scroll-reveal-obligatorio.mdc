@@ -1,0 +1,25 @@
+---
+description: NUNCA quitar el scroll Reveal interactivo del sitio Shekinah
+alwaysApply: true
+---
+
+# Scroll Reveal — obligatorio (no negociable)
+
+El usuario exige que al bajar la página el contenido **aparezca con animación** (fade + translateY). Eso es lo que hace `Reveal` en `src/components/motion/reveal.tsx`.
+
+## Prohibido
+
+- Eliminar, comentar o dejar de usar `<Reveal>` en secciones principales: Horarios, Ayuda, Galería, Palabra del Día, Ubicación, Eventos, Ministerios, Escritura.
+- Cambiar `Reveal` a `opacity: 1` fijo sin animación “para simplificar”.
+- Quitar Framer Motion del scroll reveal.
+- “Arreglar” la página desactivando el reveal.
+
+## Permitido
+
+- Ajustar duración, delay, `y` o `amount` del viewport **sin** quitar el efecto.
+- Mantener el **failsafe** (timeout / force visible) para que NUNCA quede contenido atrapado en `opacity: 0`.
+- Respetar `prefers-reduced-motion`.
+
+## Si hay bug de contenido invisible
+
+Arreglar el observer/failsafe en `reveal.tsx`. **No** eliminar el reveal.
