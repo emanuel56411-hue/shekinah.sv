@@ -99,7 +99,7 @@ export function Horarios() {
   const statusLabel = isLive ? t("heroPanel.live") : t("heroPanel.next");
 
   return (
-    <section id="reuniones" className="section-padding section-surface relative overflow-hidden">
+    <section id="reuniones" className="section-padding section-surface relative">
       <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
         <Reveal>
           <p className="eyebrow">{t("reuniones.eyebrow")}</p>

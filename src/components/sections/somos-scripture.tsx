@@ -8,7 +8,7 @@ export function Scripture() {
 
   return (
     <section
-      className="section-surface relative overflow-hidden py-16 sm:py-20"
+      className="section-surface relative py-16 sm:py-20"
       aria-label={t("scripture.aria")}
     >
       <Reveal>
