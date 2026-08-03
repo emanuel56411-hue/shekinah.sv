@@ -223,6 +223,25 @@
     backdrop-filter: none;
   }
 
+  /* Sin cajas detrás del logo ni del ícono de menú */
+  .site-header-overlay img {
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .site-header-overlay .header-menu-trigger,
+  .site-header-overlay [data-slot="sheet-trigger"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    outline: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+  }
+
   #inicio {
     z-index: 0;
   }

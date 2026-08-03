@@ -194,11 +194,10 @@ export function SiteHeader() {
 
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
-                className="inline-flex items-center gap-2 bg-transparent p-2 text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-transparent hover:text-white/85 lg:hidden"
+                className="header-menu-trigger inline-flex items-center justify-center bg-transparent p-1.5 text-white shadow-none ring-0 hover:bg-transparent hover:text-white/85 lg:hidden"
                 aria-label={t("menu.openAria")}
               >
-                <Menu className="h-5 w-5" strokeWidth={2} />
-                <span className="hidden sm:inline text-sm font-medium">{t("menu.title")}</span>
+                <Menu className="h-6 w-6" strokeWidth={2} />
               </SheetTrigger>
 
               <SheetContent
