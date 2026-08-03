@@ -50,14 +50,14 @@ function ScheduleCard({
         <div
           className={cn(
             "flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] text-white sm:h-12 sm:w-12",
-            isHighlighted ? "bg-[#7a1f2e]" : "bg-[#65101a]"
+            isHighlighted ? "bg-[#4a4e57]" : "bg-[#3a3d45]"
           )}
         >
           <Icon className="h-5 w-5" strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
           {isHighlighted && statusLabel ? (
-            <span className="mb-1.5 inline-flex rounded-full bg-white/10 px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-[#f3c4cb]">
+            <span className="mb-1.5 inline-flex rounded-full bg-white/10 px-2.5 py-0.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white/85">
               {statusLabel}
             </span>
           ) : null}
@@ -132,7 +132,7 @@ export function Horarios() {
                 {SUNDAY_SCHEDULE.map((item) => {
                   const isNext = matchNextId(item.titleKey, nextId);
                   return (
-                    <div key={item.titleKey} className={cn(isNext && "text-[#f3c4cb]")}>
+                    <div key={item.titleKey} className={cn(isNext && "text-white")}>
                       <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
                       <time className="block text-sm font-medium text-white/75">{item.time}</time>
                     </div>

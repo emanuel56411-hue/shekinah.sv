@@ -55,7 +55,7 @@ export function Hero() {
           </p>
 
           <p
-            className="mx-auto mt-6 inline-flex items-center rounded-full bg-[#111A2E] px-3.5 py-1.5 text-[0.8rem] font-semibold tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]"
+            className="mx-auto mt-6 text-[0.85rem] font-semibold tracking-wide text-white/90 [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_14px_rgba(0,0,0,0.85)]"
             suppressHydrationWarning
           >
             {chipText}
@@ -66,8 +66,8 @@ export function Hero() {
               href="#reuniones"
               className={cn(
                 ctaBase,
-                "bg-[#111A2E] text-white shadow-[0_8px_20px_-6px_rgba(0,0,0,0.55)]",
-                "hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.6)] active:translate-y-0"
+                "bg-[#3a3d45] text-white shadow-[0_8px_20px_-6px_rgba(0,0,0,0.55)]",
+                "hover:-translate-y-0.5 hover:bg-[#454851] hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.6)] active:translate-y-0"
               )}
             >
               <Clock3 className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />

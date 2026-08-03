@@ -73,10 +73,10 @@ export function Ministerios() {
             const number = String(index + 1).padStart(2, "0");
             return (
               <Reveal key={ministry.id} delay={index * 0.04}>
-                <Card className="h-full gap-0 rounded-[14px] border border-white/15 bg-[#111A2E]/70 p-0 shadow-none ring-0">
+                <Card className="h-full gap-0 rounded-[14px] border border-white/18 bg-[#3a3d45]/55 p-0 shadow-none ring-0">
                   <CardContent className="flex h-full items-start gap-4 px-4 py-4 sm:px-5 sm:py-5">
                     <span
-                      className="font-heading text-3xl font-semibold leading-none text-white/80"
+                      className="font-heading text-3xl font-semibold leading-none text-white/70"
                       aria-hidden
                     >
                       {number}
