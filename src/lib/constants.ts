@@ -1,4 +1,4 @@
-export const COORDINATOR_PHONE = "50364465489";
+export const COORDINATOR_PHONE = "50378737213";
 
 export const LINKS = {
   maps: "https://www.google.com/maps/search/?api=1&query=QJRR%2BHH2%2C%20San%20Juan%20Opico",
