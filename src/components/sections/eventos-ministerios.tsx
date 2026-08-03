@@ -25,8 +25,8 @@ export function Eventos() {
           <h2 className="section-title mt-0">{t("eventos.title")}</h2>
         </Reveal>
 
-        <Reveal className="mt-8 max-w-lg">
-          <Card className="group relative h-full gap-0 overflow-hidden border-0 bg-transparent p-0 shadow-none ring-0">
+        <Reveal className="mx-auto mt-8 w-full max-w-lg">
+          <Card className="group relative min-h-[240px] gap-0 overflow-hidden border-0 bg-transparent p-0 shadow-none ring-0 sm:min-h-[280px]">
             <Image
               src="/assets/fotos/congregacion-culto-lateral.png"
               alt=""
@@ -35,7 +35,7 @@ export function Eventos() {
               sizes="(max-width: 768px) 100vw, 480px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" aria-hidden />
-            <CardContent className="relative z-10 flex min-h-[240px] flex-col gap-4 px-6 py-6">
+            <CardContent className="relative z-10 flex min-h-[240px] flex-col gap-4 px-5 py-5 sm:min-h-[280px] sm:px-6 sm:py-6">
               <span className="inline-flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#65101a] text-white">
                 <CalendarDays className="h-5 w-5" strokeWidth={1.5} />
               </span>

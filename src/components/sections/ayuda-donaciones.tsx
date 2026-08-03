@@ -27,13 +27,28 @@ export function AyudaDonaciones() {
   const [status, setStatus] = useState<{ type: "info" | "success" | "error"; text: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const [requests, setRequests] = useState<HelpRequest[]>([]);
-  const [boardLoading, setBoardLoading] = useState(true);
 
   useEffect(() => {
+    let cancelled = false;
+    const timer = window.setTimeout(() => {
+      if (!cancelled) setRequests([]);
+    }, 4000);
+
     fetchPublicHelpRequests()
-      .then(setRequests)
-      .catch(() => setRequests([]))
-      .finally(() => setBoardLoading(false));
+      .then((rows) => {
+        if (!cancelled) setRequests(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setRequests([]);
+      })
+      .finally(() => {
+        window.clearTimeout(timer);
+      });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
   }, []);
 
   const handleSubmit = async (event: FormEvent) => {
@@ -88,6 +103,89 @@ export function AyudaDonaciones() {
     setLoading(false);
   };
 
+  const showBoard = requests.length > 0;
+
+  const form = (
+    <Card id="help-form" className="border-0 bg-transparent shadow-none ring-0">
+      <CardContent className="p-0">
+        <form aria-label={t("ayuda.formAria")} className="space-y-4" onSubmit={handleSubmit}>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-white">{t("form.name")}</label>
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder={t("form.namePlaceholder")}
+              required
+              className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+            />
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-white">{t("ayuda.typeLabel")}</label>
+            <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
+              <SelectTrigger className="control-inset h-10 w-full rounded-[12px] border-black/15 bg-white text-[#1a1214]">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {HELP_TYPES.map((type) => (
+                  <SelectItem key={type.value} value={type.value}>
+                    {t(type.labelKey)}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-white">{t("form.message")}</label>
+            <Textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder={t("ayuda.messagePlaceholder")}
+              rows={4}
+              minLength={10}
+              maxLength={500}
+              required
+              className="control-inset rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+            />
+          </div>
+          <details className="rounded-[12px] bg-white/5 px-3 py-2">
+            <summary className="cursor-pointer text-sm font-medium text-white/85">
+              {t("ayuda.optionalFields")}
+            </summary>
+            <div className="mt-3 space-y-2 pb-1">
+              <label className="text-sm font-medium text-white">{t("ayuda.phoneLabel")}</label>
+              <Input
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder={t("ayuda.phonePlaceholder")}
+                autoComplete="tel"
+                className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+              />
+            </div>
+          </details>
+          <p className="text-xs text-white/65">{t("ayuda.privacyNote")}</p>
+          {status && (
+            <p
+              role="status"
+              className={`rounded-[12px] px-3 py-2 text-sm ${
+                status.type === "error"
+                  ? "bg-red-500/15 text-red-200"
+                  : status.type === "success"
+                    ? "bg-emerald-500/15 text-emerald-200"
+                    : "bg-white/10 text-white/85"
+              }`}
+            >
+              {status.text}
+            </p>
+          )}
+          <Button type="submit" disabled={loading} className="btn-skeuo h-11 w-full rounded-[12px]">
+            {loading ? t("ayuda.saving") : t("ayuda.submitBtn")}
+          </Button>
+        </form>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <section id="ayuda" className="section-padding">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -97,150 +195,49 @@ export function AyudaDonaciones() {
           <p className="section-desc">{t("ayuda.description")}</p>
         </Reveal>
 
-        <div className="mt-10 grid gap-8 lg:grid-cols-[1.1fr_1fr]">
-          <div className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              {boardLoading ? (
-                <>
-                  {[0, 1].map((key) => (
-                    <Card key={key} className="shadow-card" aria-busy="true" aria-label={t("ayuda.loadingRequests")}>
-                      <CardContent className="space-y-3 p-6">
-                        <div className="h-5 w-20 animate-pulse rounded bg-muted" />
-                        <div className="h-6 w-3/4 animate-pulse rounded bg-muted" />
-                        <div className="h-16 w-full animate-pulse rounded bg-muted" />
-                        <div className="h-8 w-32 animate-pulse rounded bg-muted" />
-                      </CardContent>
-                    </Card>
-                  ))}
-                </>
-              ) : requests.length > 0 ? (
-                requests.map((request) => (
-                  <Card key={request.id} className="border-0 bg-transparent shadow-none ring-0">
-                    <CardHeader className="pb-2">
-                      <Badge
-                        variant="secondary"
-                        className="w-fit border-0 bg-white/10 text-[#f3c4cb]"
-                      >
-                        {request.help_type}
-                      </Badge>
-                      <CardTitle className="text-lg text-white">
-                        {request.display_name || t("ayuda.anonymousName")}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <p className="text-sm text-white/75">{request.public_message}</p>
-                      <a
-                        href={buildWhatsappUrl(
-                          `Hola, quiero ayudar o consultar sobre esta solicitud: ${request.help_type} - ${request.public_message}`
-                        )}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={cn(
-                          buttonVariants({ size: "sm", variant: "outline" }),
-                          "gap-2 border-0 bg-white/10 text-white hover:bg-white/16"
-                        )}
-                      >
-                        <MessageCircle className="h-4 w-4" />
-                        {t("ayuda.coordinateBtn")}
-                      </a>
-                    </CardContent>
-                  </Card>
-                ))
-              ) : (
-                <Card className="col-span-full border-0 bg-transparent shadow-none ring-0">
-                  <CardContent className="flex flex-col items-center gap-2 p-8 text-center">
-                    <p className="font-heading text-lg font-semibold text-white">
-                      {t("ayuda.emptyRequestsTitle")}
-                    </p>
-                    <p className="max-w-md text-sm text-white/75">{t("ayuda.emptyRequestsDesc")}</p>
+        {showBoard ? (
+          <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-start">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
+              {requests.map((request) => (
+                <Card key={request.id} className="border-0 bg-transparent shadow-none ring-0">
+                  <CardHeader className="pb-2">
+                    <Badge variant="secondary" className="w-fit border-0 bg-white/10 text-[#f3c4cb]">
+                      {request.help_type}
+                    </Badge>
+                    <CardTitle className="text-lg text-white">
+                      {request.display_name || t("ayuda.anonymousName")}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-white/75">{request.public_message}</p>
+                    <a
+                      href={buildWhatsappUrl(
+                        `Hola, quiero ayudar o consultar sobre esta solicitud: ${request.help_type} - ${request.public_message}`
+                      )}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={cn(
+                        buttonVariants({ size: "sm", variant: "outline" }),
+                        "gap-2 border-0 bg-white/10 text-white hover:bg-white/16"
+                      )}
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      {t("ayuda.coordinateBtn")}
+                    </a>
                   </CardContent>
                 </Card>
-              )}
+              ))}
             </div>
 
+            <Reveal delay={0.1} className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-lg">
+              {form}
+            </Reveal>
           </div>
-
-          <Reveal delay={0.1}>
-            <Card id="help-form" className="border-0 shadow-none ring-0">
-              <CardContent className="p-6">
-                <form aria-label={t("ayuda.formAria")} className="space-y-4" onSubmit={handleSubmit}>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-white">{t("form.name")}</label>
-                    <Input
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      placeholder={t("form.namePlaceholder")}
-                      required
-                      className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-white">{t("ayuda.typeLabel")}</label>
-                    <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-                      <SelectTrigger className="control-inset h-10 w-full rounded-[12px] border-black/15 bg-white text-[#1a1214]">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {HELP_TYPES.map((type) => (
-                          <SelectItem key={type.value} value={type.value}>
-                            {t(type.labelKey)}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-white">{t("form.message")}</label>
-                    <Textarea
-                      value={message}
-                      onChange={(e) => setMessage(e.target.value)}
-                      placeholder={t("ayuda.messagePlaceholder")}
-                      rows={4}
-                      minLength={10}
-                      maxLength={500}
-                      required
-                      className="control-inset rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
-                    />
-                  </div>
-                  <details className="rounded-[12px] bg-white/5 px-3 py-2">
-                    <summary className="cursor-pointer text-sm font-medium text-white/85">
-                      {t("ayuda.optionalFields")}
-                    </summary>
-                    <div className="mt-3 space-y-2 pb-1">
-                      <label className="text-sm font-medium text-white">{t("ayuda.phoneLabel")}</label>
-                      <Input
-                        type="tel"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        placeholder={t("ayuda.phonePlaceholder")}
-                        autoComplete="tel"
-                        className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
-                      />
-                    </div>
-                  </details>
-                  <p className="text-xs text-white/65">{t("ayuda.privacyNote")}</p>
-                  {status && (
-                    <p
-                      role="status"
-                      className={`rounded-[12px] px-3 py-2 text-sm ${
-                        status.type === "error"
-                          ? "bg-red-500/15 text-red-200"
-                          : status.type === "success"
-                            ? "bg-emerald-500/15 text-emerald-200"
-                            : "bg-white/10 text-white/85"
-                      }`}
-                    >
-                      {status.text}
-                    </p>
-                  )}
-                  <Button type="submit" disabled={loading} className="btn-skeuo h-11 w-full rounded-[12px]">
-                    {loading ? t("ayuda.saving") : t("ayuda.submitBtn")}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+        ) : (
+          <Reveal delay={0.1} className="mt-10 w-full max-w-md">
+            {form}
           </Reveal>
-        </div>
+        )}
       </div>
     </section>
   );

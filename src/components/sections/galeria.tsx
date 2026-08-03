@@ -41,45 +41,35 @@ export function Galeria() {
           <p className="section-desc">{t("galeria.description")}</p>
         </Reveal>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
-          {GALLERY_ITEMS.map((item, itemIndex) => {
-            const isLarge = "large" in item && item.large;
-
-            return (
-              <Reveal
-                key={item.src}
-                delay={Math.min(itemIndex * 0.04, 0.2)}
-                className={isLarge ? "col-span-2 row-span-2" : undefined}
+        <div className="mt-10 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 md:gap-4">
+          {GALLERY_ITEMS.map((item, itemIndex) => (
+            <Reveal key={item.src} delay={Math.min(itemIndex * 0.04, 0.2)} className="min-w-0">
+              <button
+                type="button"
+                aria-label={t(item.titleKey)}
+                onClick={() => {
+                  setIndex(itemIndex);
+                  setOpen(true);
+                }}
+                className="group relative block aspect-square w-full overflow-hidden rounded-[12px] bg-black/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
               >
-                <button
-                  type="button"
-                  aria-label={t(item.titleKey)}
-                  onClick={() => {
-                    setIndex(itemIndex);
-                    setOpen(true);
-                  }}
-                  className="group relative block h-full w-full overflow-hidden rounded-[12px] bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
-                >
-                  <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
-                    <div className="absolute bottom-0 left-0 right-0 p-3 text-left text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-4">
-                      <span className="mb-1 inline-block rounded-[12px] bg-black/45 px-2 py-0.5 text-[0.65rem] font-medium text-white/95">
-                        {t(item.tagKey)}
-                      </span>
-                      <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
-                    </div>
-                  </div>
-                </button>
-              </Reveal>
-            );
-          })}
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  sizes="(max-width: 768px) 50vw, 33vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 text-left text-white opacity-100 transition-opacity duration-200 sm:p-4 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
+                  <span className="mb-1 inline-block rounded-[12px] bg-black/45 px-2 py-0.5 text-[0.65rem] font-medium text-white/95">
+                    {t(item.tagKey)}
+                  </span>
+                  <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
+                </div>
+              </button>
+            </Reveal>
+          ))}
         </div>
       </div>
 

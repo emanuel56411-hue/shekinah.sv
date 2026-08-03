@@ -95,14 +95,14 @@ export function Horarios() {
 
   return (
     <section id="reuniones" className="section-padding relative">
-      <div className="relative z-10 mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[1fr_1.2fr] lg:items-start">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <p className="eyebrow">{t("reuniones.eyebrow")}</p>
           <h2 className="section-title">{t("reuniones.title")}</h2>
           <p className="section-desc">{t("reuniones.description")}</p>
         </Reveal>
 
-        <div className="space-y-1">
+        <div className="mx-auto mt-8 grid max-w-4xl gap-x-8 gap-y-1 sm:grid-cols-3">
           {SCHEDULE.map((item, index) => {
             const isNext = matchNextId(item.titleKey, nextId);
             const Icon = SCHEDULE_ICONS[item.titleKey] ?? BookOpen;
@@ -121,25 +121,24 @@ export function Horarios() {
             );
           })}
 
-          <Reveal delay={0.24}>
+          <Reveal delay={0.24} className="sm:col-span-3">
             <ScheduleCard
               day={DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
               icon={Church}
               isHighlighted={sundayHasNext}
               statusLabel={statusLabel}
             >
-              {SUNDAY_SCHEDULE.map((item) => {
-                const isNext = matchNextId(item.titleKey, nextId);
-                return (
-                  <div
-                    key={item.titleKey}
-                    className={cn(isNext && "text-[#f3c4cb]")}
-                  >
-                    <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                    <time className="block text-sm font-medium text-white/75">{item.time}</time>
-                  </div>
-                );
-              })}
+              <div className="grid gap-3 sm:grid-cols-2 sm:gap-8">
+                {SUNDAY_SCHEDULE.map((item) => {
+                  const isNext = matchNextId(item.titleKey, nextId);
+                  return (
+                    <div key={item.titleKey} className={cn(isNext && "text-[#f3c4cb]")}>
+                      <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                      <time className="block text-sm font-medium text-white/75">{item.time}</time>
+                    </div>
+                  );
+                })}
+              </div>
             </ScheduleCard>
           </Reveal>
         </div>
