@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Reveal } from "@/components/motion/reveal";
 import { BibleIcon } from "@/components/icons/bible-icon";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -73,7 +74,7 @@ export function MensajePastor() {
     (post.post_type === "versiculo" || post.post_type === "mensaje" || post.post_type === "oracion");
 
   return (
-    <section id="palabra" className="section-padding section-surface" aria-label={t("pastor.aria")}>
+    <section id="palabra" className="section-padding section-surface-alt" aria-label={t("pastor.aria")}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <Reveal>
           <h2 className="section-title mt-0 text-center">{t("pastor.title")}</h2>
@@ -89,13 +90,11 @@ export function MensajePastor() {
                 <div className="mx-auto h-20 w-full max-w-xl animate-pulse rounded bg-white/10" />
               </div>
             ) : post ? (
-              <article className="text-center">
-                <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-[#f3c4cb]">
-                  {typeLabel}
-                </p>
+              <article className="surface-glass px-5 py-8 text-center sm:px-8">
+                <p className="text-[0.75rem] font-medium text-[#f3c4cb]">{typeLabel}</p>
 
                 {post.media_kind === "image" && post.media_url ? (
-                  <div className="relative mx-auto mt-6 aspect-[4/3] w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+                  <div className="relative mx-auto mt-6 aspect-[4/3] w-full max-w-xl overflow-hidden rounded-[12px] border border-white/15">
                     <Image
                       src={post.media_url}
                       alt={post.content || typeLabel}
@@ -108,7 +107,7 @@ export function MensajePastor() {
                 ) : null}
 
                 {videoSrc ? (
-                  <div className="relative mx-auto mt-6 aspect-video w-full max-w-xl overflow-hidden rounded-2xl border border-white/15 bg-black/40 shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
+                  <div className="relative mx-auto mt-6 aspect-video w-full max-w-xl overflow-hidden rounded-[12px] border border-white/15 bg-black/40">
                     <iframe
                       src={videoSrc}
                       title={post.content || typeLabel}
@@ -127,32 +126,38 @@ export function MensajePastor() {
                       {showQuoteMarks ? `“${post.content}”` : post.content}
                     </p>
                     {post.reference ? (
-                      <cite className="mt-7 block font-sans text-[0.75rem] font-semibold not-italic uppercase tracking-[0.22em] text-[#f3c4cb]">
+                      <cite className="mt-6 block font-sans text-sm font-medium not-italic text-[#f3c4cb]">
                         {post.reference}
                       </cite>
                     ) : null}
                   </blockquote>
                 ) : post.reference ? (
-                  <cite className="mt-7 block font-sans text-[0.75rem] font-semibold not-italic uppercase tracking-[0.22em] text-[#f3c4cb]">
+                  <cite className="mt-6 block font-sans text-sm font-medium not-italic text-[#f3c4cb]">
                     {post.reference}
                   </cite>
                 ) : null}
 
-                <time dateTime={post.published_at} className="mt-8 block text-sm text-white/65">
+                <time dateTime={post.published_at} className="mt-7 block text-sm text-white/65">
                   {formatPostDate(post.published_at, lang)}
                 </time>
               </article>
             ) : (
-              <div className="flex flex-col items-center gap-4 py-12 text-center">
+              <div className="surface-glass flex flex-col items-center gap-4 px-6 py-12 text-center">
                 <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/80">
                   <BibleIcon className="h-8 w-8" strokeWidth={1.5} />
                 </span>
                 <p className="font-heading text-xl font-semibold text-white sm:text-2xl">
                   {t("pastor.emptyTitle")}
                 </p>
-                <p className="max-w-md text-sm leading-relaxed text-white/65">
+                <p className="max-w-md text-sm leading-relaxed text-white/70">
                   {t("pastor.emptyDesc")}
                 </p>
+                <Link
+                  href="#ayuda"
+                  className="mt-1 inline-flex rounded-[12px] border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/16"
+                >
+                  {t("pastor.emptyCta")}
+                </Link>
               </div>
             )}
           </div>

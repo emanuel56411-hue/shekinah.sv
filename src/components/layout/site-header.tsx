@@ -4,11 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CalendarDays,
-  Clock,
   Heart,
-  Home,
   Images,
-  MapPin,
   Menu,
   MessageCircle,
   Phone,
@@ -39,20 +36,19 @@ type NavItem = {
   href: string;
   titleKey: string;
   icon: NavIcon;
-  external?: boolean;
   action?: "social";
 };
 
 const navItems: NavItem[] = [
-  { href: "#inicio", titleKey: "nav.inicio", icon: Home },
   { href: "#palabra", titleKey: "nav.palabra", icon: BibleIcon },
-  { href: "#reuniones", titleKey: "nav.horarios", icon: Clock },
-  { href: "#ubicacion", titleKey: "nav.ubicacion", icon: MapPin },
   { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },
   { href: "#redes", titleKey: "nav.redes", icon: Share2, action: "social" },
   { href: "#ministerios", titleKey: "nav.ministerios", icon: Users },
   { href: "#galeria", titleKey: "nav.galeria", icon: Images },
 ];
+
+const navLinkClass =
+  "rounded-[12px] px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/12 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah";
 
 function getScrollY() {
   return (
@@ -87,9 +83,7 @@ export function SiteHeader() {
 
   useEffect(() => {
     const syncHash = () => {
-      if (window.location.hash === "#redes") {
-        setSocialOpen(true);
-      }
+      if (window.location.hash === "#redes") setSocialOpen(true);
     };
     syncHash();
     window.addEventListener("hashchange", syncHash);
@@ -104,7 +98,6 @@ export function SiteHeader() {
       const current = getScrollY();
       const delta = current - lastScrollY.current;
 
-      // Menú abierto o cerca del tope: siempre visible
       if (open || current < 72) {
         setHidden(false);
       } else if (delta > 6) {
@@ -163,7 +156,7 @@ export function SiteHeader() {
               alt="Logo Shekinah"
               width={64}
               height={64}
-              className="h-12 w-12 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] ring-1 ring-white/70 sm:h-14 sm:w-14"
+              className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1 shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] ring-1 ring-white/70 sm:h-14 sm:w-14"
               priority
             />
             <span className="min-w-0 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.65)]">
@@ -175,157 +168,141 @@ export function SiteHeader() {
           </Link>
 
           <div className="ml-auto flex items-center gap-2">
-          <nav
-            aria-label={t("header.navAria")}
-            className="hidden items-center gap-0.5 lg:flex"
-          >
-            {navItems
-              .filter((item) => item.href !== "#inicio")
-              .map((item) =>
+            <nav aria-label={t("header.navAria")} className="hidden items-center gap-0.5 lg:flex">
+              {navItems.map((item) =>
                 item.action === "social" ? (
-                  <button
-                    key={item.href}
-                    type="button"
-                    onClick={openSocial}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                  >
+                  <button key={item.href} type="button" onClick={openSocial} className={navLinkClass}>
                     {t(item.titleKey)}
                   </button>
                 ) : (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                  >
+                  <Link key={item.href} href={item.href} className={navLinkClass}>
                     {t(item.titleKey)}
                   </Link>
                 )
               )}
-            <button
-              type="button"
-              onClick={openCalendar}
-              className="rounded-full px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-            >
-              {t("nav.calendario")}
-            </button>
-          </nav>
+              <button type="button" onClick={openCalendar} className={navLinkClass}>
+                {t("nav.calendario")}
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang(lang === "es" ? "en" : "es")}
+                className="ml-1 rounded-[12px] border border-white/25 px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
+              >
+                {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
+              </button>
+            </nav>
 
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger
-              className={cn(
-                buttonVariants({ variant: "outline", size: "sm" }),
-                "surface-glass gap-2 border-white/30 text-white [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:text-white lg:hidden"
-              )}
-              aria-label={t("menu.openAria")}
-            >
-              <Menu className="h-4 w-4" />
-              <span className="hidden sm:inline">{t("menu.title")}</span>
-            </SheetTrigger>
+            <Sheet open={open} onOpenChange={setOpen}>
+              <SheetTrigger
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "sm" }),
+                  "surface-glass gap-2 border-white/30 text-white [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:text-white lg:hidden"
+                )}
+                aria-label={t("menu.openAria")}
+              >
+                <Menu className="h-4 w-4" />
+                <span className="hidden sm:inline">{t("menu.title")}</span>
+              </SheetTrigger>
 
-            <SheetContent
-              side="left"
-              showCloseButton
-              className="flex w-[min(100%,20rem)] flex-col gap-0 border-r border-white/20 bg-black/90 p-0 text-white shadow-[8px_0_40px_-12px_rgba(0,0,0,0.65),inset_-1px_0_0_rgba(255,255,255,0.08)] backdrop-blur-xl sm:max-w-xs [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
-            >
-              <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
-                <div className="flex items-center gap-3 pr-8">
-                  <Image
-                    src="/assets/logo-shekinah.png"
-                    alt="Logo Shekinah"
-                    width={48}
-                    height={48}
-                    className="h-12 w-12 shrink-0 rounded-xl bg-white object-contain p-1"
-                  />
-                  <div>
-                    <SheetTitle className="font-heading text-base font-semibold text-white">
-                      Shekinah
-                    </SheetTitle>
-                    <p className="text-xs text-white/60">San Juan Opico</p>
+              <SheetContent
+                side="left"
+                showCloseButton
+                className="flex w-[min(100%,20rem)] flex-col gap-0 border-r border-white/20 bg-black/90 p-0 text-white shadow-[8px_0_40px_-12px_rgba(0,0,0,0.65)] backdrop-blur-xl sm:max-w-xs [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
+              >
+                <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
+                  <div className="flex items-center gap-3 pr-8">
+                    <Image
+                      src="/assets/logo-shekinah.png"
+                      alt="Logo Shekinah"
+                      width={48}
+                      height={48}
+                      className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1"
+                    />
+                    <div>
+                      <SheetTitle className="font-heading text-base font-semibold text-white">
+                        Shekinah
+                      </SheetTitle>
+                      <p className="text-xs text-white/60">San Juan Opico</p>
+                    </div>
                   </div>
-                </div>
-              </SheetHeader>
+                </SheetHeader>
 
-              <nav aria-label={t("menu.title")} className="flex-1 overflow-y-auto px-3 py-4">
-                <ul className="space-y-1">
-                  {navItems.map((item) => {
-                    const Icon = item.icon;
-                    if (item.action === "social") {
+                <nav aria-label={t("menu.title")} className="flex-1 overflow-y-auto px-3 py-4">
+                  <ul className="space-y-1">
+                    {navItems.map((item) => {
+                      const Icon = item.icon;
+                      if (item.action === "social") {
+                        return (
+                          <li key={item.href}>
+                            <button
+                              type="button"
+                              onClick={openSocial}
+                              className="group flex w-full items-center gap-4 rounded-[12px] px-4 py-3 text-left text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10"
+                            >
+                              <Icon className="h-[1.35rem] w-[1.35rem] shrink-0" strokeWidth={1.75} />
+                              <span>{t(item.titleKey)}</span>
+                            </button>
+                          </li>
+                        );
+                      }
                       return (
                         <li key={item.href}>
-                          <button
-                            type="button"
-                            onClick={openSocial}
-                            className="group flex w-full items-center gap-4 rounded-full px-4 py-3 text-left text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                          <Link
+                            href={item.href}
+                            onClick={closeMenu}
+                            className="group flex items-center gap-4 rounded-[12px] px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10"
                           >
-                            <Icon className="h-[1.35rem] w-[1.35rem] shrink-0 text-white" strokeWidth={1.75} />
+                            <Icon className="h-[1.35rem] w-[1.35rem] shrink-0" strokeWidth={1.75} />
                             <span>{t(item.titleKey)}</span>
-                          </button>
+                          </Link>
                         </li>
                       );
-                    }
-                    return (
-                      <li key={item.href}>
-                        <Link
-                          href={item.href}
-                          onClick={closeMenu}
-                          className="group flex items-center gap-4 rounded-full px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                        >
-                          <Icon className="h-[1.35rem] w-[1.35rem] shrink-0 text-white" strokeWidth={1.75} />
-                          <span>{t(item.titleKey)}</span>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                  <li>
-                    <button
-                      type="button"
-                      onClick={handleOpenCalendar}
-                      className="group flex w-full items-center gap-4 rounded-full px-4 py-3 text-left text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                    >
-                      <CalendarDays className="h-[1.35rem] w-[1.35rem] shrink-0 text-white" strokeWidth={1.75} />
-                      <span>{t("nav.calendario")}</span>
-                    </button>
-                  </li>
-                </ul>
-              </nav>
+                    })}
+                    <li>
+                      <button
+                        type="button"
+                        onClick={handleOpenCalendar}
+                        className="group flex w-full items-center gap-4 rounded-[12px] px-4 py-3 text-left text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10"
+                      >
+                        <CalendarDays className="h-[1.35rem] w-[1.35rem] shrink-0" strokeWidth={1.75} />
+                        <span>{t("nav.calendario")}</span>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
 
-              <div className="mt-auto space-y-3 border-t border-white/10 p-4">
-                <a
-                  href={buildWhatsappUrl()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={closeMenu}
-                  className="btn-skeuo flex w-full items-center justify-center gap-2 rounded-full px-5 py-3.5 text-sm font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-                >
-                  <MessageCircle className="h-5 w-5" />
-                  {t("menu.whatsappCta")}
-                </a>
-
-                <p className="px-1 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-white/50">
-                  {t("menu.settings")}
-                </p>
-
-                <a
-                  href={buildTelUrl()}
-                  onClick={closeMenu}
-                  aria-label={t("menu.callAria")}
-                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white px-4 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                >
-                  <Phone className="h-4 w-4" strokeWidth={1.75} />
-                  {t("menu.call")}
-                </a>
-
-                <button
-                  type="button"
-                  onClick={() => setLang(lang === "es" ? "en" : "es")}
-                  className="flex w-full items-center justify-center gap-2 rounded-full border border-white/20 px-3 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                  aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
-                >
-                  {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
-                </button>
-              </div>
-            </SheetContent>
-          </Sheet>
+                <div className="mt-auto space-y-3 border-t border-white/10 p-4">
+                  <a
+                    href={buildWhatsappUrl()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={closeMenu}
+                    className="btn-skeuo flex w-full items-center justify-center gap-2 rounded-[12px] px-5 py-3.5 text-sm font-bold"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    {t("menu.whatsappCta")}
+                  </a>
+                  <a
+                    href={buildTelUrl()}
+                    onClick={closeMenu}
+                    aria-label={t("menu.callAria")}
+                    className="flex w-full items-center justify-center gap-2 rounded-[12px] border border-white/25 bg-white px-4 py-3 text-sm font-semibold text-black"
+                  >
+                    <Phone className="h-4 w-4" strokeWidth={1.75} />
+                    {t("menu.call")}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setLang(lang === "es" ? "en" : "es")}
+                    className="flex w-full items-center justify-center gap-2 rounded-[12px] border border-white/20 px-3 py-2.5 text-sm font-medium text-white hover:bg-white/10"
+                    aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
+                  >
+                    {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
+                  </button>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </header>

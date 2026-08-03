@@ -136,7 +136,7 @@
   }
 
   .eyebrow {
-    @apply text-[0.68rem] font-semibold uppercase tracking-[0.22em];
+    @apply text-[0.72rem] font-semibold tracking-[0.08em];
     color: #f3c4cb;
     text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
   }
@@ -145,8 +145,40 @@
   .section-surface-alt,
   .section-overlay-dark {
     @apply relative;
-    background-color: transparent;
     background-image: none;
+  }
+
+  /* Pausas visuales entre bloques (sin pelear con el fondo) */
+  .section-surface {
+    background-color: rgba(6, 4, 6, 0.18);
+  }
+
+  .section-surface-alt {
+    background-color: rgba(6, 4, 6, 0.36);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
+  .hero-copy-veil {
+    border-radius: var(--radius);
+    background: radial-gradient(
+      ellipse at center,
+      rgba(6, 4, 6, 0.42) 0%,
+      rgba(6, 4, 6, 0.18) 55%,
+      rgba(6, 4, 6, 0) 100%
+    );
+  }
+
+  .map-frame__iframe {
+    filter: grayscale(0.35) brightness(0.72) contrast(1.05) saturate(0.7);
+  }
+
+  .map-frame__veil {
+    background: linear-gradient(
+      to top,
+      rgba(6, 4, 6, 0.45) 0%,
+      rgba(6, 4, 6, 0.12) 45%,
+      rgba(6, 4, 6, 0.2) 100%
+    );
   }
 
   .site-bg {
@@ -226,7 +258,7 @@
     --border: 350 10% 84%;
     --input: 350 10% 78%;
     --ring: 350 73% 23%;
-    --radius: 14px;
+    --radius: 12px;
     --glass-bg: rgba(10, 8, 12, 0.48);
     --glass-border: rgba(255, 255, 255, 0.16);
     --glass-blur: 16px;
@@ -314,10 +346,13 @@
       inset 0 0 0 1px rgba(0, 0, 0, 0.02);
   }
 
-  /* Superficies unificadas en glass (excepto ministerios, que mantienen su estilo) */
+  /* Un solo sistema: glass oscuro */
   #ubicacion [data-slot="card"],
   #ayuda [data-slot="card"],
-  #redes [data-slot="card"] {
+  #redes [data-slot="card"],
+  #ministerios [data-slot="card"],
+  #eventos [data-slot="card"],
+  #palabra [data-slot="card"] {
     border: 1px solid var(--glass-border);
     border-radius: var(--radius);
     background: var(--glass-bg);
@@ -329,21 +364,11 @@
 
   #ubicacion [data-slot="card"]:hover,
   #ayuda [data-slot="card"]:hover,
-  #redes [data-slot="card"]:hover {
+  #redes [data-slot="card"]:hover,
+  #ministerios [data-slot="card"]:hover,
+  #eventos [data-slot="card"]:hover {
     transform: translateY(-2px);
     box-shadow: var(--spatial-shadow-hover);
-  }
-
-  #ministerios [data-slot="card"] {
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    border-radius: var(--radius);
-    background: rgba(255, 252, 248, 0.96);
-    box-shadow: var(--porcelain-shadow);
-  }
-
-  #ministerios [data-slot="card"]:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--porcelain-shadow-hover);
   }
 
   #ubicacion a.group {

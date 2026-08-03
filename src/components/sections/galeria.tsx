@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -16,11 +15,6 @@ export function Galeria() {
   const [index, setIndex] = useState(0);
 
   const current = GALLERY_ITEMS[index];
-
-  const showImage = (nextIndex: number) => {
-    const total = GALLERY_ITEMS.length;
-    setIndex((nextIndex + total) % total);
-  };
 
   useEffect(() => {
     if (!open) return;
@@ -43,8 +37,7 @@ export function Galeria() {
     <section id="galeria" className="section-padding section-surface">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
-          <p className="eyebrow">{t("galeria.eyebrow")}</p>
-          <h2 className="section-title">{t("galeria.title")}</h2>
+          <h2 className="section-title mt-0">{t("galeria.title")}</h2>
           <p className="section-desc">{t("galeria.description")}</p>
         </Reveal>
 
@@ -75,11 +68,11 @@ export function Galeria() {
                       className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                       sizes={isLarge ? "(max-width: 768px) 100vw, 50vw" : "(max-width: 768px) 50vw, 25vw"}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 text-left text-white">
-                      <Badge className="mb-2 rounded-md border border-white/15 bg-black/35 px-2.5 py-1.5 text-[0.68rem] font-medium text-white/95 shadow-none backdrop-blur-[8px] [text-shadow:0_1px_2px_rgba(0,0,0,0.5)]">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
+                    <div className="absolute bottom-0 left-0 right-0 p-3 text-left text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 sm:p-4">
+                      <span className="mb-1 inline-block rounded-[12px] bg-black/45 px-2 py-0.5 text-[0.65rem] font-medium text-white/95">
                         {t(item.tagKey)}
-                      </Badge>
+                      </span>
                       <strong className="block text-sm font-semibold sm:text-base">{t(item.titleKey)}</strong>
                     </div>
                   </div>
@@ -92,55 +85,56 @@ export function Galeria() {
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
-          className="max-w-5xl border-0 bg-transparent p-2 shadow-none ring-0 sm:p-4"
-          aria-label={t("galeria.viewerAria")}
           showCloseButton={false}
+          className="max-w-4xl border-white/15 bg-black/90 p-0 text-white sm:max-w-4xl"
+          overlayClassName="bg-black/80"
         >
-          <DialogTitle className="sr-only">{t(current.titleKey)}</DialogTitle>
-          <div className="relative flex items-center justify-center">
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute left-2 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
-              onClick={() => showImage(index - 1)}
-              aria-label="Foto anterior"
-            >
-              <ChevronLeft />
-            </Button>
-
-            <div className="relative mx-12 aspect-[3/4] w-full max-w-3xl sm:aspect-[4/3]">
-              <Image
-                src={current.src}
-                alt={current.alt}
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 80vw"
-                priority
-              />
-            </div>
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              className="absolute right-2 top-1/2 z-10 -translate-y-1/2 text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
-              onClick={() => showImage(index + 1)}
-              aria-label="Foto siguiente"
-            >
-              <ChevronRight />
-            </Button>
+          <DialogTitle className="sr-only">{t("galeria.viewerAria")}</DialogTitle>
+          <div className="relative aspect-[4/3] w-full sm:aspect-video">
+            <Image
+              src={current.src}
+              alt={current.alt}
+              fill
+              className="object-contain"
+              sizes="100vw"
+              priority
+            />
           </div>
-          <p className="text-center text-sm text-white/90">{t(current.titleKey)}</p>
-          <Button
-            type="button"
-            variant="ghost"
-            className="mx-auto text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white"
-            onClick={() => setOpen(false)}
-          >
-            <X className="mr-2 h-4 w-4" />
-            {t("galeria.closeBtn")}
-          </Button>
+          <div className="flex items-center justify-between gap-3 border-t border-white/10 px-4 py-3">
+            <p className="min-w-0 truncate text-sm font-medium">{t(current.titleKey)}</p>
+            <div className="flex shrink-0 items-center gap-2">
+              <Button
+                type="button"
+                size="icon-sm"
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+                onClick={() => setIndex((i) => (i - 1 + GALLERY_ITEMS.length) % GALLERY_ITEMS.length)}
+                aria-label="Anterior"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </Button>
+              <Button
+                type="button"
+                size="icon-sm"
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+                onClick={() => setIndex((i) => (i + 1) % GALLERY_ITEMS.length)}
+                aria-label="Siguiente"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+              <Button
+                type="button"
+                size="icon-sm"
+                variant="ghost"
+                className="text-white hover:bg-white/10"
+                onClick={() => setOpen(false)}
+                aria-label={t("galeria.closeAria")}
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </DialogContent>
       </Dialog>
     </section>

@@ -44,7 +44,7 @@ function ScheduleCard({
       )}
     >
       <div className="relative z-10 flex items-start gap-3 sm:gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#65101a] text-white sm:h-12 sm:w-12">
+        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#65101a] text-white sm:h-12 sm:w-12">
           <CalendarDays className="h-5 w-5 sm:h-5 sm:w-5" strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
@@ -95,7 +95,7 @@ export function Horarios() {
           <h2 className="section-title">{t("reuniones.title")}</h2>
           <p className="section-desc">{t("reuniones.description")}</p>
           {nextDayKey ? (
-            <p className="mt-3 text-sm font-medium text-[#f3c4cb]">
+            <p className="mt-4 inline-flex rounded-[12px] border border-white/15 bg-black/35 px-3 py-1.5 text-sm font-medium text-white">
               {statusLabel}: {t(nextDayKey)}
             </p>
           ) : null}

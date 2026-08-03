@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { ExternalLink } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { LINKS } from "@/lib/constants";
@@ -41,8 +42,8 @@ export function Ubicacion() {
     <section id="ubicacion" className="section-padding section-surface">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-start">
         <Reveal>
-          <p className="eyebrow">{t("ubicacion.eyebrow")}</p>
-          <h2 className="section-title">{t("ubicacion.title")}</h2>
+          <h2 className="section-title mt-0">{t("ubicacion.title")}</h2>
+          <p className="section-desc">{t("ubicacion.description")}</p>
           <div className="mt-8 grid gap-3 sm:grid-cols-2">
             {actions.map((action) => (
               <a
@@ -50,13 +51,11 @@ export function Ubicacion() {
                 href={action.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={cn(
-                  "surface-glass group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                )}
+                className="surface-glass group flex items-center gap-3 p-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-white/15",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[12px] border border-white/15",
                     action.iconWrapClass
                   )}
                 >
@@ -79,15 +78,25 @@ export function Ubicacion() {
 
         <Reveal delay={0.08}>
           <div className="surface-glass overflow-hidden">
-            <div className="relative aspect-[4/3] w-full bg-[#0a1218]">
+            <div className="map-frame relative aspect-[4/3] w-full bg-[#0a1218]">
               <iframe
                 title={t("ubicacion.title")}
                 src={LINKS.mapsEmbed}
-                className="absolute inset-0 h-full w-full border-0"
+                className="map-frame__iframe absolute inset-0 h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
+              <div className="map-frame__veil pointer-events-none absolute inset-0" aria-hidden />
+              <a
+                href={LINKS.maps}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-[12px] border border-white/25 bg-black/65 px-3 py-2 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+              >
+                {t("ubicacion.openMaps")}
+                <ExternalLink className="h-3.5 w-3.5" />
+              </a>
             </div>
             <div className="border-t border-white/15 px-5 py-4">
               <p className="font-heading text-xl font-semibold text-white">QJRR+HH2</p>

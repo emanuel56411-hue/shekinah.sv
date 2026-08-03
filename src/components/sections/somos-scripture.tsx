@@ -16,7 +16,7 @@ export function Scripture() {
           <p className="font-heading text-[1.5rem] font-medium leading-snug tracking-tight text-balance text-white sm:text-[1.85rem] md:text-[2.05rem] md:leading-[1.35]">
             “{t("scripture.verseText")}”
           </p>
-          <cite className="mt-7 block font-sans text-[0.7rem] font-semibold not-italic uppercase tracking-[0.22em] text-[#f3c4cb]">
+          <cite className="mt-7 block font-sans text-sm font-medium not-italic text-[#f3c4cb]">
             {t("scripture.verseRef")}
           </cite>
         </blockquote>

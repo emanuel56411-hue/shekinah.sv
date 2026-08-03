@@ -37,7 +37,7 @@ export const EVENTS = [
 
 export const GALLERY_ITEMS = [
   {
-    src: "/assets/fotos/congregacion-culto.webp",
+    src: "/assets/fotos/congregacion-culto-opt.webp",
     alt: "Congregación reunida durante un culto",
     tagKey: "galeria.item1Tag",
     titleKey: "galeria.item1Title",
@@ -46,7 +46,7 @@ export const GALLERY_ITEMS = [
     height: 732,
   },
   {
-    src: "/assets/fotos/ministerio-ninos.webp",
+    src: "/assets/fotos/ministerio-ninos-opt.webp",
     alt: "Niños participando en actividad de la iglesia",
     tagKey: "galeria.item2Tag",
     titleKey: "galeria.item2Title",
@@ -54,7 +54,7 @@ export const GALLERY_ITEMS = [
     height: 576,
   },
   {
-    src: "/assets/fotos/aniversario-shekinah.webp",
+    src: "/assets/fotos/aniversario-shekinah-opt.webp",
     alt: "Celebración de aniversario de Iglesia Bautista Shekinah",
     tagKey: "galeria.item3Tag",
     titleKey: "galeria.item3Title",
@@ -62,15 +62,15 @@ export const GALLERY_ITEMS = [
     height: 1600,
   },
   {
-    src: "/assets/fotos/liderazgo-pastoral.webp",
+    src: "/assets/fotos/liderazgo-pastoral-opt.webp",
     alt: "Liderazgo pastoral de Iglesia Bautista Shekinah",
     tagKey: "galeria.item4Tag",
     titleKey: "galeria.item4Title",
-    width: 1600,
-    height: 1353,
+    width: 1400,
+    height: 1184,
   },
   {
-    src: "/assets/fotos/predicacion-shekinah.webp",
+    src: "/assets/fotos/predicacion-shekinah-opt.webp",
     alt: "Predicación en Iglesia Bautista Shekinah",
     tagKey: "galeria.item5Tag",
     titleKey: "galeria.item5Title",
@@ -78,7 +78,7 @@ export const GALLERY_ITEMS = [
     height: 1600,
   },
   {
-    src: "/assets/fotos/predicacion-horarios.webp",
+    src: "/assets/fotos/predicacion-horarios-opt.webp",
     alt: "Enseñanza bíblica en Iglesia Bautista Shekinah",
     tagKey: "galeria.item6Tag",
     titleKey: "galeria.item6Title",
@@ -86,7 +86,7 @@ export const GALLERY_ITEMS = [
     height: 1950,
   },
   {
-    src: "/assets/fotos/presentacion-ninos.webp",
+    src: "/assets/fotos/presentacion-ninos-opt.webp",
     alt: "Niños participando en una presentación bíblica",
     tagKey: "galeria.item7Tag",
     titleKey: "galeria.item7Title",

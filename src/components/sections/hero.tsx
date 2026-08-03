@@ -1,8 +1,10 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Clock3 } from "lucide-react";
 import { useLanguage } from "@/components/providers/language-provider";
+import { getUpcomingServices } from "@/lib/schedule";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -14,62 +16,80 @@ function WhatsappIcon({ className }: { className?: string }) {
   );
 }
 
-const textReadable =
-  "[text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.55)]";
+const ctaBase =
+  "inline-flex h-12 w-full min-w-[190px] items-center justify-center gap-2.5 rounded-[12px] px-8 font-sans text-[0.95rem] font-semibold transition-all duration-200 ease-out sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40";
 
 export function Hero() {
   const { t } = useLanguage();
+  const [nextLabel, setNextLabel] = useState<string | null>(null);
+
+  useEffect(() => {
+    const refresh = () => {
+      const [next] = getUpcomingServices(new Date(), 1);
+      if (!next) {
+        setNextLabel(null);
+        return;
+      }
+      const day = t(next.dayKey);
+      setNextLabel(
+        next.isLive
+          ? `${t("heroPanel.live")} · ${next.timeLabel}`
+          : `${t("hero.nextChip")} ${day} ${next.timeLabel}`
+      );
+    };
+    refresh();
+    const id = window.setInterval(refresh, 60_000);
+    return () => window.clearInterval(id);
+  }, [t]);
 
   return (
     <section id="inicio" className="section-surface relative min-h-[88vh] sm:min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[92vh] sm:px-6">
-        <p
-          className={cn(
-            "mb-5 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-white sm:text-sm",
-            textReadable
-          )}
-        >
-          San Juan Opico, El Salvador
-        </p>
-        <h1 className={cn("max-w-4xl text-white", textReadable)}>
-          Iglesia Bautista Shekinah
-        </h1>
-        <p
-          className={cn(
-            "mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white sm:mt-6 sm:text-xl",
-            textReadable
-          )}
-        >
-          {t("hero.description")}
-        </p>
-        <div className="mt-9 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:gap-3.5">
-          <Link
-            href="#reuniones"
-            className={cn(
-              "inline-flex w-full min-w-[190px] items-center justify-center gap-2.5 rounded-[10px] px-9 py-4 font-sans text-base font-semibold text-white transition-all duration-200 ease-out",
-              "bg-gradient-to-b from-[#7a1f2e] to-[#5a1220] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.55)]",
-              "hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.6)] active:translate-y-0",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto"
-            )}
-          >
-            <Clock3 className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />
-            {t("hero.ctaPrimary")}
-          </Link>
-          <a
-            href={buildWhatsappUrl()}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              "inline-flex w-full min-w-[168px] items-center justify-center gap-2.5 rounded-[10px] border border-[#25D366]/70 bg-[#0d1f14]/72 px-7 py-[14px] font-sans text-[0.92rem] font-semibold text-[#e8fff0] backdrop-blur-sm transition-all duration-200 ease-out",
-              "shadow-[0_4px_14px_-4px_rgba(0,0,0,0.45)] hover:-translate-y-0.5 hover:border-[#25D366]/90 hover:bg-[#0d1f14]/85 hover:shadow-[0_8px_18px_-6px_rgba(0,0,0,0.5)] active:translate-y-0",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto",
-              textReadable
-            )}
-          >
-            <WhatsappIcon className="h-[1.1rem] w-[1.1rem] shrink-0 text-[#25D366]" />
-            {t("hero.ctaWhatsapp")}
-          </a>
+        <div className="hero-copy-veil w-full max-w-3xl px-4 py-8 sm:px-8 sm:py-10">
+          <h1 className="font-heading text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.75),0_8px_28px_rgba(0,0,0,0.55)] sm:text-[3.1rem] md:text-[3.4rem]">
+            {t("hero.title")}
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8),0_4px_16px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-xl">
+            {t("hero.description")}
+          </p>
+
+          {nextLabel ? (
+            <p className="mx-auto mt-6 inline-flex items-center rounded-[12px] border border-white/20 bg-black/45 px-3.5 py-1.5 text-[0.78rem] font-medium text-white shadow-[0_4px_16px_-8px_rgba(0,0,0,0.55)] backdrop-blur-sm">
+              {nextLabel}
+            </p>
+          ) : null}
+
+          <div className="mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mx-auto sm:mt-9 sm:max-w-none sm:flex-row sm:items-center sm:gap-3.5">
+            <Link
+              href="#reuniones"
+              className={cn(
+                ctaBase,
+                "bg-gradient-to-b from-[#7a1f2e] to-[#5a1220] text-white shadow-[0_8px_20px_-6px_rgba(0,0,0,0.55)]",
+                "hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.6)] active:translate-y-0"
+              )}
+            >
+              <Clock3 className="h-5 w-5 shrink-0" strokeWidth={2} aria-hidden />
+              {t("hero.ctaPrimary")}
+            </Link>
+            <a
+              href={buildWhatsappUrl()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={cn(
+                ctaBase,
+                "border border-white/55 bg-white/10 text-white backdrop-blur-sm",
+                "hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/16 active:translate-y-0"
+              )}
+            >
+              <WhatsappIcon className="h-[1.05rem] w-[1.05rem] shrink-0 text-[#25D366]" />
+              {t("hero.ctaWhatsapp")}
+            </a>
+          </div>
         </div>
+
+        <p className="mt-8 max-w-lg text-sm leading-relaxed text-white/80 [text-shadow:0_1px_8px_rgba(0,0,0,0.65)] sm:mt-10">
+          {t("anniversary.text")}
+        </p>
       </div>
     </section>
   );

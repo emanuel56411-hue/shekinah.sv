@@ -61,7 +61,13 @@ export function AyudaDonaciones() {
     const contact = phone.trim() || t("ayuda.noContact");
     const whatsappMessage = `Hola, soy ${name.trim()}. Mi contacto es ${contact}. Solicito ayuda de tipo ${helpType}: ${message.trim()}`;
 
-    openWhatsapp(whatsappMessage);
+    try {
+      openWhatsapp(whatsappMessage);
+    } catch {
+      setStatus({ type: "error", text: t("ayuda.whatsappError") });
+      setLoading(false);
+      return;
+    }
 
     const saved = await saveHelpRequest({
       name: name.trim(),
@@ -165,24 +171,13 @@ export function AyudaDonaciones() {
                       onChange={(e) => setName(e.target.value)}
                       placeholder={t("form.namePlaceholder")}
                       required
-                      className="control-inset h-10 border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-white">{t("ayuda.phoneLabel")}</label>
-                    <Input
-                      type="tel"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      placeholder={t("ayuda.phonePlaceholder")}
-                      autoComplete="tel"
-                      className="control-inset h-10 border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+                      className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-white">{t("ayuda.typeLabel")}</label>
                     <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-                      <SelectTrigger className="control-inset h-10 w-full border-black/15 bg-white text-[#1a1214]">
+                      <SelectTrigger className="control-inset h-10 w-full rounded-[12px] border-black/15 bg-white text-[#1a1214]">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -204,19 +199,41 @@ export function AyudaDonaciones() {
                       minLength={10}
                       maxLength={500}
                       required
-                      className="control-inset border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+                      className="control-inset rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
                     />
                   </div>
+                  <details className="rounded-[12px] border border-white/15 bg-white/5 px-3 py-2">
+                    <summary className="cursor-pointer text-sm font-medium text-white/85">
+                      {t("ayuda.optionalFields")}
+                    </summary>
+                    <div className="mt-3 space-y-2 pb-1">
+                      <label className="text-sm font-medium text-white">{t("ayuda.phoneLabel")}</label>
+                      <Input
+                        type="tel"
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
+                        placeholder={t("ayuda.phonePlaceholder")}
+                        autoComplete="tel"
+                        className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+                      />
+                    </div>
+                  </details>
                   <p className="text-xs text-white/65">{t("ayuda.privacyNote")}</p>
                   {status && (
                     <p
                       role="status"
-                      className={`text-sm ${status.type === "error" ? "text-destructive" : status.type === "success" ? "text-green-600 " : "text-muted-foreground"}`}
+                      className={`rounded-[12px] px-3 py-2 text-sm ${
+                        status.type === "error"
+                          ? "bg-red-500/15 text-red-200"
+                          : status.type === "success"
+                            ? "bg-emerald-500/15 text-emerald-200"
+                            : "bg-white/10 text-white/85"
+                      }`}
                     >
                       {status.text}
                     </p>
                   )}
-                  <Button type="submit" disabled={loading} className="btn-skeuo h-11 w-full">
+                  <Button type="submit" disabled={loading} className="btn-skeuo h-11 w-full rounded-[12px]">
                     {loading ? t("ayuda.saving") : t("ayuda.submitBtn")}
                   </Button>
                 </form>
