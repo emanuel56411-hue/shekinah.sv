@@ -9,7 +9,7 @@ export function Redes() {
   const { t } = useLanguage();
 
   return (
-    <section id="redes" className="section-padding section-surface-alt">
+    <section id="redes" className="section-padding">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <p className="eyebrow">{t("nav.redes")}</p>

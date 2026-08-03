@@ -34,7 +34,7 @@ export function Galeria() {
   }, [open]);
 
   return (
-    <section id="galeria" className="section-padding section-surface">
+    <section id="galeria" className="section-padding">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <h2 className="section-title mt-0">{t("galeria.title")}</h2>

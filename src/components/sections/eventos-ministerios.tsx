@@ -19,7 +19,7 @@ export function Eventos() {
   if (!event) return null;
 
   return (
-    <section id="eventos" className="section-padding-sm section-surface-alt">
+    <section id="eventos" className="section-padding-sm">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <h2 className="section-title mt-0">{t("eventos.title")}</h2>
@@ -62,7 +62,7 @@ export function Ministerios() {
   const { t } = useLanguage();
 
   return (
-    <section id="ministerios" className="section-padding section-surface">
+    <section id="ministerios" className="section-padding">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <h2 className="section-title mt-0">{t("ministerios.title")}</h2>

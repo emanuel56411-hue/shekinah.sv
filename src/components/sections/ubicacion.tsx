@@ -39,7 +39,7 @@ export function Ubicacion() {
   ];
 
   return (
-    <section id="ubicacion" className="section-padding section-surface">
+    <section id="ubicacion" className="section-padding">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:items-start">
         <Reveal>
           <h2 className="section-title mt-0">{t("ubicacion.title")}</h2>

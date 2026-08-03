@@ -44,7 +44,7 @@ export function Hero() {
   const chipText = nextLabel ?? `${t("hero.nextChip")} ${t("common.tuesday")} 7:00 p.m.`;
 
   return (
-    <section id="inicio" className="section-surface relative min-h-[88vh] sm:min-h-[92vh]">
+    <section id="inicio" className="relative min-h-[88vh] sm:min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[92vh] sm:px-6">
         <div className="w-full max-w-3xl">
           <h1 className="font-heading text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-white [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_24px_rgba(0,0,0,0.95),0_8px_28px_rgba(0,0,0,0.75)] sm:text-[3.1rem] md:text-[3.4rem]">

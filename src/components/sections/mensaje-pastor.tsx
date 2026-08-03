@@ -74,7 +74,7 @@ export function MensajePastor() {
     (post.post_type === "versiculo" || post.post_type === "mensaje" || post.post_type === "oracion");
 
   return (
-    <section id="palabra" className="section-padding section-surface-alt" aria-label={t("pastor.aria")}>
+    <section id="palabra" className="section-padding" aria-label={t("pastor.aria")}>
       <div className="mx-auto max-w-3xl px-4 sm:px-6">
         <Reveal>
           <h2 className="section-title mt-0 text-center">{t("pastor.title")}</h2>
