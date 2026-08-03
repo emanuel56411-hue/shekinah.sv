@@ -7,22 +7,25 @@
     text-wrap: balance;
   }
 
-  /* Superficies premium: sin borde/marco que encierre el contenido */
+  /* Superficies: sin borde, sin ring, sin sombra que parezca marco */
   .surface-glass {
     position: relative;
     isolation: isolate;
-    border: none;
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
     border-radius: var(--radius);
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-    box-shadow: var(--spatial-shadow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: rgba(10, 8, 12, 0.42);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
   .surface-glass-lift:hover {
     transform: translateY(-2px);
-    box-shadow: var(--spatial-shadow-hover);
+    background: rgba(10, 8, 12, 0.52);
   }
 
   .surface-porcelain {
@@ -375,16 +378,18 @@
   #redes [data-slot="card"],
   #ministerios [data-slot="card"],
   #eventos [data-slot="card"],
-  #palabra [data-slot="card"] {
-    border: none !important;
-    --tw-ring-shadow: 0 0 #0000;
-    --tw-ring-color: transparent;
+  #palabra [data-slot="card"],
+  #reuniones article {
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    --tw-ring-color: transparent !important;
     border-radius: var(--radius);
-    background: var(--glass-bg);
+    background: rgba(10, 8, 12, 0.42);
     color: #f5f5f5;
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-    box-shadow: var(--spatial-shadow);
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
   }
 
   #ubicacion [data-slot="card"]:hover,
@@ -393,23 +398,24 @@
   #ministerios [data-slot="card"]:hover,
   #eventos [data-slot="card"]:hover {
     transform: translateY(-2px);
-    box-shadow: var(--spatial-shadow-hover);
+    background: rgba(10, 8, 12, 0.52);
   }
 
   #ubicacion a.group {
-    border: none;
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
     border-radius: var(--radius);
-    background: var(--glass-bg);
+    background: rgba(10, 8, 12, 0.42);
     color: #f5f5f5;
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-    backdrop-filter: blur(var(--glass-blur)) saturate(1.2);
-    box-shadow: var(--spatial-shadow);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+    transition: transform 0.2s ease, background-color 0.2s ease;
   }
 
   #ubicacion a.group:hover {
     transform: translateY(-2px);
-    box-shadow: var(--spatial-shadow-hover);
+    background: rgba(10, 8, 12, 0.52);
   }
 
   #ayuda label,
@@ -438,14 +444,14 @@
   }
 
   #galeria button.group {
-    border: none;
-    box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: transform 0.2s ease;
   }
 
   #galeria button.group:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 30px -12px rgba(0, 0, 0, 0.48);
   }
 
   @media (prefers-reduced-motion: reduce) {
