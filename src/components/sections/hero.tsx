@@ -19,45 +19,47 @@ function WhatsappIcon({ className }: { className?: string }) {
 const ctaBase =
   "inline-flex h-12 w-full min-w-[190px] items-center justify-center gap-2.5 rounded-[12px] px-8 font-sans text-[0.95rem] font-semibold transition-all duration-200 ease-out sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40";
 
+function formatNextLabel(t: (key: string) => string): string {
+  const [next] = getUpcomingServices(new Date(), 1);
+  if (!next) {
+    return `${t("hero.nextChip")} ${t("common.tuesday")} 7:00 p.m.`;
+  }
+  if (next.isLive) {
+    return `${t("heroPanel.live")} · ${next.timeLabel}`;
+  }
+  return `${t("hero.nextChip")} ${t(next.dayKey)} ${next.timeLabel}`;
+}
+
 export function Hero() {
   const { t } = useLanguage();
   const [nextLabel, setNextLabel] = useState<string | null>(null);
 
   useEffect(() => {
-    const refresh = () => {
-      const [next] = getUpcomingServices(new Date(), 1);
-      if (!next) {
-        setNextLabel(null);
-        return;
-      }
-      const day = t(next.dayKey);
-      setNextLabel(
-        next.isLive
-          ? `${t("heroPanel.live")} · ${next.timeLabel}`
-          : `${t("hero.nextChip")} ${day} ${next.timeLabel}`
-      );
-    };
+    const refresh = () => setNextLabel(formatNextLabel(t));
     refresh();
     const id = window.setInterval(refresh, 60_000);
     return () => window.clearInterval(id);
   }, [t]);
 
+  const chipText = nextLabel ?? `${t("hero.nextChip")} ${t("common.tuesday")} 7:00 p.m.`;
+
   return (
     <section id="inicio" className="section-surface relative min-h-[88vh] sm:min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[92vh] sm:px-6">
-        <div className="hero-copy-veil w-full max-w-3xl px-4 py-8 sm:px-8 sm:py-10">
-          <h1 className="font-heading text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-white [text-shadow:0_2px_4px_rgba(0,0,0,0.75),0_8px_28px_rgba(0,0,0,0.55)] sm:text-[3.1rem] md:text-[3.4rem]">
+        <div className="hero-copy-soft w-full max-w-3xl">
+          <h1 className="font-heading text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.85),0_10px_32px_rgba(0,0,0,0.55)] sm:text-[3.1rem] md:text-[3.4rem]">
             {t("hero.title")}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white [text-shadow:0_1px_3px_rgba(0,0,0,0.8),0_4px_16px_rgba(0,0,0,0.45)] sm:mt-6 sm:text-xl">
+          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white [text-shadow:0_1px_4px_rgba(0,0,0,0.85),0_6px_20px_rgba(0,0,0,0.5)] sm:mt-6 sm:text-xl">
             {t("hero.description")}
           </p>
 
-          {nextLabel ? (
-            <p className="mx-auto mt-6 inline-flex items-center rounded-[12px] border border-white/20 bg-black/45 px-3.5 py-1.5 text-[0.78rem] font-medium text-white shadow-[0_4px_16px_-8px_rgba(0,0,0,0.55)] backdrop-blur-sm">
-              {nextLabel}
-            </p>
-          ) : null}
+          <p
+            className="mx-auto mt-6 inline-flex items-center rounded-full border border-white/30 bg-[#65101a]/88 px-3.5 py-1.5 text-[0.8rem] font-semibold tracking-wide text-white shadow-[0_6px_18px_-6px_rgba(0,0,0,0.65)] [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]"
+            suppressHydrationWarning
+          >
+            {chipText}
+          </p>
 
           <div className="mt-8 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mx-auto sm:mt-9 sm:max-w-none sm:flex-row sm:items-center sm:gap-3.5">
             <Link

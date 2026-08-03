@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { CalendarDays } from "lucide-react";
+import { BookMarked, BookOpen, Church, Users, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SCHEDULE, SUNDAY_SCHEDULE } from "@/lib/constants";
@@ -13,6 +13,12 @@ const DAY_ABBR: Record<string, { es: string; en: string }> = {
   "common.thursday": { es: "JUE", en: "THU" },
   "common.saturday": { es: "SÁB", en: "SAT" },
   "common.sunday": { es: "DOM", en: "SUN" },
+};
+
+const SCHEDULE_ICONS: Record<string, LucideIcon> = {
+  "schedule.tuesdayActivity": BookOpen,
+  "schedule.thursdayActivity": BookMarked,
+  "schedule.saturdayActivity": Users,
 };
 
 function matchNextId(titleKey: string, nextId: string | null): boolean {
@@ -27,11 +33,13 @@ function matchNextId(titleKey: string, nextId: string | null): boolean {
 
 function ScheduleCard({
   day,
+  icon: Icon,
   isHighlighted,
   statusLabel,
   children,
 }: {
   day: string;
+  icon: LucideIcon;
   isHighlighted: boolean;
   statusLabel?: string | null;
   children: ReactNode;
@@ -44,8 +52,13 @@ function ScheduleCard({
       )}
     >
       <div className="relative z-10 flex items-start gap-3 sm:gap-4">
-        <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] bg-[#65101a] text-white sm:h-12 sm:w-12">
-          <CalendarDays className="h-5 w-5 sm:h-5 sm:w-5" strokeWidth={1.75} />
+        <div
+          className={cn(
+            "flex h-11 w-11 shrink-0 items-center justify-center rounded-[12px] text-white sm:h-12 sm:w-12",
+            isHighlighted ? "bg-[#7a1f2e]" : "bg-[#65101a]"
+          )}
+        >
+          <Icon className="h-5 w-5" strokeWidth={1.75} />
         </div>
         <div className="min-w-0 flex-1">
           {isHighlighted && statusLabel ? (
@@ -66,14 +79,12 @@ function ScheduleCard({
 export function Horarios() {
   const { t, lang } = useLanguage();
   const [nextId, setNextId] = useState<string | null>(null);
-  const [nextDayKey, setNextDayKey] = useState<string | null>(null);
   const [isLive, setIsLive] = useState(false);
 
   useEffect(() => {
     const refresh = () => {
       const [next] = getUpcomingServices(new Date(), 1);
       setNextId(next?.id ?? null);
-      setNextDayKey(next?.dayKey ?? null);
       setIsLive(Boolean(next?.isLive));
     };
     refresh();
@@ -94,20 +105,17 @@ export function Horarios() {
           <p className="eyebrow">{t("reuniones.eyebrow")}</p>
           <h2 className="section-title">{t("reuniones.title")}</h2>
           <p className="section-desc">{t("reuniones.description")}</p>
-          {nextDayKey ? (
-            <p className="mt-4 inline-flex rounded-[12px] border border-white/15 bg-black/35 px-3 py-1.5 text-sm font-medium text-white">
-              {statusLabel}: {t(nextDayKey)}
-            </p>
-          ) : null}
         </Reveal>
 
         <div className="space-y-3">
           {SCHEDULE.map((item, index) => {
             const isNext = matchNextId(item.titleKey, nextId);
+            const Icon = SCHEDULE_ICONS[item.titleKey] ?? BookOpen;
             return (
-              <Reveal key={item.titleKey} delay={index * 0.06}>
+              <Reveal key={item.titleKey} delay={index * 0.07}>
                 <ScheduleCard
                   day={DAY_ABBR[item.dayKey]?.[lang] ?? ""}
+                  icon={Icon}
                   isHighlighted={isNext}
                   statusLabel={statusLabel}
                 >
@@ -118,9 +126,10 @@ export function Horarios() {
             );
           })}
 
-          <Reveal delay={0.2}>
+          <Reveal delay={0.24}>
             <ScheduleCard
               day={DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
+              icon={Church}
               isHighlighted={sundayHasNext}
               statusLabel={statusLabel}
             >

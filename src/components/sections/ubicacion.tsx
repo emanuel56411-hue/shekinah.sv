@@ -77,17 +77,16 @@ export function Ubicacion() {
         </Reveal>
 
         <Reveal delay={0.08}>
-          <div className="surface-glass overflow-hidden">
-            <div className="map-frame relative aspect-[4/3] w-full bg-[#0a1218]">
+          <div>
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] bg-[#0a1218]">
               <iframe
                 title={t("ubicacion.title")}
                 src={LINKS.mapsEmbed}
-                className="map-frame__iframe absolute inset-0 h-full w-full border-0"
+                className="absolute inset-0 h-full w-full border-0"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
               />
-              <div className="map-frame__veil pointer-events-none absolute inset-0" aria-hidden />
               <a
                 href={LINKS.maps}
                 target="_blank"
@@ -98,7 +97,7 @@ export function Ubicacion() {
                 <ExternalLink className="h-3.5 w-3.5" />
               </a>
             </div>
-            <div className="border-t border-white/15 px-5 py-4">
+            <div className="mt-4 px-1">
               <p className="font-heading text-xl font-semibold text-white">QJRR+HH2</p>
               <p className="text-sm text-white/70">San Juan Opico, La Libertad</p>
             </div>
