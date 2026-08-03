@@ -128,7 +128,7 @@ export function Horarios() {
               isHighlighted={sundayHasNext}
               statusLabel={statusLabel}
             >
-              <div className="grid gap-3 sm:grid-cols-2 sm:gap-8">
+              <div className="max-w-md space-y-2.5">
                 {SUNDAY_SCHEDULE.map((item) => {
                   const isNext = matchNextId(item.titleKey, nextId);
                   return (
