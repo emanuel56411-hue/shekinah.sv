@@ -290,23 +290,30 @@
 
   /* Cero marcos decorativos en la web pública (inputs del form se respetan) */
   header *:not(input):not(textarea):not(select),
-  main *:not(input):not(textarea):not(select):not([data-slot="input"]):not([data-slot="textarea"]):not([data-slot="select-trigger"]) {
+  main *:not(input):not(textarea):not(select):not([data-slot="input"]):not([data-slot="textarea"]):not([data-slot="select-trigger"]):not([data-ministry-frame]) {
     border-color: transparent !important;
     --tw-ring-color: transparent !important;
     --tw-ring-shadow: 0 0 #0000 !important;
   }
 
   header *:not(input):not(textarea):not(select),
-  main article,
+  main article:not([data-ministry-frame]),
   main [data-slot="card"],
   main #reuniones *,
   main #galeria button,
   main #ubicacion a,
   main #palabra article,
-  main #eventos [data-slot="card"],
-  main #ministerios [data-slot="card"] {
+  main #eventos [data-slot="card"] {
     border-width: 0 !important;
     border-style: none !important;
+    outline: none !important;
+  }
+
+  /* Marcos visibles solo en los 5 ministerios */
+  main #ministerios [data-ministry-frame] {
+    border: 1px solid rgba(255, 255, 255, 0.32) !important;
+    background: rgba(58, 61, 69, 0.55) !important;
+    box-shadow: none !important;
     outline: none !important;
   }
 
@@ -363,7 +370,6 @@
   /* Un solo sistema: glass oscuro */
   #ubicacion [data-slot="card"],
   #redes [data-slot="card"],
-  #ministerios [data-slot="card"],
   #eventos [data-slot="card"],
   #palabra [data-slot="card"],
   #reuniones article {
