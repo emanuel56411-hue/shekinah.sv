@@ -2,6 +2,7 @@ import { Cormorant_Garamond, Source_Sans_3 } from "next/font/google";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { AppProviders } from "@/components/providers/app-providers";
+import { SiteBackground } from "@/components/layout/site-background";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import "./globals.css";
@@ -54,7 +55,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {`document.documentElement.classList.remove("dark");try{localStorage.removeItem("shekinah-theme")}catch(e){}`}
         </Script>
         <AppProviders>
-          <div className="site-bg" aria-hidden />
+          <SiteBackground />
           <SiteHeader />
           {children}
           <SiteFooter />

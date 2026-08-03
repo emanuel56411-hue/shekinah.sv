@@ -166,11 +166,11 @@ export function SiteHeader() {
               className="h-12 w-12 shrink-0 rounded-xl bg-white object-contain p-1 shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] ring-1 ring-white/70 sm:h-14 sm:w-14"
               priority
             />
-            <span className="min-w-0 leading-tight [text-shadow:0_1px_8px_rgba(0,0,0,0.65)]">
+            <span className="min-w-0 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.65)]">
               <strong className="block truncate text-sm font-semibold text-white sm:text-[0.95rem]">
                 Iglesia Bautista Shekinah
               </strong>
-              <small className="block text-xs font-medium text-white/85">San Juan Opico</small>
+              <small className="block text-xs font-medium text-white/95">San Juan Opico</small>
             </span>
           </Link>
 
@@ -187,7 +187,7 @@ export function SiteHeader() {
                     key={item.href}
                     type="button"
                     onClick={openSocial}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                   >
                     {t(item.titleKey)}
                   </button>
@@ -195,7 +195,7 @@ export function SiteHeader() {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                    className="rounded-full px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                   >
                     {t(item.titleKey)}
                   </Link>
@@ -204,7 +204,7 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={openCalendar}
-              className="rounded-full px-3 py-2 text-sm font-medium text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+              className="rounded-full px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
             >
               {t("nav.calendario")}
             </button>

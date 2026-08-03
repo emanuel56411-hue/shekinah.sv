@@ -161,31 +161,36 @@
     min-width: 100%;
     min-height: 100dvh;
     height: 100dvh;
+    overflow: hidden;
     pointer-events: none;
     background-color: #0a0708;
-    background-image: url("/assets/fotos/fondo-culto-adoracion.webp");
-    background-size: cover;
-    /*
-      Mismo encuadre en todos los tamaños.
-      center bottom en desktop recortaba hacia la zona oscura de la foto
-      (por eso en laptop se veía casi negra aunque el overlay era igual).
-    */
-    background-position: center 40%;
-    background-repeat: no-repeat;
-    background-attachment: scroll;
   }
 
-  /* Un solo velo para móvil/tablet/desktop — sin overrides por breakpoint */
+  .site-bg picture {
+    position: absolute;
+    inset: 0;
+    display: block;
+  }
+
+  .site-bg__image {
+    object-fit: cover !important;
+    object-position: center 42% !important;
+  }
+
+  /* B/N: velo un poco más suave, pero con ancla oscura arriba/abajo para texto y header */
   .site-bg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(6, 4, 6, 0.36) 0%,
-      rgba(6, 4, 6, 0.26) 42%,
-      rgba(6, 4, 6, 0.44) 100%
-    );
+    z-index: 1;
+    background:
+      linear-gradient(
+        to bottom,
+        rgba(6, 4, 6, 0.55) 0%,
+        rgba(6, 4, 6, 0.28) 38%,
+        rgba(6, 4, 6, 0.32) 62%,
+        rgba(6, 4, 6, 0.58) 100%
+      );
   }
 
   .site-header-overlay {

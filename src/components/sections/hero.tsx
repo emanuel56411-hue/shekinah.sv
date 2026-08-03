@@ -14,19 +14,32 @@ function WhatsappIcon({ className }: { className?: string }) {
   );
 }
 
+const textReadable =
+  "[text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.55)]";
+
 export function Hero() {
   const { t } = useLanguage();
 
   return (
     <section id="inicio" className="section-surface relative min-h-[88vh] sm:min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[92vh] sm:px-6">
-        <p className="mb-5 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-white/90 sm:text-sm">
+        <p
+          className={cn(
+            "mb-5 text-[0.72rem] font-semibold uppercase tracking-[0.22em] text-white sm:text-sm",
+            textReadable
+          )}
+        >
           San Juan Opico, El Salvador
         </p>
-        <h1 className="max-w-4xl text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)]">
+        <h1 className={cn("max-w-4xl text-white", textReadable)}>
           Iglesia Bautista Shekinah
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/90 sm:mt-6 sm:text-xl">
+        <p
+          className={cn(
+            "mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white sm:mt-6 sm:text-xl",
+            textReadable
+          )}
+        >
           {t("hero.description")}
         </p>
         <div className="mt-9 flex w-full max-w-md flex-col items-stretch justify-center gap-3 sm:mt-10 sm:max-w-none sm:flex-row sm:items-center sm:gap-3.5">
@@ -34,8 +47,8 @@ export function Hero() {
             href="#reuniones"
             className={cn(
               "inline-flex w-full min-w-[190px] items-center justify-center gap-2.5 rounded-[10px] px-9 py-4 font-sans text-base font-semibold text-white transition-all duration-200 ease-out",
-              "bg-gradient-to-b from-[#7a1f2e] to-[#5a1220] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.5)]",
-              "hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.55)] active:translate-y-0",
+              "bg-gradient-to-b from-[#7a1f2e] to-[#5a1220] shadow-[0_8px_20px_-6px_rgba(0,0,0,0.55)]",
+              "hover:-translate-y-0.5 hover:shadow-[0_12px_26px_-8px_rgba(0,0,0,0.6)] active:translate-y-0",
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto"
             )}
           >
@@ -47,9 +60,10 @@ export function Hero() {
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "inline-flex w-full min-w-[168px] items-center justify-center gap-2.5 rounded-[10px] border border-[#25D366]/55 bg-[#25D366]/12 px-7 py-[14px] font-sans text-[0.92rem] font-semibold text-[#d9ffe8] backdrop-blur-sm transition-all duration-200 ease-out",
-              "shadow-[0_4px_12px_-6px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 hover:border-[#25D366]/80 hover:bg-[#25D366]/20 hover:shadow-[0_8px_16px_-6px_rgba(0,0,0,0.35)] active:translate-y-0",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto"
+              "inline-flex w-full min-w-[168px] items-center justify-center gap-2.5 rounded-[10px] border border-[#25D366]/70 bg-[#0d1f14]/72 px-7 py-[14px] font-sans text-[0.92rem] font-semibold text-[#e8fff0] backdrop-blur-sm transition-all duration-200 ease-out",
+              "shadow-[0_4px_14px_-4px_rgba(0,0,0,0.45)] hover:-translate-y-0.5 hover:border-[#25D366]/90 hover:bg-[#0d1f14]/85 hover:shadow-[0_8px_18px_-6px_rgba(0,0,0,0.5)] active:translate-y-0",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 sm:w-auto",
+              textReadable
             )}
           >
             <WhatsappIcon className="h-[1.1rem] w-[1.1rem] shrink-0 text-[#25D366]" />
