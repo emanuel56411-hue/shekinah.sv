@@ -119,7 +119,7 @@ export function AyudaDonaciones() {
                     <CardHeader className="pb-2">
                       <Badge
                         variant="secondary"
-                        className="w-fit border-white/15 bg-white/10 text-[#f3c4cb]"
+                        className="w-fit border-0 bg-white/10 text-[#f3c4cb]"
                       >
                         {request.help_type}
                       </Badge>
@@ -137,7 +137,7 @@ export function AyudaDonaciones() {
                         rel="noopener noreferrer"
                         className={cn(
                           buttonVariants({ size: "sm", variant: "outline" }),
-                          "gap-2 border-white/25 bg-white/5 text-white hover:bg-white/10"
+                          "gap-2 border-0 bg-white/10 text-white hover:bg-white/16"
                         )}
                       >
                         <MessageCircle className="h-4 w-4" />

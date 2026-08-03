@@ -154,7 +154,7 @@ export function MensajePastor() {
                 </p>
                 <Link
                   href="#ayuda"
-                  className="mt-1 inline-flex rounded-[12px] border border-white/30 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/16"
+                  className="mt-1 inline-flex rounded-[12px] bg-white/12 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white/18"
                 >
                   {t("pastor.emptyCta")}
                 </Link>

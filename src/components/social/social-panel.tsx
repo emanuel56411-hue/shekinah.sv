@@ -138,7 +138,7 @@ export function SocialPanel({ open, onOpenChange }: SocialPanelProps) {
       <DialogContent
         showCloseButton
         overlayClassName="z-[110] bg-black/70"
-        className="z-[111] max-h-[min(90dvh,40rem)] w-full max-w-3xl overflow-y-auto border border-white/15 bg-[#141014]/92 p-5 text-white shadow-[0_24px_60px_-20px_rgba(0,0,0,0.75)] backdrop-blur-xl sm:max-w-3xl sm:p-6 [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
+        className="z-[111] max-h-[min(90dvh,40rem)] w-full max-w-3xl overflow-y-auto border-0 bg-[#141014] p-5 text-white shadow-none sm:max-w-3xl sm:p-6 [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
       >
         <DialogHeader className="pr-8">
           <DialogTitle className="font-heading text-2xl font-semibold text-white sm:text-[1.75rem]">

@@ -156,7 +156,7 @@ export function SiteHeader() {
               alt="Logo Shekinah"
               width={64}
               height={64}
-              className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1 shadow-[0_6px_16px_-8px_rgba(0,0,0,0.5)] ring-1 ring-white/70 sm:h-14 sm:w-14"
+              className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1 sm:h-14 sm:w-14"
               priority
             />
             <span className="min-w-0 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.65)]">
@@ -186,7 +186,7 @@ export function SiteHeader() {
               <button
                 type="button"
                 onClick={() => setLang(lang === "es" ? "en" : "es")}
-                className="ml-1 rounded-[12px] border border-white/25 px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                className="ml-1 rounded-[12px] bg-white/10 px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                 aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
               >
                 {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
@@ -197,7 +197,7 @@ export function SiteHeader() {
               <SheetTrigger
                 className={cn(
                   buttonVariants({ variant: "outline", size: "sm" }),
-                  "surface-glass gap-2 border-white/30 text-white [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:text-white lg:hidden"
+                  "gap-2 border-0 bg-white/10 text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-white/16 hover:text-white lg:hidden"
                 )}
                 aria-label={t("menu.openAria")}
               >

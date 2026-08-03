@@ -322,6 +322,28 @@
     box-shadow: none;
   }
 
+  /* Cero marcos decorativos en la web pública (inputs del form se respetan) */
+  header *:not(input):not(textarea):not(select),
+  main *:not(input):not(textarea):not(select):not([data-slot="input"]):not([data-slot="textarea"]):not([data-slot="select-trigger"]) {
+    border-color: transparent !important;
+    --tw-ring-color: transparent !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+  }
+
+  header *:not(input):not(textarea):not(select),
+  main article,
+  main [data-slot="card"],
+  main #reuniones *,
+  main #galeria button,
+  main #ubicacion a,
+  main #palabra article,
+  main #eventos [data-slot="card"],
+  main #ministerios [data-slot="card"] {
+    border-width: 0 !important;
+    border-style: none !important;
+    outline: none !important;
+  }
+
   :focus-visible {
     outline: 2px solid #f3c4cb;
     outline-offset: 2px;
@@ -390,13 +412,12 @@
     color: #f5f5f5;
   }
 
-  /* Solo el formulario de ayuda conserva fondo suave, sin línea */
   #ayuda [data-slot="card"] {
     border: 0 !important;
     outline: none !important;
     box-shadow: none !important;
     --tw-ring-shadow: 0 0 #0000 !important;
-    background: rgba(10, 8, 12, 0.35) !important;
+    background: transparent !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
     color: #f5f5f5;

@@ -55,7 +55,7 @@ export function Hero() {
           </p>
 
           <p
-            className="mx-auto mt-6 inline-flex items-center rounded-full border border-white/30 bg-[#65101a]/88 px-3.5 py-1.5 text-[0.8rem] font-semibold tracking-wide text-white shadow-[0_6px_18px_-6px_rgba(0,0,0,0.65)] [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]"
+            className="mx-auto mt-6 inline-flex items-center rounded-full bg-[#65101a] px-3.5 py-1.5 text-[0.8rem] font-semibold tracking-wide text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.45)]"
             suppressHydrationWarning
           >
             {chipText}
@@ -79,8 +79,8 @@ export function Hero() {
               rel="noopener noreferrer"
               className={cn(
                 ctaBase,
-                "border border-white/55 bg-white/10 text-white backdrop-blur-sm",
-                "hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/16 active:translate-y-0"
+                "bg-white/14 text-white",
+                "hover:-translate-y-0.5 hover:bg-white/22 active:translate-y-0"
               )}
             >
               <WhatsappIcon className="h-[1.05rem] w-[1.05rem] shrink-0 text-[#25D366]" />

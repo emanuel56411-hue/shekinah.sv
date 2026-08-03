@@ -91,7 +91,7 @@ export function Ubicacion() {
                 href={LINKS.maps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-[12px] border border-white/25 bg-black/65 px-3 py-2 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-black/80"
+                className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-[12px] bg-black/70 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-black/85"
               >
                 {t("ubicacion.openMaps")}
                 <ExternalLink className="h-3.5 w-3.5" />

@@ -86,7 +86,7 @@ export function Galeria() {
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent
           showCloseButton={false}
-          className="max-w-4xl border-white/15 bg-black/90 p-0 text-white sm:max-w-4xl"
+          className="max-w-4xl border-0 bg-black/90 p-0 text-white shadow-none sm:max-w-4xl"
           overlayClassName="bg-black/80"
         >
           <DialogTitle className="sr-only">{t("galeria.viewerAria")}</DialogTitle>
