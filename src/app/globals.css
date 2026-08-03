@@ -186,7 +186,14 @@
     object-position: center 42% !important;
   }
 
-  /* B/N: velo un poco más suave, pero con ancla oscura arriba/abajo para texto y header */
+  /* En laptop el crop centra las manos claras detrás del título; bajamos un poco el foco */
+  @media (min-width: 900px) {
+    .site-bg__image {
+      object-position: center 32% !important;
+    }
+  }
+
+  /* B/N: velo a ancho completo (sin caja) para anclar texto y header */
   .site-bg::after {
     content: "";
     position: absolute;
@@ -195,10 +202,10 @@
     background:
       linear-gradient(
         to bottom,
-        rgba(6, 4, 6, 0.55) 0%,
-        rgba(6, 4, 6, 0.28) 38%,
-        rgba(6, 4, 6, 0.32) 62%,
-        rgba(6, 4, 6, 0.58) 100%
+        rgba(6, 4, 6, 0.62) 0%,
+        rgba(6, 4, 6, 0.42) 36%,
+        rgba(6, 4, 6, 0.48) 58%,
+        rgba(6, 4, 6, 0.68) 100%
       );
   }
 
@@ -210,6 +217,22 @@
 
   #inicio {
     z-index: 0;
+  }
+
+  /* Velo full-bleed del hero: oscurece el centro sin bordes de tarjeta */
+  #inicio::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      ellipse 120% 85% at 50% 42%,
+      rgba(6, 4, 6, 0.58) 0%,
+      rgba(6, 4, 6, 0.28) 42%,
+      rgba(6, 4, 6, 0.08) 68%,
+      transparent 100%
+    );
   }
 
 }
