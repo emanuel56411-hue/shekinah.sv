@@ -19,6 +19,7 @@ import { BibleIcon } from "@/components/icons/bible-icon";
 import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SocialPanel } from "@/components/social/social-panel";
+import { buttonVariants } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
@@ -155,7 +156,7 @@ export function SiteHeader() {
               alt="Logo Shekinah"
               width={64}
               height={64}
-              className="h-12 w-12 shrink-0 object-contain sm:h-14 sm:w-14"
+              className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1 sm:h-14 sm:w-14"
               priority
             />
             <span className="min-w-0 leading-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.9),0_2px_12px_rgba(0,0,0,0.65)]">
@@ -185,7 +186,7 @@ export function SiteHeader() {
               <button
                 type="button"
                 onClick={() => setLang(lang === "es" ? "en" : "es")}
-                className="ml-1 px-2 py-1.5 text-xs font-semibold text-white transition-colors hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
+                className="ml-1 rounded-[12px] bg-white/10 px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
                 aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
               >
                 {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
@@ -194,10 +195,14 @@ export function SiteHeader() {
 
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
-                className="header-menu-trigger inline-flex items-center justify-center bg-transparent p-1.5 text-white shadow-none ring-0 hover:bg-transparent hover:text-white/85 lg:hidden"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "sm" }),
+                  "gap-2 border-0 bg-white/10 text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-white/16 hover:text-white lg:hidden"
+                )}
                 aria-label={t("menu.openAria")}
               >
-                <Menu className="h-6 w-6" strokeWidth={2} />
+                <Menu className="h-4 w-4" />
+                <span className="hidden sm:inline">{t("menu.title")}</span>
               </SheetTrigger>
 
               <SheetContent
@@ -212,7 +217,7 @@ export function SiteHeader() {
                       alt="Logo Shekinah"
                       width={48}
                       height={48}
-                      className="h-12 w-12 shrink-0 object-contain"
+                      className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1"
                     />
                     <div>
                       <SheetTitle className="font-heading text-base font-semibold text-white">
