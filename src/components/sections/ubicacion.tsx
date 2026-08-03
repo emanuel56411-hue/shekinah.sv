@@ -55,7 +55,7 @@ export function Ubicacion() {
               >
                 <span
                   className={cn(
-                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[12px] border border-white/15",
+                    "relative flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-[12px]",
                     action.iconWrapClass
                   )}
                 >

@@ -48,7 +48,7 @@ function ScheduleCard({
     <article
       className={cn(
         "surface-glass relative overflow-hidden px-4 py-4 sm:px-5 sm:py-5",
-        isHighlighted && "ring-1 ring-[#f3c4cb]/70"
+        isHighlighted && "bg-white/[0.08]"
       )}
     >
       <div className="relative z-10 flex items-start gap-3 sm:gap-4">

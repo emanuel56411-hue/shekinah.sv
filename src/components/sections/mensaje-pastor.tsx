@@ -94,7 +94,7 @@ export function MensajePastor() {
                 <p className="text-[0.75rem] font-medium text-[#f3c4cb]">{typeLabel}</p>
 
                 {post.media_kind === "image" && post.media_url ? (
-                  <div className="relative mx-auto mt-6 aspect-[4/3] w-full max-w-xl overflow-hidden rounded-[12px] border border-white/15">
+                  <div className="relative mx-auto mt-6 aspect-[4/3] w-full max-w-xl overflow-hidden rounded-[12px]">
                     <Image
                       src={post.media_url}
                       alt={post.content || typeLabel}
@@ -107,7 +107,7 @@ export function MensajePastor() {
                 ) : null}
 
                 {videoSrc ? (
-                  <div className="relative mx-auto mt-6 aspect-video w-full max-w-xl overflow-hidden rounded-[12px] border border-white/15 bg-black/40">
+                  <div className="relative mx-auto mt-6 aspect-video w-full max-w-xl overflow-hidden rounded-[12px] bg-black/40">
                     <iframe
                       src={videoSrc}
                       title={post.content || typeLabel}
@@ -143,7 +143,7 @@ export function MensajePastor() {
               </article>
             ) : (
               <div className="surface-glass flex flex-col items-center gap-4 px-6 py-12 text-center">
-                <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-white/5 text-white/80">
+                <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/5 text-white/80">
                   <BibleIcon className="h-8 w-8" strokeWidth={1.5} />
                 </span>
                 <p className="font-heading text-xl font-semibold text-white sm:text-2xl">

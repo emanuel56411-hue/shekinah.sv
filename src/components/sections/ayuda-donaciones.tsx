@@ -115,7 +115,7 @@ export function AyudaDonaciones() {
                 </>
               ) : requests.length > 0 ? (
                 requests.map((request) => (
-                  <Card key={request.id} className="surface-glass ring-0">
+                  <Card key={request.id} className="surface-glass border-0 ring-0">
                     <CardHeader className="pb-2">
                       <Badge
                         variant="secondary"
@@ -147,7 +147,7 @@ export function AyudaDonaciones() {
                   </Card>
                 ))
               ) : (
-                <Card className="surface-glass col-span-full ring-0">
+                <Card className="surface-glass col-span-full border-0 ring-0">
                   <CardContent className="flex flex-col items-center gap-2 p-8 text-center">
                     <p className="font-heading text-lg font-semibold text-white">
                       {t("ayuda.emptyRequestsTitle")}
@@ -161,7 +161,7 @@ export function AyudaDonaciones() {
           </div>
 
           <Reveal delay={0.1}>
-            <Card id="help-form" className="surface-glass ring-0">
+            <Card id="help-form" className="surface-glass border-0 ring-0">
               <CardContent className="p-6">
                 <form aria-label={t("ayuda.formAria")} className="space-y-4" onSubmit={handleSubmit}>
                   <div className="space-y-2">
@@ -202,7 +202,7 @@ export function AyudaDonaciones() {
                       className="control-inset rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
                     />
                   </div>
-                  <details className="rounded-[12px] border border-white/15 bg-white/5 px-3 py-2">
+                  <details className="rounded-[12px] bg-white/5 px-3 py-2">
                     <summary className="cursor-pointer text-sm font-medium text-white/85">
                       {t("ayuda.optionalFields")}
                     </summary>

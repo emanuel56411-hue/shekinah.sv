@@ -58,7 +58,7 @@ export function Galeria() {
                     setIndex(itemIndex);
                     setOpen(true);
                   }}
-                  className="group relative block h-full w-full overflow-hidden rounded-[12px] border border-white/15 bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
+                  className="group relative block h-full w-full overflow-hidden rounded-[12px] bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah focus-visible:ring-offset-2"
                 >
                   <div className={`relative w-full ${isLarge ? "aspect-[4/3]" : "aspect-[4/3] sm:aspect-square"}`}>
                     <Image
