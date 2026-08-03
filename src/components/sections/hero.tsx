@@ -46,7 +46,7 @@ export function Hero() {
   return (
     <section id="inicio" className="section-surface relative min-h-[88vh] sm:min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[92vh] sm:px-6">
-        <div className="hero-copy-soft w-full max-w-3xl">
+        <div className="w-full max-w-3xl">
           <h1 className="font-heading text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-white [text-shadow:0_2px_8px_rgba(0,0,0,0.85),0_10px_32px_rgba(0,0,0,0.55)] sm:text-[3.1rem] md:text-[3.4rem]">
             {t("hero.title")}
           </h1>
