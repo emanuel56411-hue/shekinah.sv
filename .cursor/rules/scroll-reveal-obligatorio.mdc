@@ -17,9 +17,15 @@ El usuario exige que al bajar la página el contenido **aparezca con animación*
 ## Permitido
 
 - Ajustar duración, delay, `y` o `amount` del viewport **sin** quitar el efecto.
-- Mantener el **failsafe** (timeout / force visible) para que NUNCA quede contenido atrapado en `opacity: 0`.
+- Mantener un **failsafe puntual**: solo forzar visible si el bloque **ya está en pantalla** y el observer falló.
 - Respetar `prefers-reduced-motion`.
+
+## Prohibido en el failsafe
+
+- Un timeout global que ponga **toda** la página en `opacity: 1` a los 1–2s.
+  Eso hace que al bajar ya no se sienta la animación (el usuario lo reporta siempre).
 
 ## Si hay bug de contenido invisible
 
 Arreglar el observer/failsafe en `reveal.tsx`. **No** eliminar el reveal.
+**No** “arreglar” matando la experiencia de scroll.
