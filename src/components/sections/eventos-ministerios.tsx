@@ -68,33 +68,63 @@ export function Ministerios() {
           <h2 className="section-title mt-0">{t("ministerios.title")}</h2>
         </Reveal>
 
-        <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {MINISTRIES.map((ministry, index) => {
-            const number = String(index + 1).padStart(2, "0");
-            return (
-              <Reveal key={ministry.id} delay={index * 0.04}>
-                <article
-                  data-ministry-frame
-                  className="flex h-full items-start gap-4 rounded-[14px] px-4 py-4 sm:px-5 sm:py-5"
-                >
-                  <span
-                    className="font-heading text-3xl font-semibold leading-none text-white/70"
-                    aria-hidden
+        <div className="mt-10 space-y-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {MINISTRIES.slice(0, 3).map((ministry, index) => {
+              const number = String(index + 1).padStart(2, "0");
+              return (
+                <Reveal key={ministry.id} delay={index * 0.04}>
+                  <article
+                    data-ministry-frame
+                    className="flex h-full items-start gap-4 rounded-[14px] px-4 py-4 sm:px-5 sm:py-5"
                   >
-                    {number}
-                  </span>
-                  <div className="min-w-0 pt-0.5">
-                    <h3 className="font-heading text-xl font-semibold text-white">
-                      {t(ministry.titleKey)}
-                    </h3>
-                    <p className="mt-1.5 text-sm leading-relaxed text-white/75">
-                      {t(ministry.descKey)}
-                    </p>
-                  </div>
-                </article>
-              </Reveal>
-            );
-          })}
+                    <span
+                      className="font-heading text-3xl font-semibold leading-none text-white/70"
+                      aria-hidden
+                    >
+                      {number}
+                    </span>
+                    <div className="min-w-0 pt-0.5">
+                      <h3 className="font-heading text-xl font-semibold text-white">
+                        {t(ministry.titleKey)}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-white/75">
+                        {t(ministry.descKey)}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
+          <div className="mx-auto grid w-full max-w-3xl gap-3 sm:grid-cols-2 lg:max-w-none lg:w-2/3">
+            {MINISTRIES.slice(3).map((ministry, index) => {
+              const number = String(index + 4).padStart(2, "0");
+              return (
+                <Reveal key={ministry.id} delay={(index + 3) * 0.04}>
+                  <article
+                    data-ministry-frame
+                    className="flex h-full items-start gap-4 rounded-[14px] px-4 py-4 sm:px-5 sm:py-5"
+                  >
+                    <span
+                      className="font-heading text-3xl font-semibold leading-none text-white/70"
+                      aria-hidden
+                    >
+                      {number}
+                    </span>
+                    <div className="min-w-0 pt-0.5">
+                      <h3 className="font-heading text-xl font-semibold text-white">
+                        {t(ministry.titleKey)}
+                      </h3>
+                      <p className="mt-1.5 text-sm leading-relaxed text-white/75">
+                        {t(ministry.descKey)}
+                      </p>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
 
         <Reveal className="mt-10">
@@ -108,7 +138,7 @@ export function Ministerios() {
               rel="noopener noreferrer"
               className={cn(
                 buttonVariants({ variant: "outline" }),
-                "btn-skeuo rounded-[12px] border-transparent text-white hover:text-white"
+                "rounded-[12px] border-transparent bg-[#8fa3b8] text-[#111A2E] hover:bg-[#9db0c4] hover:text-[#111A2E]"
               )}
             >
               {t("ministerios.calloutBtn")}
