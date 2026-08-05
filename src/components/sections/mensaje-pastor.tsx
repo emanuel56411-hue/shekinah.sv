@@ -5,9 +5,8 @@ import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { toVideoEmbedUrl } from "@/lib/pastor-media";
+import { isPastorWordActive } from "@/lib/pastor-word";
 import { fetchPublicPastorPosts, type PublicPastorPost } from "@/lib/supabase";
-
-const WORD_VISIBLE_MS = 24 * 60 * 60 * 1000;
 
 function formatPostDate(value: string, lang: string) {
   try {
@@ -19,12 +18,6 @@ function formatPostDate(value: string, lang: string) {
   } catch {
     return value.slice(0, 10);
   }
-}
-
-function isWithinLast24Hours(publishedAt: string) {
-  const published = new Date(publishedAt).getTime();
-  if (Number.isNaN(published)) return false;
-  return Date.now() - published < WORD_VISIBLE_MS;
 }
 
 function typeLabelFor(post: PublicPastorPost, t: (key: string) => string) {
@@ -56,7 +49,7 @@ export function MensajePastor() {
       .then((posts) => {
         if (cancelled) return;
         const latest = posts[0] ?? null;
-        if (latest && isWithinLast24Hours(latest.published_at)) {
+        if (latest && isPastorWordActive(latest.published_at)) {
           setPost(latest);
         } else {
           setPost(null);

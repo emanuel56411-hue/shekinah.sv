@@ -13,13 +13,19 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
-import { useEffect, useRef, useState, type ComponentType, type SVGProps } from "react";
+import { useEffect, useRef, useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
 import { CalendarModal } from "@/components/calendar/calendar-modal";
 import { BibleIcon } from "@/components/icons/bible-icon";
 import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SocialPanel } from "@/components/social/social-panel";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Sheet,
   SheetContent,
@@ -27,6 +33,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { isPastorWordActive } from "@/lib/pastor-word";
+import { fetchPublicPastorPosts } from "@/lib/supabase";
 import { buildTelUrl, buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -65,6 +73,7 @@ export function SiteHeader() {
   const { open: calendarOpen, setOpen: setCalendarOpen, openCalendar } = useCalendarModal();
   const [open, setOpen] = useState(false);
   const [socialOpen, setSocialOpen] = useState(false);
+  const [palabraSoonOpen, setPalabraSoonOpen] = useState(false);
   const [hidden, setHidden] = useState(false);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
@@ -72,6 +81,37 @@ export function SiteHeader() {
   const openSocial = () => {
     setOpen(false);
     setSocialOpen(true);
+  };
+
+  const scrollToPalabra = () => {
+    const section = document.getElementById("palabra");
+    if (!section) return false;
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+    history.replaceState(null, "", `${window.location.pathname}${window.location.search}#palabra`);
+    return true;
+  };
+
+  const handlePalabraNav = async (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    setOpen(false);
+
+    if (scrollToPalabra()) return;
+
+    try {
+      const posts = await fetchPublicPastorPosts();
+      const latest = posts[0] ?? null;
+      if (latest && isPastorWordActive(latest.published_at)) {
+        // La sección puede estar montando; reintentar un instante
+        window.setTimeout(() => {
+          if (!scrollToPalabra()) setPalabraSoonOpen(true);
+        }, 120);
+        return;
+      }
+    } catch {
+      // Si falla la API, mostrar el aviso de menú
+    }
+
+    setPalabraSoonOpen(true);
   };
 
   const handleSocialOpenChange = (next: boolean) => {
@@ -174,6 +214,10 @@ export function SiteHeader() {
                   <button key={item.href} type="button" onClick={openSocial} className={navLinkClass}>
                     {t(item.titleKey)}
                   </button>
+                ) : item.href === "#palabra" ? (
+                  <a key={item.href} href={item.href} onClick={handlePalabraNav} className={navLinkClass}>
+                    {t(item.titleKey)}
+                  </a>
                 ) : (
                   <Link key={item.href} href={item.href} className={navLinkClass}>
                     {t(item.titleKey)}
@@ -246,6 +290,20 @@ export function SiteHeader() {
                           </li>
                         );
                       }
+                      if (item.href === "#palabra") {
+                        return (
+                          <li key={item.href}>
+                            <a
+                              href={item.href}
+                              onClick={handlePalabraNav}
+                              className="group flex items-center gap-4 rounded-[12px] px-4 py-3 text-[1.05rem] font-medium text-white transition-colors hover:bg-white/10"
+                            >
+                              <Icon className="h-[1.35rem] w-[1.35rem] shrink-0" strokeWidth={1.75} />
+                              <span>{t(item.titleKey)}</span>
+                            </a>
+                          </li>
+                        );
+                      }
                       return (
                         <li key={item.href}>
                           <Link
@@ -309,6 +367,27 @@ export function SiteHeader() {
 
       <CalendarModal open={calendarOpen} onOpenChange={setCalendarOpen} />
       <SocialPanel open={socialOpen} onOpenChange={handleSocialOpenChange} />
+
+      <Dialog open={palabraSoonOpen} onOpenChange={setPalabraSoonOpen}>
+        <DialogContent className="max-w-sm border-0 bg-[#141014] text-white shadow-none sm:max-w-sm [&>button]:text-white [&>button]:hover:bg-white/10">
+          <div className="flex flex-col items-center gap-3 py-2 text-center">
+            <BibleIcon className="h-10 w-10 text-white/80" strokeWidth={1.5} />
+            <DialogTitle className="font-heading text-xl font-semibold text-white">
+              {t("pastor.emptyTitle")}
+            </DialogTitle>
+            <DialogDescription className="text-sm leading-relaxed text-white/70">
+              {t("pastor.emptyDesc")}
+            </DialogDescription>
+            <Button
+              type="button"
+              className="mt-2 rounded-[12px] bg-[#8fa3b8] text-[#111A2E] hover:bg-[#9db0c4]"
+              onClick={() => setPalabraSoonOpen(false)}
+            >
+              {t("pastor.menuSoonClose")}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
