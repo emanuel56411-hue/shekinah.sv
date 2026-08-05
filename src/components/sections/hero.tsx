@@ -47,10 +47,16 @@ export function Hero() {
     <section id="inicio" className="relative min-h-[88vh] sm:min-h-[92vh]">
       <div className="relative z-10 mx-auto flex min-h-[88vh] max-w-6xl flex-col items-center justify-center px-4 py-24 text-center sm:min-h-[92vh] sm:px-6">
         <div className="w-full max-w-3xl">
-          <h1 className="font-heading text-[2.35rem] font-semibold leading-[1.12] tracking-tight text-white [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_24px_rgba(0,0,0,0.95),0_8px_28px_rgba(0,0,0,0.75)] sm:text-[3.1rem] md:text-[3.4rem]">
-            {t("hero.title")}
+          <h1 className="font-heading text-[clamp(2.4rem,7vw,3.75rem)] font-semibold leading-[1.08] tracking-tight text-white [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_24px_rgba(0,0,0,0.95),0_8px_28px_rgba(0,0,0,0.75)]">
+            {t("hero.brand")}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_18px_rgba(0,0,0,0.9),0_6px_20px_rgba(0,0,0,0.65)] sm:mt-6 sm:text-xl">
+          <p className="mt-2 text-sm font-semibold uppercase tracking-[0.16em] text-white/85 [text-shadow:0_1px_2px_rgba(0,0,0,0.9)] sm:text-[0.9rem]">
+            {t("hero.location")}
+          </p>
+          <p className="mx-auto mt-5 max-w-xl font-heading text-[clamp(1.35rem,3.5vw,1.85rem)] font-medium leading-snug text-white [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_18px_rgba(0,0,0,0.9)]">
+            {t("hero.title")}
+          </p>
+          <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-white/95 [text-shadow:0_1px_2px_rgba(0,0,0,1),0_0_14px_rgba(0,0,0,0.85)] sm:mt-4 sm:text-lg">
             {t("hero.description")}
           </p>
 

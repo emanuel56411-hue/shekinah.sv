@@ -4,8 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   CalendarDays,
+  Clock3,
   Heart,
   Images,
+  MapPin,
   Menu,
   MessageCircle,
   Phone,
@@ -48,15 +50,17 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { href: "#palabra", titleKey: "nav.palabra", icon: BibleIcon },
+  { href: "#reuniones", titleKey: "nav.horarios", icon: Clock3 },
+  { href: "#ubicacion", titleKey: "nav.ubicacion", icon: MapPin },
   { href: "#ayuda", titleKey: "nav.ayuda", icon: Heart },
-  { href: "#redes", titleKey: "nav.redes", icon: Share2, action: "social" },
   { href: "#ministerios", titleKey: "nav.ministerios", icon: Users },
   { href: "#galeria", titleKey: "nav.galeria", icon: Images },
+  { href: "#palabra", titleKey: "nav.palabra", icon: BibleIcon },
+  { href: "#redes", titleKey: "nav.redes", icon: Share2, action: "social" },
 ];
 
 const navLinkClass =
-  "rounded-[12px] px-3 py-2 text-sm font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/12 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah";
+  "rounded-[12px] px-2 py-2 text-[0.82rem] font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/12 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah xl:px-2.5 xl:text-sm";
 
 function getScrollY() {
   return (

@@ -90,6 +90,8 @@ export const translations: Record<Lang, TranslationTree> = {
       live: "En curso ahora",
     },
     hero: {
+      brand: "Iglesia Bautista Shekinah",
+      location: "San Juan Opico",
       title: "Una familia en Cristo",
       description: "Conoce a Cristo, crece en fe y camina en familia.",
       ctaPrimary: "Ver horarios",
@@ -349,6 +351,8 @@ export const translations: Record<Lang, TranslationTree> = {
       live: "Happening now",
     },
     hero: {
+      brand: "Iglesia Bautista Shekinah",
+      location: "San Juan Opico",
       title: "A family in Christ",
       description: "Know Christ, grow in faith and walk as family.",
       ctaPrimary: "See times",

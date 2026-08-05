@@ -5,6 +5,8 @@ import { AppProviders } from "@/components/providers/app-providers";
 import { SiteBackground } from "@/components/layout/site-background";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
+import { ChurchJsonLd } from "@/components/seo/church-json-ld";
+import { absoluteUrl, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -20,31 +22,57 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
+const ogImage = absoluteUrl("/assets/fotos/congregacion-culto-opt.webp");
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://shekinah-sv.vercel.app"),
-  title: "Iglesia Bautista Shekinah",
-  description:
-    "Sitio web de Iglesia Bautista Shekinah: horarios, ubicación, ministerios, ayuda, donaciones y redes sociales.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_NAME,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "Iglesia Bautista Shekinah",
+    "San Juan Opico",
+    "El Salvador",
+    "iglesia",
+    "culto",
+    "horarios",
+  ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
-    url: "https://shekinah-sv.vercel.app/",
-    title: "Iglesia Bautista Shekinah",
-    description:
-      "Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador.",
-    images: ["/assets/fotos/congregacion-culto.webp"],
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — congregación en culto`,
+      },
+    ],
     locale: "es_SV",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Iglesia Bautista Shekinah",
-    description:
-      "Horarios, ubicación, ministerios y contacto de Iglesia Bautista Shekinah en San Juan Opico, El Salvador.",
-    images: ["/assets/fotos/congregacion-culto.webp"],
+    title: SITE_NAME,
+    description: SITE_DESCRIPTION,
+    images: [ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
 export const viewport = {
-  themeColor: "#65101a",
+  themeColor: "#111A2E",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -54,6 +82,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Script id="force-light-theme" strategy="beforeInteractive">
           {`document.documentElement.classList.remove("dark");try{localStorage.removeItem("shekinah-theme")}catch(e){}`}
         </Script>
+        <ChurchJsonLd />
         <AppProviders>
           <SiteBackground />
           <SiteHeader />

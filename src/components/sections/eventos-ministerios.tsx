@@ -28,11 +28,11 @@ export function Eventos() {
         <Reveal className="mx-auto mt-8 w-full max-w-lg">
           <Card className="group relative min-h-[240px] gap-0 overflow-hidden border-0 bg-transparent p-0 shadow-none ring-0 sm:min-h-[280px]">
             <Image
-              src="/assets/fotos/congregacion-culto-lateral.png"
+              src="/assets/fotos/congregacion-culto-lateral.webp"
               alt=""
               fill
               className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 768px) 100vw, 480px"
+              sizes="(max-width: 768px) 100vw, 512px"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/45 to-black/20" aria-hidden />
             <CardContent className="relative z-10 flex min-h-[240px] flex-col gap-4 px-5 py-5 sm:min-h-[280px] sm:px-6 sm:py-6">

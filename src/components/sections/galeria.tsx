@@ -58,7 +58,7 @@ export function Galeria() {
                   alt={item.alt}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                  sizes="(max-width: 768px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 360px"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent opacity-80 transition-opacity group-hover:opacity-100" />
                 <div className="absolute bottom-0 left-0 right-0 p-3 text-left text-white opacity-100 transition-opacity duration-200 sm:p-4 sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-visible:opacity-100">
