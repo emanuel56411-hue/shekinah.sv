@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { AyudaFormSkeleton } from "@/components/ui/section-skeleton";
 import { useLanguage } from "@/components/providers/language-provider";
 import { HELP_TYPES } from "@/lib/constants";
 import { fetchPublicHelpRequests, saveHelpRequest, type HelpRequest } from "@/lib/supabase";
@@ -27,11 +28,20 @@ export function AyudaDonaciones() {
   const [status, setStatus] = useState<{ type: "info" | "success" | "error"; text: string } | null>(null);
   const [loading, setLoading] = useState(false);
   const [requests, setRequests] = useState<HelpRequest[]>([]);
+  const [boardReady, setBoardReady] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    const timer = window.setTimeout(() => {
-      if (!cancelled) setRequests([]);
+    const skeletonTimer = window.setTimeout(() => {
+      if (!cancelled) setShowSkeleton(true);
+    }, 160);
+    const failsafe = window.setTimeout(() => {
+      if (!cancelled) {
+        setRequests([]);
+        setBoardReady(true);
+        setShowSkeleton(false);
+      }
     }, 4000);
 
     fetchPublicHelpRequests()
@@ -42,12 +52,18 @@ export function AyudaDonaciones() {
         if (!cancelled) setRequests([]);
       })
       .finally(() => {
-        window.clearTimeout(timer);
+        if (!cancelled) {
+          window.clearTimeout(failsafe);
+          window.clearTimeout(skeletonTimer);
+          setShowSkeleton(false);
+          setBoardReady(true);
+        }
       });
 
     return () => {
       cancelled = true;
-      window.clearTimeout(timer);
+      window.clearTimeout(failsafe);
+      window.clearTimeout(skeletonTimer);
     };
   }, []);
 
@@ -116,13 +132,13 @@ export function AyudaDonaciones() {
               onChange={(e) => setName(e.target.value)}
               placeholder={t("form.namePlaceholder")}
               required
-              className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+              className="control-inset h-10 rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/40"
             />
           </div>
           <div className="space-y-2">
             <label className="text-sm font-medium text-white">{t("ayuda.typeLabel")}</label>
             <Select value={helpType} onValueChange={(value) => setHelpType(value ?? "General")}>
-              <SelectTrigger className="control-inset h-10 w-full rounded-[12px] border-black/15 bg-white text-[#1a1214]">
+              <SelectTrigger className="control-inset h-10 w-full rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214]">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -144,7 +160,7 @@ export function AyudaDonaciones() {
               minLength={10}
               maxLength={500}
               required
-              className="control-inset rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+              className="control-inset rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/40"
             />
           </div>
           <details className="rounded-[12px] bg-white/5 px-3 py-2">
@@ -159,7 +175,7 @@ export function AyudaDonaciones() {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder={t("ayuda.phonePlaceholder")}
                 autoComplete="tel"
-                className="control-inset h-10 rounded-[12px] border-black/15 bg-white text-[#1a1214] placeholder:text-black/45"
+                className="control-inset h-10 rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/40"
               />
             </div>
           </details>
@@ -195,41 +211,49 @@ export function AyudaDonaciones() {
           <p className="section-desc">{t("ayuda.description")}</p>
         </Reveal>
 
-        {showBoard ? (
+        {!boardReady ? (
+          showSkeleton ? (
+            <Reveal delay={0.08} className="mt-10 w-full max-w-md">
+              <AyudaFormSkeleton label={t("ayuda.loadingRequests")} />
+            </Reveal>
+          ) : null
+        ) : showBoard ? (
           <div className="mt-10 grid gap-8 lg:grid-cols-2 lg:items-start">
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2">
-              {requests.map((request) => (
-                <Card key={request.id} className="border-0 bg-transparent shadow-none ring-0">
-                  <CardHeader className="pb-2">
-                    <Badge variant="secondary" className="w-fit border-0 bg-white/10 text-[#f3c4cb]">
-                      {request.help_type}
-                    </Badge>
-                    <CardTitle className="text-lg text-white">
-                      {request.display_name || t("ayuda.anonymousName")}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <p className="text-sm text-white/75">{request.public_message}</p>
-                    <a
-                      href={buildWhatsappUrl(
-                        `Hola, quiero ayudar o consultar sobre esta solicitud: ${request.help_type} - ${request.public_message}`
-                      )}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={cn(
-                        buttonVariants({ size: "sm", variant: "outline" }),
-                        "gap-2 border-0 bg-white/10 text-white hover:bg-white/16"
-                      )}
-                    >
-                      <MessageCircle className="h-4 w-4" />
-                      {t("ayuda.coordinateBtn")}
-                    </a>
-                  </CardContent>
-                </Card>
+              {requests.map((request, index) => (
+                <Reveal key={request.id} delay={Math.min(index * 0.06, 0.18)}>
+                  <Card className="border-0 bg-transparent shadow-none ring-0">
+                    <CardHeader className="pb-2">
+                      <Badge variant="secondary" className="w-fit border-0 bg-white/10 text-[#f3c4cb]">
+                        {request.help_type}
+                      </Badge>
+                      <CardTitle className="text-lg text-white">
+                        {request.display_name || t("ayuda.anonymousName")}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-sm text-white/75">{request.public_message}</p>
+                      <a
+                        href={buildWhatsappUrl(
+                          `Hola, quiero ayudar o consultar sobre esta solicitud: ${request.help_type} - ${request.public_message}`
+                        )}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={cn(
+                          buttonVariants({ size: "sm", variant: "outline" }),
+                          "gap-2 border-0 bg-white/10 text-white hover:bg-white/16"
+                        )}
+                      >
+                        <MessageCircle className="h-4 w-4" />
+                        {t("ayuda.coordinateBtn")}
+                      </a>
+                    </CardContent>
+                  </Card>
+                </Reveal>
               ))}
             </div>
 
-            <Reveal delay={0.1} className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-lg">
+            <Reveal delay={0.12} className="mx-auto w-full max-w-md lg:mx-0 lg:max-w-lg">
               {form}
             </Reveal>
           </div>

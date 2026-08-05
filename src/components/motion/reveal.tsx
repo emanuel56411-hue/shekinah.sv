@@ -12,48 +12,47 @@ type RevealProps = {
 function isOnScreen(el: HTMLElement) {
   const rect = el.getBoundingClientRect();
   const vh = window.innerHeight || document.documentElement.clientHeight;
-  // Más generoso en móvil: dispara un poco antes de entrar
-  return rect.top < vh + 40 && rect.bottom > -40;
+  return rect.top < vh + 48 && rect.bottom > -48;
 }
 
 /**
  * Scroll reveal — SIEMPRE debe existir en las secciones principales.
  * NO ELIMINAR ni desactivar (regla del proyecto / usuario).
+ *
+ * NUNCA dejar contenido atrapado en opacity:0 (sobre todo en móvil).
+ * Debe haber respaldo por scroll/touch si el observer falla.
  */
 export function Reveal({ children, className, delay = 0 }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const reduceMotion = useReducedMotion();
   const inView = useInView(ref, {
     once: true,
-    amount: 0.05,
-    margin: "120px 0px 120px 0px",
+    amount: 0.12,
+    margin: "0px 0px -8% 0px",
   });
   const [ready, setReady] = useState(false);
-  const [forced, setForced] = useState(false);
+  const [mountVisible, setMountVisible] = useState(false);
+  const [scrollVisible, setScrollVisible] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
-    // Si ya está en pantalla al montar, no lo escondas
-    if (el && isOnScreen(el)) {
-      setForced(true);
-    }
+    if (el && isOnScreen(el)) setMountVisible(true);
     setReady(true);
   }, []);
 
-  // Respaldo: al hacer scroll, si entra en pantalla → animar / mostrar
   useEffect(() => {
-    if (!ready || reduceMotion || forced) return;
+    if (!ready || reduceMotion || mountVisible || scrollVisible || inView) return;
 
     const revealIfVisible = () => {
       const el = ref.current;
       if (!el) return;
-      if (isOnScreen(el)) setForced(true);
+      if (isOnScreen(el)) setScrollVisible(true);
     };
 
     window.addEventListener("scroll", revealIfVisible, { passive: true });
     window.addEventListener("touchmove", revealIfVisible, { passive: true });
     window.addEventListener("resize", revealIfVisible);
-    const interval = window.setInterval(revealIfVisible, 300);
+    const interval = window.setInterval(revealIfVisible, 350);
 
     return () => {
       window.removeEventListener("scroll", revealIfVisible);
@@ -61,7 +60,7 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
       window.removeEventListener("resize", revealIfVisible);
       window.clearInterval(interval);
     };
-  }, [ready, reduceMotion, forced]);
+  }, [ready, reduceMotion, mountVisible, scrollVisible, inView]);
 
   if (reduceMotion) {
     return (
@@ -71,7 +70,6 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
     );
   }
 
-  // Mientras no está listo: contenido visible (nunca pantalla en blanco)
   if (!ready) {
     return (
       <div ref={ref} className={className}>
@@ -80,18 +78,18 @@ export function Reveal({ children, className, delay = 0 }: RevealProps) {
     );
   }
 
-  const visible = inView || forced;
+  const visible = inView || mountVisible || scrollVisible;
 
   return (
     <motion.div
       ref={ref}
       className={className}
-      initial={forced ? false : { opacity: 0, y: 28 }}
-      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+      initial={mountVisible ? false : { opacity: 0, y: 40 }}
+      animate={visible ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{
-        duration: 0.6,
+        duration: 0.7,
         ease: [0.22, 1, 0.36, 1],
-        delay: visible && inView && !forced ? delay : 0,
+        delay: visible && !mountVisible ? delay : 0,
       }}
     >
       {children}

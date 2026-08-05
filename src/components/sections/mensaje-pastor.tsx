@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
+import { PastorWordSkeleton } from "@/components/ui/section-skeleton";
 import { useLanguage } from "@/components/providers/language-provider";
 import { toVideoEmbedUrl } from "@/lib/pastor-media";
 import { isPastorWordActive } from "@/lib/pastor-word";
@@ -41,8 +42,11 @@ export function MensajePastor() {
   const { t, lang } = useLanguage();
   const [post, setPost] = useState<PublicPastorPost | null>(null);
   const [ready, setReady] = useState(false);
+  const [showSkeleton, setShowSkeleton] = useState(false);
 
   useEffect(() => {
+    // Solo mostrar skeleton si la carga tarda un poco (evita parpadeo en redes rápidas)
+    const skeletonTimer = window.setTimeout(() => setShowSkeleton(true), 180);
     let cancelled = false;
 
     fetchPublicPastorPosts()
@@ -59,16 +63,41 @@ export function MensajePastor() {
         if (!cancelled) setPost(null);
       })
       .finally(() => {
-        if (!cancelled) setReady(true);
+        if (!cancelled) {
+          window.clearTimeout(skeletonTimer);
+          setShowSkeleton(false);
+          setReady(true);
+        }
       });
 
     return () => {
       cancelled = true;
+      window.clearTimeout(skeletonTimer);
     };
   }, []);
 
-  // Opción A: oculta si no hay post o ya pasaron 24h (se evalúa en cada carga)
-  if (!ready || !post) return null;
+  // Sin post vigente: no renderizar (después de cargar)
+  if (ready && !post) return null;
+
+  // Cargando: skeleton suave (solo si tardó >180ms)
+  if (!ready) {
+    if (!showSkeleton) return null;
+    return (
+      <section id="palabra" className="section-padding" aria-label={t("pastor.aria")}>
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <Reveal>
+            <h2 className="section-title mt-0 text-center">{t("pastor.title")}</h2>
+            <p className="section-desc mx-auto text-center">{t("pastor.description")}</p>
+          </Reveal>
+          <Reveal delay={0.06}>
+            <PastorWordSkeleton label={t("pastor.loading")} />
+          </Reveal>
+        </div>
+      </section>
+    );
+  }
+
+  if (!post) return null;
 
   const typeLabel = typeLabelFor(post, t);
   const videoSrc =
@@ -88,7 +117,7 @@ export function MensajePastor() {
           <p className="section-desc mx-auto text-center">{t("pastor.description")}</p>
         </Reveal>
 
-        <Reveal delay={0.08}>
+        <Reveal delay={0.1}>
           <article className="mt-10 px-1 py-4 text-center sm:px-2">
             <p className="text-[0.75rem] font-medium text-[#f3c4cb]">{typeLabel}</p>
 
