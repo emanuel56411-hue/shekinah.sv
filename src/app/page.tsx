@@ -15,10 +15,10 @@ export default function HomePage() {
       {/* IMPORTANTE: las secciones usan <Reveal> para el scroll interactivo. NO quitar. */}
       <Hero />
       <Horarios />
-      <AyudaDonaciones />
       <Galeria />
       <MensajePastor />
       <Ubicacion />
+      <AyudaDonaciones />
       <Eventos />
       <Ministerios />
       <Scripture />

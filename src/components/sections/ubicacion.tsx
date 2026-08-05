@@ -78,20 +78,24 @@ export function Ubicacion() {
 
         <Reveal delay={0.08}>
           <div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] bg-[#0a1218]">
+            <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[12px] bg-[#1a1214] ring-1 ring-white/10">
               <iframe
                 title={t("ubicacion.title")}
                 src={LINKS.mapsEmbed}
-                className="absolute inset-0 h-full w-full border-0"
+                className="absolute inset-0 h-full w-full border-0 brightness-[0.82] contrast-[0.95] saturate-[0.75]"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 allowFullScreen
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#1a1214]/55 via-transparent to-[#1a1214]/25"
+                aria-hidden
               />
               <a
                 href={LINKS.maps}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-[12px] bg-black/70 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-black/85"
+                className="absolute bottom-3 right-3 z-10 inline-flex items-center gap-1.5 rounded-[12px] bg-black/70 px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-black/85"
               >
                 {t("ubicacion.openMaps")}
                 <ExternalLink className="h-3.5 w-3.5" />

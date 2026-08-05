@@ -102,7 +102,7 @@ export function Horarios() {
           <p className="section-desc">{t("reuniones.description")}</p>
         </Reveal>
 
-        <div className="mx-auto mt-8 grid max-w-4xl gap-x-8 gap-y-1 sm:grid-cols-3">
+        <div className="mx-auto mt-8 grid max-w-3xl gap-x-10 gap-y-2 sm:grid-cols-2">
           {SCHEDULE.map((item, index) => {
             const isNext = matchNextId(item.titleKey, nextId);
             const Icon = SCHEDULE_ICONS[item.titleKey] ?? BookOpen;
@@ -121,14 +121,14 @@ export function Horarios() {
             );
           })}
 
-          <Reveal delay={0.24} className="sm:col-span-3">
+          <Reveal delay={0.24}>
             <ScheduleCard
               day={DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
               icon={Church}
               isHighlighted={sundayHasNext}
               statusLabel={statusLabel}
             >
-              <div className="max-w-md space-y-2.5">
+              <div className="space-y-2.5">
                 {SUNDAY_SCHEDULE.map((item) => {
                   const isNext = matchNextId(item.titleKey, nextId);
                   return (
