@@ -22,11 +22,46 @@ export const SUNDAY_SCHEDULE = [
 ] as const;
 
 export const MINISTRIES = [
-  { id: "diaconado", icon: "book", titleKey: "ministerios.item1Title", descKey: "ministerios.item1Desc" },
-  { id: "alabanza", icon: "music", titleKey: "ministerios.item2Title", descKey: "ministerios.item2Desc" },
-  { id: "acomodacion", icon: "welcome", titleKey: "ministerios.item3Title", descKey: "ministerios.item3Desc" },
-  { id: "escuela", icon: "child", titleKey: "ministerios.item4Title", descKey: "ministerios.item4Desc" },
-  { id: "aseo", icon: "clean", titleKey: "ministerios.item5Title", descKey: "ministerios.item5Desc" },
+  {
+    id: "diaconado",
+    icon: "book",
+    titleKey: "ministerios.item1Title",
+    descKey: "ministerios.item1Desc",
+    leader: "Hna. Cristina",
+    phone: "7939 8749",
+  },
+  {
+    id: "alabanza",
+    icon: "music",
+    titleKey: "ministerios.item2Title",
+    descKey: "ministerios.item2Desc",
+    leader: "Hno. Gerson",
+    phone: "6446 5489",
+  },
+  {
+    id: "acomodacion",
+    icon: "welcome",
+    titleKey: "ministerios.item3Title",
+    descKey: "ministerios.item3Desc",
+    leader: "Hna. Bessy",
+    phone: "7830 3270",
+  },
+  {
+    id: "escuela",
+    icon: "child",
+    titleKey: "ministerios.item4Title",
+    descKey: "ministerios.item4Desc",
+    leader: "Hna. Daniela",
+    phone: "7904 2375",
+  },
+  {
+    id: "aseo",
+    icon: "clean",
+    titleKey: "ministerios.item5Title",
+    descKey: "ministerios.item5Desc",
+    leader: "Pastor Ovidio",
+    phone: "7873 7213",
+  },
 ] as const;
 
 export const EVENTS = [

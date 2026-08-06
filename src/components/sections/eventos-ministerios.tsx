@@ -4,19 +4,21 @@ import Image from "next/image";
 import {
   BookOpen,
   CalendarDays,
+  ChevronDown,
   DoorOpen,
   HandHeart,
+  MessageCircle,
   Mic2,
   Sparkles,
   type LucideIcon,
 } from "lucide-react";
+import { useState } from "react";
 import { Reveal } from "@/components/motion/reveal";
 import { Card, CardContent } from "@/components/ui/card";
 import { useCalendarModal } from "@/components/providers/calendar-provider";
 import { useLanguage } from "@/components/providers/language-provider";
 import { EVENTS, MINISTRIES } from "@/lib/constants";
-import { buildWhatsappUrl } from "@/lib/whatsapp";
-import { buttonVariants } from "@/components/ui/button";
+import { buildWhatsappUrlForPhone } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
 const MINISTRY_ICONS: Record<string, LucideIcon> = {
@@ -76,6 +78,7 @@ export function Eventos() {
 
 export function Ministerios() {
   const { t } = useLanguage();
+  const [openMinistryId, setOpenMinistryId] = useState<string | null>(null);
 
   return (
     <section id="ministerios" className="section-padding">
@@ -88,6 +91,10 @@ export function Ministerios() {
           {MINISTRIES.map((ministry, index) => {
             const number = String(index + 1).padStart(2, "0");
             const Icon = MINISTRY_ICONS[ministry.icon] ?? Sparkles;
+            const title = t(ministry.titleKey);
+            const isOpen = openMinistryId === ministry.id;
+            const contactId = `ministerio-contacto-${ministry.id}`;
+            const whatsappMessage = `Hola, me interesa servir en el ministerio de ${title}.`;
             return (
               <Reveal
                 key={ministry.id}
@@ -96,55 +103,79 @@ export function Ministerios() {
               >
                 <article
                   data-ministry-frame
-                  className="group relative flex h-full min-h-[178px] items-start gap-4 overflow-hidden rounded-[16px] px-4 py-4 transition-all duration-300 ease-out active:-translate-y-0.5 sm:px-5 sm:py-5 md:hover:-translate-y-1"
+                  className="group relative flex h-full min-h-[178px] flex-col overflow-hidden rounded-[16px] px-4 py-4 transition-all duration-300 ease-out active:-translate-y-0.5 sm:px-5 sm:py-5 md:hover:-translate-y-1"
                 >
                   <span
                     className="absolute inset-y-5 left-0 w-px rounded-full bg-[#8fa3b8]/55 transition-colors duration-300 group-hover:bg-[#d9c68a]/80"
                     aria-hidden
                   />
-                  <div className="flex shrink-0 flex-col items-center gap-2">
-                    <span
-                      className="font-heading text-2xl font-semibold leading-none text-[#d9c68a]"
+                  <button
+                    type="button"
+                    onClick={() => setOpenMinistryId(isOpen ? null : ministry.id)}
+                    aria-expanded={isOpen}
+                    aria-controls={contactId}
+                    className="relative z-10 flex w-full items-start gap-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/45"
+                  >
+                    <div className="flex shrink-0 flex-col items-center gap-2">
+                      <span
+                        className="font-heading text-2xl font-semibold leading-none text-[#d9c68a]"
+                        aria-hidden
+                      >
+                        {number}
+                      </span>
+                      <span className="inline-flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#8fa3b8]/12 text-[#d9c68a] ring-1 ring-[#8fa3b8]/25 transition-colors duration-300 group-hover:bg-[#8fa3b8]/18 group-hover:text-[#f1dda0]">
+                        <Icon className="h-5 w-5" strokeWidth={1.75} />
+                      </span>
+                    </div>
+                    <div className="min-w-0 flex-1 pt-0.5">
+                      <h3 className="font-heading text-[1.35rem] font-semibold leading-tight text-white">
+                        {title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-white/70">
+                        {t(ministry.descKey)}
+                      </p>
+                    </div>
+                    <ChevronDown
+                      className={cn(
+                        "mt-1 h-4 w-4 shrink-0 text-white/55 transition-transform duration-300",
+                        isOpen && "rotate-180 text-[#d9c68a]"
+                      )}
                       aria-hidden
-                    >
-                      {number}
-                    </span>
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-[12px] bg-[#8fa3b8]/12 text-[#d9c68a] ring-1 ring-[#8fa3b8]/25 transition-colors duration-300 group-hover:bg-[#8fa3b8]/18 group-hover:text-[#f1dda0]">
-                      <Icon className="h-5 w-5" strokeWidth={1.75} />
-                    </span>
-                  </div>
-                  <div className="min-w-0 pt-0.5">
-                    <h3 className="font-heading text-[1.35rem] font-semibold leading-tight text-white">
-                      {t(ministry.titleKey)}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-white/70">
-                      {t(ministry.descKey)}
-                    </p>
+                    />
+                  </button>
+
+                  <div
+                    id={contactId}
+                    className={cn(
+                      "grid transition-[grid-template-rows,opacity] duration-300 ease-out",
+                      isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    )}
+                  >
+                    <div className="overflow-hidden">
+                      <div className="mt-4 border-t border-white/10 pt-4">
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/45">
+                          Líder
+                        </p>
+                        <p className="mt-1 font-heading text-lg font-semibold text-white">
+                          {ministry.leader}
+                        </p>
+                        <a
+                          href={buildWhatsappUrlForPhone(ministry.phone, whatsappMessage)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-3 inline-flex items-center justify-center gap-2 rounded-[12px] bg-[#8fa3b8] px-4 py-2.5 text-sm font-semibold text-[#111A2E] transition-colors hover:bg-[#9db0c4] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                        >
+                          <MessageCircle className="h-4 w-4" />
+                          WhatsApp {ministry.phone}
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </article>
               </Reveal>
             );
           })}
         </div>
-
-        <Reveal className="mt-12">
-          <div className="relative mx-auto flex max-w-3xl flex-col items-center justify-between gap-4 pt-7 text-center before:absolute before:left-6 before:right-6 before:top-0 before:h-px before:bg-gradient-to-r before:from-transparent before:via-[#8fa3b8]/45 before:to-transparent sm:flex-row sm:text-left">
-            <p className="font-heading text-lg font-semibold text-white/90">
-              {t("ministerios.calloutText")}
-            </p>
-            <a
-              href={buildWhatsappUrl()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(
-                buttonVariants({ variant: "outline" }),
-                "rounded-[12px] border-transparent bg-[#8fa3b8] text-[#111A2E] hover:bg-[#9db0c4] hover:text-[#111A2E]"
-              )}
-            >
-              {t("ministerios.calloutBtn")}
-            </a>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

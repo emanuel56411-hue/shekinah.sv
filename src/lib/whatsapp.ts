@@ -1,7 +1,17 @@
 import { COORDINATOR_PHONE } from "./constants";
 
+function normalizeWhatsappPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  return digits.length === 8 ? `503${digits}` : digits;
+}
+
 export function buildWhatsappUrl(message = ""): string {
   const baseUrl = `https://wa.me/${COORDINATOR_PHONE}`;
+  return message ? `${baseUrl}?text=${encodeURIComponent(message)}` : baseUrl;
+}
+
+export function buildWhatsappUrlForPhone(phone: string, message = ""): string {
+  const baseUrl = `https://wa.me/${normalizeWhatsappPhone(phone)}`;
   return message ? `${baseUrl}?text=${encodeURIComponent(message)}` : baseUrl;
 }
 
