@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { ImagePlus, Pencil, Plus, Trash2 } from "lucide-react";
 import { BibleIcon } from "@/components/icons/bible-icon";
@@ -471,9 +470,13 @@ export default function AdminPastorPage() {
                     )}
 
                     {form.media_kind === "image" && form.media_url ? (
-                      <div className="relative mt-2 overflow-hidden rounded-xl border border-black/10">
+                      <div className="relative mt-2 rounded-xl border border-black/10 bg-black/5 p-2">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img src={form.media_url} alt="Vista previa" className="max-h-56 w-full object-cover" />
+                        <img
+                          src={form.media_url}
+                          alt="Vista previa"
+                          className="mx-auto h-auto max-h-72 w-auto max-w-full rounded-lg object-contain"
+                        />
                         <Button
                           type="button"
                           size="sm"
@@ -584,13 +587,12 @@ export default function AdminPastorPage() {
                             <span className="text-xs text-muted-foreground">{formatDate(post.published_at)}</span>
                           </div>
                           {post.media_kind === "image" && post.media_url ? (
-                            <div className="relative h-40 overflow-hidden rounded-xl bg-black/5">
-                              <Image
+                            <div className="rounded-xl bg-black/5 p-2">
+                              {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <img
                                 src={post.media_url}
                                 alt=""
-                                fill
-                                unoptimized
-                                className="object-cover"
+                                className="mx-auto h-auto max-h-56 w-auto max-w-full rounded-lg object-contain"
                               />
                             </div>
                           ) : null}

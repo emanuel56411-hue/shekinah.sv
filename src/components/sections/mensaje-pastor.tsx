@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import { Reveal } from "@/components/motion/reveal";
 import { PastorWordSkeleton } from "@/components/ui/section-skeleton";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -122,14 +121,12 @@ export function MensajePastor() {
             <p className="text-[0.75rem] font-medium text-[#f3c4cb]">{typeLabel}</p>
 
             {post.media_kind === "image" && post.media_url ? (
-              <div className="relative mx-auto mt-6 aspect-[4/3] w-full max-w-xl overflow-hidden rounded-[12px]">
-                <Image
+              <div className="mx-auto mt-6 w-full max-w-xl">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
                   src={post.media_url}
                   alt={post.content || typeLabel}
-                  fill
-                  unoptimized
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 576px"
+                  className="mx-auto h-auto max-h-[70vh] w-auto max-w-full rounded-[12px] object-contain"
                 />
               </div>
             ) : null}

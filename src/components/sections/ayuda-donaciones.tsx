@@ -205,15 +205,15 @@ export function AyudaDonaciones() {
   return (
     <section id="ayuda" className="section-padding">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Reveal>
+        <Reveal className="mx-auto max-w-md text-center">
           <p className="eyebrow">{t("ayuda.eyebrow")}</p>
           <h2 className="section-title">{t("ayuda.title")}</h2>
-          <p className="section-desc">{t("ayuda.description")}</p>
+          <p className="section-desc mx-auto">{t("ayuda.description")}</p>
         </Reveal>
 
         {!boardReady ? (
           showSkeleton ? (
-            <Reveal delay={0.08} className="mt-10 w-full max-w-md">
+            <Reveal delay={0.08} className="mx-auto mt-10 w-full max-w-md">
               <AyudaFormSkeleton label={t("ayuda.loadingRequests")} />
             </Reveal>
           ) : null
@@ -258,7 +258,7 @@ export function AyudaDonaciones() {
             </Reveal>
           </div>
         ) : (
-          <Reveal delay={0.1} className="mt-10 w-full max-w-md">
+          <Reveal delay={0.1} className="mx-auto mt-10 w-full max-w-md">
             {form}
           </Reveal>
         )}

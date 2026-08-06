@@ -59,9 +59,6 @@ const navItems: NavItem[] = [
   { href: "#redes", titleKey: "nav.redes", icon: Share2, action: "social" },
 ];
 
-const navLinkClass =
-  "rounded-[12px] px-2 py-2 text-[0.82rem] font-medium text-white [text-shadow:0_1px_2px_rgba(0,0,0,0.85),0_2px_10px_rgba(0,0,0,0.45)] transition-colors hover:bg-white/12 hover:underline hover:underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah xl:px-2.5 xl:text-sm";
-
 function getScrollY() {
   return (
     window.scrollY ||
@@ -212,45 +209,15 @@ export function SiteHeader() {
           </Link>
 
           <div className="ml-auto flex items-center gap-2">
-            <nav aria-label={t("header.navAria")} className="hidden items-center gap-0.5 lg:flex">
-              {navItems.map((item) =>
-                item.action === "social" ? (
-                  <button key={item.href} type="button" onClick={openSocial} className={navLinkClass}>
-                    {t(item.titleKey)}
-                  </button>
-                ) : item.href === "#palabra" ? (
-                  <a key={item.href} href={item.href} onClick={handlePalabraNav} className={navLinkClass}>
-                    {t(item.titleKey)}
-                  </a>
-                ) : (
-                  <Link key={item.href} href={item.href} className={navLinkClass}>
-                    {t(item.titleKey)}
-                  </Link>
-                )
-              )}
-              <button type="button" onClick={openCalendar} className={navLinkClass}>
-                {t("nav.calendario")}
-              </button>
-              <button
-                type="button"
-                onClick={() => setLang(lang === "es" ? "en" : "es")}
-                className="ml-1 rounded-[12px] bg-white/10 px-2.5 py-1.5 text-xs font-semibold text-white transition-colors hover:bg-white/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shekinah"
-                aria-label={lang === "es" ? t("lang.ariaToEnglish") : t("lang.ariaToSpanish")}
-              >
-                {lang === "es" ? t("lang.toEnglish") : t("lang.toSpanish")}
-              </button>
-            </nav>
-
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger
                 className={cn(
                   buttonVariants({ variant: "outline", size: "sm" }),
-                  "gap-2 border-0 bg-white/10 text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-white/16 hover:text-white lg:hidden"
+                  "gap-2 border-0 bg-white/10 text-white shadow-none [text-shadow:0_0_4px_rgba(0,0,0,0.9)] hover:bg-white/16 hover:text-white"
                 )}
                 aria-label={t("menu.openAria")}
               >
                 <Menu className="h-4 w-4" />
-                <span className="hidden sm:inline">{t("menu.title")}</span>
               </SheetTrigger>
 
               <SheetContent
