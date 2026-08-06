@@ -13,10 +13,13 @@ import { buttonVariants } from "@/components/ui/button";
 import { useLanguage } from "@/components/providers/language-provider";
 import {
   CALENDAR_EVENTS,
+  type CalendarEvent,
   eventsForDate,
   hasEventsOnDate,
+  siteCalendarEventsToCalendarEvents,
   toDateKey,
 } from "@/lib/calendar-events";
+import { fetchPublicSiteCalendarEvents } from "@/lib/supabase";
 import { cn } from "@/lib/utils";
 
 type CalendarModalProps = {
@@ -63,6 +66,7 @@ export function CalendarModal({ open, onOpenChange }: CalendarModalProps) {
 
   const [viewDate, setViewDate] = useState(() => startOfMonth(new Date()));
   const [selectedKey, setSelectedKey] = useState<string | null>(todayKey);
+  const [dynamicEvents, setDynamicEvents] = useState<CalendarEvent[]>([]);
 
   useEffect(() => {
     if (!open) return;
@@ -70,8 +74,22 @@ export function CalendarModal({ open, onOpenChange }: CalendarModalProps) {
     setSelectedKey(toDateKey(new Date()));
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    let cancelled = false;
+    fetchPublicSiteCalendarEvents().then((rows) => {
+      if (!cancelled && rows.length > 0) {
+        setDynamicEvents(siteCalendarEventsToCalendarEvents(rows));
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [open]);
+
   const cells = useMemo(() => buildMonthGrid(viewDate), [viewDate]);
-  const selectedEvents = selectedKey ? eventsForDate(selectedKey, CALENDAR_EVENTS) : [];
+  const calendarEvents = dynamicEvents.length > 0 ? dynamicEvents : CALENDAR_EVENTS;
+  const selectedEvents = selectedKey ? eventsForDate(selectedKey, calendarEvents) : [];
 
   const monthLabel = viewDate.toLocaleDateString(lang === "es" ? "es-SV" : "en-US", {
     month: "long",
@@ -159,7 +177,7 @@ export function CalendarModal({ open, onOpenChange }: CalendarModalProps) {
           {cells.map((cell) => {
             const isToday = cell.key === todayKey;
             const isSelected = cell.key === selectedKey;
-            const hasEvent = hasEventsOnDate(cell.key, CALENDAR_EVENTS);
+            const hasEvent = hasEventsOnDate(cell.key, calendarEvents);
 
             return (
               <button
@@ -210,7 +228,7 @@ export function CalendarModal({ open, onOpenChange }: CalendarModalProps) {
           {selectedEvents.length > 0 ? (
             <ul className="mt-3 space-y-3">
               {selectedEvents.map((event) => (
-                <li key={`${event.fecha}-${event.titulo}-${event.hora}`} className="border-t border-black/10 pt-3 first:border-t-0 first:pt-0">
+                <li key={event.id ?? `${event.fecha}-${event.titulo}-${event.hora}`} className="border-t border-black/10 pt-3 first:border-t-0 first:pt-0">
                   <p className="font-heading text-base font-semibold text-foreground">{event.titulo}</p>
                   <p className="mt-0.5 text-sm font-medium text-shekinah">{event.hora}</p>
                   <p className="mt-1 text-sm text-muted-foreground">{event.descripcion}</p>

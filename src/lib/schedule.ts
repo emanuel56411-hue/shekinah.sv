@@ -11,6 +11,16 @@ export type ServiceSlot = {
   timeLabel: string;
 };
 
+export type SiteScheduleSource = {
+  id: string;
+  day_of_week: number;
+  day_label: string;
+  title: string;
+  start_time: string;
+  end_time: string;
+  sort_order?: number;
+};
+
 export type UpcomingService = ServiceSlot & {
   isLive: boolean;
   /** Minutos absolutos desde un ancla semanal (para ordenar) */
@@ -132,6 +142,45 @@ function toMinutes(hour: number, minute: number): number {
   return hour * 60 + minute;
 }
 
+function parseClock(value: string) {
+  const [hour = "0", minute = "0"] = value.split(":");
+  return {
+    hour: Number(hour) || 0,
+    minute: Number(minute) || 0,
+  };
+}
+
+export function formatScheduleTime(value: string): string {
+  const { hour, minute } = parseClock(value);
+  const period = hour >= 12 ? "p.m." : "a.m.";
+  const normalized = hour % 12 || 12;
+  return `${normalized}:${String(minute).padStart(2, "0")} ${period}`;
+}
+
+export function formatScheduleRange(start: string, end: string): string {
+  return `${formatScheduleTime(start)} - ${formatScheduleTime(end)}`;
+}
+
+export function siteSchedulesToServiceSlots(schedules: SiteScheduleSource[]): ServiceSlot[] {
+  return [...schedules]
+    .sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+    .map((schedule) => {
+      const start = parseClock(schedule.start_time);
+      const end = parseClock(schedule.end_time);
+      return {
+        id: schedule.id,
+        day: schedule.day_of_week,
+        startHour: start.hour,
+        startMinute: start.minute,
+        endHour: end.hour,
+        endMinute: end.minute,
+        dayKey: schedule.day_label,
+        titleKey: schedule.title,
+        timeLabel: formatScheduleTime(schedule.start_time),
+      };
+    });
+}
+
 /** Vista estable para SSR / primer paint (Domingo + Martes/Jueves). */
 export function getDefaultHeroServices(): UpcomingService[] {
   const sunday = SERVICE_SLOTS.find((s) => s.id === "sunday1")!;
@@ -150,12 +199,20 @@ export function getDefaultHeroServices(): UpcomingService[] {
  * Si hay uno en curso, ese va primero con `isLive: true`.
  */
 export function getUpcomingServices(now = new Date(), count = 3): UpcomingService[] {
+  return getUpcomingServicesFromSlots(SERVICE_SLOTS, now, count);
+}
+
+export function getUpcomingServicesFromSlots(
+  slots: ServiceSlot[],
+  now = new Date(),
+  count = 3
+): UpcomingService[] {
   const parts = getTzParts(now);
   const nowMinutes = toMinutes(parts.hour, parts.minute);
   const results: UpcomingService[] = [];
 
   for (let weekOffset = 0; weekOffset <= 1 && results.length < count; weekOffset++) {
-    const ordered = [...SERVICE_SLOTS].sort((a, b) => {
+    const ordered = [...slots].sort((a, b) => {
       const aKey = a.day * 1440 + toMinutes(a.startHour, a.startMinute);
       const bKey = b.day * 1440 + toMinutes(b.startHour, b.startMinute);
       return aKey - bKey;

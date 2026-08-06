@@ -1,8 +1,8 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { ImagePlus, Pencil, Plus, Trash2 } from "lucide-react";
+import { CalendarDays, Clock3, ImagePlus, Pencil, Plus, Trash2 } from "lucide-react";
 import { BibleIcon } from "@/components/icons/bible-icon";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -15,15 +15,44 @@ import { isLikelyImageUrl, toVideoEmbedUrl } from "@/lib/pastor-media";
 import {
   createPastorPost,
   deletePastorPost,
+  deleteSiteCalendarEvent,
+  deleteSiteSchedule,
   listPastorPostsAdmin,
+  listSiteCalendarEventsAdmin,
+  listSiteSchedulesAdmin,
   updatePastorPost,
+  upsertSiteCalendarEvent,
+  upsertSiteSchedule,
   uploadPastorImage,
   verifyPastorAdmin,
   type PastorPost,
   type PastorPostType,
+  type SiteCalendarEvent,
+  type SiteCalendarEventPayload,
+  type SiteSchedule,
+  type SiteSchedulePayload,
 } from "@/lib/supabase";
+import { cn } from "@/lib/utils";
 
 const ADMIN_TOKEN_KEY = "shekinah-pastor-admin";
+
+type AdminTab = "palabra" | "horarios" | "calendario";
+
+const ADMIN_TABS: { id: AdminTab; label: string }[] = [
+  { id: "palabra", label: "Palabra del Día" },
+  { id: "horarios", label: "Horarios" },
+  { id: "calendario", label: "Calendario" },
+];
+
+const DAY_OPTIONS = [
+  { value: 0, label: "Domingo" },
+  { value: 1, label: "Lunes" },
+  { value: 2, label: "Martes" },
+  { value: 3, label: "Miércoles" },
+  { value: 4, label: "Jueves" },
+  { value: 5, label: "Viernes" },
+  { value: 6, label: "Sábado" },
+];
 
 const TYPE_OPTIONS: { value: PastorPostType; label: string }[] = [
   { value: "versiculo", label: "Versículo" },
@@ -45,6 +74,31 @@ function emptyForm() {
   };
 }
 
+function emptyScheduleForm(): SiteSchedulePayload {
+  return {
+    id: null,
+    day_of_week: 2,
+    day_label: "Martes",
+    title: "",
+    start_time: "19:00",
+    end_time: "20:30",
+    is_active: true,
+    sort_order: 0,
+  };
+}
+
+function emptyCalendarForm(): SiteCalendarEventPayload {
+  return {
+    id: null,
+    event_date: new Date().toISOString().slice(0, 10),
+    title: "",
+    event_time: "",
+    description: "",
+    is_active: true,
+    sort_order: 0,
+  };
+}
+
 function formatDate(value: string) {
   try {
     return new Intl.DateTimeFormat("es-SV", {
@@ -63,16 +117,25 @@ export default function AdminPastorPage() {
   const [token, setToken] = useState("");
   const [password, setPassword] = useState("");
   const [authed, setAuthed] = useState(false);
+  const [activeTab, setActiveTab] = useState<AdminTab>("palabra");
   const [checking, setChecking] = useState(true);
   const [posts, setPosts] = useState<PastorPost[]>([]);
   const [loadingList, setLoadingList] = useState(false);
+  const [schedules, setSchedules] = useState<SiteSchedule[]>([]);
+  const [loadingSchedules, setLoadingSchedules] = useState(false);
+  const [calendarEvents, setCalendarEvents] = useState<SiteCalendarEvent[]>([]);
+  const [loadingCalendarEvents, setLoadingCalendarEvents] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [scheduleEditingId, setScheduleEditingId] = useState<string | null>(null);
+  const [calendarEditingId, setCalendarEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm());
+  const [scheduleForm, setScheduleForm] = useState(emptyScheduleForm());
+  const [calendarForm, setCalendarForm] = useState(emptyCalendarForm());
 
-  const loadPosts = async (adminToken: string) => {
+  const loadPosts = useCallback(async (adminToken: string) => {
     setLoadingList(true);
     try {
       const rows = await listPastorPostsAdmin(adminToken);
@@ -83,7 +146,35 @@ export default function AdminPastorPage() {
     } finally {
       setLoadingList(false);
     }
-  };
+  }, []);
+
+  const loadSchedules = useCallback(async (adminToken: string) => {
+    setLoadingSchedules(true);
+    try {
+      setSchedules(await listSiteSchedulesAdmin(adminToken));
+    } catch {
+      setSchedules([]);
+      setStatus({ type: "error", text: "No se pudieron cargar horarios. Ejecuta supabase-site-content.sql." });
+    } finally {
+      setLoadingSchedules(false);
+    }
+  }, []);
+
+  const loadCalendarEvents = useCallback(async (adminToken: string) => {
+    setLoadingCalendarEvents(true);
+    try {
+      setCalendarEvents(await listSiteCalendarEventsAdmin(adminToken));
+    } catch {
+      setCalendarEvents([]);
+      setStatus({ type: "error", text: "No se pudieron cargar eventos. Ejecuta supabase-site-content.sql." });
+    } finally {
+      setLoadingCalendarEvents(false);
+    }
+  }, []);
+
+  const loadAdminData = useCallback(async (adminToken: string) => {
+    await Promise.all([loadPosts(adminToken), loadSchedules(adminToken), loadCalendarEvents(adminToken)]);
+  }, [loadCalendarEvents, loadPosts, loadSchedules]);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(ADMIN_TOKEN_KEY) || "";
@@ -101,14 +192,14 @@ export default function AdminPastorPage() {
         }
         setToken(saved);
         setAuthed(true);
-        await loadPosts(saved);
+        await loadAdminData(saved);
         setChecking(false);
       })
       .catch(() => {
         sessionStorage.removeItem(ADMIN_TOKEN_KEY);
         setChecking(false);
       });
-  }, []);
+  }, [loadAdminData]);
 
   const handleLogin = async (event: FormEvent) => {
     event.preventDefault();
@@ -123,7 +214,7 @@ export default function AdminPastorPage() {
     setToken(next);
     setAuthed(true);
     setPassword("");
-    await loadPosts(next);
+    await loadAdminData(next);
   };
 
   const handleLogout = () => {
@@ -131,8 +222,14 @@ export default function AdminPastorPage() {
     setToken("");
     setAuthed(false);
     setPosts([]);
+    setSchedules([]);
+    setCalendarEvents([]);
     setEditingId(null);
+    setScheduleEditingId(null);
+    setCalendarEditingId(null);
     setForm(emptyForm());
+    setScheduleForm(emptyScheduleForm());
+    setCalendarForm(emptyCalendarForm());
   };
 
   const startEdit = (post: PastorPost) => {
@@ -262,6 +359,134 @@ export default function AdminPastorPage() {
     }
   };
 
+  const startScheduleEdit = (schedule: SiteSchedule) => {
+    setScheduleEditingId(schedule.id);
+    setScheduleForm({
+      id: schedule.id,
+      day_of_week: schedule.day_of_week,
+      day_label: schedule.day_label,
+      title: schedule.title,
+      start_time: schedule.start_time.slice(0, 5),
+      end_time: schedule.end_time.slice(0, 5),
+      is_active: schedule.is_active,
+      sort_order: schedule.sort_order,
+    });
+    setStatus(null);
+  };
+
+  const resetScheduleForm = () => {
+    setScheduleEditingId(null);
+    setScheduleForm(emptyScheduleForm());
+  };
+
+  const handleScheduleSave = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!scheduleForm.title.trim() || !scheduleForm.day_label.trim()) {
+      setStatus({ type: "error", text: "Completa el día y nombre de la actividad." });
+      return;
+    }
+    setSaving(true);
+    setStatus(null);
+    try {
+      await upsertSiteSchedule(token, {
+        ...scheduleForm,
+        id: scheduleEditingId,
+        title: scheduleForm.title.trim(),
+        day_label: scheduleForm.day_label.trim(),
+      });
+      setStatus({ type: "success", text: scheduleEditingId ? "Horario actualizado." : "Horario creado." });
+      resetScheduleForm();
+      await loadSchedules(token);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        text:
+          error instanceof Error && error.message === "unauthorized"
+            ? "Sesión no válida. Vuelve a iniciar sesión."
+            : "No se pudo guardar el horario. Ejecuta supabase-site-content.sql.",
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleScheduleDelete = async (id: string) => {
+    if (!window.confirm("¿Eliminar este horario?")) return;
+    setStatus(null);
+    try {
+      await deleteSiteSchedule(token, id);
+      if (scheduleEditingId === id) resetScheduleForm();
+      await loadSchedules(token);
+      setStatus({ type: "success", text: "Horario eliminado." });
+    } catch {
+      setStatus({ type: "error", text: "No se pudo eliminar el horario." });
+    }
+  };
+
+  const startCalendarEdit = (event: SiteCalendarEvent) => {
+    setCalendarEditingId(event.id);
+    setCalendarForm({
+      id: event.id,
+      event_date: event.event_date,
+      title: event.title,
+      event_time: event.event_time,
+      description: event.description,
+      is_active: event.is_active,
+      sort_order: event.sort_order,
+    });
+    setStatus(null);
+  };
+
+  const resetCalendarForm = () => {
+    setCalendarEditingId(null);
+    setCalendarForm(emptyCalendarForm());
+  };
+
+  const handleCalendarSave = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!calendarForm.event_date || !calendarForm.title.trim()) {
+      setStatus({ type: "error", text: "Completa la fecha y el nombre del evento." });
+      return;
+    }
+    setSaving(true);
+    setStatus(null);
+    try {
+      await upsertSiteCalendarEvent(token, {
+        ...calendarForm,
+        id: calendarEditingId,
+        title: calendarForm.title.trim(),
+        event_time: calendarForm.event_time.trim(),
+        description: calendarForm.description.trim(),
+      });
+      setStatus({ type: "success", text: calendarEditingId ? "Evento actualizado." : "Evento creado." });
+      resetCalendarForm();
+      await loadCalendarEvents(token);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        text:
+          error instanceof Error && error.message === "unauthorized"
+            ? "Sesión no válida. Vuelve a iniciar sesión."
+            : "No se pudo guardar el evento. Ejecuta supabase-site-content.sql.",
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleCalendarDelete = async (id: string) => {
+    if (!window.confirm("¿Eliminar este evento del calendario?")) return;
+    setStatus(null);
+    try {
+      await deleteSiteCalendarEvent(token, id);
+      if (calendarEditingId === id) resetCalendarForm();
+      await loadCalendarEvents(token);
+      setStatus({ type: "success", text: "Evento eliminado." });
+    } catch {
+      setStatus({ type: "error", text: "No se pudo eliminar el evento." });
+    }
+  };
+
   const typeLabel = (type: PastorPostType) =>
     TYPE_OPTIONS.find((item) => item.value === type)?.label || type;
 
@@ -331,6 +556,26 @@ export default function AdminPastorPage() {
               </Button>
             </div>
 
+            <div className="flex flex-wrap gap-2 rounded-[14px] bg-black/[0.03] p-1">
+              {ADMIN_TABS.map((tab) => (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setActiveTab(tab.id)}
+                  className={cn(
+                    "rounded-[12px] px-3 py-2 text-sm font-semibold transition-colors",
+                    activeTab === tab.id
+                      ? "bg-[#65101a] text-white"
+                      : "text-muted-foreground hover:bg-black/5 hover:text-foreground"
+                  )}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+
+            {activeTab === "palabra" ? (
+              <>
             <Card className="shadow-card">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-lg">
@@ -625,6 +870,334 @@ export default function AdminPastorPage() {
                 </ul>
               )}
             </section>
+              </>
+            ) : activeTab === "horarios" ? (
+              <section className="space-y-6">
+                <Card className="shadow-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      {scheduleEditingId ? <Pencil className="h-4 w-4" /> : <Clock3 className="h-4 w-4" />}
+                      {scheduleEditingId ? "Editar horario" : "Nuevo horario"}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="grid gap-4 sm:grid-cols-2" onSubmit={handleScheduleSave}>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium">Día</label>
+                        <Select
+                          value={String(scheduleForm.day_of_week)}
+                          onValueChange={(value) => {
+                            const day = Number(value);
+                            const label = DAY_OPTIONS.find((item) => item.value === day)?.label || "Martes";
+                            setScheduleForm((prev) => ({ ...prev, day_of_week: day, day_label: label }));
+                          }}
+                        >
+                          <SelectTrigger className="control-inset h-10 w-full bg-white">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {DAY_OPTIONS.map((day) => (
+                              <SelectItem key={day.value} value={String(day.value)}>
+                                {day.label}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="schedule-title">
+                          Actividad
+                        </label>
+                        <Input
+                          id="schedule-title"
+                          value={scheduleForm.title}
+                          onChange={(e) => setScheduleForm((prev) => ({ ...prev, title: e.target.value }))}
+                          placeholder="Estudio bíblico"
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="schedule-start">
+                          Inicio
+                        </label>
+                        <Input
+                          id="schedule-start"
+                          type="time"
+                          value={scheduleForm.start_time}
+                          onChange={(e) => setScheduleForm((prev) => ({ ...prev, start_time: e.target.value }))}
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="schedule-end">
+                          Fin
+                        </label>
+                        <Input
+                          id="schedule-end"
+                          type="time"
+                          value={scheduleForm.end_time}
+                          onChange={(e) => setScheduleForm((prev) => ({ ...prev, end_time: e.target.value }))}
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="schedule-order">
+                          Orden
+                        </label>
+                        <Input
+                          id="schedule-order"
+                          type="number"
+                          value={scheduleForm.sort_order ?? 0}
+                          onChange={(e) =>
+                            setScheduleForm((prev) => ({ ...prev, sort_order: Number(e.target.value) || 0 }))
+                          }
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <label className="flex items-center gap-2 text-sm font-medium sm:pt-8">
+                        <input
+                          type="checkbox"
+                          checked={scheduleForm.is_active ?? true}
+                          onChange={(e) => setScheduleForm((prev) => ({ ...prev, is_active: e.target.checked }))}
+                          className="h-4 w-4 accent-[#65101a]"
+                        />
+                        Activo en el sitio
+                      </label>
+
+                      {status && (
+                        <p className={`text-sm sm:col-span-2 ${status.type === "error" ? "text-destructive" : "text-green-700"}`}>
+                          {status.text}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 sm:col-span-2">
+                        <Button type="submit" disabled={saving} className="btn-skeuo h-11 min-w-36">
+                          {saving ? "Guardando..." : scheduleEditingId ? "Guardar horario" : "Crear horario"}
+                        </Button>
+                        {scheduleEditingId ? (
+                          <Button type="button" variant="outline" className="h-11" onClick={resetScheduleForm}>
+                            Cancelar edición
+                          </Button>
+                        ) : null}
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+
+                <section className="space-y-3">
+                  <h2 className="font-heading text-xl font-semibold">Horarios guardados</h2>
+                  {loadingSchedules ? (
+                    <p className="text-sm text-muted-foreground">Cargando horarios...</p>
+                  ) : schedules.length === 0 ? (
+                    <Card className="shadow-card">
+                      <CardContent className="p-8 text-center text-sm text-muted-foreground">
+                        Aún no hay horarios. Ejecuta el SQL o crea el primero.
+                      </CardContent>
+                    </Card>
+                  ) : (
+                    <ul className="space-y-3">
+                      {schedules.map((schedule) => (
+                        <li key={schedule.id}>
+                          <Card className="shadow-card">
+                            <CardContent className="space-y-3 p-5">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <Badge variant="secondary" className="bg-shekinah/10 text-shekinah">
+                                  {schedule.day_label}
+                                </Badge>
+                                <Badge variant="secondary" className={schedule.is_active ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}>
+                                  {schedule.is_active ? "Activo" : "Inactivo"}
+                                </Badge>
+                              </div>
+                              <div>
+                                <p className="font-heading text-lg font-semibold">{schedule.title}</p>
+                                <p className="text-sm text-muted-foreground">
+                                  {schedule.start_time.slice(0, 5)} - {schedule.end_time.slice(0, 5)}
+                                </p>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                <Button type="button" size="sm" variant="outline" className="gap-1.5" onClick={() => startScheduleEdit(schedule)}>
+                                  <Pencil className="h-3.5 w-3.5" />
+                                  Editar
+                                </Button>
+                                <Button type="button" size="sm" variant="destructive" className="gap-1.5" onClick={() => handleScheduleDelete(schedule.id)}>
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                  Eliminar
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              </section>
+            ) : (
+              <section className="space-y-6">
+                <Card className="shadow-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      {calendarEditingId ? <Pencil className="h-4 w-4" /> : <CalendarDays className="h-4 w-4" />}
+                      {calendarEditingId ? "Editar evento" : "Nuevo evento"}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="grid gap-4 sm:grid-cols-2" onSubmit={handleCalendarSave}>
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="event-date">
+                          Fecha
+                        </label>
+                        <Input
+                          id="event-date"
+                          type="date"
+                          value={calendarForm.event_date}
+                          onChange={(e) => setCalendarForm((prev) => ({ ...prev, event_date: e.target.value }))}
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="event-time">
+                          Hora
+                        </label>
+                        <Input
+                          id="event-time"
+                          value={calendarForm.event_time}
+                          onChange={(e) => setCalendarForm((prev) => ({ ...prev, event_time: e.target.value }))}
+                          placeholder="7:00 p.m."
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2 sm:col-span-2">
+                        <label className="text-sm font-medium" htmlFor="event-title">
+                          Nombre del evento
+                        </label>
+                        <Input
+                          id="event-title"
+                          value={calendarForm.title}
+                          onChange={(e) => setCalendarForm((prev) => ({ ...prev, title: e.target.value }))}
+                          placeholder="Noche de oración"
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2 sm:col-span-2">
+                        <label className="text-sm font-medium" htmlFor="event-description">
+                          Descripción breve
+                        </label>
+                        <Textarea
+                          id="event-description"
+                          value={calendarForm.description}
+                          onChange={(e) => setCalendarForm((prev) => ({ ...prev, description: e.target.value }))}
+                          rows={3}
+                          className="control-inset bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="event-order">
+                          Orden
+                        </label>
+                        <Input
+                          id="event-order"
+                          type="number"
+                          value={calendarForm.sort_order ?? 0}
+                          onChange={(e) =>
+                            setCalendarForm((prev) => ({ ...prev, sort_order: Number(e.target.value) || 0 }))
+                          }
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <label className="flex items-center gap-2 text-sm font-medium sm:pt-8">
+                        <input
+                          type="checkbox"
+                          checked={calendarForm.is_active ?? true}
+                          onChange={(e) => setCalendarForm((prev) => ({ ...prev, is_active: e.target.checked }))}
+                          className="h-4 w-4 accent-[#65101a]"
+                        />
+                        Activo en el sitio
+                      </label>
+
+                      {status && (
+                        <p className={`text-sm sm:col-span-2 ${status.type === "error" ? "text-destructive" : "text-green-700"}`}>
+                          {status.text}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 sm:col-span-2">
+                        <Button type="submit" disabled={saving} className="btn-skeuo h-11 min-w-36">
+                          {saving ? "Guardando..." : calendarEditingId ? "Guardar evento" : "Crear evento"}
+                        </Button>
+                        {calendarEditingId ? (
+                          <Button type="button" variant="outline" className="h-11" onClick={resetCalendarForm}>
+                            Cancelar edición
+                          </Button>
+                        ) : null}
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+
+                <section className="space-y-3">
+                  <h2 className="font-heading text-xl font-semibold">Eventos guardados</h2>
+                  {loadingCalendarEvents ? (
+                    <p className="text-sm text-muted-foreground">Cargando eventos...</p>
+                  ) : calendarEvents.length === 0 ? (
+                    <Card className="shadow-card">
+                      <CardContent className="p-8 text-center text-sm text-muted-foreground">
+                        Aún no hay eventos. Ejecuta el SQL o crea el primero.
+                      </CardContent>
+                    </Card>
+                  ) : (
+                    <ul className="space-y-3">
+                      {calendarEvents.map((event) => (
+                        <li key={event.id}>
+                          <Card className="shadow-card">
+                            <CardContent className="space-y-3 p-5">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <Badge variant="secondary" className="bg-shekinah/10 text-shekinah">
+                                  {event.event_date}
+                                </Badge>
+                                <Badge variant="secondary" className={event.is_active ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}>
+                                  {event.is_active ? "Activo" : "Inactivo"}
+                                </Badge>
+                              </div>
+                              <div>
+                                <p className="font-heading text-lg font-semibold">{event.title}</p>
+                                <p className="text-sm font-medium text-shekinah">{event.event_time}</p>
+                                <p className="mt-1 text-sm text-muted-foreground">{event.description}</p>
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                <Button type="button" size="sm" variant="outline" className="gap-1.5" onClick={() => startCalendarEdit(event)}>
+                                  <Pencil className="h-3.5 w-3.5" />
+                                  Editar
+                                </Button>
+                                <Button type="button" size="sm" variant="destructive" className="gap-1.5" onClick={() => handleCalendarDelete(event.id)}>
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                  Eliminar
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              </section>
+            )}
           </div>
         )}
       </div>

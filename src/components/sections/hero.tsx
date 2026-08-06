@@ -1,10 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Clock3 } from "lucide-react";
 import { useLanguage } from "@/components/providers/language-provider";
-import { getUpcomingServices } from "@/lib/schedule";
+import {
+  getUpcomingServices,
+  getUpcomingServicesFromSlots,
+  siteSchedulesToServiceSlots,
+} from "@/lib/schedule";
+import { fetchPublicSiteSchedules, type PublicSiteSchedule } from "@/lib/supabase";
 import { buildWhatsappUrl } from "@/lib/whatsapp";
 import { cn } from "@/lib/utils";
 
@@ -19,27 +24,50 @@ function WhatsappIcon({ className }: { className?: string }) {
 const ctaBase =
   "inline-flex h-12 w-full min-w-[190px] items-center justify-center gap-2.5 rounded-[12px] px-8 font-sans text-[0.95rem] font-semibold transition-all duration-200 ease-out sm:w-auto focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black/40";
 
-function formatNextLabel(t: (key: string) => string): string {
-  const [next] = getUpcomingServices(new Date(), 1);
+function displayLabel(value: string, t: (key: string) => string): string {
+  return value.includes(".") ? t(value) : value;
+}
+
+function formatNextLabel(t: (key: string) => string, slots = siteSchedulesToServiceSlots([])): string {
+  const [next] =
+    slots.length > 0
+      ? getUpcomingServicesFromSlots(slots, new Date(), 1)
+      : getUpcomingServices(new Date(), 1);
   if (!next) {
     return `${t("hero.nextChip")} ${t("common.tuesday")} 7:00 p.m.`;
   }
   if (next.isLive) {
     return `${t("heroPanel.live")} · ${next.timeLabel}`;
   }
-  return `${t("hero.nextChip")} ${t(next.dayKey)} ${next.timeLabel}`;
+  return `${t("hero.nextChip")} ${displayLabel(next.dayKey, t)} ${next.timeLabel}`;
 }
 
 export function Hero() {
   const { t } = useLanguage();
   const [nextLabel, setNextLabel] = useState<string | null>(null);
+  const [siteSchedules, setSiteSchedules] = useState<PublicSiteSchedule[]>([]);
 
   useEffect(() => {
-    const refresh = () => setNextLabel(formatNextLabel(t));
+    let cancelled = false;
+    fetchPublicSiteSchedules().then((rows) => {
+      if (!cancelled && rows.length > 0) setSiteSchedules(rows);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const dynamicSlots = useMemo(
+    () => (siteSchedules.length > 0 ? siteSchedulesToServiceSlots(siteSchedules) : []),
+    [siteSchedules]
+  );
+
+  useEffect(() => {
+    const refresh = () => setNextLabel(formatNextLabel(t, dynamicSlots));
     refresh();
     const id = window.setInterval(refresh, 60_000);
     return () => window.clearInterval(id);
-  }, [t]);
+  }, [dynamicSlots, t]);
 
   const chipText = nextLabel ?? `${t("hero.nextChip")} ${t("common.tuesday")} 7:00 p.m.`;
 

@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { BookMarked, BookOpen, Church, Users, type LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { SCHEDULE, SUNDAY_SCHEDULE } from "@/lib/constants";
-import { getUpcomingServices } from "@/lib/schedule";
+import {
+  formatScheduleRange,
+  getUpcomingServices,
+  getUpcomingServicesFromSlots,
+  siteSchedulesToServiceSlots,
+} from "@/lib/schedule";
+import { fetchPublicSiteSchedules, type PublicSiteSchedule } from "@/lib/supabase";
 import { cn } from "@/lib/utils";
 
 const DAY_ABBR: Record<string, { es: string; en: string }> = {
@@ -21,6 +27,16 @@ const SCHEDULE_ICONS: Record<string, LucideIcon> = {
   "schedule.saturdayActivity": Users,
 };
 
+const DYNAMIC_DAY_ABBR: Record<number, { es: string; en: string }> = {
+  0: { es: "DOM", en: "SUN" },
+  1: { es: "LUN", en: "MON" },
+  2: { es: "MAR", en: "TUE" },
+  3: { es: "MIÉ", en: "WED" },
+  4: { es: "JUE", en: "THU" },
+  5: { es: "VIE", en: "FRI" },
+  6: { es: "SÁB", en: "SAT" },
+};
+
 function matchNextId(titleKey: string, nextId: string | null): boolean {
   if (!nextId) return false;
   if (titleKey === "schedule.tuesdayActivity") return nextId === "tuesday";
@@ -29,6 +45,15 @@ function matchNextId(titleKey: string, nextId: string | null): boolean {
   if (titleKey === "schedule.sunday1Activity") return nextId === "sunday1";
   if (titleKey === "schedule.sunday2Activity") return nextId === "sunday2";
   return false;
+}
+
+function iconForSchedule(title: string, fallback: LucideIcon) {
+  const value = title.toLowerCase();
+  if (value.includes("joven")) return Users;
+  if (value.includes("bíblico") || value.includes("biblico")) return BookMarked;
+  if (value.includes("culto")) return Church;
+  if (value.includes("estudio")) return BookOpen;
+  return fallback;
 }
 
 function ScheduleCard({
@@ -75,21 +100,46 @@ export function Horarios() {
   const { t, lang } = useLanguage();
   const [nextId, setNextId] = useState<string | null>(null);
   const [isLive, setIsLive] = useState(false);
+  const [siteSchedules, setSiteSchedules] = useState<PublicSiteSchedule[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetchPublicSiteSchedules().then((rows) => {
+      if (!cancelled && rows.length > 0) setSiteSchedules(rows);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const dynamicSlots = useMemo(
+    () => (siteSchedules.length > 0 ? siteSchedulesToServiceSlots(siteSchedules) : []),
+    [siteSchedules]
+  );
 
   useEffect(() => {
     const refresh = () => {
-      const [next] = getUpcomingServices(new Date(), 1);
+      const [next] =
+        dynamicSlots.length > 0
+          ? getUpcomingServicesFromSlots(dynamicSlots, new Date(), 1)
+          : getUpcomingServices(new Date(), 1);
       setNextId(next?.id ?? null);
       setIsLive(Boolean(next?.isLive));
     };
     refresh();
     const id = window.setInterval(refresh, 60_000);
     return () => window.clearInterval(id);
-  }, []);
+  }, [dynamicSlots]);
+
+  const hasDynamicSchedules = siteSchedules.length > 0;
+  const regularDynamicSchedules = siteSchedules.filter((item) => item.day_of_week !== 0);
+  const sundayDynamicSchedules = siteSchedules.filter((item) => item.day_of_week === 0);
 
   const sundayHasNext =
-    matchNextId("schedule.sunday1Activity", nextId) ||
-    matchNextId("schedule.sunday2Activity", nextId);
+    hasDynamicSchedules
+      ? sundayDynamicSchedules.some((item) => item.id === nextId)
+      : matchNextId("schedule.sunday1Activity", nextId) ||
+        matchNextId("schedule.sunday2Activity", nextId);
 
   const statusLabel = isLive ? t("heroPanel.live") : t("heroPanel.next");
 
@@ -103,41 +153,73 @@ export function Horarios() {
         </Reveal>
 
         <div className="mx-auto mt-8 grid max-w-3xl gap-x-10 gap-y-2 sm:grid-cols-2">
-          {SCHEDULE.map((item, index) => {
-            const isNext = matchNextId(item.titleKey, nextId);
-            const Icon = SCHEDULE_ICONS[item.titleKey] ?? BookOpen;
-            return (
-              <Reveal key={item.titleKey} delay={index * 0.07}>
-                <ScheduleCard
-                  day={DAY_ABBR[item.dayKey]?.[lang] ?? ""}
-                  icon={Icon}
-                  isHighlighted={isNext}
-                  statusLabel={statusLabel}
-                >
-                  <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                  <time className="block text-sm font-medium text-white/75">{item.time}</time>
-                </ScheduleCard>
-              </Reveal>
-            );
-          })}
+          {hasDynamicSchedules
+            ? regularDynamicSchedules.map((item, index) => {
+                const isNext = item.id === nextId;
+                const Icon = iconForSchedule(item.title, BookOpen);
+                return (
+                  <Reveal key={item.id} delay={index * 0.07}>
+                    <ScheduleCard
+                      day={DYNAMIC_DAY_ABBR[item.day_of_week]?.[lang] ?? item.day_label.slice(0, 3).toUpperCase()}
+                      icon={Icon}
+                      isHighlighted={isNext}
+                      statusLabel={statusLabel}
+                    >
+                      <p className="text-sm text-white/90 sm:text-[0.95rem]">{item.title}</p>
+                      <time className="block text-sm font-medium text-white/75">
+                        {formatScheduleRange(item.start_time, item.end_time)}
+                      </time>
+                    </ScheduleCard>
+                  </Reveal>
+                );
+              })
+            : SCHEDULE.map((item, index) => {
+                const isNext = matchNextId(item.titleKey, nextId);
+                const Icon = SCHEDULE_ICONS[item.titleKey] ?? BookOpen;
+                return (
+                  <Reveal key={item.titleKey} delay={index * 0.07}>
+                    <ScheduleCard
+                      day={DAY_ABBR[item.dayKey]?.[lang] ?? ""}
+                      icon={Icon}
+                      isHighlighted={isNext}
+                      statusLabel={statusLabel}
+                    >
+                      <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                      <time className="block text-sm font-medium text-white/75">{item.time}</time>
+                    </ScheduleCard>
+                  </Reveal>
+                );
+              })}
 
           <Reveal delay={0.24}>
             <ScheduleCard
-              day={DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
+              day={DYNAMIC_DAY_ABBR[0]?.[lang] ?? DAY_ABBR["common.sunday"]?.[lang] ?? "DOM"}
               icon={Church}
               isHighlighted={sundayHasNext}
               statusLabel={statusLabel}
             >
               <div className="space-y-2.5">
-                {SUNDAY_SCHEDULE.map((item) => {
-                  const isNext = matchNextId(item.titleKey, nextId);
-                  return (
-                    <div key={item.titleKey} className={cn(isNext && "text-white")}>
-                      <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
-                      <time className="block text-sm font-medium text-white/75">{item.time}</time>
-                    </div>
-                  );
-                })}
+                {hasDynamicSchedules
+                  ? sundayDynamicSchedules.map((item) => {
+                      const isNext = item.id === nextId;
+                      return (
+                        <div key={item.id} className={cn(isNext && "text-white")}>
+                          <p className="text-sm text-white/90 sm:text-[0.95rem]">{item.title}</p>
+                          <time className="block text-sm font-medium text-white/75">
+                            {formatScheduleRange(item.start_time, item.end_time)}
+                          </time>
+                        </div>
+                      );
+                    })
+                  : SUNDAY_SCHEDULE.map((item) => {
+                      const isNext = matchNextId(item.titleKey, nextId);
+                      return (
+                        <div key={item.titleKey} className={cn(isNext && "text-white")}>
+                          <p className="text-sm text-white/90 sm:text-[0.95rem]">{t(item.titleKey)}</p>
+                          <time className="block text-sm font-medium text-white/75">{item.time}</time>
+                        </div>
+                      );
+                    })}
               </div>
             </ScheduleCard>
           </Reveal>

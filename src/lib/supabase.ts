@@ -28,6 +28,58 @@ export type PastorPost = PublicPastorPost & {
   updated_at: string;
 };
 
+export type PublicSiteSchedule = {
+  id: string;
+  day_of_week: number;
+  day_label: string;
+  title: string;
+  start_time: string;
+  end_time: string;
+  sort_order: number;
+};
+
+export type SiteSchedule = PublicSiteSchedule & {
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type SiteSchedulePayload = {
+  id?: string | null;
+  day_of_week: number;
+  day_label: string;
+  title: string;
+  start_time: string;
+  end_time: string;
+  is_active?: boolean;
+  sort_order?: number;
+};
+
+export type PublicSiteCalendarEvent = {
+  id: string;
+  event_date: string;
+  title: string;
+  event_time: string;
+  description: string;
+  sort_order: number;
+};
+
+export type SiteCalendarEvent = PublicSiteCalendarEvent & {
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type SiteCalendarEventPayload = {
+  id?: string | null;
+  event_date: string;
+  title: string;
+  event_time: string;
+  description: string;
+  is_active?: boolean;
+  sort_order?: number;
+};
+
 const isConfigured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.length > 20;
 
 async function supabaseFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
@@ -145,6 +197,34 @@ export async function fetchPublicPastorPosts(): Promise<PublicPastorPost[]> {
   }
 }
 
+export async function fetchPublicSiteSchedules(): Promise<PublicSiteSchedule[]> {
+  if (!isConfigured || (typeof navigator !== "undefined" && !navigator.onLine)) {
+    return [];
+  }
+
+  try {
+    return await supabaseFetch<PublicSiteSchedule[]>(
+      "public_site_schedules?select=id,day_of_week,day_label,title,start_time,end_time,sort_order&order=sort_order.asc"
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function fetchPublicSiteCalendarEvents(): Promise<PublicSiteCalendarEvent[]> {
+  if (!isConfigured || (typeof navigator !== "undefined" && !navigator.onLine)) {
+    return [];
+  }
+
+  try {
+    return await supabaseFetch<PublicSiteCalendarEvent[]>(
+      "public_site_calendar_events?select=id,event_date,title,event_time,description,sort_order&order=event_date.asc"
+    );
+  } catch {
+    return [];
+  }
+}
+
 export async function verifyPastorAdmin(token: string): Promise<boolean> {
   if (!isConfigured) return false;
   try {
@@ -157,6 +237,55 @@ export async function verifyPastorAdmin(token: string): Promise<boolean> {
 export async function listPastorPostsAdmin(token: string): Promise<PastorPost[]> {
   const rows = await supabaseRpc<PastorPost[]>("list_pastor_posts_admin", { p_token: token });
   return rows.map((row) => normalizePastorPost(row));
+}
+
+export async function listSiteSchedulesAdmin(token: string): Promise<SiteSchedule[]> {
+  return supabaseRpc<SiteSchedule[]>("list_site_schedules_admin", { p_token: token });
+}
+
+export async function upsertSiteSchedule(
+  token: string,
+  payload: SiteSchedulePayload
+): Promise<SiteSchedule> {
+  return supabaseRpc<SiteSchedule>("upsert_site_schedule", {
+    p_token: token,
+    p_id: payload.id ?? null,
+    p_day_of_week: payload.day_of_week,
+    p_day_label: payload.day_label,
+    p_title: payload.title,
+    p_start_time: payload.start_time,
+    p_end_time: payload.end_time,
+    p_is_active: payload.is_active ?? true,
+    p_sort_order: payload.sort_order ?? 0,
+  });
+}
+
+export async function deleteSiteSchedule(token: string, id: string): Promise<boolean> {
+  return Boolean(await supabaseRpc<boolean>("delete_site_schedule", { p_token: token, p_id: id }));
+}
+
+export async function listSiteCalendarEventsAdmin(token: string): Promise<SiteCalendarEvent[]> {
+  return supabaseRpc<SiteCalendarEvent[]>("list_site_calendar_events_admin", { p_token: token });
+}
+
+export async function upsertSiteCalendarEvent(
+  token: string,
+  payload: SiteCalendarEventPayload
+): Promise<SiteCalendarEvent> {
+  return supabaseRpc<SiteCalendarEvent>("upsert_site_calendar_event", {
+    p_token: token,
+    p_id: payload.id ?? null,
+    p_event_date: payload.event_date,
+    p_title: payload.title,
+    p_event_time: payload.event_time,
+    p_description: payload.description,
+    p_is_active: payload.is_active ?? true,
+    p_sort_order: payload.sort_order ?? 0,
+  });
+}
+
+export async function deleteSiteCalendarEvent(token: string, id: string): Promise<boolean> {
+  return Boolean(await supabaseRpc<boolean>("delete_site_calendar_event", { p_token: token, p_id: id }));
 }
 
 export async function createPastorPost(

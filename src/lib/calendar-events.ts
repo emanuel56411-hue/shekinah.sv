@@ -1,9 +1,34 @@
 export type CalendarEvent = {
+  id?: string;
   fecha: string; // YYYY-MM-DD
   titulo: string;
   hora: string;
   descripcion: string;
 };
+
+export type SiteCalendarEventSource = {
+  id: string;
+  event_date: string;
+  title: string;
+  event_time: string;
+  description: string;
+  sort_order?: number;
+};
+
+export function siteCalendarEventsToCalendarEvents(events: SiteCalendarEventSource[]): CalendarEvent[] {
+  return [...events]
+    .sort((a, b) => {
+      if (a.event_date !== b.event_date) return a.event_date.localeCompare(b.event_date);
+      return (a.sort_order ?? 0) - (b.sort_order ?? 0);
+    })
+    .map((event) => ({
+      id: event.id,
+      fecha: event.event_date,
+      titulo: event.title,
+      hora: event.event_time,
+      descripcion: event.description,
+    }));
+}
 
 /**
  * Eventos del calendario 2026.
