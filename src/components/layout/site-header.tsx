@@ -13,6 +13,7 @@ import {
   Phone,
   Share2,
   Users,
+  X,
   type LucideIcon,
 } from "lucide-react";
 import { useEffect, useRef, useState, type ComponentType, type MouseEvent, type SVGProps } from "react";
@@ -222,24 +223,35 @@ export function SiteHeader() {
 
               <SheetContent
                 side="left"
-                showCloseButton
+                showCloseButton={false}
                 className="!left-0 !translate-x-0 flex w-[22rem] max-w-[92vw] flex-col gap-0 border-r border-white/20 bg-black/90 p-0 text-white shadow-[8px_0_40px_-12px_rgba(0,0,0,0.65)] backdrop-blur-xl lg:w-[24rem] [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
+                style={{ transform: "translate3d(0, 0, 0)" }}
               >
-                <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
-                  <div className="flex items-center gap-3 pr-8">
-                    <Image
-                      src="/assets/logo-shekinah.png"
-                      alt="Logo Shekinah"
-                      width={48}
-                      height={48}
-                      className="h-12 w-12 shrink-0 rounded-[12px] bg-white object-contain p-1"
-                    />
-                    <div>
-                      <SheetTitle className="font-heading text-base font-semibold text-white">
-                        Shekinah
-                      </SheetTitle>
-                      <p className="text-xs text-white/60">San Juan Opico</p>
+                <SheetHeader className="border-b border-white/10 px-5 py-5 text-left">
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <Image
+                        src="/assets/logo-shekinah.png"
+                        alt="Logo Shekinah"
+                        width={40}
+                        height={40}
+                        className="h-10 w-10 shrink-0 rounded-[12px] bg-white object-contain p-1"
+                      />
+                      <div className="min-w-0">
+                        <SheetTitle className="font-heading text-base font-semibold text-white">
+                          Shekinah
+                        </SheetTitle>
+                        <p className="text-xs text-white/60">San Juan Opico</p>
+                      </div>
                     </div>
+                    <button
+                      type="button"
+                      onClick={closeMenu}
+                      aria-label={t("menu.closeAria")}
+                      className="shrink-0 rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/16 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
                   </div>
                 </SheetHeader>
 
