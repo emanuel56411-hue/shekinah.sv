@@ -65,6 +65,15 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: [ogImage],
   },
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
@@ -78,11 +87,13 @@ export const viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es" suppressHydrationWarning>
+      <head>
+        <ChurchJsonLd />
+      </head>
       <body className={`${sourceSans.variable} ${cormorant.variable} min-h-screen font-sans antialiased`}>
         <Script id="force-light-theme" strategy="beforeInteractive">
           {`document.documentElement.classList.remove("dark");try{localStorage.removeItem("shekinah-theme")}catch(e){}`}
         </Script>
-        <ChurchJsonLd />
         <AppProviders>
           <SiteBackground />
           <SiteHeader />
