@@ -132,7 +132,7 @@ export function AyudaDonaciones() {
               onChange={(e) => setName(e.target.value)}
               placeholder={t("form.namePlaceholder")}
               required
-              className="control-inset h-10 rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/40"
+              className="control-inset h-10 rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/70"
             />
           </div>
           <div className="space-y-2">
@@ -160,7 +160,7 @@ export function AyudaDonaciones() {
               minLength={10}
               maxLength={500}
               required
-              className="control-inset rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/40"
+              className="control-inset rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/70"
             />
           </div>
           <details className="rounded-[12px] bg-white/5 px-3 py-2">
@@ -175,7 +175,7 @@ export function AyudaDonaciones() {
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder={t("ayuda.phonePlaceholder")}
                 autoComplete="tel"
-                className="control-inset h-10 rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/40"
+                className="control-inset h-10 rounded-[12px] border-white/15 bg-[#f2ebe8]/[0.88] text-[#1a1214] placeholder:text-black/70"
               />
             </div>
           </details>

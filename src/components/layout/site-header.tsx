@@ -223,7 +223,7 @@ export function SiteHeader() {
               <SheetContent
                 side="left"
                 showCloseButton
-                className="flex w-[min(100%,20rem)] flex-col gap-0 border-r border-white/20 bg-black/90 p-0 text-white shadow-[8px_0_40px_-12px_rgba(0,0,0,0.65)] backdrop-blur-xl sm:max-w-xs [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
+                className="!left-0 !translate-x-0 flex w-[22rem] max-w-[92vw] flex-col gap-0 border-r border-white/20 bg-black/90 p-0 text-white shadow-[8px_0_40px_-12px_rgba(0,0,0,0.65)] backdrop-blur-xl lg:w-[24rem] [&>button]:text-white [&>button]:hover:bg-white/10 [&>button]:hover:text-white"
               >
                 <SheetHeader className="border-b border-white/10 px-4 py-5 text-left">
                   <div className="flex items-center gap-3 pr-8">
