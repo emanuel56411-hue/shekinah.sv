@@ -1,5 +1,5 @@
 ---
-description: NUNCA quitar el scroll Reveal interactivo del sitio Shekinah
+description: NUNCA quitar el scroll Reveal ni dejar contenido invisible (sobre todo en móvil)
 alwaysApply: true
 ---
 
@@ -7,25 +7,32 @@ alwaysApply: true
 
 El usuario exige que al bajar la página el contenido **aparezca con animación** (fade + translateY). Eso es lo que hace `Reveal` en `src/components/motion/reveal.tsx`.
 
+## Error grave ya cometido — NUNCA repetir
+
+Dejar la página en blanco / sin información al hacer scroll en el **teléfono** porque el contenido quedó en `opacity: 0`.
+
+Eso enfurece al usuario. Es peor que no tener animación.
+
+**Regla de oro:** si hay duda entre “animación perfecta” y “contenido siempre legible”, gana el contenido legible — pero sin apagar el Reveal.
+
 ## Prohibido
 
 - Eliminar, comentar o dejar de usar `<Reveal>` en secciones principales: Horarios, Ayuda, Galería, Palabra del Día, Ubicación, Eventos, Ministerios, Escritura.
 - Cambiar `Reveal` a `opacity: 1` fijo sin animación “para simplificar”.
 - Quitar Framer Motion del scroll reveal.
 - “Arreglar” la página desactivando el reveal.
+- Montar bloques en `opacity: 0` **sin** un respaldo que los muestre al entrar en pantalla (scroll / touch / interval).
+- Un timeout global que ponga **toda** la página visible a los 1–2s (mata la sensación al bajar).
 
-## Permitido
+## Obligatorio en `reveal.tsx`
 
-- Ajustar duración, delay, `y` o `amount` del viewport **sin** quitar el efecto.
-- Mantener un **failsafe puntual**: solo forzar visible si el bloque **ya está en pantalla** y el observer falló.
-- Respetar `prefers-reduced-motion`.
+1. Animación al entrar en viewport (fade + translateY).
+2. Respaldo: si el bloque está en pantalla (o entra al hacer scroll/touch), debe volverse visible. Nunca quedar atrapado en `opacity: 0`.
+3. Mientras no esté listo el motion: mostrar contenido (no pantalla en blanco).
+4. Respetar `prefers-reduced-motion`.
 
-## Prohibido en el failsafe
+## Si hay bug
 
-- Un timeout global que ponga **toda** la página en `opacity: 1` a los 1–2s.
-  Eso hace que al bajar ya no se sienta la animación (el usuario lo reporta siempre).
-
-## Si hay bug de contenido invisible
-
-Arreglar el observer/failsafe en `reveal.tsx`. **No** eliminar el reveal.
-**No** “arreglar” matando la experiencia de scroll.
+- Contenido invisible → arreglar failsafe/observer en `reveal.tsx`.
+- Animación no se siente → afinar trigger; **no** forzar toda la página visible al cargar.
+- **Nunca** “arreglar” quitando Reveal ni dejando el móvil en blanco.
