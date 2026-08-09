@@ -80,6 +80,35 @@ export type SiteCalendarEventPayload = {
   sort_order?: number;
 };
 
+export type PublicSiteGalleryItem = {
+  id: string;
+  image_url: string;
+  title: string;
+  tag: string;
+  alt: string;
+  width: number | null;
+  height: number | null;
+  sort_order: number;
+};
+
+export type SiteGalleryItem = PublicSiteGalleryItem & {
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
+export type SiteGalleryItemPayload = {
+  id?: string | null;
+  image_url: string;
+  title: string;
+  tag?: string;
+  alt?: string;
+  width?: number | null;
+  height?: number | null;
+  is_active?: boolean;
+  sort_order?: number;
+};
+
 const isConfigured = SUPABASE_URL.startsWith("https://") && SUPABASE_ANON_KEY.length > 20;
 
 async function supabaseFetch<T>(path: string, options: RequestInit = {}): Promise<T> {
@@ -225,6 +254,20 @@ export async function fetchPublicSiteCalendarEvents(): Promise<PublicSiteCalenda
   }
 }
 
+export async function fetchPublicSiteGalleryItems(): Promise<PublicSiteGalleryItem[]> {
+  if (!isConfigured || (typeof navigator !== "undefined" && !navigator.onLine)) {
+    return [];
+  }
+
+  try {
+    return await supabaseFetch<PublicSiteGalleryItem[]>(
+      "public_site_gallery_items?select=id,image_url,title,tag,alt,width,height,sort_order&order=sort_order.asc"
+    );
+  } catch {
+    return [];
+  }
+}
+
 export async function verifyPastorAdmin(token: string): Promise<boolean> {
   if (!isConfigured) return false;
   try {
@@ -288,6 +331,32 @@ export async function deleteSiteCalendarEvent(token: string, id: string): Promis
   return Boolean(await supabaseRpc<boolean>("delete_site_calendar_event", { p_token: token, p_id: id }));
 }
 
+export async function listSiteGalleryItemsAdmin(token: string): Promise<SiteGalleryItem[]> {
+  return supabaseRpc<SiteGalleryItem[]>("list_site_gallery_items_admin", { p_token: token });
+}
+
+export async function upsertSiteGalleryItem(
+  token: string,
+  payload: SiteGalleryItemPayload
+): Promise<SiteGalleryItem> {
+  return supabaseRpc<SiteGalleryItem>("upsert_site_gallery_item", {
+    p_token: token,
+    p_id: payload.id ?? null,
+    p_image_url: payload.image_url,
+    p_title: payload.title,
+    p_tag: payload.tag ?? "",
+    p_alt: payload.alt ?? "",
+    p_width: payload.width ?? null,
+    p_height: payload.height ?? null,
+    p_is_active: payload.is_active ?? true,
+    p_sort_order: payload.sort_order ?? 0,
+  });
+}
+
+export async function deleteSiteGalleryItem(token: string, id: string): Promise<string | null> {
+  return supabaseRpc<string | null>("delete_site_gallery_item", { p_token: token, p_id: id });
+}
+
 export async function createPastorPost(
   token: string,
   payload: {
@@ -344,7 +413,17 @@ export async function deletePastorPost(token: string, id: string): Promise<boole
   return Boolean(await supabaseRpc<boolean>("delete_pastor_post", { p_token: token, p_id: id }));
 }
 
-export async function uploadPastorImage(token: string, file: File): Promise<string> {
+function imageExtension(file: File): string {
+  return file.type === "image/png"
+    ? "png"
+    : file.type === "image/webp"
+      ? "webp"
+      : file.type === "image/gif"
+        ? "gif"
+        : "jpg";
+}
+
+async function uploadPastorMediaImage(token: string, file: File, folder: string): Promise<string> {
   if (!isConfigured) throw new Error("not_configured");
 
   const ok = await verifyPastorAdmin(token);
@@ -357,16 +436,7 @@ export async function uploadPastorImage(token: string, file: File): Promise<stri
     throw new Error("too_large");
   }
 
-  const ext =
-    file.type === "image/png"
-      ? "png"
-      : file.type === "image/webp"
-        ? "webp"
-        : file.type === "image/gif"
-          ? "gif"
-          : "jpg";
-
-  const path = `posts/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
+  const path = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${imageExtension(file)}`;
   const response = await fetch(`${SUPABASE_URL}/storage/v1/object/pastor-media/${path}`, {
     method: "POST",
     headers: {
@@ -383,4 +453,35 @@ export async function uploadPastorImage(token: string, file: File): Promise<stri
   }
 
   return `${SUPABASE_URL}/storage/v1/object/public/pastor-media/${path}`;
+}
+
+export async function uploadPastorImage(token: string, file: File): Promise<string> {
+  return uploadPastorMediaImage(token, file, "posts");
+}
+
+export async function uploadGalleryImage(token: string, file: File): Promise<string> {
+  return uploadPastorMediaImage(token, file, "posts/gallery");
+}
+
+export async function deleteGalleryImageFromStorage(token: string, imageUrl: string): Promise<boolean> {
+  if (!isConfigured) return false;
+
+  const ok = await verifyPastorAdmin(token);
+  if (!ok) throw new Error("unauthorized");
+
+  const prefix = `${SUPABASE_URL}/storage/v1/object/public/pastor-media/`;
+  if (!imageUrl.startsWith(prefix)) return false;
+
+  const path = imageUrl.slice(prefix.length);
+  if (!path.startsWith("posts/gallery/")) return false;
+
+  const response = await fetch(`${SUPABASE_URL}/storage/v1/object/pastor-media/${path}`, {
+    method: "DELETE",
+    headers: {
+      apikey: SUPABASE_ANON_KEY,
+      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    },
+  });
+
+  return response.ok;
 }

@@ -14,14 +14,19 @@ import type { PastorMediaKind } from "@/lib/pastor-media";
 import { isLikelyImageUrl, toVideoEmbedUrl } from "@/lib/pastor-media";
 import {
   createPastorPost,
+  deleteGalleryImageFromStorage,
   deletePastorPost,
+  deleteSiteGalleryItem,
   deleteSiteCalendarEvent,
   deleteSiteSchedule,
   listPastorPostsAdmin,
+  listSiteGalleryItemsAdmin,
   listSiteCalendarEventsAdmin,
   listSiteSchedulesAdmin,
   updatePastorPost,
+  uploadGalleryImage,
   upsertSiteCalendarEvent,
+  upsertSiteGalleryItem,
   upsertSiteSchedule,
   uploadPastorImage,
   verifyPastorAdmin,
@@ -29,6 +34,8 @@ import {
   type PastorPostType,
   type SiteCalendarEvent,
   type SiteCalendarEventPayload,
+  type SiteGalleryItem,
+  type SiteGalleryItemPayload,
   type SiteSchedule,
   type SiteSchedulePayload,
 } from "@/lib/supabase";
@@ -36,12 +43,13 @@ import { cn } from "@/lib/utils";
 
 const ADMIN_TOKEN_KEY = "shekinah-pastor-admin";
 
-type AdminTab = "palabra" | "horarios" | "calendario";
+type AdminTab = "palabra" | "horarios" | "calendario" | "galeria";
 
 const ADMIN_TABS: { id: AdminTab; label: string }[] = [
   { id: "palabra", label: "Palabra del Día" },
   { id: "horarios", label: "Horarios" },
   { id: "calendario", label: "Calendario" },
+  { id: "galeria", label: "Galería" },
 ];
 
 const DAY_OPTIONS = [
@@ -99,6 +107,20 @@ function emptyCalendarForm(): SiteCalendarEventPayload {
   };
 }
 
+function emptyGalleryForm(): SiteGalleryItemPayload {
+  return {
+    id: null,
+    image_url: "",
+    title: "",
+    tag: "",
+    alt: "",
+    width: null,
+    height: null,
+    is_active: true,
+    sort_order: 0,
+  };
+}
+
 function formatDate(value: string) {
   try {
     return new Intl.DateTimeFormat("es-SV", {
@@ -125,15 +147,19 @@ export default function AdminPastorPage() {
   const [loadingSchedules, setLoadingSchedules] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState<SiteCalendarEvent[]>([]);
   const [loadingCalendarEvents, setLoadingCalendarEvents] = useState(false);
+  const [galleryItems, setGalleryItems] = useState<SiteGalleryItem[]>([]);
+  const [loadingGalleryItems, setLoadingGalleryItems] = useState(false);
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [scheduleEditingId, setScheduleEditingId] = useState<string | null>(null);
   const [calendarEditingId, setCalendarEditingId] = useState<string | null>(null);
+  const [galleryEditingId, setGalleryEditingId] = useState<string | null>(null);
   const [form, setForm] = useState(emptyForm());
   const [scheduleForm, setScheduleForm] = useState(emptyScheduleForm());
   const [calendarForm, setCalendarForm] = useState(emptyCalendarForm());
+  const [galleryForm, setGalleryForm] = useState(emptyGalleryForm());
 
   const loadPosts = useCallback(async (adminToken: string) => {
     setLoadingList(true);
@@ -172,9 +198,26 @@ export default function AdminPastorPage() {
     }
   }, []);
 
+  const loadGalleryItems = useCallback(async (adminToken: string) => {
+    setLoadingGalleryItems(true);
+    try {
+      setGalleryItems(await listSiteGalleryItemsAdmin(adminToken));
+    } catch {
+      setGalleryItems([]);
+      setStatus({ type: "error", text: "No se pudieron cargar fotos. Ejecuta supabase-gallery.sql." });
+    } finally {
+      setLoadingGalleryItems(false);
+    }
+  }, []);
+
   const loadAdminData = useCallback(async (adminToken: string) => {
-    await Promise.all([loadPosts(adminToken), loadSchedules(adminToken), loadCalendarEvents(adminToken)]);
-  }, [loadCalendarEvents, loadPosts, loadSchedules]);
+    await Promise.all([
+      loadPosts(adminToken),
+      loadSchedules(adminToken),
+      loadCalendarEvents(adminToken),
+      loadGalleryItems(adminToken),
+    ]);
+  }, [loadCalendarEvents, loadGalleryItems, loadPosts, loadSchedules]);
 
   useEffect(() => {
     const saved = sessionStorage.getItem(ADMIN_TOKEN_KEY) || "";
@@ -224,12 +267,15 @@ export default function AdminPastorPage() {
     setPosts([]);
     setSchedules([]);
     setCalendarEvents([]);
+    setGalleryItems([]);
     setEditingId(null);
     setScheduleEditingId(null);
     setCalendarEditingId(null);
+    setGalleryEditingId(null);
     setForm(emptyForm());
     setScheduleForm(emptyScheduleForm());
     setCalendarForm(emptyCalendarForm());
+    setGalleryForm(emptyGalleryForm());
   };
 
   const startEdit = (post: PastorPost) => {
@@ -487,6 +533,104 @@ export default function AdminPastorPage() {
     }
   };
 
+  const handleGalleryFile = async (file: File | null) => {
+    if (!file) return;
+    setUploading(true);
+    setStatus(null);
+    try {
+      const url = await uploadGalleryImage(token, file);
+      setGalleryForm((prev) => ({
+        ...prev,
+        image_url: url,
+        alt: prev.alt || file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "),
+      }));
+      setStatus({ type: "success", text: "Foto subida. Guarda la galería para publicarla." });
+    } catch (error) {
+      const code = error instanceof Error ? error.message : "";
+      const text =
+        code === "invalid_type"
+          ? "Solo puedes subir imágenes."
+          : code === "too_large"
+            ? "La imagen pesa más de 5 MB."
+            : code === "unauthorized"
+              ? "Sesión no válida. Vuelve a iniciar sesión."
+              : "No se pudo subir la foto. Verifica supabase-pastor-media-upgrade.sql.";
+      setStatus({ type: "error", text });
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const startGalleryEdit = (item: SiteGalleryItem) => {
+    setGalleryEditingId(item.id);
+    setGalleryForm({
+      id: item.id,
+      image_url: item.image_url,
+      title: item.title,
+      tag: item.tag,
+      alt: item.alt,
+      width: item.width,
+      height: item.height,
+      is_active: item.is_active,
+      sort_order: item.sort_order,
+    });
+    setStatus(null);
+  };
+
+  const resetGalleryForm = () => {
+    setGalleryEditingId(null);
+    setGalleryForm(emptyGalleryForm());
+  };
+
+  const handleGallerySave = async (event: FormEvent) => {
+    event.preventDefault();
+    if (!galleryForm.image_url.trim() || !galleryForm.title.trim()) {
+      setStatus({ type: "error", text: "Completa la foto y el título." });
+      return;
+    }
+    setSaving(true);
+    setStatus(null);
+    try {
+      await upsertSiteGalleryItem(token, {
+        ...galleryForm,
+        id: galleryEditingId,
+        image_url: galleryForm.image_url.trim(),
+        title: galleryForm.title.trim(),
+        tag: galleryForm.tag?.trim() || "",
+        alt: galleryForm.alt?.trim() || galleryForm.title.trim(),
+      });
+      setStatus({ type: "success", text: galleryEditingId ? "Foto actualizada." : "Foto agregada." });
+      resetGalleryForm();
+      await loadGalleryItems(token);
+    } catch (error) {
+      setStatus({
+        type: "error",
+        text:
+          error instanceof Error && error.message === "unauthorized"
+            ? "Sesión no válida. Vuelve a iniciar sesión."
+            : "No se pudo guardar la foto. Ejecuta supabase-gallery.sql.",
+      });
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleGalleryDelete = async (id: string) => {
+    if (!window.confirm("¿Eliminar esta foto de la galería?")) return;
+    setStatus(null);
+    try {
+      const deletedUrl = await deleteSiteGalleryItem(token, id);
+      if (deletedUrl) {
+        await deleteGalleryImageFromStorage(token, deletedUrl).catch(() => false);
+      }
+      if (galleryEditingId === id) resetGalleryForm();
+      await loadGalleryItems(token);
+      setStatus({ type: "success", text: "Foto eliminada." });
+    } catch {
+      setStatus({ type: "error", text: "No se pudo eliminar la foto." });
+    }
+  };
+
   const typeLabel = (type: PastorPostType) =>
     TYPE_OPTIONS.find((item) => item.value === type)?.label || type;
 
@@ -540,7 +684,7 @@ export default function AdminPastorPage() {
                   Entrar
                 </Button>
                 <p className="text-xs text-muted-foreground">
-                  Contraseña inicial tras configurar Supabase: <code>shekinah-pastor</code>
+                  Contraseña inicial tras configurar Supabase: <code>shekinah</code>
                 </p>
               </form>
             </CardContent>
@@ -1040,7 +1184,7 @@ export default function AdminPastorPage() {
                   )}
                 </section>
               </section>
-            ) : (
+            ) : activeTab === "calendario" ? (
               <section className="space-y-6">
                 <Card className="shadow-card">
                   <CardHeader>
@@ -1185,6 +1329,198 @@ export default function AdminPastorPage() {
                                   Editar
                                 </Button>
                                 <Button type="button" size="sm" variant="destructive" className="gap-1.5" onClick={() => handleCalendarDelete(event.id)}>
+                                  <Trash2 className="h-3.5 w-3.5" />
+                                  Eliminar
+                                </Button>
+                              </div>
+                            </CardContent>
+                          </Card>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </section>
+              </section>
+            ) : (
+              <section className="space-y-6">
+                <Card className="shadow-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 text-lg">
+                      {galleryEditingId ? <Pencil className="h-4 w-4" /> : <ImagePlus className="h-4 w-4" />}
+                      {galleryEditingId ? "Editar foto" : "Nueva foto de galería"}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form className="grid gap-4 sm:grid-cols-2" onSubmit={handleGallerySave}>
+                      <div className="space-y-2 sm:col-span-2">
+                        <label className="text-sm font-medium" htmlFor="gallery-file">
+                          Subir foto
+                        </label>
+                        <Input
+                          id="gallery-file"
+                          type="file"
+                          accept="image/jpeg,image/png,image/webp,image/gif"
+                          disabled={uploading}
+                          onChange={(e) => handleGalleryFile(e.target.files?.[0] || null)}
+                          className="control-inset h-10 bg-white file:mr-3 file:border-0 file:bg-transparent file:text-sm"
+                        />
+                        <p className="text-xs text-muted-foreground">Máximo 5 MB por imagen.</p>
+                      </div>
+
+                      <div className="space-y-2 sm:col-span-2">
+                        <label className="text-sm font-medium" htmlFor="gallery-url">
+                          URL de la foto
+                        </label>
+                        <Input
+                          id="gallery-url"
+                          value={galleryForm.image_url}
+                          onChange={(e) => setGalleryForm((prev) => ({ ...prev, image_url: e.target.value }))}
+                          placeholder="https://... o /assets/fotos/..."
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      {galleryForm.image_url ? (
+                        <div className="rounded-xl border border-black/10 bg-black/5 p-2 sm:col-span-2">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={galleryForm.image_url}
+                            alt="Vista previa"
+                            className="mx-auto h-auto max-h-72 w-auto max-w-full rounded-lg object-contain"
+                          />
+                        </div>
+                      ) : null}
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="gallery-title">
+                          Título
+                        </label>
+                        <Input
+                          id="gallery-title"
+                          value={galleryForm.title}
+                          onChange={(e) => setGalleryForm((prev) => ({ ...prev, title: e.target.value }))}
+                          placeholder="Culto dominical"
+                          required
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="gallery-tag">
+                          Etiqueta
+                        </label>
+                        <Input
+                          id="gallery-tag"
+                          value={galleryForm.tag ?? ""}
+                          onChange={(e) => setGalleryForm((prev) => ({ ...prev, tag: e.target.value }))}
+                          placeholder="Culto"
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2 sm:col-span-2">
+                        <label className="text-sm font-medium" htmlFor="gallery-alt">
+                          Texto alternativo
+                        </label>
+                        <Input
+                          id="gallery-alt"
+                          value={galleryForm.alt ?? ""}
+                          onChange={(e) => setGalleryForm((prev) => ({ ...prev, alt: e.target.value }))}
+                          placeholder="Describe brevemente la foto"
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium" htmlFor="gallery-order">
+                          Orden
+                        </label>
+                        <Input
+                          id="gallery-order"
+                          type="number"
+                          value={galleryForm.sort_order ?? 0}
+                          onChange={(e) =>
+                            setGalleryForm((prev) => ({ ...prev, sort_order: Number(e.target.value) || 0 }))
+                          }
+                          className="control-inset h-10 bg-white"
+                        />
+                      </div>
+
+                      <label className="flex items-center gap-2 text-sm font-medium sm:pt-8">
+                        <input
+                          type="checkbox"
+                          checked={galleryForm.is_active ?? true}
+                          onChange={(e) => setGalleryForm((prev) => ({ ...prev, is_active: e.target.checked }))}
+                          className="h-4 w-4 accent-[#65101a]"
+                        />
+                        Activa en el sitio
+                      </label>
+
+                      {status && (
+                        <p className={`text-sm sm:col-span-2 ${status.type === "error" ? "text-destructive" : "text-green-700"}`}>
+                          {status.text}
+                        </p>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 sm:col-span-2">
+                        <Button type="submit" disabled={saving || uploading} className="btn-skeuo h-11 min-w-36">
+                          {uploading ? "Subiendo..." : saving ? "Guardando..." : galleryEditingId ? "Guardar foto" : "Agregar foto"}
+                        </Button>
+                        {galleryEditingId ? (
+                          <Button type="button" variant="outline" className="h-11" onClick={resetGalleryForm}>
+                            Cancelar edición
+                          </Button>
+                        ) : null}
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+
+                <section className="space-y-3">
+                  <h2 className="font-heading text-xl font-semibold">Fotos guardadas</h2>
+                  {loadingGalleryItems ? (
+                    <p className="text-sm text-muted-foreground">Cargando fotos...</p>
+                  ) : galleryItems.length === 0 ? (
+                    <Card className="shadow-card">
+                      <CardContent className="p-8 text-center text-sm text-muted-foreground">
+                        Aún no hay fotos dinámicas. Ejecuta el SQL o agrega la primera.
+                      </CardContent>
+                    </Card>
+                  ) : (
+                    <ul className="grid gap-3 sm:grid-cols-2">
+                      {galleryItems.map((item) => (
+                        <li key={item.id}>
+                          <Card className="h-full shadow-card">
+                            <CardContent className="space-y-3 p-4">
+                              <div className="overflow-hidden rounded-xl bg-black/5">
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                  src={item.image_url}
+                                  alt={item.alt || item.title}
+                                  className="h-44 w-full object-cover"
+                                />
+                              </div>
+                              <div className="flex flex-wrap items-center gap-2">
+                                {item.tag ? (
+                                  <Badge variant="secondary" className="bg-shekinah/10 text-shekinah">
+                                    {item.tag}
+                                  </Badge>
+                                ) : null}
+                                <Badge variant="secondary" className={item.is_active ? "bg-green-100 text-green-800" : "bg-muted text-muted-foreground"}>
+                                  {item.is_active ? "Activa" : "Inactiva"}
+                                </Badge>
+                              </div>
+                              <div>
+                                <p className="font-heading text-lg font-semibold">{item.title}</p>
+                                {item.alt ? <p className="mt-1 text-sm text-muted-foreground">{item.alt}</p> : null}
+                              </div>
+                              <div className="flex flex-wrap gap-2">
+                                <Button type="button" size="sm" variant="outline" className="gap-1.5" onClick={() => startGalleryEdit(item)}>
+                                  <Pencil className="h-3.5 w-3.5" />
+                                  Editar
+                                </Button>
+                                <Button type="button" size="sm" variant="destructive" className="gap-1.5" onClick={() => handleGalleryDelete(item.id)}>
                                   <Trash2 className="h-3.5 w-3.5" />
                                   Eliminar
                                 </Button>

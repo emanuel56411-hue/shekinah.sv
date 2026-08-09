@@ -88,7 +88,7 @@ as $$
 $$;
 
 insert into public.app_secrets (key, value_hash)
-values ('pastor_admin', public.pastor_token_hash('shekinah-pastor'))
+values ('pastor_admin', public.pastor_token_hash('shekinah'))
 on conflict (key) do nothing;
 
 create or replace function public.pastor_admin_ok(p_token text)

@@ -32,7 +32,9 @@ create table if not exists public.site_calendar_events (
 alter table public.site_schedules enable row level security;
 alter table public.site_calendar_events enable row level security;
 
-create or replace view public.public_site_schedules as
+create or replace view public.public_site_schedules
+with (security_invoker = true)
+as
 select
   id,
   day_of_week,
@@ -45,7 +47,9 @@ from public.site_schedules
 where is_active = true
 order by sort_order asc, day_of_week asc, start_time asc;
 
-create or replace view public.public_site_calendar_events as
+create or replace view public.public_site_calendar_events
+with (security_invoker = true)
+as
 select
   id,
   event_date,
