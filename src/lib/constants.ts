@@ -36,7 +36,7 @@ export const MINISTRIES = [
     titleKey: "ministerios.item2Title",
     descKey: "ministerios.item2Desc",
     leader: "Hno. Gerson",
-    phone: "6446 5489",
+    phone: "7685 0759",
   },
   {
     id: "acomodacion",
