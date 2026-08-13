@@ -2,6 +2,8 @@
 -- Ejecutar en el SQL Editor de Supabase.
 -- IMPORTANTE: desactiva Google Translate en esta página antes de pegar.
 
+create extension if not exists pgcrypto;
+
 create table if not exists public.app_secrets (
   key text primary key,
   value_hash text not null,
@@ -82,13 +84,12 @@ using (is_active = true);
 create or replace function public.pastor_token_hash(p_token text)
 returns text
 language sql
-immutable
 as $$
-  select md5('shekinah-pastor-v1:' || coalesce(p_token, ''));
+  select crypt(coalesce(p_token, ''), gen_salt('bf'));
 $$;
 
 insert into public.app_secrets (key, value_hash)
-values ('pastor_admin', public.pastor_token_hash('shekinah'))
+values ('pastor_admin', public.pastor_token_hash('CAMBIA_ESTA_CONTRASENA_EN_SUPABASE'))
 on conflict (key) do nothing;
 
 create or replace function public.pastor_admin_ok(p_token text)
@@ -102,7 +103,7 @@ as $$
     select 1
     from public.app_secrets
     where key = 'pastor_admin'
-      and value_hash = public.pastor_token_hash(p_token)
+      and crypt(coalesce(p_token, ''), value_hash) = value_hash
   );
 $$;
 

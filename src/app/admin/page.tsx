@@ -683,9 +683,6 @@ export default function AdminPastorPage() {
                 <Button type="submit" className="btn-skeuo h-11 w-full">
                   Entrar
                 </Button>
-                <p className="text-xs text-muted-foreground">
-                  Contraseña inicial tras configurar Supabase: <code>shekinah</code>
-                </p>
               </form>
             </CardContent>
           </Card>
